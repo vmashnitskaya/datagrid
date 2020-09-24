@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 import userDataSelectors from '../redux/userData/userDataSelectors';
@@ -6,9 +6,11 @@ import fetchData from '../redux/userData/userDataActions';
 import { DataObject } from '../redux/userData/userDataInterfaces';
 
 import Loader from './Loader';
+import TableRow from './TableRow';
+import { ColumnInterface } from './ColumnInterface';
 
 export interface TableProps {
-    userData: DataObject[];
+    userData: { [key: string]: any }[];
     loading: boolean;
     error: string;
     fetchUserData: () => void;
@@ -25,13 +27,42 @@ const Table: FC<TableProps> = ({ userData, loading, error, fetchUserData }) => {
         }
     }, [userData]);
 
+    const columnHeaders = useMemo<Array<ColumnInterface>>(
+        () => [
+            { header: 'Id', name: 'id' },
+            { header: 'First name', name: 'first_name' },
+            { header: 'Last name', name: 'last_name' },
+            { header: 'Birth date', name: 'date' },
+            { header: 'Email', name: 'email' },
+            { header: 'Gender', name: 'gender' },
+            { header: 'Location', name: 'location' },
+        ],
+        []
+    );
+
     return (
         <>
-            <h1>Hello</h1>
             {loading || error.length > 0 || userData.length === 0 ? (
                 <Loader />
             ) : (
-                <div>User data</div>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            {columnHeaders.map((element) => (
+                                <th>{element.header}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {userData.map((userObject) => (
+                            <TableRow
+                                key={userObject.id}
+                                row={userObject}
+                                columnHeaders={columnHeaders}
+                            />
+                        ))}
+                    </tbody>
+                </table>
             )}
         </>
     );
