@@ -1,4 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
+import { strict } from 'assert';
 import types, { UserdataActions } from './userDataTypes';
 import { DataObject } from './userDataInterfaces';
 import fetchUserData from './api';
@@ -18,12 +19,12 @@ const fetchUserDataFailed = (error: string): UserdataActions => ({
     payload: error,
 });
 
-const fetchData = (): ThunkAction<Promise<void>, RootState, unknown, UserdataActions> => async (
-    dispatch
-) => {
+const fetchData = (
+    tabActive: string
+): ThunkAction<Promise<void>, RootState, unknown, UserdataActions> => async (dispatch) => {
     try {
         dispatch(fetchUserDataPending());
-        const userData = await fetchUserData();
+        const userData = await fetchUserData(tabActive);
         dispatch(fetchUserDataSuccess(userData));
     } catch (e) {
         dispatch(fetchUserDataFailed(e.message));

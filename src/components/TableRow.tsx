@@ -10,8 +10,14 @@ export interface TableRowProps {
 const TableRow: FC<TableRowProps> = ({ row, columnHeaders }) => {
     return (
         <tr>
-            {columnHeaders.map((element: ColumnInterface) => {
-                return <TableCell key={Date.now()} row={row} columnName={element.name} />;
+            {columnHeaders.map((element: ColumnInterface, index: number) => {
+                return (
+                    <TableCell
+                        key={Date.now() + Number(index + 1)}
+                        row={row}
+                        columnName={element.name}
+                    />
+                );
             })}
         </tr>
     );

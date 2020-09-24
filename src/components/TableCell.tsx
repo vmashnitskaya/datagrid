@@ -7,7 +7,11 @@ interface TableCellProps {
 
 const handleEmailDisplaying = (row: { [key: string]: any }, columnName: string) => {
     if (columnName === 'email') {
-        return <a href={`mailto:${row[columnName]}`}>{row[columnName]}</a>;
+        return (
+            <a className="text-secondary" href={`mailto:${row[columnName]}`}>
+                {row[columnName]}
+            </a>
+        );
     }
     return row[columnName];
 };

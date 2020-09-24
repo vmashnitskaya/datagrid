@@ -12,13 +12,14 @@ export interface TableProps {
     userData: { [key: string]: any }[];
     loading: boolean;
     error: string;
-    fetchUserData: () => void;
+    fetchUserData: (tabActive: string) => void;
+    tabActive: string;
 }
 
-const Table: FC<TableProps> = ({ userData, loading, error, fetchUserData }) => {
+const Table: FC<TableProps> = ({ userData, loading, error, fetchUserData, tabActive }) => {
     useEffect(() => {
-        fetchUserData();
-    }, [fetchUserData]);
+        fetchUserData(tabActive.toLowerCase());
+    }, [fetchUserData, tabActive]);
 
     useEffect(() => {
         if (userData.length > 0) {
@@ -44,11 +45,13 @@ const Table: FC<TableProps> = ({ userData, loading, error, fetchUserData }) => {
             {loading || error.length > 0 || userData.length === 0 ? (
                 <Loader />
             ) : (
-                <table className="table table-hover table-bordered mt-5">
+                <table className="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            {columnHeaders.map((element) => (
-                                <th>{element.header}</th>
+                            {columnHeaders.map((element, index: number) => (
+                                <th key={Date.now() + Number(index + 1)} className="bg-light">
+                                    {element.header}
+                                </th>
                             ))}
                         </tr>
                     </thead>
@@ -74,8 +77,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    fetchUserData: () => {
-        dispatch(fetchData());
+    fetchUserData: (tabActive: string) => {
+        dispatch(fetchData(tabActive));
     },
 });
 
