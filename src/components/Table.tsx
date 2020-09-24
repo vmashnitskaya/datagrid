@@ -3,7 +3,6 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 import userDataSelectors from '../redux/userData/userDataSelectors';
 import fetchData from '../redux/userData/userDataActions';
-import { DataObject } from '../redux/userData/userDataInterfaces';
 
 import Loader from './Loader';
 import TableRow from './TableRow';
@@ -45,7 +44,7 @@ const Table: FC<TableProps> = ({ userData, loading, error, fetchUserData }) => {
             {loading || error.length > 0 || userData.length === 0 ? (
                 <Loader />
             ) : (
-                <table className="table">
+                <table className="table table-hover table-bordered mt-5">
                     <thead>
                         <tr>
                             {columnHeaders.map((element) => (
