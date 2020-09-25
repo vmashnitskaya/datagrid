@@ -13,6 +13,18 @@ const handleEmailDisplaying = (row: { [key: string]: any }, columnName: string) 
             </a>
         );
     }
+    if (columnName === 'app_url') {
+        return (
+            <a
+                className="text-secondary"
+                href={`${row[columnName]}`}
+                target="_blank"
+                rel="noreferrer"
+            >
+                {row[columnName]}
+            </a>
+        );
+    }
     return row[columnName];
 };
 
