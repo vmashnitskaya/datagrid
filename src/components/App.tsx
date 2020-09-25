@@ -19,8 +19,8 @@ const App: React.FC = () => {
                 pathname: '/users',
             },
             {
-                label: 'Technologies',
-                pathname: '/technologies',
+                label: 'Apps',
+                pathname: '/apps',
             },
             {
                 label: 'Locations',
