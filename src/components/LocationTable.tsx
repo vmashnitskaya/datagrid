@@ -33,9 +33,13 @@ const LocationTable: FC<LocationTableProps> = ({
         ];
     }, []);
 
+    const columnsForSorting = useMemo<string[]>(() => {
+        return ['city', 'country', 'state', 'country_code'];
+    }, []);
+
     useEffect(() => {
         fetchLocationsData('Locations');
-    }, []);
+    }, [fetchLocationsData]);
 
     return (
         <Table
@@ -43,6 +47,7 @@ const LocationTable: FC<LocationTableProps> = ({
             loading={loadingLocation}
             error={errorLocation}
             columnHeaders={columnHeaders}
+            columnsForSorting={columnsForSorting}
         />
     );
 };

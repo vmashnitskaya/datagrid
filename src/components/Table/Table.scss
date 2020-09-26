@@ -1,0 +1,21 @@
+.table th{
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    .sorting {
+      display: flex;
+      flex-direction: column;
+      .up{
+        cursor: pointer;
+      }
+      .down{
+        margin-top: -8px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+

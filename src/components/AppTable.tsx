@@ -26,10 +26,13 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, appData, loadingApp, error
             { header: 'App URL', name: 'app_url' },
         ];
     }, []);
+    const columnsForSorting = useMemo<string[]>(() => {
+        return ['app_id', 'app_name', 'app_version', 'app_domain'];
+    }, []);
 
     useEffect(() => {
         fetchAppsData('Apps');
-    }, []);
+    }, [fetchAppsData]);
 
     return (
         <Table
@@ -37,6 +40,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, appData, loadingApp, error
             renderData={appData}
             loading={loadingApp}
             error={errorApp}
+            columnsForSorting={columnsForSorting}
         />
     );
 };

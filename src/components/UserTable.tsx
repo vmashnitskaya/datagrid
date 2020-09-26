@@ -29,9 +29,13 @@ const UserTable: FC<UserTableProps> = ({ userData, loadingUser, errorUser, fetch
         ];
     }, []);
 
+    const columnsForSorting = useMemo<string[]>(() => {
+        return ['id', 'first_name', ';ast_name', 'gender'];
+    }, []);
+
     useEffect(() => {
         fetchUsersData('Users');
-    }, []);
+    }, [fetchUsersData]);
 
     return (
         <Table
@@ -39,6 +43,7 @@ const UserTable: FC<UserTableProps> = ({ userData, loadingUser, errorUser, fetch
             renderData={userData}
             loading={loadingUser}
             error={errorUser}
+            columnsForSorting={columnsForSorting}
         />
     );
 };
