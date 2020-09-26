@@ -1,27 +1,32 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
-import userDataSelectors from '../redux/userData/userDataSelectors';
-import fetchUserData from '../redux/userData/userDataActions';
+
 import locationDataSelectors from '../redux/locationData/locationDataSelectors';
-import fetchLocationData from '../redux/locationData/locationDataActions';
 import appDataSelectors from '../redux/appData/appDataSelectors';
+import userDataSelectors from '../redux/userData/userDataSelectors';
+import fetchAppData from '../redux/appData/appDataActions';
+import fetchLocationData from '../redux/locationData/locationDataActions';
+import fetchUserData from '../redux/userData/userDataActions';
 
 import Loader from './Loader';
 import TableRow from './TableRow';
-import { ColumnsInterface } from './ColumnInterface';
-import fetchAppData from '../redux/appData/appDataActions';
+
+import { ColumnsInterface, ColumnInterface } from './ColumnInterface';
+import { DataObject } from '../redux/userData/userDataInterfaces';
+import { AppDataObject } from '../redux/appData/appDataInterfaces';
+import { LocationDataObject } from '../redux/locationData/locationDataInterfaces';
 
 export interface TableProps {
-    userData: { [key: string]: any }[];
+    userData: DataObject[];
     loading: boolean;
     error: string;
     fetchUsersData: (tabActive: string) => void;
     tabActive: string;
-    appData: { [key: string]: any }[];
+    appData: AppDataObject[];
     loadingApp: boolean;
     errorApp: string;
-    locationData: { [key: string]: any }[];
+    locationData: LocationDataObject[];
     loadingLocation: boolean;
     errorLocation: string;
     fetchLocationsData: (tabActive: string) => void;
@@ -72,11 +77,11 @@ const Table: FC<TableProps> = ({
         };
     }, []);
 
-    const [columnHeaderForActiveTab, setColumnHeaderForActiveTab] = useState(
+    const [columnHeaderForActiveTab, setColumnHeaderForActiveTab] = useState<ColumnInterface[]>(
         columnHeaders[(tabActive as keyof typeof columnHeaders) || []]
     );
 
-    const [renderData, setRenderData] = useState<{ [key: string]: any }>([]);
+    const [renderData, setRenderData] = useState<{ [key: string]: any }[]>([]);
 
     useEffect(() => {
         setColumnHeaderForActiveTab(columnHeaders[tabActive as keyof typeof columnHeaders]);
@@ -128,10 +133,10 @@ const Table: FC<TableProps> = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {renderData.map((userObject: { [key: string]: any }, index: number) => (
+                        {renderData.map((element: { [key: string]: any }, index: number) => (
                             <TableRow
                                 key={`key${index + 1}`}
-                                row={userObject}
+                                row={element}
                                 columnHeaderForActiveTab={columnHeaderForActiveTab}
                             />
                         ))}

@@ -1,5 +1,4 @@
 import { ThunkAction } from 'redux-thunk';
-import { strict } from 'assert';
 import types, { LocationDataActions } from './locationDataTypes';
 import { LocationDataObject } from './locationDataInterfaces';
 import fetchApiData from '../api';
