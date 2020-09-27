@@ -19,18 +19,45 @@ interface UserTableProps {
 const UserTable: FC<UserTableProps> = ({ userData, loadingUser, errorUser, fetchUsersData }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
-            { header: 'Id', name: 'id' },
-            { header: 'First name', name: 'first_name' },
-            { header: 'Last name', name: 'last_name' },
-            { header: 'Birth date', name: 'date' },
-            { header: 'Email', name: 'email' },
-            { header: 'Gender', name: 'gender' },
-            { header: 'Location', name: 'location' },
+            { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
+            {
+                header: 'First name',
+                name: 'first_name',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+            },
+            {
+                header: 'Last name',
+                name: 'last_name',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+            },
+            {
+                header: 'Birth date',
+                name: 'date',
+                type: 'string',
+                sorting: false,
+                filtering: false,
+            },
+            { header: 'Email', name: 'email', type: 'string', sorting: false, filtering: false },
+            {
+                header: 'Gender',
+                name: 'gender',
+                type: 'select',
+                options: ['Female', 'Male'],
+                sorting: true,
+                filtering: true,
+            },
+            {
+                header: 'Location',
+                name: 'location',
+                type: 'string',
+                sorting: false,
+                filtering: false,
+            },
         ];
-    }, []);
-
-    const columnsForSorting = useMemo<string[]>(() => {
-        return ['id', 'first_name', 'last_name', 'gender'];
     }, []);
 
     useEffect(() => {
@@ -43,7 +70,6 @@ const UserTable: FC<UserTableProps> = ({ userData, loadingUser, errorUser, fetch
             renderData={userData}
             loading={loadingUser}
             error={errorUser}
-            columnsForSorting={columnsForSorting}
         />
     );
 };

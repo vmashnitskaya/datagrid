@@ -1,39 +1,44 @@
 import React, { FC, useEffect, useState, useCallback } from 'react';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import clsx from 'clsx';
-
 import Loader from '../Loader';
 import TableRow from './TableRow';
 import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
+import SortingControls from './SortingControls';
+import FilterControl from './FilterControl';
+import FilterPopUp from './FilterPopUp';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
     loading: boolean;
     error: string;
     columnHeaders: ColumnInterface[];
-    columnsForSorting: string[];
+}
+interface FilteringColumn {
+    [key: string]: string;
 }
 
-const Table: FC<TableProps> = ({
-    renderData,
-    loading,
-    error,
-    columnHeaders,
-    columnsForSorting,
-}) => {
+const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) => {
     const [sorting, setSorting] = useState<string>('');
     const [sortingColumn, setSortingColumn] = useState<string>('');
-    const [sortedRenderData, setSortedRenderData] = useState<{ [key: string]: any }[]>([]);
+    const [sortedFilteredRenderData, setSortedFilteredRenderData] = useState<
+        { [key: string]: any }[]
+    >([]);
+    const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
+    const [filteredColumnAndValue, setFilteredColumnAndValue] = useState<FilteringColumn>({});
 
     useEffect(() => {
-        setSortedRenderData([...renderData]);
+        setFilteredColumnAndValue(
+            columnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {} as FilteringColumn)
+        );
+    }, [columnHeaders]);
+
+    useEffect(() => {
+        setSortedFilteredRenderData([...renderData]);
     }, [sorting, renderData]);
 
     const sortData = useCallback(() => {
-        const arrayForSorting = [...renderData];
+        const arrayForSorting = [...sortedFilteredRenderData];
         arrayForSorting.sort((a, b) => {
             if (a[sortingColumn] < b[sortingColumn]) {
                 return sorting === 'up' ? -1 : 1;
@@ -44,25 +49,79 @@ const Table: FC<TableProps> = ({
             return 0;
         });
         return arrayForSorting;
-    }, [renderData, sortingColumn, sorting]);
+    }, [sortingColumn, sorting]);
 
     useEffect(() => {
         if (sorting.length > 0) {
-            setSortedRenderData(sortData());
+            setSortedFilteredRenderData(sortData());
         }
     }, [sorting, sortingColumn, renderData, sortData]);
-
-    useEffect(() => {
-        console.log(sortedRenderData);
-    }, [sortedRenderData]);
 
     const handleSorting = (columnName: string) => {
         setSorting('down');
         setSortingColumn(columnName);
     };
+
     const handleReverseSorting = (columnName: string) => {
         setSorting('up');
         setSortingColumn(columnName);
+    };
+
+    const handleFilterOpened = (columnName: string) => {
+        if (filteredColumnOpened.length > 0) {
+            setFilteredColumnOpened('');
+        } else {
+            setFilteredColumnOpened(columnName);
+        }
+    };
+
+    const filterStringsAndNumbers = (
+        column: string,
+        query: string,
+        array: { [key: string]: any }[]
+    ): { [key: string]: any }[] => {
+        return array.filter((element) => {
+            const arr = columnHeaders
+                .filter((el) => el.type === 'select')
+                .find((el) => el.name === column);
+            if (arr) {
+                return element[column].toLowerCase() === query.toLowerCase();
+            }
+            if (typeof element[column] === 'string') {
+                return element[column].toLowerCase().includes(query.toLowerCase());
+            }
+            if (typeof element[column] === 'number') {
+                return element[column] === Number(query);
+            }
+            return false;
+        });
+    };
+
+    const filterRenderData = () => {
+        const filteringColumns = Object.keys(filteredColumnAndValue).filter((element) => {
+            return filteredColumnAndValue[element].length > 0;
+        });
+
+        let data: { [key: string]: any }[] = [...renderData];
+
+        filteringColumns.forEach((column) => {
+            data = filterStringsAndNumbers(column, filteredColumnAndValue[column], renderData);
+        });
+
+        setSortedFilteredRenderData(data);
+    };
+
+    const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        filterRenderData();
+    };
+
+    const handleInputProvided = (
+        event: React.ChangeEvent<HTMLInputElement>,
+        columnName: string
+    ) => {
+        const query = event.target.value;
+        setFilteredColumnAndValue((prevState) => ({ ...prevState, [columnName]: query }));
     };
 
     return (
@@ -77,45 +136,53 @@ const Table: FC<TableProps> = ({
                                 <th key={`key${index + 1}`} className="bg-light">
                                     <div className="header">
                                         <div>{element.header}</div>
-                                        {columnsForSorting.includes(element.name) && (
-                                            <div className="sorting">
-                                                <ArrowDropUpIcon
-                                                    className={clsx(
-                                                        'up',
-                                                        'text-secondary',
-                                                        sorting === 'up' &&
-                                                            sortingColumn === element.name &&
-                                                            'text-info'
-                                                    )}
-                                                    onClick={() =>
-                                                        handleReverseSorting(element.name)
-                                                    }
+                                        <div className="icons">
+                                            {element.filtering && (
+                                                <>
+                                                    <FilterControl
+                                                        currentElementColumn={element.name}
+                                                        filteredColumnAndValue={
+                                                            filteredColumnAndValue
+                                                        }
+                                                        handleFilterOpened={handleFilterOpened}
+                                                    />
+                                                    <FilterPopUp
+                                                        filteredColumnOpened={filteredColumnOpened}
+                                                        filteredColumnAndValue={
+                                                            filteredColumnAndValue
+                                                        }
+                                                        currentColumnName={element.name}
+                                                        handleFilter={handleFilter}
+                                                        handleInputProvided={handleInputProvided}
+                                                        currentElementType={element.type}
+                                                    />
+                                                </>
+                                            )}
+                                            {element.sorting && (
+                                                <SortingControls
+                                                    sortingColumn={sortingColumn}
+                                                    currentElementColumn={element.name}
+                                                    handleReverseSorting={handleReverseSorting}
+                                                    handleSorting={handleSorting}
+                                                    sorting={sorting}
                                                 />
-                                                <ArrowDropDownIcon
-                                                    className={clsx(
-                                                        'down',
-                                                        'text-secondary',
-                                                        sorting === 'down' &&
-                                                            sortingColumn === element.name &&
-                                                            'text-info'
-                                                    )}
-                                                    onClick={() => handleSorting(element.name)}
-                                                />
-                                            </div>
-                                        )}
+                                            )}
+                                        </div>
                                     </div>
                                 </th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedRenderData.map((element: { [key: string]: any }, index: number) => (
-                            <TableRow
-                                key={`key${index + 1}`}
-                                row={element}
-                                columnHeaders={columnHeaders}
-                            />
-                        ))}
+                        {sortedFilteredRenderData.map(
+                            (element: { [key: string]: any }, index: number) => (
+                                <TableRow
+                                    key={`key${index + 1}`}
+                                    row={element}
+                                    columnHeaders={columnHeaders}
+                                />
+                            )
+                        )}
                     </tbody>
                 </table>
             )}

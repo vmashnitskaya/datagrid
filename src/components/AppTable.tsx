@@ -19,15 +19,36 @@ interface AppTableProps {
 const AppTable: FC<AppTableProps> = ({ fetchAppsData, appData, loadingApp, errorApp }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
-            { header: 'App Id', name: 'app_id' },
-            { header: 'App name', name: 'app_name' },
-            { header: 'App version', name: 'app_version' },
-            { header: 'App domain', name: 'app_domain' },
-            { header: 'App URL', name: 'app_url' },
+            { header: 'App Id', name: 'app_id', type: 'string', filtering: true, sorting: true },
+            {
+                header: 'App name',
+                name: 'app_name',
+                type: 'string',
+                filtering: true,
+                sorting: true,
+            },
+            {
+                header: 'App version',
+                name: 'app_version',
+                type: 'string',
+                filtering: true,
+                sorting: true,
+            },
+            {
+                header: 'App domain',
+                name: 'app_domain',
+                type: 'string',
+                filtering: true,
+                sorting: true,
+            },
+            {
+                header: 'App URL',
+                name: 'app_url',
+                type: 'string',
+                filtering: false,
+                sorting: false,
+            },
         ];
-    }, []);
-    const columnsForSorting = useMemo<string[]>(() => {
-        return ['app_id', 'app_name', 'app_version', 'app_domain'];
     }, []);
 
     useEffect(() => {
@@ -40,7 +61,6 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, appData, loadingApp, error
             renderData={appData}
             loading={loadingApp}
             error={errorApp}
-            columnsForSorting={columnsForSorting}
         />
     );
 };

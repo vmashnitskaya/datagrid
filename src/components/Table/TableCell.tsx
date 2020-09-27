@@ -19,7 +19,7 @@ const handleEmailDisplaying = (row: { [key: string]: any }, columnName: string) 
                 className="text-secondary"
                 href={`${row[columnName]}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
             >
                 {row[columnName]}
             </a>

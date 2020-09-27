@@ -1,18 +1,40 @@
-.table th{
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 40px;
-    .sorting {
+.table {
+  td{
+    max-width: 400px;
+    min-width: 100px;
+    overflow: hidden;
+  }
+  th {
+    position: relative;
+    padding-right: 0;
+
+    .header {
       display: flex;
-      flex-direction: column;
-      .up{
-        cursor: pointer;
-      }
-      .down{
-        margin-top: -8px;
-        cursor: pointer;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 40px;
+
+      .icons {
+        display: flex;
+
+        .sorting {
+          display: flex;
+          flex-direction: column;
+
+          .up {
+            cursor: pointer;
+          }
+
+          .down {
+            margin-top: -8px;
+            cursor: pointer;
+          }
+        }
+
+        .filtering {
+          cursor: pointer;
+          margin: 4px -6px 0 6px;
+        }
       }
     }
   }

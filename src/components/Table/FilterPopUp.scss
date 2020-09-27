@@ -1,0 +1,30 @@
+.filterPopUp{
+  position: absolute;
+  min-width: 200px;
+  margin: 2px;
+  transform: translateY(100%);
+  right: 0;
+  bottom: 0;
+  border: 2px solid #dee2e6;
+  text-align: right;
+  &.hidden{
+    display: none;
+  }
+  .form-control:focus{
+    outline: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .radios{
+    margin: 10px;
+    input[type="radio" i] {
+      margin-left: 6px;
+      &:checked {
+        filter: invert(48%) sepia(96%) saturate(400%) hue-rotate(140deg) brightness(90%) contrast(91%);
+      }
+      &:focus {
+        outline-offset: 0;
+      }
+    }
+  }
+}

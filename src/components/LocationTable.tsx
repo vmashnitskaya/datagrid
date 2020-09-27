@@ -24,17 +24,31 @@ const LocationTable: FC<LocationTableProps> = ({
 }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
-            { header: 'City', name: 'city' },
-            { header: 'Country', name: 'country' },
-            { header: 'State', name: 'state' },
-            { header: 'Country code', name: 'country_code' },
-            { header: 'Longitude and Latitude', name: 'loc' },
-            { header: 'Timezone', name: 'timezone' },
+            { header: 'City', name: 'city', type: 'string', sorting: true, filtering: true },
+            { header: 'Country', name: 'country', type: 'string', sorting: true, filtering: true },
+            { header: 'State', name: 'state', type: 'string', sorting: true, filtering: true },
+            {
+                header: 'Country code',
+                name: 'country_code',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+            },
+            {
+                header: 'Longitude and Latitude',
+                name: 'loc',
+                type: 'string',
+                sorting: false,
+                filtering: false,
+            },
+            {
+                header: 'Timezone',
+                name: 'timezone',
+                type: 'string',
+                sorting: false,
+                filtering: false,
+            },
         ];
-    }, []);
-
-    const columnsForSorting = useMemo<string[]>(() => {
-        return ['city', 'country', 'state', 'country_code'];
     }, []);
 
     useEffect(() => {
@@ -47,7 +61,6 @@ const LocationTable: FC<LocationTableProps> = ({
             loading={loadingLocation}
             error={errorLocation}
             columnHeaders={columnHeaders}
-            columnsForSorting={columnsForSorting}
         />
     );
 };
