@@ -1,5 +1,4 @@
 import { ThunkAction } from 'redux-thunk';
-import { strict } from 'assert';
 import types, { UserdataActions } from './userDataTypes';
 import { DataObject } from './userDataInterfaces';
 import fetchApiData from '../api';

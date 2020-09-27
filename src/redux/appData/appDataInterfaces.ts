@@ -1,5 +1,3 @@
-import { Location } from '../userData/userDataInterfaces';
-
 export interface AppDataObject {
     app_id: string;
     app_name: string;

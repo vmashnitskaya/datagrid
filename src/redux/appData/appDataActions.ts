@@ -1,5 +1,4 @@
 import { ThunkAction } from 'redux-thunk';
-import { strict } from 'assert';
 import types, { AppDataActions } from './appDataTypes';
 import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
