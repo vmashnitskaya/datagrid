@@ -67,9 +67,13 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         setSortingColumn(columnName);
     };
 
+    const closePopUp = (): void => {
+        setFilteredColumnOpened('');
+    };
+
     const handleFilterOpened = (columnName: string) => {
         if (filteredColumnOpened.length > 0) {
-            setFilteredColumnOpened('');
+            closePopUp();
         } else {
             setFilteredColumnOpened(columnName);
         }
@@ -81,14 +85,11 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         array: { [key: string]: any }[]
     ): { [key: string]: any }[] => {
         return array.filter((element) => {
-            const arr = columnHeaders
-                .filter((el) => el.type === 'select')
-                .find((el) => el.name === column);
-            if (arr) {
-                return element[column].toLowerCase() === query.toLowerCase();
-            }
             if (typeof element[column] === 'string') {
-                return element[column].toLowerCase().includes(query.toLowerCase());
+                console.log(element[column].toLowerCase().startsWith(query.toLowerCase()));
+                console.log(element[column]);
+                console.log(query);
+                return element[column].toLowerCase().startsWith(query.toLowerCase());
             }
             if (typeof element[column] === 'number') {
                 return element[column] === Number(query);
@@ -102,11 +103,16 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
             return filteredColumnAndValue[element].length > 0;
         });
 
+        console.log(filteredColumnAndValue);
+        console.log(filteringColumns);
+
         let data: { [key: string]: any }[] = [...renderData];
 
         filteringColumns.forEach((column) => {
-            data = filterStringsAndNumbers(column, filteredColumnAndValue[column], renderData);
+            data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
         });
+
+        console.log(data);
 
         setSortedFilteredRenderData(data);
     };
@@ -114,6 +120,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         filterRenderData();
+        closePopUp();
     };
 
     const handleInputProvided = (

@@ -9,9 +9,12 @@ interface BaseColumn<T> {
 interface StringColumn extends BaseColumn<'string'> {
     maxLength?: number;
 }
+interface NumberColumn extends BaseColumn<'number'> {
+    maxLength?: number;
+}
 
 interface SelectColumn extends BaseColumn<'select'> {
     options: Array<string>;
 }
 
-export type ColumnInterface = StringColumn | SelectColumn;
+export type ColumnInterface = StringColumn | SelectColumn | NumberColumn;
