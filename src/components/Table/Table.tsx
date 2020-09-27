@@ -37,23 +37,26 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         setSortedFilteredRenderData([...renderData]);
     }, [sorting, renderData]);
 
-    const sortData = useCallback(() => {
-        const arrayForSorting = [...sortedFilteredRenderData];
-        arrayForSorting.sort((a, b) => {
-            if (a[sortingColumn] < b[sortingColumn]) {
-                return sorting === 'up' ? -1 : 1;
-            }
-            if (a[sortingColumn] > b[sortingColumn]) {
-                return sorting === 'up' ? 1 : -1;
-            }
-            return 0;
-        });
-        return arrayForSorting;
-    }, [sortingColumn, sorting]);
+    const sortData = useCallback(
+        (data: { [key: string]: any }[]) => {
+            const arrayForSorting = [...data];
+            arrayForSorting.sort((a, b) => {
+                if (a[sortingColumn] < b[sortingColumn]) {
+                    return sorting === 'up' ? -1 : 1;
+                }
+                if (a[sortingColumn] > b[sortingColumn]) {
+                    return sorting === 'up' ? 1 : -1;
+                }
+                return 0;
+            });
+            return arrayForSorting;
+        },
+        [sortingColumn, sorting]
+    );
 
     useEffect(() => {
         if (sorting.length > 0) {
-            setSortedFilteredRenderData(sortData());
+            setSortedFilteredRenderData(sortData);
         }
     }, [sorting, sortingColumn, renderData, sortData]);
 
@@ -86,9 +89,6 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     ): { [key: string]: any }[] => {
         return array.filter((element) => {
             if (typeof element[column] === 'string') {
-                console.log(element[column].toLowerCase().startsWith(query.toLowerCase()));
-                console.log(element[column]);
-                console.log(query);
                 return element[column].toLowerCase().startsWith(query.toLowerCase());
             }
             if (typeof element[column] === 'number') {
@@ -103,16 +103,10 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
             return filteredColumnAndValue[element].length > 0;
         });
 
-        console.log(filteredColumnAndValue);
-        console.log(filteringColumns);
-
         let data: { [key: string]: any }[] = [...renderData];
-
         filteringColumns.forEach((column) => {
             data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
         });
-
-        console.log(data);
 
         setSortedFilteredRenderData(data);
     };
