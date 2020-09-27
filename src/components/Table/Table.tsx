@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import clsx from 'clsx';
@@ -8,7 +8,6 @@ import TableRow from './TableRow';
 import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
-import { render } from 'react-dom';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
@@ -30,10 +29,10 @@ const Table: FC<TableProps> = ({
     const [sortedRenderData, setSortedRenderData] = useState<{ [key: string]: any }[]>([]);
 
     useEffect(() => {
-        setSortedRenderData([]);
-    }, []);
+        setSortedRenderData([...renderData]);
+    }, [sorting, renderData]);
 
-    const sortData = (): { [key: string]: any }[] => {
+    const sortData = useCallback(() => {
         const arrayForSorting = [...renderData];
         if (sorting === 'down') {
             arrayForSorting.sort((a, b) => {
@@ -57,13 +56,13 @@ const Table: FC<TableProps> = ({
             });
         }
         return arrayForSorting;
-    };
+    }, [renderData, sortingColumn, sorting]);
 
     useEffect(() => {
         if (sorting.length > 0) {
             setSortedRenderData(sortData());
         }
-    }, [sorting, sortingColumn, renderData]);
+    }, [sorting, sortingColumn, renderData, sortData]);
 
     useEffect(() => {
         console.log(sortedRenderData);
@@ -122,23 +121,13 @@ const Table: FC<TableProps> = ({
                         </tr>
                     </thead>
                     <tbody>
-                        {sorting.length === 0
-                            ? renderData.map((element: { [key: string]: any }, index: number) => (
-                                  <TableRow
-                                      key={`key${index + 1}`}
-                                      row={element}
-                                      columnHeaders={columnHeaders}
-                                  />
-                              ))
-                            : sortedRenderData.map(
-                                  (element: { [key: string]: any }, index: number) => (
-                                      <TableRow
-                                          key={`key${index + 1}`}
-                                          row={element}
-                                          columnHeaders={columnHeaders}
-                                      />
-                                  )
-                              )}
+                        {sortedRenderData.map((element: { [key: string]: any }, index: number) => (
+                            <TableRow
+                                key={`key${index + 1}`}
+                                row={element}
+                                columnHeaders={columnHeaders}
+                            />
+                        ))}
                     </tbody>
                 </table>
             )}
