@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import './SortingControls.scss';
 
 interface SortingControlsProps {
     sortingColumn: string;

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC } from 'react';
 import HelpText from './HelpText';
+import './SelectFilterContent.scss';
 
 interface SelectFilterContentProps {
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
