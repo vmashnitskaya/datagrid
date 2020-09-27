@@ -4,14 +4,14 @@ import TableCell from './TableCell';
 
 export interface TableRowProps {
     row: { [key: string]: any };
-    columnHeaders: ColumnInterface[];
+    columnHeaderForActiveTab: ColumnInterface[];
 }
 
-const TableRow: FC<TableRowProps> = ({ row, columnHeaders }) => {
+const TableRow: FC<TableRowProps> = ({ row, columnHeaderForActiveTab }) => {
     return (
         <tr>
-            {columnHeaders.map((element: ColumnInterface) => {
-                return <TableCell key={Date.now()} row={row} columnName={element.name} />;
+            {columnHeaderForActiveTab.map((element: ColumnInterface, index: number) => {
+                return <TableCell key={`key${index + 1}}`} row={row} columnName={element.name} />;
             })}
         </tr>
     );
