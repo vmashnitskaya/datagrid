@@ -14,16 +14,9 @@ export interface TableProps {
     loading: boolean;
     error: string;
     columnHeaders: ColumnInterface[];
-    columnsForSorting: string[];
 }
 
-const Table: FC<TableProps> = ({
-    renderData,
-    loading,
-    error,
-    columnHeaders,
-    columnsForSorting,
-}) => {
+const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) => {
     const [sorting, setSorting] = useState<string>('');
     const [sortingColumn, setSortingColumn] = useState<string>('');
     const [sortedRenderData, setSortedRenderData] = useState<{ [key: string]: any }[]>([]);
@@ -77,7 +70,7 @@ const Table: FC<TableProps> = ({
                                 <th key={`key${index + 1}`} className="bg-light">
                                     <div className="header">
                                         <div>{element.header}</div>
-                                        {columnsForSorting.includes(element.name) && (
+                                        {element.sorting && (
                                             <div className="sorting">
                                                 <ArrowDropUpIcon
                                                     className={clsx(
