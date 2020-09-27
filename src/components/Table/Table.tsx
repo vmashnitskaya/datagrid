@@ -1,13 +1,12 @@
-import React, { FC, useEffect, useState, useCallback, useMemo } from 'react';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import clsx from 'clsx';
+import React, { FC, useEffect, useState, useCallback } from 'react';
 import Loader from '../Loader';
 import TableRow from './TableRow';
 import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
+import SortingControls from './SortingControls';
+import FilterControl from './FilterControl';
+import FilterPopUp from './FilterPopUp';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
@@ -50,7 +49,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
             return 0;
         });
         return arrayForSorting;
-    }, [sortingColumn, sorting, sortedFilteredRenderData]);
+    }, [sortingColumn, sorting]);
 
     useEffect(() => {
         if (sorting.length > 0) {
@@ -82,6 +81,12 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         array: { [key: string]: any }[]
     ): { [key: string]: any }[] => {
         return array.filter((element) => {
+            const arr = columnHeaders
+                .filter((el) => el.type === 'select')
+                .find((el) => el.name === column);
+            if (arr) {
+                return element[column].toLowerCase() === query.toLowerCase();
+            }
             if (typeof element[column] === 'string') {
                 return element[column].toLowerCase().includes(query.toLowerCase());
             }
@@ -111,7 +116,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         filterRenderData();
     };
 
-    const handleSearchByString = (
+    const handleInputProvided = (
         event: React.ChangeEvent<HTMLInputElement>,
         columnName: string
     ) => {
@@ -134,84 +139,33 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
                                         <div className="icons">
                                             {element.filtering && (
                                                 <>
-                                                    <FilterListIcon
-                                                        className={clsx(
-                                                            'filtering',
-                                                            filteredColumnAndValue[element.name]
-                                                                .length > 0 && 'text-info'
-                                                        )}
-                                                        onClick={() =>
-                                                            handleFilterOpened(element.name)
+                                                    <FilterControl
+                                                        currentElementColumn={element.name}
+                                                        filteredColumnAndValue={
+                                                            filteredColumnAndValue
                                                         }
+                                                        handleFilterOpened={handleFilterOpened}
                                                     />
-                                                    <div
-                                                        className={clsx(
-                                                            'filterPopUp',
-                                                            'bg-light',
-                                                            filteredColumnOpened !== element.name &&
-                                                                'hidden'
-                                                        )}
-                                                    >
-                                                        <form
-                                                            autoComplete="off"
-                                                            onSubmit={handleFilter}
-                                                        >
-                                                            {element.type === 'string' && (
-                                                                <>
-                                                                    <input
-                                                                        className="form-control form-control-sm"
-                                                                        id="exampleInputEmail1"
-                                                                        aria-describedby="emailHelp"
-                                                                        onChange={(event) =>
-                                                                            handleSearchByString(
-                                                                                event,
-                                                                                element.name
-                                                                            )
-                                                                        }
-                                                                        value={
-                                                                            filteredColumnAndValue[
-                                                                                element.name
-                                                                            ]
-                                                                        }
-                                                                    />
-                                                                    <small
-                                                                        id="emailHelp"
-                                                                        className="form-text text-muted"
-                                                                    >
-                                                                        Enter filter criteria and
-                                                                        click Enter.
-                                                                    </small>
-                                                                </>
-                                                            )}
-                                                        </form>
-                                                    </div>
+                                                    <FilterPopUp
+                                                        filteredColumnOpened={filteredColumnOpened}
+                                                        filteredColumnAndValue={
+                                                            filteredColumnAndValue
+                                                        }
+                                                        currentColumnName={element.name}
+                                                        handleFilter={handleFilter}
+                                                        handleInputProvided={handleInputProvided}
+                                                        currentElementType={element.type}
+                                                    />
                                                 </>
                                             )}
                                             {element.sorting && (
-                                                <div className="sorting">
-                                                    <ArrowDropUpIcon
-                                                        className={clsx(
-                                                            'up',
-                                                            'text-secondary',
-                                                            sorting === 'up' &&
-                                                                sortingColumn === element.name &&
-                                                                'text-info'
-                                                        )}
-                                                        onClick={() =>
-                                                            handleReverseSorting(element.name)
-                                                        }
-                                                    />
-                                                    <ArrowDropDownIcon
-                                                        className={clsx(
-                                                            'down',
-                                                            'text-secondary',
-                                                            sorting === 'down' &&
-                                                                sortingColumn === element.name &&
-                                                                'text-info'
-                                                        )}
-                                                        onClick={() => handleSorting(element.name)}
-                                                    />
-                                                </div>
+                                                <SortingControls
+                                                    sortingColumn={sortingColumn}
+                                                    currentElementColumn={element.name}
+                                                    handleReverseSorting={handleReverseSorting}
+                                                    handleSorting={handleSorting}
+                                                    sorting={sorting}
+                                                />
                                             )}
                                         </div>
                                     </div>
