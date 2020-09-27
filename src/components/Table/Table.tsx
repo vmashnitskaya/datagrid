@@ -34,27 +34,15 @@ const Table: FC<TableProps> = ({
 
     const sortData = useCallback(() => {
         const arrayForSorting = [...renderData];
-        if (sorting === 'down') {
-            arrayForSorting.sort((a, b) => {
-                if (a[sortingColumn] < b[sortingColumn]) {
-                    return -1;
-                }
-                if (a[sortingColumn] > b[sortingColumn]) {
-                    return 1;
-                }
-                return 0;
-            });
-        } else {
-            arrayForSorting.sort((a, b) => {
-                if (a[sortingColumn] > b[sortingColumn]) {
-                    return -1;
-                }
-                if (a[sortingColumn] < b[sortingColumn]) {
-                    return 1;
-                }
-                return 0;
-            });
-        }
+        arrayForSorting.sort((a, b) => {
+            if (a[sortingColumn] < b[sortingColumn]) {
+                return sorting === 'up' ? -1 : 1;
+            }
+            if (a[sortingColumn] > b[sortingColumn]) {
+                return sorting === 'up' ? 1 : -1;
+            }
+            return 0;
+        });
         return arrayForSorting;
     }, [renderData, sortingColumn, sorting]);
 
