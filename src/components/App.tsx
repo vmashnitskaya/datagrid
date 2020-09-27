@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
+import { Redirect, Route, Switch } from 'react-router';
 import { BrowserRouter, Link } from 'react-router-dom';
 import './App.scss';
 import clsx from 'clsx';
-import Table from './Table';
+import UserTable from './UserTable';
+import AppTable from './AppTable';
+import LocationTable from './LocationTable';
 
 interface LinkDef {
     label: string;
@@ -64,7 +67,20 @@ const App: React.FC = () => {
                     </div>
                 </nav>
                 <div className="tab-content" id="nav-tabContent">
-                    <Table tabActive={tabActive} />
+                    <Switch>
+                        <Route exact path="/">
+                            <Redirect to="/users" />
+                        </Route>
+                        <Route exact path="/users">
+                            <UserTable />
+                        </Route>
+                        <Route path="/apps">
+                            <AppTable />
+                        </Route>
+                        <Route path="/locations">
+                            <LocationTable />
+                        </Route>
+                    </Switch>
                 </div>
             </BrowserRouter>
         </div>
