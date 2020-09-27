@@ -1,18 +1,43 @@
 .table th{
+  position: relative;
+  padding-right: 0;
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     min-height: 40px;
-    .sorting {
+    .icons{
       display: flex;
-      flex-direction: column;
-      .up{
-        cursor: pointer;
+      .sorting {
+        display: flex;
+        flex-direction: column;
+        .up{
+          cursor: pointer;
+        }
+        .down{
+          margin-top: -8px;
+          cursor: pointer;
+        }
       }
-      .down{
-        margin-top: -8px;
+      .filtering{
         cursor: pointer;
+        margin: 4px -6px 0 6px;
+      }
+      .filterPopUp{
+        position: absolute;
+        min-width: 200px;
+        transform: translateY(100%);
+        right: 0;
+        bottom: 0;
+        border: 2px solid #dee2e6;
+        .form-control:focus{
+          outline: none;
+          border-color: transparent;
+          box-shadow: none;
+        }
+        &.hidden{
+          display: none;
+        }
       }
     }
   }
