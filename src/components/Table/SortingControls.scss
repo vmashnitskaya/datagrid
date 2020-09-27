@@ -1,0 +1,13 @@
+.sorting {
+  display: flex;
+  flex-direction: column;
+
+  .up {
+    cursor: pointer;
+  }
+
+  .down {
+    margin-top: -8px;
+    cursor: pointer;
+  }
+}
