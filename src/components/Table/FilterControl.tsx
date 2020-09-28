@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import clsx from 'clsx';
 
-interface FilterControlProps {
+export interface FilterControlProps {
     currentElementColumn: string;
     filteredColumnAndValue: { [key: string]: string };
     handleFilterOpened: (columnName: string) => void;
