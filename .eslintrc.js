@@ -34,7 +34,7 @@ module.exports = {
         'react/prop-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         "react/jsx-props-no-spreading": "off",
-        ' @typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': 'off',
         "jsx-a11y/label-has-associated-control": [ "error", {
             "required": {
                 "some": [ "nesting", "id"  ]
