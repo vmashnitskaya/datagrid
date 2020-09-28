@@ -25,6 +25,8 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     >([]);
     const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
     const [filteredColumnAndValue, setFilteredColumnAndValue] = useState<FilteringColumn>({});
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+    const [currntPage, setCurrntPage] = useState<number>(1);
 
     useEffect(() => {
         setFilteredColumnAndValue(
