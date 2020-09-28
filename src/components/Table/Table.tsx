@@ -156,6 +156,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
                                                         handleFilter={handleFilter}
                                                         handleInputProvided={handleInputProvided}
                                                         currentElementType={element.type}
+                                                        closePopUp={closePopUp}
                                                     />
                                                 </>
                                             )}
