@@ -7,6 +7,9 @@
   bottom: 0;
   border: 2px solid #dee2e6;
   text-align: right;
+  &:focus{
+    outline: none;
+  }
   &.hidden{
     display: none;
   }

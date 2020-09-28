@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FunctionComponent } from 'react';
+import React, { ChangeEvent, FC, FormEvent } from 'react';
 import clsx from 'clsx';
 import StringFilterContent from './StringFilterContent';
 import SelectFilterContent from './SelectFilterContent';
@@ -8,21 +8,26 @@ interface FilterPopUpProps {
     filteredColumnOpened: string;
     filteredColumnAndValue: { [key: string]: string };
     currentColumnName: string;
-    handleFilter: (event: React.FormEvent<HTMLFormElement>) => void;
+    handleFilter: (event: FormEvent<HTMLFormElement>) => void;
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentElementType: string;
+    closePopUp: () => void;
 }
 
-const FilterPopUp: FunctionComponent<FilterPopUpProps> = ({
+const FilterPopUp: FC<FilterPopUpProps> = ({
     filteredColumnOpened,
     filteredColumnAndValue,
     currentColumnName,
     handleFilter,
     handleInputProvided,
     currentElementType,
+    closePopUp,
 }) => {
     return (
         <div
+            role="button"
+            onBlur={closePopUp}
+            tabIndex={-1}
             className={clsx(
                 'filterPopUp',
                 'bg-light',
