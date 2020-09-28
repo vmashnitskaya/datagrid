@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-interface HelpTextProps {
+export interface HelpTextProps {
     value: string;
 }
 
