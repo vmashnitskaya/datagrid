@@ -5,8 +5,6 @@ import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
 import SortingControls from './SortingControls';
-import FilterControl from './FilterControl';
-import FilterPopUp from './FilterPopUp';
 import Filtering from './Filtering';
 
 export interface TableProps {
