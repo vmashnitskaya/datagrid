@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FunctionComponent } from 'react';
+import React, { ChangeEvent } from 'react';
 import HelpText from './HelpText';
 
 interface StringFilterControlProps {

@@ -8,10 +8,11 @@ interface SelectFilterContentProps {
     filteredColumnAndValue: { [key: string]: string };
 }
 
-const SelectFilterContent: FC<SelectFilterContentProps> = (
-    { handleInputProvided, currentColumnName, filteredColumnAndValue },
-    ref
-) => {
+const SelectFilterContent: FC<SelectFilterContentProps> = ({
+    handleInputProvided,
+    currentColumnName,
+    filteredColumnAndValue,
+}) => {
     return (
         <>
             <label htmlFor="male">Male</label>
