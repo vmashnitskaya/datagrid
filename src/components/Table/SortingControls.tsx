@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, KeyboardEvent } from 'react';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -19,6 +19,18 @@ const SortingControls: FC<SortingControlsProps> = ({
     handleSorting,
     sorting,
 }) => {
+    const handleReverseSortingPressed = (event: KeyboardEvent<SVGSVGElement>) => {
+        if (event.key === 'Enter') {
+            handleReverseSorting(currentElementColumn);
+        }
+    };
+
+    const handleSortingPressed = (event: KeyboardEvent<SVGSVGElement>) => {
+        if (event.key === 'Enter') {
+            handleSorting(currentElementColumn);
+        }
+    };
+
     return (
         <>
             <div className="sorting">
@@ -29,6 +41,8 @@ const SortingControls: FC<SortingControlsProps> = ({
                         sorting === 'up' && sortingColumn === currentElementColumn && 'text-info'
                     )}
                     onClick={() => handleReverseSorting(currentElementColumn)}
+                    tabIndex={0}
+                    onKeyPress={handleReverseSortingPressed}
                 />
                 <ArrowDropDownIcon
                     className={clsx(
@@ -37,6 +51,8 @@ const SortingControls: FC<SortingControlsProps> = ({
                         sorting === 'down' && sortingColumn === currentElementColumn && 'text-info'
                     )}
                     onClick={() => handleSorting(currentElementColumn)}
+                    tabIndex={0}
+                    onKeyPress={handleSortingPressed}
                 />
             </div>
         </>

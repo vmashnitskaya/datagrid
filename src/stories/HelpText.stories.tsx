@@ -18,5 +18,5 @@ HelpTextSelect.args = {
 export const HelpTextString = Template.bind({});
 
 HelpTextString.args = {
-    value: 'Enter filter criteria and click Enter.',
+    value: 'Fill in filter criteria and click Enter.',
 };
