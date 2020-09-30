@@ -7,6 +7,7 @@ import { ColumnInterface } from '../ColumnInterface';
 import SortingControls from './SortingControls';
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopUp';
+import Filtering from './Filtering';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
@@ -103,18 +104,23 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
             return filteredColumnAndValue[element].length > 0;
         });
 
+        console.log(filteringColumns);
+
         let data: { [key: string]: any }[] = [...renderData];
         filteringColumns.forEach((column) => {
             data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
         });
 
+        console.log(data);
+
         setSortedFilteredRenderData(data);
     };
 
     const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+        console.log(filteredColumnAndValue);
         filterRenderData();
         closePopUp();
+        event.preventDefault();
     };
 
     const handleInputProvided = (
@@ -122,6 +128,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         columnName: string
     ) => {
         const query = event.target.value;
+        console.log(query);
         setFilteredColumnAndValue((prevState) => ({ ...prevState, [columnName]: query }));
     };
 
@@ -139,26 +146,16 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
                                         <div>{element.header}</div>
                                         <div className="icons">
                                             {element.filtering && (
-                                                <>
-                                                    <FilterControl
-                                                        currentElementColumn={element.name}
-                                                        filteredColumnAndValue={
-                                                            filteredColumnAndValue
-                                                        }
-                                                        handleFilterOpened={handleFilterOpened}
-                                                    />
-                                                    <FilterPopUp
-                                                        filteredColumnOpened={filteredColumnOpened}
-                                                        filteredColumnAndValue={
-                                                            filteredColumnAndValue
-                                                        }
-                                                        currentColumnName={element.name}
-                                                        handleFilter={handleFilter}
-                                                        handleInputProvided={handleInputProvided}
-                                                        currentElementType={element.type}
-                                                        closePopUp={closePopUp}
-                                                    />
-                                                </>
+                                                <Filtering
+                                                    currentElementColumn={element.name}
+                                                    filteredColumnAndValue={filteredColumnAndValue}
+                                                    handleFilterOpened={handleFilterOpened}
+                                                    filteredColumnOpened={filteredColumnOpened}
+                                                    handleFilter={handleFilter}
+                                                    handleInputProvided={handleInputProvided}
+                                                    currentElementType={element.type}
+                                                    closePopUp={closePopUp}
+                                                />
                                             )}
                                             {element.sorting && (
                                                 <SortingControls

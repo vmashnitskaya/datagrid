@@ -7,23 +7,24 @@ interface StringFilterControlProps {
     filteredColumnAndValue: { [key: string]: string };
 }
 
-const StringFilterContent: FunctionComponent<StringFilterControlProps> = ({
-    handleInputProvided,
-    currentColumnName,
-    filteredColumnAndValue,
-}) => {
-    return (
-        <>
-            <input
-                className="form-control form-control-sm"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                onChange={(event) => handleInputProvided(event, currentColumnName)}
-                value={filteredColumnAndValue[currentColumnName]}
-            />
-            <HelpText value="Enter filter criteria and click Enter." />
-        </>
-    );
-};
+export type RefForInput = HTMLInputElement;
+
+const StringFilterContent = React.forwardRef<RefForInput, StringFilterControlProps>(
+    ({ handleInputProvided, currentColumnName, filteredColumnAndValue }, ref) => {
+        return (
+            <>
+                <input
+                    className="form-control form-control-sm"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    onChange={(event) => handleInputProvided(event, currentColumnName)}
+                    value={filteredColumnAndValue[currentColumnName]}
+                    ref={ref}
+                />
+                <HelpText value="Fill in filter criteria and click Enter." />
+            </>
+        );
+    }
+);
 
 export default StringFilterContent;
