@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, FunctionComponent, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, FC } from 'react';
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopUp';
 
@@ -10,10 +10,9 @@ interface FilteringProps {
     handleFilter: (event: FormEvent<HTMLFormElement>) => void;
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentElementType: string;
-    closePopUp: () => void;
 }
 
-const Filtering: FunctionComponent<FilteringProps> = ({
+const Filtering: FC<FilteringProps> = ({
     currentElementColumn,
     filteredColumnAndValue,
     handleFilterOpened,
@@ -21,24 +20,13 @@ const Filtering: FunctionComponent<FilteringProps> = ({
     handleFilter,
     handleInputProvided,
     currentElementType,
-    closePopUp,
 }) => {
-    const iconRef = useRef<SVGSVGElement>(null);
-
-    const handlePopUpClosed = () => {
-        if (iconRef && iconRef.current) {
-            iconRef.current.focus();
-        }
-        closePopUp();
-    };
-
     return (
         <>
             <FilterControl
                 currentElementColumn={currentElementColumn}
                 filteredColumnAndValue={filteredColumnAndValue}
                 handleFilterOpened={handleFilterOpened}
-                ref={iconRef}
             />
             <FilterPopUp
                 filteredColumnOpened={filteredColumnOpened}
@@ -47,7 +35,6 @@ const Filtering: FunctionComponent<FilteringProps> = ({
                 handleFilter={handleFilter}
                 handleInputProvided={handleInputProvided}
                 currentElementType={currentElementType}
-                closePopUp={handlePopUpClosed}
             />
         </>
     );

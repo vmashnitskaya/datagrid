@@ -11,7 +11,6 @@ interface FilterPopUpProps {
     handleFilter: (event: FormEvent<HTMLFormElement>) => void;
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentElementType: string;
-    closePopUp: () => void;
 }
 
 const FilterPopUp: FC<FilterPopUpProps> = ({
@@ -21,7 +20,6 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
     handleFilter,
     handleInputProvided,
     currentElementType,
-    closePopUp,
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,8 +28,7 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
             filteredColumnOpened === currentElementColumn &&
             filteredColumnOpened.length > 0 &&
             inputRef &&
-            inputRef.current &&
-            currentElementType !== 'select'
+            inputRef.current
         ) {
             inputRef.current.focus();
         }
@@ -40,7 +37,6 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
     return (
         <div
             role="button"
-            onBlur={closePopUp}
             tabIndex={0}
             className={clsx(
                 'filterPopUp',
@@ -62,6 +58,7 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
                         handleInputProvided={handleInputProvided}
                         currentColumnName={currentElementColumn}
                         filteredColumnAndValue={filteredColumnAndValue}
+                        ref={inputRef}
                     />
                 )}
             </form>
