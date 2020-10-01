@@ -1,4 +1,9 @@
 import React, { FC, useEffect, useState, useCallback } from 'react';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import clsx from 'clsx';
 import Loader from '../Loader';
 import TableRow from './TableRow';
 import './Table.scss';
@@ -26,17 +31,25 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
     const [filteredColumnAndValue, setFilteredColumnAndValue] = useState<FilteringColumn>({});
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-    const [currntPage, setCurrntPage] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(renderData.length / rowsPerPage);
+
+    useEffect(() => {
+        const index = currentPage - 1;
+        setSortedFilteredRenderData(
+            renderData.slice(index * rowsPerPage, index * rowsPerPage + rowsPerPage)
+        );
+    }, [currentPage, renderData, rowsPerPage]);
+
+    useEffect(() => {
+        setTotalPages(Math.ceil(renderData.length / rowsPerPage));
+    }, [renderData.length, rowsPerPage]);
 
     useEffect(() => {
         setFilteredColumnAndValue(
             columnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {} as FilteringColumn)
         );
     }, [columnHeaders]);
-
-    useEffect(() => {
-        setSortedFilteredRenderData([...renderData]);
-    }, [sorting, renderData]);
 
     const sortData = useCallback(
         (data: { [key: string]: any }[]) => {
@@ -126,57 +139,114 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         setFilteredColumnAndValue((prevState) => ({ ...prevState, [columnName]: query }));
     };
 
+    const handleNextPageNavigation = () => {
+        setCurrentPage((prevState: number) => {
+            return prevState + 1 > totalPages ? prevState : prevState + 1;
+        });
+    };
+
+    const handlePreviousPageNavigation = () => {
+        setCurrentPage((prevState: number) => {
+            return prevState - 1 > 0 ? prevState - 1 : prevState;
+        });
+    };
+
+    const handleFirstPageNavigation = () => {
+        if (currentPage !== 1) {
+            setCurrentPage(1);
+        }
+    };
+
+    const handleLastPageNavigation = () => {
+        if (currentPage !== totalPages) {
+            setCurrentPage(totalPages);
+        }
+    };
+
     return (
         <>
             {loading || error.length > 0 || renderData.length === 0 ? (
                 <Loader />
             ) : (
-                <table className="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            {columnHeaders.map((element, index: number) => (
-                                <th key={`key${index + 1}`} className="bg-light">
-                                    <div className="header">
-                                        <div>{element.header}</div>
-                                        <div className="icons">
-                                            {element.filtering && (
-                                                <Filtering
-                                                    currentElementColumn={element.name}
-                                                    filteredColumnAndValue={filteredColumnAndValue}
-                                                    handleFilterOpened={handleFilterOpened}
-                                                    filteredColumnOpened={filteredColumnOpened}
-                                                    handleFilter={handleFilter}
-                                                    handleInputProvided={handleInputProvided}
-                                                    currentElementType={element.type}
-                                                />
-                                            )}
-                                            {element.sorting && (
-                                                <SortingControls
-                                                    sortingColumn={sortingColumn}
-                                                    currentElementColumn={element.name}
-                                                    handleReverseSorting={handleReverseSorting}
-                                                    handleSorting={handleSorting}
-                                                    sorting={sorting}
-                                                />
-                                            )}
+                <>
+                    <table className="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                {columnHeaders.map((element, index: number) => (
+                                    <th key={`key${index + 1}`} className="bg-light">
+                                        <div className="header">
+                                            <div>{element.header.replace(/ /g, '\u00a0')}</div>
+                                            <div className="icons">
+                                                {element.filtering && (
+                                                    <Filtering
+                                                        currentElementColumn={element.name}
+                                                        filteredColumnAndValue={
+                                                            filteredColumnAndValue
+                                                        }
+                                                        handleFilterOpened={handleFilterOpened}
+                                                        filteredColumnOpened={filteredColumnOpened}
+                                                        handleFilter={handleFilter}
+                                                        handleInputProvided={handleInputProvided}
+                                                        currentElementType={element.type}
+                                                    />
+                                                )}
+                                                {element.sorting && (
+                                                    <SortingControls
+                                                        sortingColumn={sortingColumn}
+                                                        currentElementColumn={element.name}
+                                                        handleReverseSorting={handleReverseSorting}
+                                                        handleSorting={handleSorting}
+                                                        sorting={sorting}
+                                                    />
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sortedFilteredRenderData.map(
-                            (element: { [key: string]: any }, index: number) => (
-                                <TableRow
-                                    key={`key${index + 1}`}
-                                    row={element}
-                                    columnHeaders={columnHeaders}
-                                />
-                            )
-                        )}
-                    </tbody>
-                </table>
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedFilteredRenderData.map(
+                                (element: { [key: string]: any }, index: number) => (
+                                    <TableRow
+                                        key={`key${index + 1}`}
+                                        row={element}
+                                        columnHeaders={columnHeaders}
+                                    />
+                                )
+                            )}
+                        </tbody>
+                    </table>
+                    <div className="mb-5">
+                        <div className="pagination">
+                            <FirstPageIcon
+                                className={clsx('page-first', currentPage !== 1 && 'text-info')}
+                                onClick={handleFirstPageNavigation}
+                            />
+                            <NavigateBeforeIcon
+                                className={clsx('page-previous', currentPage !== 1 && 'text-info')}
+                                onClick={handlePreviousPageNavigation}
+                            />
+                            <div className="pagination-input">
+                                <input type="text" value={currentPage} /> of {totalPages}
+                            </div>
+                            <NavigateNextIcon
+                                className={clsx(
+                                    'page-next',
+                                    currentPage !== totalPages && 'text-info'
+                                )}
+                                onClick={handleNextPageNavigation}
+                            />
+                            <LastPageIcon
+                                className={clsx(
+                                    'page-last',
+                                    currentPage !== totalPages && 'text-info'
+                                )}
+                                onClick={handleLastPageNavigation}
+                            />
+                        </div>
+                    </div>
+                </>
             )}
         </>
     );
