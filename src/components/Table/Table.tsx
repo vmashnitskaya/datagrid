@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useCallback } from 'react';
+import React, { FC, useEffect, useState, useCallback, ChangeEvent, FormEvent } from 'react';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
@@ -33,6 +33,11 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(renderData.length / rowsPerPage);
+    const [pageInputState, setPageInputState] = useState();
+
+    useEffect(() => {
+        setPageInputState(currentPage);
+    }, [currentPage]);
 
     useEffect(() => {
         const index = currentPage - 1;
@@ -163,6 +168,18 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         }
     };
 
+    const handlePageEnter = (event: ChangeEvent<HTMLInputElement>) => {
+        const page = Number(event.target.value);
+        if (page <= totalPages) {
+            setPageInputState(page);
+        }
+    };
+
+    const handlePageNavigationByInput = (event: FormEvent) => {
+        event.preventDefault();
+        setCurrentPage(pageInputState);
+    };
+
     return (
         <>
             {loading || error.length > 0 || renderData.length === 0 ? (
@@ -227,9 +244,17 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
                                 className={clsx('page-previous', currentPage !== 1 && 'text-info')}
                                 onClick={handlePreviousPageNavigation}
                             />
-                            <div className="pagination-input">
-                                <input type="text" value={currentPage} /> of {totalPages}
-                            </div>
+                            <form
+                                className="pagination-input"
+                                onSubmit={handlePageNavigationByInput}
+                            >
+                                <input
+                                    type="text"
+                                    value={pageInputState}
+                                    onChange={handlePageEnter}
+                                />{' '}
+                                of {totalPages}
+                            </form>
                             <NavigateNextIcon
                                 className={clsx(
                                     'page-next',
