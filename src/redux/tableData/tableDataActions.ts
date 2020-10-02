@@ -1,4 +1,5 @@
 import types, { TableDataActions } from './tableDataTypes';
+import { RenderDataObject } from './TableDataInterface';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -19,16 +20,14 @@ const setSortingColumn = (column: string): TableDataActions => {
     };
 };
 const setSortedFilteredRenderData = (
-    sortedFilteredRenderData: { [key: string]: any }[]
+    sortedFilteredRenderData: RenderDataObject[]
 ): TableDataActions => {
     return {
         type: types.SET_SORTED_FILTERED_RENDER_DATA,
         payload: sortedFilteredRenderData,
     };
 };
-const setNotFilteredRenderData = (
-    notFilteredRenderData: { [key: string]: any }[]
-): TableDataActions => {
+const setNotFilteredRenderData = (notFilteredRenderData: RenderDataObject[]): TableDataActions => {
     return {
         type: types.SET_NOT_FILTERED_RENDER_DATA,
         payload: notFilteredRenderData,

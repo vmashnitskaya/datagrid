@@ -1,22 +1,7 @@
 import { Reducer } from 'redux';
 import types, { TableDataActions } from './tableDataTypes';
-import { TableDataInterface } from './TableDataInterface';
-
-const filterStringsAndNumbers = (
-    column: string,
-    query: string,
-    array: { [key: string]: any }[]
-): { [key: string]: any }[] => {
-    return array.filter((element) => {
-        if (typeof element[column] === 'string') {
-            return element[column].toLowerCase().startsWith(query.toLowerCase());
-        }
-        if (typeof element[column] === 'number') {
-            return element[column] === Number(query);
-        }
-        return false;
-    });
-};
+import { RenderDataObject, TableDataInterface } from './TableDataInterface';
+import sortingFilteringLogic from './sortingFilteringLogic';
 
 const initialState: TableDataInterface = {
     sorting: '',
@@ -73,15 +58,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             };
         case types.SORT_RENDER_DATA: {
             const arrayToSort = [...state.sortedFilteredRenderData];
-            arrayToSort.sort((a, b) => {
-                if (a[state.sortingColumn] < b[state.sortingColumn]) {
-                    return state.sorting === 'up' ? -1 : 1;
-                }
-                if (a[state.sortingColumn] > b[state.sortingColumn]) {
-                    return state.sorting === 'up' ? 1 : -1;
-                }
-                return 0;
-            });
+            sortingFilteringLogic.sortArray(arrayToSort, state.sortingColumn, state.sorting);
             return {
                 ...state,
                 sortedFilteredRenderData: arrayToSort,
@@ -92,9 +69,13 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 return state.filteredColumnAndValue[element].length > 0;
             });
 
-            let data: { [key: string]: any }[] = [...state.notFilteredRenderData];
+            let data: RenderDataObject[] = [...state.notFilteredRenderData];
             filteringColumns.forEach((column) => {
-                data = filterStringsAndNumbers(column, state.filteredColumnAndValue[column], data);
+                data = sortingFilteringLogic.filterStringsAndNumbers(
+                    column,
+                    state.filteredColumnAndValue[column],
+                    data
+                );
             });
             return {
                 ...state,

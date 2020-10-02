@@ -1,10 +1,14 @@
 import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
 
+export interface RenderDataObject {
+    [key: string]: any;
+}
+
 export interface TableDataInterface {
     sorting: string;
     sortingColumn: string;
-    sortedFilteredRenderData: { [key: string]: any }[];
-    notFilteredRenderData: { [key: string]: any }[];
+    sortedFilteredRenderData: RenderDataObject[];
+    notFilteredRenderData: RenderDataObject[];
     filteredColumnAndValue: FilteringColumn;
     rowsPerPage: number;
     currentPage: number;

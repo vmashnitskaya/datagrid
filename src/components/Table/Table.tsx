@@ -13,6 +13,7 @@ import { RootState } from '../../redux/rootReducer';
 
 import actions from '../../redux/tableData/tableDataActions';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import { RenderDataObject } from '../../redux/tableData/TableDataInterface';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
@@ -21,8 +22,8 @@ export interface TableProps {
     columnHeaders: ColumnInterface[];
     sorting: string;
     sortingColumn: string;
-    sortedFilteredRenderData: { [key: string]: any }[];
-    notFilteredRenderData: { [key: string]: any }[];
+    sortedFilteredRenderData: RenderDataObject[];
+    notFilteredRenderData: RenderDataObject[];
     filteredColumnAndValue: FilteringColumn;
     rowsPerPage: number;
     currentPage: number;
@@ -163,10 +164,10 @@ const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => (
     setSortingColumn: (column: string) => {
         dispatch(actions.setSortingColumn(column));
     },
-    setSortedFilteredRenderData: (data: { [key: string]: any }[]) => {
+    setSortedFilteredRenderData: (data: RenderDataObject[]) => {
         dispatch(actions.setSortedFilteredRenderData(data));
     },
-    setNotFilteredRenderData: (data: { [key: string]: any }[]) => {
+    setNotFilteredRenderData: (data: RenderDataObject[]) => {
         dispatch(actions.setNotFilteredRenderData(data));
     },
     setFilteredColumnAndValue: (data: FilteringColumn) => {
