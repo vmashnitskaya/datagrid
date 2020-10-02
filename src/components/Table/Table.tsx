@@ -28,8 +28,6 @@ export interface TableProps {
     rowsPerPage: number;
     currentPage: number;
     totalPages: number;
-    setSorting: (sorting: string) => void;
-    setSortingColumn: (column: string) => void;
     setSortedFilteredRenderData: (data: { [key: string]: string }[]) => void;
     setNotFilteredRenderData: (data: { [key: string]: string }[]) => void;
     setFilteredColumnAndValue: (data: FilteringColumn) => void;
@@ -50,8 +48,6 @@ const Table: FC<TableProps> = ({
     rowsPerPage,
     currentPage,
     totalPages,
-    setSorting,
-    setSortingColumn,
     setSortedFilteredRenderData,
     setNotFilteredRenderData,
     setFilteredColumnAndValue,
@@ -83,25 +79,7 @@ const Table: FC<TableProps> = ({
         if (sorting.length > 0) {
             sortRenderData();
         }
-    }, [sortRenderData, sorting.length]);
-
-    const handleSorting = (columnName: string, direction: string) => {
-        setSorting(direction);
-        setSortingColumn(columnName);
-    };
-
-    /*    const filterRenderData = () => {
-        const filteringColumns = Object.keys(filteredColumnAndValue).filter((element) => {
-            return filteredColumnAndValue[element].length > 0;
-        });
-
-        let data: { [key: string]: any }[] = [...notFilteredRenderData];
-        filteringColumns.forEach((column) => {
-            data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
-        });
-
-        setSortedFilteredRenderData(data);
-    }; */
+    }, [sortRenderData, sorting, sortingColumn, sorting.length]);
 
     return (
         <>
@@ -117,9 +95,6 @@ const Table: FC<TableProps> = ({
                                         key={`key${index + 1}`}
                                         element={element}
                                         filteredColumnAndValue={filteredColumnAndValue}
-                                        handleSorting={handleSorting}
-                                        sorting={sorting}
-                                        sortingColumn={sortingColumn}
                                     />
                                 ))}
                             </tr>
@@ -158,12 +133,6 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    setSorting: (direction: string) => {
-        dispatch(actions.setSorting(direction));
-    },
-    setSortingColumn: (column: string) => {
-        dispatch(actions.setSortingColumn(column));
-    },
     setSortedFilteredRenderData: (data: RenderDataObject[]) => {
         dispatch(actions.setSortedFilteredRenderData(data));
     },

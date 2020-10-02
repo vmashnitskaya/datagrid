@@ -3,20 +3,31 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import './SortingControls.scss';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import actions from '../../redux/tableData/tableDataActions';
 
 export interface SortingControlsProps {
     sortingColumn: string;
     currentElementColumn: string;
-    handleSorting: (columnName: string, direction: string) => void;
     sorting: string;
+    setSorting: (sorting: string) => void;
+    setSortingColumn: (column: string) => void;
 }
 
 const SortingControls: FC<SortingControlsProps> = ({
     sortingColumn,
     currentElementColumn,
-    handleSorting,
     sorting,
+    setSorting,
+    setSortingColumn,
 }) => {
+    const handleSorting = (columnName: string, direction: string) => {
+        setSorting(direction);
+        setSortingColumn(columnName);
+    };
+
     const handleSortingPressed = (event: KeyboardEvent<SVGSVGElement>, direction: string) => {
         if (event.key === 'Enter') {
             handleSorting(currentElementColumn, direction);
@@ -55,4 +66,18 @@ const SortingControls: FC<SortingControlsProps> = ({
     );
 };
 
-export default SortingControls;
+const mapStateToProps = (state: RootState) => ({
+    sorting: tableDataSelectors.getSorting(state),
+    sortingColumn: tableDataSelectors.getSortingColumn(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+    setSorting: (direction: string) => {
+        dispatch(actions.setSorting(direction));
+    },
+    setSortingColumn: (column: string) => {
+        dispatch(actions.setSortingColumn(column));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortingControls);

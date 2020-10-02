@@ -7,18 +7,9 @@ import { FilteringColumn } from './FilteringColumnInterface';
 interface TableHeaderProps {
     element: ColumnInterface;
     filteredColumnAndValue: FilteringColumn;
-    handleSorting: (columnName: string, direction: string) => void;
-    sorting: string;
-    sortingColumn: string;
 }
 
-const TableHeader: FunctionComponent<TableHeaderProps> = ({
-    element,
-    filteredColumnAndValue,
-    handleSorting,
-    sorting,
-    sortingColumn,
-}) => {
+const TableHeader: FunctionComponent<TableHeaderProps> = ({ element, filteredColumnAndValue }) => {
     return (
         <th className="bg-light">
             <div className="header">
@@ -31,14 +22,7 @@ const TableHeader: FunctionComponent<TableHeaderProps> = ({
                             currentElementType={element.type}
                         />
                     )}
-                    {element.sorting && (
-                        <SortingControls
-                            sortingColumn={sortingColumn}
-                            currentElementColumn={element.name}
-                            handleSorting={handleSorting}
-                            sorting={sorting}
-                        />
-                    )}
+                    {element.sorting && <SortingControls currentElementColumn={element.name} />}
                 </div>
             </div>
         </th>
