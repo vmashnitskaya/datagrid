@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, FC } from 'react';
+import React, { ChangeEvent, FormEvent, FC, useState } from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import FilterControl from './FilterControl';
@@ -7,8 +7,6 @@ import FilterPopUp from './FilterPopUp';
 interface FilteringProps {
     currentElementColumn: string;
     filteredColumnAndValue: { [key: string]: string };
-    handleFilterOpened: (columnName: string) => void;
-    filteredColumnOpened: string;
     handleFilter: (event: FormEvent<HTMLFormElement>) => void;
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentElementType: string;
@@ -17,14 +15,26 @@ interface FilteringProps {
 const Filtering: FC<FilteringProps> = ({
     currentElementColumn,
     filteredColumnAndValue,
-    handleFilterOpened,
-    filteredColumnOpened,
     handleFilter,
     handleInputProvided,
     currentElementType,
 }) => {
+    const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
+
+    const closePopUp = (): void => {
+        setFilteredColumnOpened('');
+    };
+
+    const handleFilterOpened = (columnName: string) => {
+        if (filteredColumnOpened.length > 0) {
+            closePopUp();
+        } else {
+            setFilteredColumnOpened(columnName);
+        }
+    };
+
     const popover = (
-        <Popover id="popover-basic">
+        <Popover id="popover-basic" className="bg-light">
             <Popover.Title as="h3">Filter</Popover.Title>
             <Popover.Content>
                 <FilterPopUp

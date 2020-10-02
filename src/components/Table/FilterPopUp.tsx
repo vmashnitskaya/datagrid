@@ -1,8 +1,6 @@
 import React, { ChangeEvent, FC, FormEvent, useRef, useEffect } from 'react';
-import clsx from 'clsx';
 import StringFilterContent from './StringFilterContent';
 import SelectFilterContent from './SelectFilterContent';
-import './FilterPopUp.scss';
 
 interface FilterPopUpProps {
     filteredColumnOpened: string;

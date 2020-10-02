@@ -7,27 +7,19 @@ import './SortingControls.scss';
 export interface SortingControlsProps {
     sortingColumn: string;
     currentElementColumn: string;
-    handleReverseSorting: (columnName: string) => void;
-    handleSorting: (columnName: string) => void;
+    handleSorting: (columnName: string, direction: string) => void;
     sorting: string;
 }
 
 const SortingControls: FC<SortingControlsProps> = ({
     sortingColumn,
     currentElementColumn,
-    handleReverseSorting,
     handleSorting,
     sorting,
 }) => {
-    const handleReverseSortingPressed = (event: KeyboardEvent<SVGSVGElement>) => {
+    const handleSortingPressed = (event: KeyboardEvent<SVGSVGElement>, direction: string) => {
         if (event.key === 'Enter') {
-            handleReverseSorting(currentElementColumn);
-        }
-    };
-
-    const handleSortingPressed = (event: KeyboardEvent<SVGSVGElement>) => {
-        if (event.key === 'Enter') {
-            handleSorting(currentElementColumn);
+            handleSorting(currentElementColumn, direction);
         }
     };
 
@@ -36,23 +28,27 @@ const SortingControls: FC<SortingControlsProps> = ({
             <div className="sorting">
                 <ArrowDropUpIcon
                     className={clsx(
-                        'up',
-                        'text-secondary',
-                        sorting === 'up' && sortingColumn === currentElementColumn && 'text-info'
-                    )}
-                    onClick={() => handleReverseSorting(currentElementColumn)}
-                    tabIndex={0}
-                    onKeyPress={handleReverseSortingPressed}
-                />
-                <ArrowDropDownIcon
-                    className={clsx(
                         'down',
                         'text-secondary',
                         sorting === 'down' && sortingColumn === currentElementColumn && 'text-info'
                     )}
-                    onClick={() => handleSorting(currentElementColumn)}
+                    onClick={() => handleSorting(currentElementColumn, 'down')}
                     tabIndex={0}
-                    onKeyPress={handleSortingPressed}
+                    onKeyPress={(event: KeyboardEvent<SVGSVGElement>) =>
+                        handleSortingPressed(event, 'down')
+                    }
+                />
+                <ArrowDropDownIcon
+                    className={clsx(
+                        'up',
+                        'text-secondary',
+                        sorting === 'up' && sortingColumn === currentElementColumn && 'text-info'
+                    )}
+                    onClick={() => handleSorting(currentElementColumn, 'up')}
+                    tabIndex={0}
+                    onKeyPress={(event: KeyboardEvent<SVGSVGElement>) =>
+                        handleSortingPressed(event, 'up')
+                    }
                 />
             </div>
         </>

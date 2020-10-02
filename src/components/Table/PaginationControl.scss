@@ -1,0 +1,22 @@
+.page{
+  &-last,
+  &-first,
+  &-previous,
+  &-next{
+    height: 32px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+.pagination-input{
+  display: flex;
+  input{
+    width: 26px;
+    height: 22px;
+    margin-right: 6px;
+    &:focus{
+      outline: none;
+    }
+  }
+}

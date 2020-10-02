@@ -1,25 +1,19 @@
 import React, { FC, useEffect, useState, useCallback, ChangeEvent, FormEvent } from 'react';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import clsx from 'clsx';
-import Loader from '../Loader';
+import Loader from './Loader';
 import TableRow from './TableRow';
+import TableHeader from './TableHeader';
+import PaginationControl from './PaginationControl';
 import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
-import SortingControls from './SortingControls';
-import Filtering from './Filtering';
+import { FilteringColumn } from './FilteringColumnInterface';
+import RowsPerPageControl from './RowsPerPageControl';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
     loading: boolean;
     error: string;
     columnHeaders: ColumnInterface[];
-}
-interface FilteringColumn {
-    [key: string]: string;
 }
 
 const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) => {
@@ -28,7 +22,6 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     const [sortedFilteredRenderData, setSortedFilteredRenderData] = useState<
         { [key: string]: any }[]
     >([]);
-    const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
     const [filteredColumnAndValue, setFilteredColumnAndValue] = useState<FilteringColumn>({});
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -77,28 +70,11 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         if (sorting.length > 0) {
             setSortedFilteredRenderData(sortData);
         }
-    }, [sorting, sortingColumn, renderData, sortData]);
+    }, [sorting, sortingColumn, renderData, sortData, rowsPerPage]);
 
-    const handleSorting = (columnName: string) => {
-        setSorting('down');
+    const handleSorting = (columnName: string, direction: string) => {
+        setSorting(direction);
         setSortingColumn(columnName);
-    };
-
-    const handleReverseSorting = (columnName: string) => {
-        setSorting('up');
-        setSortingColumn(columnName);
-    };
-
-    const closePopUp = (): void => {
-        setFilteredColumnOpened('');
-    };
-
-    const handleFilterOpened = (columnName: string) => {
-        if (filteredColumnOpened.length > 0) {
-            closePopUp();
-        } else {
-            setFilteredColumnOpened(columnName);
-        }
     };
 
     const filterStringsAndNumbers = (
@@ -118,21 +94,21 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     };
 
     const filterRenderData = () => {
-        const filteringColumns = Object.keys(filteredColumnAndValue).filter((element) => {
+        const filteredColumns = Object.keys(filteredColumnAndValue).filter((element) => {
             return filteredColumnAndValue[element].length > 0;
         });
 
-        let data: { [key: string]: any }[] = [...renderData];
-        filteringColumns.forEach((column) => {
-            data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
+        setSortedFilteredRenderData((prevState) => {
+            let data: { [key: string]: any }[] = [...prevState];
+            filteredColumns.forEach((column) => {
+                data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
+            });
+            return data;
         });
-
-        setSortedFilteredRenderData(data);
     };
 
     const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
         filterRenderData();
-        closePopUp();
         event.preventDefault();
     };
 
@@ -144,28 +120,27 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         setFilteredColumnAndValue((prevState) => ({ ...prevState, [columnName]: query }));
     };
 
-    const handleNextPageNavigation = () => {
-        setCurrentPage((prevState: number) => {
-            return prevState + 1 > totalPages ? prevState : prevState + 1;
-        });
-    };
+    const handlePageNavigation = (pageDirection: string) => {
+        let nextPage = 0;
 
-    const handlePreviousPageNavigation = () => {
-        setCurrentPage((prevState: number) => {
-            return prevState - 1 > 0 ? prevState - 1 : prevState;
-        });
-    };
-
-    const handleFirstPageNavigation = () => {
-        if (currentPage !== 1) {
-            setCurrentPage(1);
+        switch (pageDirection) {
+            case 'next':
+                nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
+                break;
+            case 'previous':
+                nextPage = currentPage - 1 > 0 ? currentPage - 1 : currentPage;
+                break;
+            case 'first':
+                nextPage = currentPage !== 1 ? 1 : currentPage;
+                break;
+            case 'last':
+                nextPage = totalPages !== 1 ? totalPages : currentPage;
+                break;
+            default:
+                nextPage = currentPage;
         }
-    };
 
-    const handleLastPageNavigation = () => {
-        if (currentPage !== totalPages) {
-            setCurrentPage(totalPages);
-        }
+        setCurrentPage(nextPage);
     };
 
     const handlePageEnter = (event: ChangeEvent<HTMLInputElement>) => {
@@ -180,6 +155,10 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         setCurrentPage(pageInputState);
     };
 
+    const changeRowsPerPage = (rowsPerPageNext: number) => {
+        setRowsPerPage(rowsPerPageNext);
+    };
+
     return (
         <>
             {loading || error.length > 0 || renderData.length === 0 ? (
@@ -190,35 +169,16 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
                         <thead>
                             <tr>
                                 {columnHeaders.map((element, index: number) => (
-                                    <th key={`key${index + 1}`} className="bg-light">
-                                        <div className="header">
-                                            <div>{element.header.replace(/ /g, '\u00a0')}</div>
-                                            <div className="icons">
-                                                {element.filtering && (
-                                                    <Filtering
-                                                        currentElementColumn={element.name}
-                                                        filteredColumnAndValue={
-                                                            filteredColumnAndValue
-                                                        }
-                                                        handleFilterOpened={handleFilterOpened}
-                                                        filteredColumnOpened={filteredColumnOpened}
-                                                        handleFilter={handleFilter}
-                                                        handleInputProvided={handleInputProvided}
-                                                        currentElementType={element.type}
-                                                    />
-                                                )}
-                                                {element.sorting && (
-                                                    <SortingControls
-                                                        sortingColumn={sortingColumn}
-                                                        currentElementColumn={element.name}
-                                                        handleReverseSorting={handleReverseSorting}
-                                                        handleSorting={handleSorting}
-                                                        sorting={sorting}
-                                                    />
-                                                )}
-                                            </div>
-                                        </div>
-                                    </th>
+                                    <TableHeader
+                                        key={`key${index + 1}`}
+                                        element={element}
+                                        filteredColumnAndValue={filteredColumnAndValue}
+                                        handleFilter={handleFilter}
+                                        handleInputProvided={handleInputProvided}
+                                        handleSorting={handleSorting}
+                                        sorting={sorting}
+                                        sortingColumn={sortingColumn}
+                                    />
                                 ))}
                             </tr>
                         </thead>
@@ -234,42 +194,16 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
                             )}
                         </tbody>
                     </table>
-                    <div className="mb-5">
-                        <div className="pagination">
-                            <FirstPageIcon
-                                className={clsx('page-first', currentPage !== 1 && 'text-info')}
-                                onClick={handleFirstPageNavigation}
-                            />
-                            <NavigateBeforeIcon
-                                className={clsx('page-previous', currentPage !== 1 && 'text-info')}
-                                onClick={handlePreviousPageNavigation}
-                            />
-                            <form
-                                className="pagination-input"
-                                onSubmit={handlePageNavigationByInput}
-                            >
-                                <input
-                                    type="text"
-                                    value={pageInputState}
-                                    onChange={handlePageEnter}
-                                />{' '}
-                                of {totalPages}
-                            </form>
-                            <NavigateNextIcon
-                                className={clsx(
-                                    'page-next',
-                                    currentPage !== totalPages && 'text-info'
-                                )}
-                                onClick={handleNextPageNavigation}
-                            />
-                            <LastPageIcon
-                                className={clsx(
-                                    'page-last',
-                                    currentPage !== totalPages && 'text-info'
-                                )}
-                                onClick={handleLastPageNavigation}
-                            />
-                        </div>
+                    <div className="mb-5 footer-controls">
+                        <RowsPerPageControl changeRowsPerPage={changeRowsPerPage} />
+                        <PaginationControl
+                            currentPage={currentPage}
+                            handlePageNavigation={handlePageNavigation}
+                            pageInputState={pageInputState}
+                            totalPages={totalPages}
+                            handlePageEnter={handlePageEnter}
+                            handlePageNavigationByInput={handlePageNavigationByInput}
+                        />
                     </div>
                 </>
             )}

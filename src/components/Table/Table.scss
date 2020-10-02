@@ -16,32 +16,10 @@
     width: 220px;
   }
 }
-.pagination{
+.footer-controls{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  .page{
-    &-last,
-    &-first,
-    &-previous,
-    &-next{
-      height: 32px;
-      &:hover{
-        cursor: pointer;
-      }
-    }
-  }
-  .pagination-input{
-    display: flex;
-    input{
-      width: 26px;
-      height: 22px;
-      margin-right: 6px;
-      &:focus{
-        outline: none;
-      }
-    }
-  }
 }
 
 
