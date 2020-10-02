@@ -1,35 +1,37 @@
 import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import actions from '../../redux/tableData/tableDataActions';
 
 interface RowsPerPageControlProps {
-    changeRowsPerPage: (rowsPerPage: number) => void;
+    setRowsPerPage: (rowsPerPage: number) => void;
+    rowsPerPage: number;
 }
 
-const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({ changeRowsPerPage }) => {
-    const [key, setKey] = useState<string | null>('10');
-
+const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
+    setRowsPerPage,
+    rowsPerPage,
+}) => {
     const dropdownKeys = useMemo((): string[] => {
         return ['5', '10', '20', '50', '100'];
     }, []);
 
-    useEffect(() => {
-        changeRowsPerPage(Number(key));
-    }, [changeRowsPerPage, key]);
-
     const handleDropDownSelect = (eventKey: string | null) => {
-        setKey(eventKey);
+        setRowsPerPage(Number(eventKey));
     };
 
     return (
         <Dropdown>
             <Dropdown.Toggle variant="info" id="dropdown-basic" size="sm">
-                {key}
+                {rowsPerPage}
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 {dropdownKeys.map((element) => (
                     <Dropdown.Item
                         eventKey={element}
-                        active={element === key}
+                        active={element === String(rowsPerPage)}
                         onSelect={handleDropDownSelect}
                     >
                         {element}
@@ -40,4 +42,14 @@ const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({ change
     );
 };
 
-export default RowsPerPageControl;
+const mapStateToProps = (state: RootState) => ({
+    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+    setRowsPerPage: (rowsPerPage: number) => {
+        dispatch(actions.setRowsPerPage(rowsPerPage));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RowsPerPageControl);

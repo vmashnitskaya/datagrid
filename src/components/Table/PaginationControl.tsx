@@ -1,28 +1,66 @@
-import React, { ChangeEvent, FunctionComponent } from 'react';
+import React, { ChangeEvent, FormEvent, FunctionComponent, useEffect, useState } from 'react';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import clsx from 'clsx';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import './PaginationControl.scss';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import actions from '../../redux/tableData/tableDataActions';
 
 interface PaginationControlProps {
     currentPage: number;
-    handlePageNavigation: (pageDirection: string) => void;
-    pageInputState: number;
     totalPages: number;
-    handlePageEnter: (event: ChangeEvent<HTMLInputElement>) => void;
-    handlePageNavigationByInput: (event: React.FormEvent<Element>) => void;
+    setCurrentPage: (rowsPerPage: number) => void;
 }
 
 const PaginationControl: FunctionComponent<PaginationControlProps> = ({
     currentPage,
-    handlePageNavigation,
-    pageInputState,
     totalPages,
-    handlePageEnter,
-    handlePageNavigationByInput,
+    setCurrentPage,
 }) => {
+    const [pageInputState, setPageInputState] = useState<number>(1);
+
+    useEffect(() => {
+        setPageInputState(currentPage);
+    }, [currentPage]);
+
+    const handlePageEnter = (event: ChangeEvent<HTMLInputElement>) => {
+        const page = Number(event.target.value);
+        if (page <= totalPages) {
+            setPageInputState(page);
+        }
+    };
+
+    const handlePageNavigationByInput = (event: FormEvent) => {
+        event.preventDefault();
+        setCurrentPage(pageInputState);
+    };
+
+    const handlePageNavigation = (pageDirection: string) => {
+        let nextPage = 0;
+
+        switch (pageDirection) {
+            case 'next':
+                nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
+                break;
+            case 'previous':
+                nextPage = currentPage - 1 > 0 ? currentPage - 1 : currentPage;
+                break;
+            case 'first':
+                nextPage = currentPage !== 1 ? 1 : currentPage;
+                break;
+            case 'last':
+                nextPage = totalPages !== 1 ? totalPages : currentPage;
+                break;
+            default:
+                nextPage = currentPage;
+        }
+
+        setCurrentPage(nextPage);
+    };
     return (
         <div className="pagination">
             <FirstPageIcon
@@ -49,4 +87,15 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
     );
 };
 
-export default PaginationControl;
+const mapStateToProps = (state: RootState) => ({
+    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+    currentPage: tableDataSelectors.getCurrentPage(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+    setCurrentPage: (currentPage: number) => {
+        dispatch(actions.setCurrentPage(currentPage));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaginationControl);

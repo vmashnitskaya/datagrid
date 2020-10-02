@@ -61,12 +61,6 @@ const Table: FC<TableProps> = ({
     setTotalPages,
     sortRenderData,
 }) => {
-    const [pageInputState, setPageInputState] = useState<number>(1);
-
-    useEffect(() => {
-        setPageInputState(currentPage);
-    }, [currentPage]);
-
     useEffect(() => {
         const index = currentPage - 1;
         setNotFilteredRenderData(
@@ -141,45 +135,6 @@ const Table: FC<TableProps> = ({
         setFilteredColumnAndValue({ ...filteredColumnAndValue, [columnName]: query });
     };
 
-    const handlePageNavigation = (pageDirection: string) => {
-        let nextPage = 0;
-
-        switch (pageDirection) {
-            case 'next':
-                nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
-                break;
-            case 'previous':
-                nextPage = currentPage - 1 > 0 ? currentPage - 1 : currentPage;
-                break;
-            case 'first':
-                nextPage = currentPage !== 1 ? 1 : currentPage;
-                break;
-            case 'last':
-                nextPage = totalPages !== 1 ? totalPages : currentPage;
-                break;
-            default:
-                nextPage = currentPage;
-        }
-
-        setCurrentPage(nextPage);
-    };
-
-    const handlePageEnter = (event: ChangeEvent<HTMLInputElement>) => {
-        const page = Number(event.target.value);
-        if (page <= totalPages) {
-            setPageInputState(page);
-        }
-    };
-
-    const handlePageNavigationByInput = (event: FormEvent) => {
-        event.preventDefault();
-        setCurrentPage(pageInputState);
-    };
-
-    const changeRowsPerPage = (rowsPerPageNext: number) => {
-        setRowsPerPage(rowsPerPageNext);
-    };
-
     return (
         <>
             {loading || error.length > 0 || renderData.length === 0 ? (
@@ -216,15 +171,8 @@ const Table: FC<TableProps> = ({
                         </tbody>
                     </table>
                     <div className="mb-5 footer-controls">
-                        <RowsPerPageControl changeRowsPerPage={changeRowsPerPage} />
-                        <PaginationControl
-                            currentPage={currentPage}
-                            handlePageNavigation={handlePageNavigation}
-                            pageInputState={pageInputState}
-                            totalPages={totalPages}
-                            handlePageEnter={handlePageEnter}
-                            handlePageNavigationByInput={handlePageNavigationByInput}
-                        />
+                        <RowsPerPageControl />
+                        <PaginationControl currentPage={currentPage} totalPages={totalPages} />
                     </div>
                 </>
             )}
