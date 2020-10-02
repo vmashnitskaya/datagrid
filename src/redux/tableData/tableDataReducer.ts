@@ -2,6 +2,22 @@ import { Reducer } from 'redux';
 import types, { TableDataActions } from './tableDataTypes';
 import { TableDataInterface } from './TableDataInterface';
 
+const filterStringsAndNumbers = (
+    column: string,
+    query: string,
+    array: { [key: string]: any }[]
+): { [key: string]: any }[] => {
+    return array.filter((element) => {
+        if (typeof element[column] === 'string') {
+            return element[column].toLowerCase().startsWith(query.toLowerCase());
+        }
+        if (typeof element[column] === 'number') {
+            return element[column] === Number(query);
+        }
+        return false;
+    });
+};
+
 const initialState: TableDataInterface = {
     sorting: '',
     sortingColumn: '',
@@ -38,7 +54,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
         case types.SET_FILTERED_COLUMN_AND_VALUE:
             return {
                 ...state,
-                filteredColumnAndValue: action.payload,
+                filteredColumnAndValue: { ...state.filteredColumnAndValue, ...action.payload },
             };
         case types.SET_ROWS_PER_PAGE:
             return {
@@ -69,6 +85,20 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return {
                 ...state,
                 sortedFilteredRenderData: arrayToSort,
+            };
+        }
+        case types.FILTER_RENDER_DATA: {
+            const filteringColumns = Object.keys(state.filteredColumnAndValue).filter((element) => {
+                return state.filteredColumnAndValue[element].length > 0;
+            });
+
+            let data: { [key: string]: any }[] = [...state.notFilteredRenderData];
+            filteringColumns.forEach((column) => {
+                data = filterStringsAndNumbers(column, state.filteredColumnAndValue[column], data);
+            });
+            return {
+                ...state,
+                sortedFilteredRenderData: data,
             };
         }
         default:

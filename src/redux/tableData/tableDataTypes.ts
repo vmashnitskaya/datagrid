@@ -10,8 +10,11 @@ const SET_ROWS_PER_PAGE = 'SET_ROWS_PER_PAGE';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
 const SORT_RENDER_DATA = 'SORT_RENDER_DATA';
+const FILTER_RENDER_DATA = 'FILTER_RENDER_DATA';
 
-type SortRenderData = Action<typeof SORT_RENDER_DATA>;
+type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
+
+type FilterRenderDataAction = Action<typeof FILTER_RENDER_DATA>;
 
 interface SetSortingAction extends Action<typeof SET_SORTING> {
     payload: string;
@@ -40,7 +43,7 @@ interface SetTotalPagesAction extends Action<typeof SET_TOTAL_PAGES> {
 }
 
 export type TableDataActions =
-    | SortRenderData
+    | SortRenderDataAction
     | SetSortingAction
     | SetSortingColumnAction
     | SetFilteredColumnAndValueAction
@@ -48,7 +51,8 @@ export type TableDataActions =
     | SetNotFilteredRenderDataAction
     | SetRowsPerPageAction
     | SetCurrentPageAction
-    | SetTotalPagesAction;
+    | SetTotalPagesAction
+    | FilterRenderDataAction;
 
 export default {
     SORT_RENDER_DATA,
@@ -60,4 +64,5 @@ export default {
     SET_ROWS_PER_PAGE,
     SET_CURRENT_PAGE,
     SET_TOTAL_PAGES,
+    FILTER_RENDER_DATA,
 } as const;

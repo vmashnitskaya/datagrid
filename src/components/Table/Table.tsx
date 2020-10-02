@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import Loader from './Loader';
 import TableRow from './TableRow';
@@ -32,8 +32,6 @@ export interface TableProps {
     setSortedFilteredRenderData: (data: { [key: string]: string }[]) => void;
     setNotFilteredRenderData: (data: { [key: string]: string }[]) => void;
     setFilteredColumnAndValue: (data: FilteringColumn) => void;
-    setRowsPerPage: (rowsPerPage: number) => void;
-    setCurrentPage: (currentPage: number) => void;
     setTotalPages: (totalPages: number) => void;
     sortRenderData: () => void;
 }
@@ -56,8 +54,6 @@ const Table: FC<TableProps> = ({
     setSortedFilteredRenderData,
     setNotFilteredRenderData,
     setFilteredColumnAndValue,
-    setRowsPerPage,
-    setCurrentPage,
     setTotalPages,
     sortRenderData,
 }) => {
@@ -93,23 +89,7 @@ const Table: FC<TableProps> = ({
         setSortingColumn(columnName);
     };
 
-    const filterStringsAndNumbers = (
-        column: string,
-        query: string,
-        array: { [key: string]: any }[]
-    ): { [key: string]: any }[] => {
-        return array.filter((element) => {
-            if (typeof element[column] === 'string') {
-                return element[column].toLowerCase().startsWith(query.toLowerCase());
-            }
-            if (typeof element[column] === 'number') {
-                return element[column] === Number(query);
-            }
-            return false;
-        });
-    };
-
-    const filterRenderData = () => {
+    /*    const filterRenderData = () => {
         const filteringColumns = Object.keys(filteredColumnAndValue).filter((element) => {
             return filteredColumnAndValue[element].length > 0;
         });
@@ -120,20 +100,7 @@ const Table: FC<TableProps> = ({
         });
 
         setSortedFilteredRenderData(data);
-    };
-
-    const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
-        filterRenderData();
-        event.preventDefault();
-    };
-
-    const handleInputProvided = (
-        event: React.ChangeEvent<HTMLInputElement>,
-        columnName: string
-    ) => {
-        const query = event.target.value;
-        setFilteredColumnAndValue({ ...filteredColumnAndValue, [columnName]: query });
-    };
+    }; */
 
     return (
         <>
@@ -149,8 +116,6 @@ const Table: FC<TableProps> = ({
                                         key={`key${index + 1}`}
                                         element={element}
                                         filteredColumnAndValue={filteredColumnAndValue}
-                                        handleFilter={handleFilter}
-                                        handleInputProvided={handleInputProvided}
                                         handleSorting={handleSorting}
                                         sorting={sorting}
                                         sortingColumn={sortingColumn}
@@ -206,12 +171,6 @@ const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => (
     },
     setFilteredColumnAndValue: (data: FilteringColumn) => {
         dispatch(actions.setFilteredColumnAndValue(data));
-    },
-    setRowsPerPage: (rowsPerPage: number) => {
-        dispatch(actions.setRowsPerPage(rowsPerPage));
-    },
-    setCurrentPage: (currentPage: number) => {
-        dispatch(actions.setCurrentPage(currentPage));
     },
     setTotalPages: (totalPages: number) => {
         dispatch(actions.setTotalPages(totalPages));

@@ -7,8 +7,6 @@ import { FilteringColumn } from './FilteringColumnInterface';
 interface TableHeaderProps {
     element: ColumnInterface;
     filteredColumnAndValue: FilteringColumn;
-    handleFilter: (event: FormEvent<HTMLFormElement>) => void;
-    handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     handleSorting: (columnName: string, direction: string) => void;
     sorting: string;
     sortingColumn: string;
@@ -17,8 +15,6 @@ interface TableHeaderProps {
 const TableHeader: FunctionComponent<TableHeaderProps> = ({
     element,
     filteredColumnAndValue,
-    handleFilter,
-    handleInputProvided,
     handleSorting,
     sorting,
     sortingColumn,
@@ -32,8 +28,6 @@ const TableHeader: FunctionComponent<TableHeaderProps> = ({
                         <Filtering
                             currentElementColumn={element.name}
                             filteredColumnAndValue={filteredColumnAndValue}
-                            handleFilter={handleFilter}
-                            handleInputProvided={handleInputProvided}
                             currentElementType={element.type}
                         />
                     )}

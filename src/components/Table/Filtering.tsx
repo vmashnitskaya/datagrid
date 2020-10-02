@@ -1,23 +1,25 @@
 import React, { ChangeEvent, FormEvent, FC, useState } from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopUp';
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import actions from '../../redux/tableData/tableDataActions';
 
 interface FilteringProps {
     currentElementColumn: string;
     filteredColumnAndValue: { [key: string]: string };
-    handleFilter: (event: FormEvent<HTMLFormElement>) => void;
-    handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentElementType: string;
+    filterRenderData: () => void;
 }
 
 const Filtering: FC<FilteringProps> = ({
     currentElementColumn,
     filteredColumnAndValue,
-    handleFilter,
-    handleInputProvided,
     currentElementType,
+    filterRenderData,
 }) => {
     const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
 
@@ -31,6 +33,11 @@ const Filtering: FC<FilteringProps> = ({
         } else {
             setFilteredColumnOpened(columnName);
         }
+    };
+
+    const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
+        filterRenderData();
+        event.preventDefault();
     };
 
     const onFilterExecuted = (event: FormEvent<HTMLFormElement>) => {
@@ -47,7 +54,6 @@ const Filtering: FC<FilteringProps> = ({
                     filteredColumnAndValue={filteredColumnAndValue}
                     currentElementColumn={currentElementColumn}
                     onFilterExecuted={onFilterExecuted}
-                    handleInputProvided={handleInputProvided}
                     currentElementType={currentElementType}
                 />
             </Popover.Content>
@@ -73,4 +79,10 @@ const Filtering: FC<FilteringProps> = ({
     );
 };
 
-export default Filtering;
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+    filterRenderData: () => {
+        dispatch(actions.filterRenderData());
+    },
+});
+
+export default connect(null, mapDispatchToProps)(Filtering);

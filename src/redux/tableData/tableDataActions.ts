@@ -1,64 +1,70 @@
 import types, { TableDataActions } from './tableDataTypes';
-import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
 
-function sortRenderData(): TableDataActions {
+const sortRenderData = (): TableDataActions => {
     return {
         type: types.SORT_RENDER_DATA,
     };
-}
+};
 
-function setSorting(direction: string): TableDataActions {
+const setSorting = (direction: string): TableDataActions => {
     return {
         type: types.SET_SORTING,
         payload: direction,
     };
-}
-function setSortingColumn(column: string): TableDataActions {
+};
+const setSortingColumn = (column: string): TableDataActions => {
     return {
         type: types.SET_SORTING_COLUMN,
         payload: column,
     };
-}
-function setSortedFilteredRenderData(
+};
+const setSortedFilteredRenderData = (
     sortedFilteredRenderData: { [key: string]: any }[]
-): TableDataActions {
+): TableDataActions => {
     return {
         type: types.SET_SORTED_FILTERED_RENDER_DATA,
         payload: sortedFilteredRenderData,
     };
-}
-function setNotFilteredRenderData(
+};
+const setNotFilteredRenderData = (
     notFilteredRenderData: { [key: string]: any }[]
-): TableDataActions {
+): TableDataActions => {
     return {
         type: types.SET_NOT_FILTERED_RENDER_DATA,
         payload: notFilteredRenderData,
     };
-}
-function setFilteredColumnAndValue(filteredColumnAndValue: FilteringColumn): TableDataActions {
+};
+const setFilteredColumnAndValue = (newEntry: { [key: string]: string }): TableDataActions => {
     return {
         type: types.SET_FILTERED_COLUMN_AND_VALUE,
-        payload: filteredColumnAndValue,
+        payload: newEntry,
     };
-}
-function setRowsPerPage(rowsPerPage: number): TableDataActions {
+};
+const setRowsPerPage = (rowsPerPage: number): TableDataActions => {
     return {
         type: types.SET_ROWS_PER_PAGE,
         payload: rowsPerPage,
     };
-}
-function setCurrentPage(currentPage: number): TableDataActions {
+};
+const setCurrentPage = (currentPage: number): TableDataActions => {
     return {
         type: types.SET_CURRENT_PAGE,
         payload: currentPage,
     };
-}
-function setTotalPages(totalPages: number): TableDataActions {
+};
+const setTotalPages = (totalPages: number): TableDataActions => {
     return {
         type: types.SET_TOTAL_PAGES,
         payload: totalPages,
     };
-}
+};
+
+const filterRenderData = (): TableDataActions => {
+    return {
+        type: types.FILTER_RENDER_DATA,
+    };
+};
+
 export default {
     sortRenderData,
     setSorting,
@@ -69,4 +75,5 @@ export default {
     setRowsPerPage,
     setTotalPages,
     setCurrentPage,
+    filterRenderData,
 };
