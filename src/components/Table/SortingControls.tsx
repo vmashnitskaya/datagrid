@@ -1,4 +1,4 @@
-import React, { FC, KeyboardEvent } from 'react';
+import React, { FC, KeyboardEvent, useEffect } from 'react';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import clsx from 'clsx';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -14,6 +14,7 @@ export interface SortingControlsProps {
     sorting: string;
     setSorting: (sorting: string) => void;
     setSortingColumn: (column: string) => void;
+    sortRenderData: () => void;
 }
 
 const SortingControls: FC<SortingControlsProps> = ({
@@ -22,7 +23,14 @@ const SortingControls: FC<SortingControlsProps> = ({
     sorting,
     setSorting,
     setSortingColumn,
+    sortRenderData,
 }) => {
+    useEffect(() => {
+        if (sorting.length > 0) {
+            sortRenderData();
+        }
+    }, [sorting, sortingColumn, sorting.length, sortRenderData]);
+
     const handleSorting = (columnName: string, direction: string) => {
         setSorting(direction);
         setSortingColumn(columnName);
@@ -77,6 +85,9 @@ const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => (
     },
     setSortingColumn: (column: string) => {
         dispatch(actions.setSortingColumn(column));
+    },
+    sortRenderData: () => {
+        dispatch(actions.sortRenderData());
     },
 });
 

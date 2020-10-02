@@ -75,12 +75,6 @@ const Table: FC<TableProps> = ({
         );
     }, [columnHeaders, setFilteredColumnAndValue]);
 
-    useEffect(() => {
-        if (sorting.length > 0) {
-            sortRenderData();
-        }
-    }, [sortRenderData, sorting, sortingColumn, sorting.length]);
-
     return (
         <>
             {loading || error.length > 0 || renderData.length === 0 ? (
