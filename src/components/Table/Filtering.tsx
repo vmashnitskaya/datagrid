@@ -1,4 +1,6 @@
 import React, { ChangeEvent, FormEvent, FC } from 'react';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopUp';
 
@@ -21,21 +23,37 @@ const Filtering: FC<FilteringProps> = ({
     handleInputProvided,
     currentElementType,
 }) => {
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Title as="h3">Filter</Popover.Title>
+            <Popover.Content>
+                <FilterPopUp
+                    filteredColumnOpened={filteredColumnOpened}
+                    filteredColumnAndValue={filteredColumnAndValue}
+                    currentElementColumn={currentElementColumn}
+                    handleFilter={handleFilter}
+                    handleInputProvided={handleInputProvided}
+                    currentElementType={currentElementType}
+                />
+            </Popover.Content>
+        </Popover>
+    );
     return (
         <>
-            <FilterControl
-                currentElementColumn={currentElementColumn}
-                filteredColumnAndValue={filteredColumnAndValue}
-                handleFilterOpened={handleFilterOpened}
-            />
-            <FilterPopUp
-                filteredColumnOpened={filteredColumnOpened}
-                filteredColumnAndValue={filteredColumnAndValue}
-                currentElementColumn={currentElementColumn}
-                handleFilter={handleFilter}
-                handleInputProvided={handleInputProvided}
-                currentElementType={currentElementType}
-            />
+            <OverlayTrigger
+                show={
+                    Boolean(filteredColumnOpened) && filteredColumnOpened === currentElementColumn
+                }
+                trigger="click"
+                placement="bottom"
+                overlay={popover}
+            >
+                <FilterControl
+                    currentElementColumn={currentElementColumn}
+                    filteredColumnAndValue={filteredColumnAndValue}
+                    handleFilterOpened={handleFilterOpened}
+                />
+            </OverlayTrigger>
         </>
     );
 };

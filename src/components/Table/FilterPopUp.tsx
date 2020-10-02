@@ -35,34 +35,24 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
     }, [currentElementColumn, currentElementType, filteredColumnOpened]);
 
     return (
-        <div
-            role="button"
-            tabIndex={0}
-            className={clsx(
-                'filterPopUp',
-                'bg-light',
-                filteredColumnOpened !== currentElementColumn && 'hidden'
+        <form autoComplete="off" onSubmit={handleFilter}>
+            {currentElementType === 'string' && (
+                <StringFilterContent
+                    handleInputProvided={handleInputProvided}
+                    currentColumnName={currentElementColumn}
+                    filteredColumnAndValue={filteredColumnAndValue}
+                    ref={inputRef}
+                />
             )}
-        >
-            <form autoComplete="off" onSubmit={handleFilter}>
-                {currentElementType === 'string' && (
-                    <StringFilterContent
-                        handleInputProvided={handleInputProvided}
-                        currentColumnName={currentElementColumn}
-                        filteredColumnAndValue={filteredColumnAndValue}
-                        ref={inputRef}
-                    />
-                )}
-                {currentElementType === 'select' && (
-                    <SelectFilterContent
-                        handleInputProvided={handleInputProvided}
-                        currentColumnName={currentElementColumn}
-                        filteredColumnAndValue={filteredColumnAndValue}
-                        ref={inputRef}
-                    />
-                )}
-            </form>
-        </div>
+            {currentElementType === 'select' && (
+                <SelectFilterContent
+                    handleInputProvided={handleInputProvided}
+                    currentColumnName={currentElementColumn}
+                    filteredColumnAndValue={filteredColumnAndValue}
+                    ref={inputRef}
+                />
+            )}
+        </form>
     );
 };
 

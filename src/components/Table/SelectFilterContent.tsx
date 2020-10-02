@@ -33,7 +33,7 @@ const SelectFilterContent = React.forwardRef<RefForInput, SelectFilterContentPro
                     checked={filteredColumnAndValue[currentColumnName] === 'female'}
                     onChange={(event) => handleInputProvided(event, currentColumnName)}
                 />
-                <input type="submit" className="btn btn-info btn-sm" />
+                <input type="submit" className="btn btn-info btn-sm" value="Filter" />
                 <HelpText value="Select filter criteria and click Filter." />
             </>
         );
