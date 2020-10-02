@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import userData from './userData/userDataReducer';
 import appData from './appData/appDataReducer';
 import locationData from './locationData/locationDataReducer';
+import tableData from './tableData/tableDataReducer';
 
 declare module 'redux' {
     export interface Dispatch<A extends Action = AnyAction> {
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     userData,
     appData,
     locationData,
+    tableData,
 });
 
 export type RootState = ReturnType<typeof reducer>;

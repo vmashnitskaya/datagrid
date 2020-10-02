@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState, useCallback, ChangeEvent, FormEvent } from 'react';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import Loader from './Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
@@ -8,28 +9,59 @@ import './Table.scss';
 import { ColumnInterface } from '../ColumnInterface';
 import { FilteringColumn } from './FilteringColumnInterface';
 import RowsPerPageControl from './RowsPerPageControl';
+import { RootState } from '../../redux/rootReducer';
+
+import actions from '../../redux/tableData/tableDataActions';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 
 export interface TableProps {
     renderData: { [key: string]: any }[];
     loading: boolean;
     error: string;
     columnHeaders: ColumnInterface[];
+    sorting: string;
+    sortingColumn: string;
+    sortedFilteredRenderData: { [key: string]: any }[];
+    notFilteredRenderData: { [key: string]: any }[];
+    filteredColumnAndValue: FilteringColumn;
+    rowsPerPage: number;
+    currentPage: number;
+    totalPages: number;
+    setSorting: (sorting: string) => void;
+    setSortingColumn: (column: string) => void;
+    setSortedFilteredRenderData: (data: { [key: string]: string }[]) => void;
+    setNotFilteredRenderData: (data: { [key: string]: string }[]) => void;
+    setFilteredColumnAndValue: (data: FilteringColumn) => void;
+    setRowsPerPage: (rowsPerPage: number) => void;
+    setCurrentPage: (currentPage: number) => void;
+    setTotalPages: (totalPages: number) => void;
+    sortRenderData: () => void;
 }
 
-const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) => {
-    const [sorting, setSorting] = useState<string>('');
-    const [sortingColumn, setSortingColumn] = useState<string>('');
-    const [sortedFilteredRenderData, setSortedFilteredRenderData] = useState<
-        { [key: string]: any }[]
-    >([]);
-    const [notFilteredRenderData, setNotFilteredRenderData] = useState<{ [key: string]: any }[]>(
-        []
-    );
-    const [filteredColumnAndValue, setFilteredColumnAndValue] = useState<FilteringColumn>({});
-    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalPages, setTotalPages] = useState<number>(renderData.length / rowsPerPage);
-    const [pageInputState, setPageInputState] = useState();
+const Table: FC<TableProps> = ({
+    renderData,
+    loading,
+    error,
+    columnHeaders,
+    sorting,
+    sortingColumn,
+    sortedFilteredRenderData,
+    notFilteredRenderData,
+    filteredColumnAndValue,
+    rowsPerPage,
+    currentPage,
+    totalPages,
+    setSorting,
+    setSortingColumn,
+    setSortedFilteredRenderData,
+    setNotFilteredRenderData,
+    setFilteredColumnAndValue,
+    setRowsPerPage,
+    setCurrentPage,
+    setTotalPages,
+    sortRenderData,
+}) => {
+    const [pageInputState, setPageInputState] = useState<number>(1);
 
     useEffect(() => {
         setPageInputState(currentPage);
@@ -40,44 +72,27 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         setNotFilteredRenderData(
             renderData.slice(index * rowsPerPage, index * rowsPerPage + rowsPerPage)
         );
-    }, [currentPage, renderData, rowsPerPage]);
+    }, [currentPage, renderData, rowsPerPage, setNotFilteredRenderData]);
 
     useEffect(() => {
         setSortedFilteredRenderData(notFilteredRenderData);
-    }, [notFilteredRenderData]);
+    }, [notFilteredRenderData, setSortedFilteredRenderData]);
 
     useEffect(() => {
         setTotalPages(Math.ceil(renderData.length / rowsPerPage));
-    }, [renderData.length, rowsPerPage]);
+    }, [renderData.length, rowsPerPage, setTotalPages]);
 
     useEffect(() => {
         setFilteredColumnAndValue(
             columnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {} as FilteringColumn)
         );
-    }, [columnHeaders]);
-
-    const sortData = useCallback(
-        (data: { [key: string]: any }[]) => {
-            const arrayForSorting = [...data];
-            arrayForSorting.sort((a, b) => {
-                if (a[sortingColumn] < b[sortingColumn]) {
-                    return sorting === 'up' ? -1 : 1;
-                }
-                if (a[sortingColumn] > b[sortingColumn]) {
-                    return sorting === 'up' ? 1 : -1;
-                }
-                return 0;
-            });
-            return arrayForSorting;
-        },
-        [sortingColumn, sorting]
-    );
+    }, [columnHeaders, setFilteredColumnAndValue]);
 
     useEffect(() => {
         if (sorting.length > 0) {
-            setSortedFilteredRenderData(sortData);
+            sortRenderData();
         }
-    }, [sorting, sortingColumn, renderData, sortData, rowsPerPage]);
+    }, [sortRenderData, sorting.length]);
 
     const handleSorting = (columnName: string, direction: string) => {
         setSorting(direction);
@@ -123,8 +138,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         columnName: string
     ) => {
         const query = event.target.value;
-        console.log(query);
-        setFilteredColumnAndValue((prevState) => ({ ...prevState, [columnName]: query }));
+        setFilteredColumnAndValue({ ...filteredColumnAndValue, [columnName]: query });
     };
 
     const handlePageNavigation = (pageDirection: string) => {
@@ -218,4 +232,45 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     );
 };
 
-export default Table;
+const mapStateToProps = (state: RootState) => ({
+    sorting: tableDataSelectors.getSorting(state),
+    sortingColumn: tableDataSelectors.getSortingColumn(state),
+    sortedFilteredRenderData: tableDataSelectors.getSortedFilteredRenderData(state),
+    notFilteredRenderData: tableDataSelectors.getNotFilteredRenderData(state),
+    filteredColumnAndValue: tableDataSelectors.getFilteredColumnAndValue(state),
+    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+    currentPage: tableDataSelectors.getCurrentPage(state),
+    totalPages: tableDataSelectors.getTotalPages(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+    setSorting: (direction: string) => {
+        dispatch(actions.setSorting(direction));
+    },
+    setSortingColumn: (column: string) => {
+        dispatch(actions.setSortingColumn(column));
+    },
+    setSortedFilteredRenderData: (data: { [key: string]: any }[]) => {
+        dispatch(actions.setSortedFilteredRenderData(data));
+    },
+    setNotFilteredRenderData: (data: { [key: string]: any }[]) => {
+        dispatch(actions.setNotFilteredRenderData(data));
+    },
+    setFilteredColumnAndValue: (data: FilteringColumn) => {
+        dispatch(actions.setFilteredColumnAndValue(data));
+    },
+    setRowsPerPage: (rowsPerPage: number) => {
+        dispatch(actions.setRowsPerPage(rowsPerPage));
+    },
+    setCurrentPage: (currentPage: number) => {
+        dispatch(actions.setCurrentPage(currentPage));
+    },
+    setTotalPages: (totalPages: number) => {
+        dispatch(actions.setTotalPages(totalPages));
+    },
+    sortRenderData: () => {
+        dispatch(actions.sortRenderData());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
