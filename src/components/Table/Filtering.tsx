@@ -33,6 +33,11 @@ const Filtering: FC<FilteringProps> = ({
         }
     };
 
+    const onFilterExecuted = (event: FormEvent<HTMLFormElement>) => {
+        closePopUp();
+        handleFilter(event);
+    };
+
     const popover = (
         <Popover id="popover-basic" className="bg-light">
             <Popover.Title as="h3">Filter</Popover.Title>
@@ -41,7 +46,7 @@ const Filtering: FC<FilteringProps> = ({
                     filteredColumnOpened={filteredColumnOpened}
                     filteredColumnAndValue={filteredColumnAndValue}
                     currentElementColumn={currentElementColumn}
-                    handleFilter={handleFilter}
+                    onFilterExecuted={onFilterExecuted}
                     handleInputProvided={handleInputProvided}
                     currentElementType={currentElementType}
                 />

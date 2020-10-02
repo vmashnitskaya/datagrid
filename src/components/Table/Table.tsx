@@ -22,6 +22,9 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     const [sortedFilteredRenderData, setSortedFilteredRenderData] = useState<
         { [key: string]: any }[]
     >([]);
+    const [notFilteredRenderData, setNotFilteredRenderData] = useState<{ [key: string]: any }[]>(
+        []
+    );
     const [filteredColumnAndValue, setFilteredColumnAndValue] = useState<FilteringColumn>({});
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -34,10 +37,14 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
 
     useEffect(() => {
         const index = currentPage - 1;
-        setSortedFilteredRenderData(
+        setNotFilteredRenderData(
             renderData.slice(index * rowsPerPage, index * rowsPerPage + rowsPerPage)
         );
     }, [currentPage, renderData, rowsPerPage]);
+
+    useEffect(() => {
+        setSortedFilteredRenderData(notFilteredRenderData);
+    }, [notFilteredRenderData]);
 
     useEffect(() => {
         setTotalPages(Math.ceil(renderData.length / rowsPerPage));
@@ -94,17 +101,16 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
     };
 
     const filterRenderData = () => {
-        const filteredColumns = Object.keys(filteredColumnAndValue).filter((element) => {
+        const filteringColumns = Object.keys(filteredColumnAndValue).filter((element) => {
             return filteredColumnAndValue[element].length > 0;
         });
 
-        setSortedFilteredRenderData((prevState) => {
-            let data: { [key: string]: any }[] = [...prevState];
-            filteredColumns.forEach((column) => {
-                data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
-            });
-            return data;
+        let data: { [key: string]: any }[] = [...notFilteredRenderData];
+        filteringColumns.forEach((column) => {
+            data = filterStringsAndNumbers(column, filteredColumnAndValue[column], data);
         });
+
+        setSortedFilteredRenderData(data);
     };
 
     const handleFilter = (event: React.FormEvent<HTMLFormElement>) => {
@@ -117,6 +123,7 @@ const Table: FC<TableProps> = ({ renderData, loading, error, columnHeaders }) =>
         columnName: string
     ) => {
         const query = event.target.value;
+        console.log(query);
         setFilteredColumnAndValue((prevState) => ({ ...prevState, [columnName]: query }));
     };
 

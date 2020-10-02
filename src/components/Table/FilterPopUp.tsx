@@ -6,7 +6,7 @@ interface FilterPopUpProps {
     filteredColumnOpened: string;
     filteredColumnAndValue: { [key: string]: string };
     currentElementColumn: string;
-    handleFilter: (event: FormEvent<HTMLFormElement>) => void;
+    onFilterExecuted: (event: FormEvent<HTMLFormElement>) => void;
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentElementType: string;
 }
@@ -15,7 +15,7 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
     filteredColumnOpened,
     filteredColumnAndValue,
     currentElementColumn,
-    handleFilter,
+    onFilterExecuted,
     handleInputProvided,
     currentElementType,
 }) => {
@@ -33,7 +33,7 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
     }, [currentElementColumn, currentElementType, filteredColumnOpened]);
 
     return (
-        <form autoComplete="off" onSubmit={handleFilter}>
+        <form autoComplete="off" onSubmit={onFilterExecuted}>
             {currentElementType === 'string' && (
                 <StringFilterContent
                     handleInputProvided={handleInputProvided}
