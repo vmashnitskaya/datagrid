@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { LocationDataActions } from './locationDataTypes';
-import { LocationDataObject } from './locationDataInterfaces';
+import { NormalizedData } from './locationDataInterfaces';
 import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
 
@@ -8,7 +8,7 @@ const fetchLocationDataPending = (): LocationDataActions => ({
     type: types.FETCH_LOCATIONDATA_PENDING,
 });
 
-const fetchLocationDataSuccess = (locationData: LocationDataObject[]): LocationDataActions => ({
+const fetchLocationDataSuccess = (locationData: NormalizedData): LocationDataActions => ({
     type: types.FETCH_LOCATIONDATA_SUCCESS,
     payload: locationData,
 });

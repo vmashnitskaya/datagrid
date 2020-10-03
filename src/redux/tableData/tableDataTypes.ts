@@ -1,16 +1,33 @@
 import { Action } from 'redux';
 import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { NormalizedObject } from './tableDataInterface';
+
+const SET_RENDER_DATA = 'SET_RENDER_DATA';
+const SET_ALL_IDS = 'SET_ALL_IDS';
+const SET_ERROR = 'SET_ERROR';
+const SET_LOADING = 'SET_LOADING';
 
 const SET_SORTING = 'SET_SORTING';
 const SET_SORTING_COLUMN = 'SET_SORTING_COLUMN';
-const SET_SORTED_FILTERED_RENDER_DATA = 'SET_SORTED_FILTERED_RENDER_DATA';
-const SET_NOT_FILTERED_RENDER_DATA = 'SET_NOT_FILTERED_RENDER_DATA';
 const SET_FILTERED_COLUMN_AND_VALUE = 'SET_FILTERED_COLUMN_AND_VALUE';
 const SET_ROWS_PER_PAGE = 'SET_ROWS_PER_PAGE';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
 const SORT_RENDER_DATA = 'SORT_RENDER_DATA';
 const FILTER_RENDER_DATA = 'FILTER_RENDER_DATA';
+const SET_SORTED_FILTERED_RENDER_DATA_IDS = 'SET_SORTED_FILTERED_RENDER_DATA_IDS';
+const SET_SORT_FILTER_SLICED_DATA_IDS = 'SET_SORT_FILTER_SLICED_DATA_IDS';
+
+interface SetRenderDataAction extends Action<typeof SET_RENDER_DATA> {
+    payload: NormalizedObject;
+}
+interface SetAllIdsAction extends Action<typeof SET_ALL_IDS> {
+    payload: number[];
+}
+interface SetErrorAction extends Action<typeof SET_ERROR> {
+    payload: string;
+}
+type SetLoadingAction = Action<typeof SET_LOADING>;
 
 type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
 
@@ -22,13 +39,9 @@ interface SetSortingAction extends Action<typeof SET_SORTING> {
 interface SetSortingColumnAction extends Action<typeof SET_SORTING_COLUMN> {
     payload: string;
 }
-interface SetSortedFilteredRenderDataAction extends Action<typeof SET_SORTED_FILTERED_RENDER_DATA> {
-    payload: { [key: string]: any }[];
+interface SetSortFilterSlicedDataIdsAction extends Action<typeof SET_SORT_FILTER_SLICED_DATA_IDS> {
+    payload: number[];
 }
-interface SetNotFilteredRenderDataAction extends Action<typeof SET_NOT_FILTERED_RENDER_DATA> {
-    payload: { [key: string]: any }[];
-}
-
 interface SetFilteredColumnAndValueAction extends Action<typeof SET_FILTERED_COLUMN_AND_VALUE> {
     payload: FilteringColumn;
 }
@@ -41,28 +54,40 @@ interface SetCurrentPageAction extends Action<typeof SET_CURRENT_PAGE> {
 interface SetTotalPagesAction extends Action<typeof SET_TOTAL_PAGES> {
     payload: number;
 }
+interface SetSortedFilteredRenderDataIdsAction
+    extends Action<typeof SET_SORTED_FILTERED_RENDER_DATA_IDS> {
+    payload: number[];
+}
 
 export type TableDataActions =
     | SortRenderDataAction
     | SetSortingAction
     | SetSortingColumnAction
     | SetFilteredColumnAndValueAction
-    | SetSortedFilteredRenderDataAction
-    | SetNotFilteredRenderDataAction
+    | SetSortedFilteredRenderDataIdsAction
     | SetRowsPerPageAction
     | SetCurrentPageAction
     | SetTotalPagesAction
-    | FilterRenderDataAction;
+    | FilterRenderDataAction
+    | SetSortFilterSlicedDataIdsAction
+    | SetRenderDataAction
+    | SetErrorAction
+    | SetLoadingAction
+    | SetAllIdsAction;
 
 export default {
     SORT_RENDER_DATA,
     SET_SORTING,
     SET_SORTING_COLUMN,
-    SET_SORTED_FILTERED_RENDER_DATA,
-    SET_NOT_FILTERED_RENDER_DATA,
+    SET_SORTED_FILTERED_RENDER_DATA_IDS,
     SET_FILTERED_COLUMN_AND_VALUE,
     SET_ROWS_PER_PAGE,
     SET_CURRENT_PAGE,
     SET_TOTAL_PAGES,
     FILTER_RENDER_DATA,
+    SET_SORT_FILTER_SLICED_DATA_IDS,
+    SET_RENDER_DATA,
+    SET_LOADING,
+    SET_ERROR,
+    SET_ALL_IDS,
 } as const;

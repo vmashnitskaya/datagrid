@@ -2,13 +2,13 @@ import { ThunkAction } from 'redux-thunk';
 import types, { AppDataActions } from './appDataTypes';
 import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
-import { AppDataObject } from './appDataInterfaces';
+import { NormalizedData } from './appDataInterfaces';
 
 const fetchAppDataPending = (): AppDataActions => ({
     type: types.FETCH_APPDATA_PENDING,
 });
 
-const fetchAppDataSuccess = (appData: AppDataObject[]): AppDataActions => ({
+const fetchAppDataSuccess = (appData: NormalizedData): AppDataActions => ({
     type: types.FETCH_APPDATA_SUCCESS,
     payload: appData,
 });

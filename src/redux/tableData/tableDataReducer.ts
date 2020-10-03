@@ -1,13 +1,17 @@
 import { Reducer } from 'redux';
 import types, { TableDataActions } from './tableDataTypes';
-import { RenderDataObject, TableDataInterface } from './TableDataInterface';
+import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
 
-const initialState: TableDataInterface = {
+const initialState = {
+    renderData: {},
+    allIds: [],
+    error: '',
+    loading: false,
     sorting: '',
     sortingColumn: '',
-    sortedFilteredRenderData: [],
-    notFilteredRenderData: [],
+    sortedFilteredRenderDataIds: [],
+    sortFilterSlicedDataIds: [],
     filteredColumnAndValue: {},
     rowsPerPage: 10,
     currentPage: 1,
@@ -19,6 +23,14 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
     action
 ) => {
     switch (action.type) {
+        case types.SET_RENDER_DATA:
+            return { ...state, renderData: action.payload, loading: false };
+        case types.SET_ALL_IDS:
+            return { ...state, allIds: action.payload, loading: false };
+        case types.SET_LOADING:
+            return { ...state, loading: true };
+        case types.SET_ERROR:
+            return { ...state, error: action.payload };
         case types.SET_SORTING:
             return { ...state, sorting: action.payload };
         case types.SET_SORTING_COLUMN:
@@ -26,15 +38,15 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 ...state,
                 sortingColumn: action.payload,
             };
-        case types.SET_SORTED_FILTERED_RENDER_DATA:
+        case types.SET_SORTED_FILTERED_RENDER_DATA_IDS:
             return {
                 ...state,
-                sortedFilteredRenderData: action.payload,
+                sortedFilteredRenderDataIds: action.payload,
             };
-        case types.SET_NOT_FILTERED_RENDER_DATA:
+        case types.SET_SORT_FILTER_SLICED_DATA_IDS:
             return {
                 ...state,
-                notFilteredRenderData: action.payload,
+                sortFilterSlicedDataIds: action.payload,
             };
         case types.SET_FILTERED_COLUMN_AND_VALUE:
             return {
@@ -57,11 +69,13 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 totalPages: action.payload,
             };
         case types.SORT_RENDER_DATA: {
-            const arrayToSort = [...state.sortedFilteredRenderData];
+            const arrayToSort = [
+                ...state.sortedFilteredRenderDataIds.map((elem) => state.renderData[elem]),
+            ];
             sortingFilteringLogic.sortArray(arrayToSort, state.sortingColumn, state.sorting);
             return {
                 ...state,
-                sortedFilteredRenderData: arrayToSort,
+                sortedFilteredRenderDataIds: arrayToSort.map((el) => el.id),
             };
         }
         case types.FILTER_RENDER_DATA: {
@@ -69,7 +83,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 return state.filteredColumnAndValue[element].length > 0;
             });
 
-            let data: RenderDataObject[] = [...state.notFilteredRenderData];
+            let data: RenderDataObject[] = [...state.allIds.map((elem) => state.renderData[elem])];
             filteringColumns.forEach((column) => {
                 data = sortingFilteringLogic.filterStringsAndNumbers(
                     column,
@@ -79,7 +93,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             });
             return {
                 ...state,
-                sortedFilteredRenderData: data,
+                sortedFilteredRenderDataIds: data.map((el) => el.id),
             };
         }
         default:

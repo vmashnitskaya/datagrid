@@ -12,7 +12,16 @@ const fetchApiData = (tabActive: string) => {
     // const res = await window.fetch(url, { method: 'GET' });
     // const data = await res.json();
 
-    return data[tabActive];
+    const dataNormalized = (data[tabActive] as Array<{ [key: string]: any }>).reduce(
+        (acc, el) => ({
+            ...acc,
+            [el.id]: el,
+        }),
+        {} as { [key: string]: any }
+    );
+    const allIds = (data[tabActive] as Array<{ [key: string]: any }>).map((el) => el.id);
+
+    return { dataNormalized, allIds };
 };
 
 export default fetchApiData;

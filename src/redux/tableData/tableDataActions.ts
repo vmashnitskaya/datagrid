@@ -1,5 +1,5 @@
 import types, { TableDataActions } from './tableDataTypes';
-import { RenderDataObject } from './TableDataInterface';
+import { NormalizedObject } from './tableDataInterface';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -19,20 +19,20 @@ const setSortingColumn = (column: string): TableDataActions => {
         payload: column,
     };
 };
-const setSortedFilteredRenderData = (
-    sortedFilteredRenderData: RenderDataObject[]
-): TableDataActions => {
+const setSortedFilteredRenderDataIds = (allIds: number[]): TableDataActions => {
     return {
-        type: types.SET_SORTED_FILTERED_RENDER_DATA,
-        payload: sortedFilteredRenderData,
+        type: types.SET_SORTED_FILTERED_RENDER_DATA_IDS,
+        payload: allIds,
     };
 };
-const setNotFilteredRenderData = (notFilteredRenderData: RenderDataObject[]): TableDataActions => {
+
+const setSortFilterSlicedDataIds = (sortFilterSlicedDataIds: number[]): TableDataActions => {
     return {
-        type: types.SET_NOT_FILTERED_RENDER_DATA,
-        payload: notFilteredRenderData,
+        type: types.SET_SORT_FILTER_SLICED_DATA_IDS,
+        payload: sortFilterSlicedDataIds,
     };
 };
+
 const setFilteredColumnAndValue = (newEntry: { [key: string]: string }): TableDataActions => {
     return {
         type: types.SET_FILTERED_COLUMN_AND_VALUE,
@@ -64,15 +64,46 @@ const filterRenderData = (): TableDataActions => {
     };
 };
 
+const setRenderData = (renderData: NormalizedObject): TableDataActions => {
+    return {
+        type: types.SET_RENDER_DATA,
+        payload: renderData,
+    };
+};
+
+const setLoading = (): TableDataActions => {
+    return {
+        type: types.SET_LOADING,
+    };
+};
+
+const setError = (error: string): TableDataActions => {
+    return {
+        type: types.SET_ERROR,
+        payload: error,
+    };
+};
+
+const setAllIds = (allIds: number[]): TableDataActions => {
+    return {
+        type: types.SET_ALL_IDS,
+        payload: allIds,
+    };
+};
+
 export default {
     sortRenderData,
     setSorting,
     setSortingColumn,
-    setSortedFilteredRenderData,
-    setNotFilteredRenderData,
+    setSortedFilteredRenderDataIds,
     setFilteredColumnAndValue,
     setRowsPerPage,
     setTotalPages,
     setCurrentPage,
     filterRenderData,
+    setSortFilterSlicedDataIds,
+    setRenderData,
+    setLoading,
+    setError,
+    setAllIds,
 };

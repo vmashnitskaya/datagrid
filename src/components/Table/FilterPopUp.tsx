@@ -1,7 +1,9 @@
-import React, { ChangeEvent, FC, FormEvent, useRef, useEffect } from 'react';
+import React, { FC, FormEvent, useRef, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+
 import StringFilterContent from './StringFilterContent';
 import SelectFilterContent from './SelectFilterContent';
+
 import { RootState } from '../../redux/rootReducer';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import actions from '../../redux/tableData/tableDataActions';

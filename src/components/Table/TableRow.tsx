@@ -1,20 +1,38 @@
 import React, { FC } from 'react';
-import { ColumnInterface } from '../ColumnInterface';
+import { connect } from 'react-redux';
+
 import TableCell from './TableCell';
 
+import { ColumnInterface } from '../ColumnInterface';
+import { RenderDataObject } from '../../redux/tableData/tableDataInterface';
+
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+
 export interface TableRowProps {
-    row: { [key: string]: any };
+    row: number;
     columnHeaders: ColumnInterface[];
+    rowElement: RenderDataObject;
 }
 
-const TableRow: FC<TableRowProps> = ({ row, columnHeaders }) => {
+const TableRow: FC<TableRowProps> = ({ row, columnHeaders, rowElement }) => {
     return (
         <tr>
-            {columnHeaders.map((element: ColumnInterface, index: number) => {
-                return <TableCell key={`key${index + 1}}`} row={row} columnName={element.name} />;
+            {columnHeaders.map((element: ColumnInterface) => {
+                return (
+                    <TableCell
+                        key={`key${row + 1}}`}
+                        rowElement={rowElement}
+                        columnName={element.name}
+                    />
+                );
             })}
         </tr>
     );
 };
 
-export default TableRow;
+const mapStateToProps = (state: RootState, { row }: { row: number }) => ({
+    rowElement: tableDataSelectors.getElementById(state, row),
+});
+
+export default connect(mapStateToProps)(TableRow);

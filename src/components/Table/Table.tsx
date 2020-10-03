@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+
 import Loader from './Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
@@ -9,65 +10,109 @@ import './Table.scss';
 import { ColumnInterface } from '../ColumnInterface';
 import { FilteringColumn } from './FilteringColumnInterface';
 import RowsPerPageControl from './RowsPerPageControl';
-import { RootState } from '../../redux/rootReducer';
+import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 
 import actions from '../../redux/tableData/tableDataActions';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
-import { RenderDataObject } from '../../redux/tableData/TableDataInterface';
+import { RootState } from '../../redux/rootReducer';
 
 export interface TableProps {
-    renderData: { [key: string]: any }[];
+    tableLoading: boolean;
+    tableError: string;
+    tableAllIds: number[];
+    renderData: { [key: string]: any };
     loading: boolean;
     error: string;
+    allIds: number[];
     columnHeaders: ColumnInterface[];
-    sorting: string;
-    sortingColumn: string;
-    sortedFilteredRenderData: RenderDataObject[];
-    notFilteredRenderData: RenderDataObject[];
     filteredColumnAndValue: FilteringColumn;
     rowsPerPage: number;
     currentPage: number;
     totalPages: number;
-    setSortedFilteredRenderData: (data: { [key: string]: string }[]) => void;
-    setNotFilteredRenderData: (data: { [key: string]: string }[]) => void;
     setFilteredColumnAndValue: (data: FilteringColumn) => void;
     setTotalPages: (totalPages: number) => void;
     sortRenderData: () => void;
+    setTableRenderData: (data: NormalizedObject) => void;
+    setTableAllIds: (allIds: number[]) => void;
+    setTableLoading: () => void;
+    setTableError: (error: string) => void;
+    setSortedFilteredRenderDataIds: (allIds: number[]) => void;
+    setSortFilterSlicedDataIds: (allIds: number[]) => void;
+    sortedFilteredRenderDataIds: number[];
+    sortFilterSlicedDataIds: number[];
 }
 
 const Table: FC<TableProps> = ({
+    tableLoading,
+    tableError,
+    tableAllIds,
     renderData,
+    allIds,
     loading,
     error,
     columnHeaders,
-    sorting,
-    sortingColumn,
-    sortedFilteredRenderData,
-    notFilteredRenderData,
     filteredColumnAndValue,
     rowsPerPage,
     currentPage,
     totalPages,
-    setSortedFilteredRenderData,
-    setNotFilteredRenderData,
     setFilteredColumnAndValue,
     setTotalPages,
-    sortRenderData,
+    setTableRenderData,
+    setTableAllIds,
+    setTableLoading,
+    setTableError,
+    sortFilterSlicedDataIds,
+    setSortedFilteredRenderDataIds,
+    setSortFilterSlicedDataIds,
+    sortedFilteredRenderDataIds,
 }) => {
     useEffect(() => {
+        if (Object.keys(renderData).length > 0) {
+            setTableRenderData({ ...renderData });
+        }
+    }, [renderData, setTableRenderData]);
+
+    useEffect(() => {
+        if (allIds.length > 0) {
+            setTableAllIds([...allIds]);
+        }
+    }, [allIds, setTableAllIds]);
+
+    useEffect(() => {
+        setTableLoading();
+    }, [loading, setTableLoading]);
+
+    useEffect(() => {
+        setTableError(error);
+    }, [error, setTableError]);
+
+    useEffect(() => {
+        setSortedFilteredRenderDataIds([...tableAllIds]);
+    }, [setSortedFilteredRenderDataIds, tableAllIds]);
+
+    useEffect(() => {
         const index = currentPage - 1;
-        setNotFilteredRenderData(
-            renderData.slice(index * rowsPerPage, index * rowsPerPage + rowsPerPage)
+        setSortFilterSlicedDataIds(
+            sortedFilteredRenderDataIds.slice(
+                index * rowsPerPage,
+                index * rowsPerPage + rowsPerPage
+            ).length > 0
+                ? sortedFilteredRenderDataIds.slice(
+                      index * rowsPerPage,
+                      index * rowsPerPage + rowsPerPage
+                  )
+                : sortedFilteredRenderDataIds.slice(0, rowsPerPage)
         );
-    }, [currentPage, renderData, rowsPerPage, setNotFilteredRenderData]);
+    }, [currentPage, rowsPerPage, setSortFilterSlicedDataIds, sortedFilteredRenderDataIds]);
 
     useEffect(() => {
-        setSortedFilteredRenderData(notFilteredRenderData);
-    }, [notFilteredRenderData, setSortedFilteredRenderData]);
-
-    useEffect(() => {
-        setTotalPages(Math.ceil(renderData.length / rowsPerPage));
-    }, [renderData.length, rowsPerPage, setTotalPages]);
+        setTotalPages(Math.ceil(sortedFilteredRenderDataIds.length / rowsPerPage));
+    }, [
+        rowsPerPage,
+        setTotalPages,
+        sortedFilteredRenderDataIds,
+        sortedFilteredRenderDataIds.length,
+    ]);
 
     useEffect(() => {
         setFilteredColumnAndValue(
@@ -77,7 +122,7 @@ const Table: FC<TableProps> = ({
 
     return (
         <>
-            {loading || error.length > 0 || renderData.length === 0 ? (
+            {tableLoading || tableError.length > 0 ? (
                 <Loader />
             ) : (
                 <>
@@ -94,15 +139,14 @@ const Table: FC<TableProps> = ({
                             </tr>
                         </thead>
                         <tbody>
-                            {sortedFilteredRenderData.map(
-                                (element: { [key: string]: any }, index: number) => (
-                                    <TableRow
-                                        key={`key${index + 1}`}
-                                        row={element}
-                                        columnHeaders={columnHeaders}
-                                    />
-                                )
-                            )}
+                            {sortFilterSlicedDataIds.length === 0 && <div>No data to display.</div>}
+                            {sortFilterSlicedDataIds.map((element: number) => (
+                                <TableRow
+                                    key={`key${element}`}
+                                    row={element}
+                                    columnHeaders={columnHeaders}
+                                />
+                            ))}
                         </tbody>
                     </table>
                     <div className="mb-5 footer-controls">
@@ -118,29 +162,41 @@ const Table: FC<TableProps> = ({
 const mapStateToProps = (state: RootState) => ({
     sorting: tableDataSelectors.getSorting(state),
     sortingColumn: tableDataSelectors.getSortingColumn(state),
-    sortedFilteredRenderData: tableDataSelectors.getSortedFilteredRenderData(state),
-    notFilteredRenderData: tableDataSelectors.getNotFilteredRenderData(state),
     filteredColumnAndValue: tableDataSelectors.getFilteredColumnAndValue(state),
     rowsPerPage: tableDataSelectors.getRowsPerPage(state),
     currentPage: tableDataSelectors.getCurrentPage(state),
     totalPages: tableDataSelectors.getTotalPages(state),
+    tableLoading: tableDataSelectors.getLoading(state),
+    tableError: tableDataSelectors.getError(state),
+    tableAllIds: tableDataSelectors.getAllIds(state),
+    sortedFilteredRenderDataIds: tableDataSelectors.getSortedFilteredRenderDataIds(state),
+    sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    setSortedFilteredRenderData: (data: RenderDataObject[]) => {
-        dispatch(actions.setSortedFilteredRenderData(data));
-    },
-    setNotFilteredRenderData: (data: RenderDataObject[]) => {
-        dispatch(actions.setNotFilteredRenderData(data));
-    },
     setFilteredColumnAndValue: (data: FilteringColumn) => {
         dispatch(actions.setFilteredColumnAndValue(data));
     },
     setTotalPages: (totalPages: number) => {
         dispatch(actions.setTotalPages(totalPages));
     },
-    sortRenderData: () => {
-        dispatch(actions.sortRenderData());
+    setTableRenderData: (data: NormalizedObject) => {
+        dispatch(actions.setRenderData(data));
+    },
+    setTableLoading: () => {
+        dispatch(actions.setLoading());
+    },
+    setTableError: (error: string) => {
+        dispatch(actions.setError(error));
+    },
+    setTableAllIds: (allIds: number[]) => {
+        dispatch(actions.setAllIds(allIds));
+    },
+    setSortedFilteredRenderDataIds: (allIds: number[]) => {
+        dispatch(actions.setSortedFilteredRenderDataIds(allIds));
+    },
+    setSortFilterSlicedDataIds: (allIds: number[]) => {
+        dispatch(actions.setSortFilterSlicedDataIds(allIds));
     },
 });
 

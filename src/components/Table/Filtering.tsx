@@ -1,11 +1,11 @@
-import React, { ChangeEvent, FormEvent, FC, useState } from 'react';
+import React, { FormEvent, FC, useState } from 'react';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
-import { connect, MapDispatchToPropsFunction } from 'react-redux';
+
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopUp';
-import { RootState } from '../../redux/rootReducer';
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+
 import actions from '../../redux/tableData/tableDataActions';
 
 interface FilteringProps {

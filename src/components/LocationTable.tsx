@@ -7,13 +7,14 @@ import locationDataSelectors from '../redux/locationData/locationDataSelectors';
 import Table from './Table';
 
 import { ColumnInterface } from './ColumnInterface';
-import { LocationDataObject } from '../redux/locationData/locationDataInterfaces';
+import { NormalizedObject } from '../redux/locationData/locationDataInterfaces';
 
 interface LocationTableProps {
-    locationData: LocationDataObject[];
+    locationData: NormalizedObject;
     loadingLocation: boolean;
     errorLocation: string;
     fetchLocationsData: (tabActive: string) => void;
+    allIds: number[];
 }
 
 const LocationTable: FC<LocationTableProps> = ({
@@ -21,9 +22,11 @@ const LocationTable: FC<LocationTableProps> = ({
     loadingLocation,
     errorLocation,
     fetchLocationsData,
+    allIds,
 }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
+            { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
             { header: 'City', name: 'city', type: 'string', sorting: true, filtering: true },
             { header: 'Country', name: 'country', type: 'string', sorting: true, filtering: true },
             { header: 'State', name: 'state', type: 'string', sorting: true, filtering: true },
@@ -61,6 +64,7 @@ const LocationTable: FC<LocationTableProps> = ({
             loading={loadingLocation}
             error={errorLocation}
             columnHeaders={columnHeaders}
+            allIds={allIds}
         />
     );
 };
@@ -69,6 +73,7 @@ const mapStateToProps = (state: RootState) => ({
     locationData: locationDataSelectors.getLocationData(state),
     loadingLocation: locationDataSelectors.getLoading(state),
     errorLocation: locationDataSelectors.getError(state),
+    allIds: locationDataSelectors.getAllIds(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({

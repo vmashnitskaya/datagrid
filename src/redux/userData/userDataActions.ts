@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { UserdataActions } from './userDataTypes';
-import { DataObject } from './userDataInterfaces';
+import { NormalizedData } from './userDataInterfaces';
 import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
 
@@ -8,7 +8,7 @@ const fetchUserDataPending = (): UserdataActions => ({
     type: types.FETCH_USERDATA_PENDING,
 });
 
-const fetchUserDataSuccess = (userData: DataObject[]): UserdataActions => ({
+const fetchUserDataSuccess = (userData: NormalizedData): UserdataActions => ({
     type: types.FETCH_USERDATA_SUCCESS,
     payload: userData,
 });

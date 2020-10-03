@@ -7,16 +7,23 @@ import { RootState } from '../redux/rootReducer';
 import Table from './Table';
 
 import { ColumnInterface } from './ColumnInterface';
-import { DataObject } from '../redux/userData/userDataInterfaces';
+import { NormalizedObject } from '../redux/userData/userDataInterfaces';
 
 interface UserTableProps {
-    userData: DataObject[];
+    userData: NormalizedObject;
+    allIds: number[];
     loadingUser: boolean;
     errorUser: string;
     fetchUsersData: (tabActive: string) => void;
 }
 
-const UserTable: FC<UserTableProps> = ({ userData, loadingUser, errorUser, fetchUsersData }) => {
+const UserTable: FC<UserTableProps> = ({
+    userData,
+    allIds,
+    loadingUser,
+    errorUser,
+    fetchUsersData,
+}) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
             { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
@@ -70,6 +77,7 @@ const UserTable: FC<UserTableProps> = ({ userData, loadingUser, errorUser, fetch
             renderData={userData}
             loading={loadingUser}
             error={errorUser}
+            allIds={allIds}
         />
     );
 };
@@ -78,6 +86,7 @@ const mapStateToProps = (state: RootState) => ({
     userData: userDataSelectors.getUserData(state),
     loadingUser: userDataSelectors.getLoading(state),
     errorUser: userDataSelectors.getError(state),
+    allIds: userDataSelectors.getAllIds(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({

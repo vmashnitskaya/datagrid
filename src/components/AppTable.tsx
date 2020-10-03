@@ -14,11 +14,13 @@ interface AppTableProps {
     loadingApp: boolean;
     errorApp: string;
     fetchAppsData: (tabActive: string) => void;
+    allIds: number[];
 }
 
-const AppTable: FC<AppTableProps> = ({ fetchAppsData, appData, loadingApp, errorApp }) => {
+const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingApp, errorApp }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
+            { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
             { header: 'App Id', name: 'app_id', type: 'string', filtering: true, sorting: true },
             {
                 header: 'App name',
@@ -61,6 +63,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, appData, loadingApp, error
             renderData={appData}
             loading={loadingApp}
             error={errorApp}
+            allIds={allIds}
         />
     );
 };
@@ -69,6 +72,7 @@ const mapStateToProps = (state: RootState) => ({
     appData: appDataSelectors.getAppData(state),
     loadingApp: appDataSelectors.getLoading(state),
     errorApp: appDataSelectors.getError(state),
+    allIds: appDataSelectors.getAllIds(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({

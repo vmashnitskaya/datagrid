@@ -1,6 +1,8 @@
-import React, { ChangeEvent, FunctionComponent, FormEvent } from 'react';
+import React, { FC } from 'react';
+
 import Filtering from './Filtering';
 import SortingControls from './SortingControls';
+
 import { ColumnInterface } from '../ColumnInterface';
 import { FilteringColumn } from './FilteringColumnInterface';
 
@@ -9,7 +11,7 @@ interface TableHeaderProps {
     filteredColumnAndValue: FilteringColumn;
 }
 
-const TableHeader: FunctionComponent<TableHeaderProps> = ({ element, filteredColumnAndValue }) => {
+const TableHeader: FC<TableHeaderProps> = ({ element, filteredColumnAndValue }) => {
     return (
         <th className="bg-light">
             <div className="header">

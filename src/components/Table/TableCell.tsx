@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 
 interface TableCellProps {
-    row: { [key: string]: any };
+    rowElement: { [key: string]: any };
     columnName: string;
 }
 
-const handleEmailDisplaying = (row: { [key: string]: any }, columnName: string) => {
+const handleEmailDisplaying = (rowElement: { [key: string]: any }, columnName: string) => {
     if (columnName === 'email') {
         return (
-            <a className="text-secondary" href={`mailto:${row[columnName]}`}>
-                {row[columnName]}
+            <a className="text-secondary" href={`mailto:${rowElement[columnName]}`}>
+                {rowElement[columnName]}
             </a>
         );
     }
@@ -17,23 +17,23 @@ const handleEmailDisplaying = (row: { [key: string]: any }, columnName: string) 
         return (
             <a
                 className="text-secondary"
-                href={`${row[columnName]}`}
+                href={`${rowElement[columnName]}`}
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                {row[columnName]}
+                {rowElement[columnName]}
             </a>
         );
     }
-    return row[columnName];
+    return rowElement[columnName];
 };
 
-const TableCell: FC<TableCellProps> = ({ row, columnName }) => {
+const TableCell: FC<TableCellProps> = ({ rowElement, columnName }) => {
     return (
         <td>
-            {typeof row[columnName] === 'object' && row[columnName] !== null
-                ? Object.values(row[columnName]).join(', ')
-                : handleEmailDisplaying(row, columnName)}
+            {typeof rowElement[columnName] === 'object' && rowElement[columnName] !== null
+                ? Object.values(rowElement[columnName]).join(', ')
+                : handleEmailDisplaying(rowElement, columnName)}
         </td>
     );
 };

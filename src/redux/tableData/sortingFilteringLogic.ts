@@ -1,4 +1,4 @@
-import { RenderDataObject } from './TableDataInterface';
+import { RenderDataObject } from './tableDataInterface';
 
 const sortArray = (
     array: RenderDataObject[],

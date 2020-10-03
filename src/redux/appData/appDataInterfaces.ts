@@ -1,4 +1,5 @@
 export interface AppDataObject {
+    id: number;
     app_id: string;
     app_name: string;
     app_version: string;
@@ -6,8 +7,18 @@ export interface AppDataObject {
     app_url: string;
 }
 
+export interface NormalizedObject {
+    [key: string]: AppDataObject;
+}
+
+export interface NormalizedData {
+    dataNormalized: NormalizedObject;
+    allIds: number[];
+}
+
 export interface AppDataState {
-    appData: AppDataObject[];
+    appData: NormalizedObject;
+    allIds: number[];
     loading: boolean;
     error: string;
 }
