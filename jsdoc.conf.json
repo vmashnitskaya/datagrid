@@ -1,23 +1,17 @@
 {
   "tags": {
     "allowUnknownTags": true,
-    "dictionaries": ["closure", "jsdoc"]
-  },
-  "source": {
-    "include": ["src"],
-    "includePattern": "\\.(jsx|js|ts|tsx)$"
+      "dictionaries": ["jsdoc","closure"]
   },
   "plugins": [
     "node_modules/better-docs/typescript"
   ],
-  "templates": {
-    "better-docs": {
-      "name": "Datagrid components"
-    }
+  "source": {
+    "include": ["src/components"],
+    "includePattern": "\\.(jsx|js|ts|tsx)$"
   },
   "opts": {
-    "destination": "docs",
-    "recurse": true,
-    "readme": "README.md"
+    "template": "node_modules/better-docs",
+    "recurse": true
   }
 }

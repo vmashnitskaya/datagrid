@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Table/SelectFilterContent.tsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>Table/SelectFilterContent.tsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { ChangeEvent } from 'react';
+import HelpText from './HelpText';
+import './SelectFilterContent.scss';
+
+interface SelectFilterContentProps {
+    handleInputProvided: (event: ChangeEvent&lt;HTMLInputElement>, columnName: string) => void;
+    currentColumnName: string;
+    filteredColumnAndValue: { [key: string]: string };
+}
+
+type RefForInput = HTMLInputElement;
+
+/**
+ * Component for displaying filter pop-up with select type.
+ *
+ *  @param  props
+ *  @param  {string} props.currentColumnName - current column name.
+ *  @param  {Object.&lt;string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ *  @param {function(ChangeEvent&lt;HTMLInputElement>, string): void} props.handleInputProvided
+ *  ref is used to focus input field after filter pop-up is opened.
+ */
+
+const SelectFilterContent = React.forwardRef&lt;RefForInput, SelectFilterContentProps>(
+    ({ handleInputProvided, currentColumnName, filteredColumnAndValue }, ref) => {
+        return (
+            &lt;>
+                &lt;label htmlFor="male">Male&lt;/label>
+                &lt;input
+                    ref={ref}
+                    type="radio"
+                    value="male"
+                    id="male"
+                    name="male"
+                    checked={filteredColumnAndValue[currentColumnName] === 'male'}
+                    onChange={(event) => handleInputProvided(event, currentColumnName)}
+                />
+                &lt;label htmlFor="female">Female&lt;/label>
+                &lt;input
+                    type="radio"
+                    value="female"
+                    id="female"
+                    name="female"
+                    checked={filteredColumnAndValue[currentColumnName] === 'female'}
+                    onChange={(event) => handleInputProvided(event, currentColumnName)}
+                />
+                &lt;input type="submit" className="btn btn-info btn-sm" value="Filter" />
+                &lt;HelpText value="Select filter criteria and click Filter." />
+            &lt;/>
+        );
+    }
+);
+
+export default SelectFilterContent;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
