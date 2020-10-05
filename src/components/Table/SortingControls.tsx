@@ -26,12 +26,12 @@ export interface SortingControlsProps {
  *
  * @component
  * @param props
- * @param props.sortingColumn - column for which sorting is executed.
- * @param props.currentElementColumn - name of current column.
- * @param props.sorting - direction of sorting.
- * @param props.setSorting
- * @param props.setSortingColumn
- * @param props.sortRenderData
+ * @param {string} props.sortingColumn - column for which sorting is executed.
+ * @param {string} props.currentElementColumn - name of current column.
+ * @param {string} props.sorting - direction of sorting.
+ * @param {function(string): void} props.setSorting
+ * @param {function(string): void} props.setSortingColumn
+ * @param {function(): void} props.sortRenderData
  * @returns {JSX.Element}
  */
 

@@ -22,12 +22,12 @@ interface FilterPopUpProps {
  *
  * @component
  * @param props
- * @param props.filteredColumnOpened - name of column filter opened.
- * @param props.filteredColumnAndValue  - the object with key as column name and value - filter query for the column.
- * @param props.currentElementColumn - the current column name.
- * @param props.onFilterExecuted
- * @param props.setFilteredColumnAndValue
- * @param props.currentElementType
+ * @param {string} props.filteredColumnOpened - name of column filter opened.
+ * @param {Object.<string, string>} props.filteredColumnAndValue  - the object with key as column name and value - filter query for the column.
+ * @param {string} props.currentElementColumn - the current column name.
+ * @param {function(React.FormEvent<HTMLFormElement>): void} props.onFilterExecuted
+ * @param {function(Object.<string, string>): void} props.setFilteredColumnAndValue
+ * @param {string} props.currentElementType
  * @returns {JSX.Element}
  */
 

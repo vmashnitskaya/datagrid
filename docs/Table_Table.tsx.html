@@ -72,7 +72,15 @@
             
             <nav>
                 
+<<<<<<< HEAD
                     <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
+=======
+<<<<<<< HEAD
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
+=======
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
+>>>>>>> 306adc1... add types
+>>>>>>> temp-branch
                 
             </nav>
         </div>
@@ -139,6 +147,32 @@ export interface TableProps {
  *
  * @component
  * @param props
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+ * @param {boolean} props.tableLoading - the loading of data.
+ * @param {string} props.tableError - the error if occurred during data loading.
+ * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
+ * @param {Object.&lt;string, any>} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
+ * @param {number[]} props.allIds - the array with ids for props.renderData.
+ * @param {boolean} props.loading - the loading of data supplied from one of custom tables.
+ * @param {string} props.error - the error supplied from one of custom tables.
+ * @param {ColumnInterface[]} props.columnHeaders - the array with column headers and information about columns.
+ * @param {number[]} props.sortFilterSlicedDataIds  - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
+ * @param {number[]} props.sortedFilteredRenderDataIds - the array with sequence of ids for filtered and sorted data.
+ * @param {number} props.rowsPerPage - the amount of rows per page.
+ * @param {number} props.currentPage - the current page.
+ * @param {number} props.totalPages - the total pages in table.
+ * @param {function(FilteringColumn): void} props.setFilteredColumnAndValue
+ * @param {function(number): void} props.setTotalPages
+ * @param {function(NormalizedObject): void} props.setTableRenderData
+ * @param {function(number[]): void} props.setTableAllIds
+ * @param {function(): void} props.setTableLoading
+ * @param {function(string): void} props.setTableError
+ * @param {function(number[]): void} props.setSortedFilteredRenderDataIds
+ * @param {function(number[]): void} props.setSortFilterSlicedDataIds
+=======
+>>>>>>> temp-branch
  * @param props.tableLoading - the loading of data.
  * @param props.tableError - the error if occurred during data loading.
  * @param props.tableAllIds - the array with initial data ids used in component.
@@ -160,6 +194,10 @@ export interface TableProps {
  * @param props.setTableError
  * @param props.setSortedFilteredRenderDataIds
  * @param props.setSortFilterSlicedDataIds
+<<<<<<< HEAD
+=======
+>>>>>>> 306adc1... add types
+>>>>>>> temp-branch
  * @returns {JSX.Element}
  */
 

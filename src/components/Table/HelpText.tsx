@@ -4,6 +4,14 @@ export interface HelpTextProps {
     value: string;
 }
 
+/**
+ * Components displays help text in filter pop-up.
+ *
+ * @component
+ * @param {string} value
+ * @returns {JSX.Element}
+ */
+
 const HelpText: FC<HelpTextProps> = ({ value }) => {
     return (
         <small id="emailHelp" className="form-text text-muted">

@@ -24,9 +24,9 @@ interface FilteringProps {
  *
  * @component
  * @param  props
- * @param props.currentElementColumn - the object with column info.
- * @param props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
- * @param filterRenderData
+ * @param {StringColumn | SelectColumn | NumberColumn} props.currentElementColumn - the object with column info.
+ * @param {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ * @param {function(): void} filterRenderData
  * @returns {JSX.Element}
  */
 

@@ -20,9 +20,9 @@ export interface TableRowProps {
  *
  * @component
  * @param props
- * @param props.id - the id by which in render data particular object will be extracted.
- * @param props.columnHeaders - the object with column headers info.
- * @param props.rowElement - the object extracted from render data by id.
+ * @param {number} props.id - the id by which in render data particular object will be extracted.
+ * @param {ColumnInterface[]} props.columnHeaders - the object with column headers info.
+ * @param {RenderDataObject} props.rowElement - the object extracted from render data by id.
  * @returns {JSX.Element}
  */
 

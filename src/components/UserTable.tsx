@@ -22,11 +22,11 @@ interface UserTableProps {
  *
  * @component
  * @param props
- * @param props.userData - object with id as key and object for table row as value.
- * @param props.allIds - ids for locationData.
- * @param props.loadingUser - loading of data.
- * @param props.errorUser - error during data fetch.
- * @param props.fetchUsersData
+ * @param {NormalizedObject} props.userData - object with id as key and object for table row as value.
+ * @param {number[]} props.allIds - ids for locationData.
+ * @param {boolean} props.loadingUser - loading of data.
+ * @param {string} props.errorUser - error during data fetch.
+ * @param {function(string): void} props.fetchUsersData
  * @returns {JSX.Element}
  */
 

@@ -14,10 +14,10 @@ type RefForInput = HTMLInputElement;
  * Component for displaying filter pop-up with select type.
  *
  *  @component
- *  @param props
- *  @param props.currentColumnName - current column name.
- *  @param props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
- *  @param props.handleInputProvided
+ *  @param  props
+ *  @param  {string} props.currentColumnName - current column name.
+ *  @param  {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ *  @param {function(ChangeEvent<HTMLInputElement>, string): void} props.handleInputProvided
  *  ref is used to focus input field after filter pop-up is opened.
  */
 

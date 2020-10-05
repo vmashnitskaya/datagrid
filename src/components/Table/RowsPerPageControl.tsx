@@ -17,8 +17,8 @@ interface RowsPerPageControlProps {
  *
  * @component
  * @param props
- * @param props.setRowsPerPage
- * @param props.rowsPerPage - the rows per page selected.
+ * @param {function(number): void} props.setRowsPerPage
+ * @param {number} props.rowsPerPage - the rows per page selected.
  * @returns {JSX.Element}
  */
 

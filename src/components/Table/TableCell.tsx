@@ -6,10 +6,7 @@ interface TableCellProps {
 }
 
 /**
- *
- * @param  rowElement
- * @param columnName
- * @returns {AnchorHTMLAttributes<any> | string} returns element in link tag if column name equals email or app_url.
+ * returns element in link tag if column name equals email or app_url.
  */
 
 const handleLinkDisplaying = (
@@ -43,8 +40,8 @@ const handleLinkDisplaying = (
  *
  * @component
  * @param props
- * @param props.rowElement - the object with all data for particular row.
- * @param props.columnName - current column name.
+ * @param {Object.<string, any>} props.rowElement - the object with all data for particular row.
+ * @param {string} props.columnName - current column name.
  * @returns {JSX.Element}
  */
 

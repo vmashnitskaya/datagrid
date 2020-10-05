@@ -21,9 +21,9 @@ interface PaginationControlProps {
  *
  * @component
  * @param props
- * @param props.currentPage - the current page selected.
- * @param props.totalPages - the number of all pages for table.
- * @param props.setCurrentPage
+ * @param {number} props.currentPage - the current page selected.
+ * @param {number} props.totalPages - the number of all pages for table.
+ * @param {function(number): void} props.setCurrentPage
  * @returns {JSX.Element}
  */
 
