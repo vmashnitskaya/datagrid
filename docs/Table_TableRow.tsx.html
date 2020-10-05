@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="AppTable.html">AppTable</a></li><li><a href="FilterControl.html">FilterControl</a></li><li><a href="Filtering.html">Filtering</a></li><li><a href="FilterPopUp.html">FilterPopUp</a></li><li><a href="LocationTable.html">LocationTable</a></li><li><a href="PaginationControl.html">PaginationControl</a></li><li><a href="RowsPerPageControl.html">RowsPerPageControl</a></li><li><a href="SortingControls.html">SortingControls</a></li><li><a href="Table.html">Table</a></li><li><a href="TableCell.html">TableCell</a></li><li><a href="TableHeader.html">TableHeader</a></li><li><a href="TableRow.html">TableRow</a></li><li><a href="UserTable.html">UserTable</a></li></ul><h3>Global</h3><ul><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
                 
             </nav>
         </div>
@@ -110,12 +110,11 @@ export interface TableRowProps {
  * Component for displaying table row.
  *
  * @component
- * @params props
+ * @param props
  * @param {number} props.id - the id by which in render data particular object will be extracted.
  * @param {ColumnInterface[]} props.columnHeaders - the object with column headers info.
  * @param {RenderDataObject} props.rowElement - the object extracted from render data by id.
  * @returns {JSX.Element}
- * @constructor
  */
 
 const TableRow: FC&lt;TableRowProps> = ({ id, columnHeaders, rowElement }) => {

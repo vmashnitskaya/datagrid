@@ -51,7 +51,7 @@ export interface TableProps {
  * @param {boolean} props.tableLoading - the loading of data.
  * @param {string} props.tableError - the error if occurred during data loading.
  * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
- * @param {{[p: string]: any}} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
+ * @param {Object.<string, any>} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
  * @param {number[]} props.allIds - the array with ids for props.renderData.
  * @param {boolean} props.loading - the loading of data supplied from one of custom tables.
  * @param {string} props.error - the error supplied from one of custom tables.
@@ -61,16 +61,15 @@ export interface TableProps {
  * @param {number} props.rowsPerPage - the amount of rows per page.
  * @param {number} props.currentPage - the current page.
  * @param {number} props.totalPages - the total pages in table.
- * @param {(data: FilteringColumn) => void} props.setFilteredColumnAndValue
- * @param {(totalPages: number) => void} props.setTotalPages
- * @param {(data: NormalizedObject) => void} props.setTableRenderData
- * @param {(allIds: number[]) => void} props.setTableAllIds
- * @param {() => void} props.setTableLoading
- * @param {(error: string) => void} props.setTableError
- * @param {(allIds: number[]) => void} props.setSortedFilteredRenderDataIds
- * @param {(allIds: number[]) => void} props.setSortFilterSlicedDataIds
+ * @param {function(FilteringColumn): void} props.setFilteredColumnAndValue
+ * @param {function(number): void} props.setTotalPages
+ * @param {function(NormalizedObject): void} props.setTableRenderData
+ * @param {function(number[]): void} props.setTableAllIds
+ * @param {function(): void} props.setTableLoading
+ * @param {function(string): void} props.setTableError
+ * @param {function(number[]): void} props.setSortedFilteredRenderDataIds
+ * @param {function(number[]): void} props.setSortFilterSlicedDataIds
  * @returns {JSX.Element}
- * @constructor
  */
 
 const Table: FC<TableProps> = ({

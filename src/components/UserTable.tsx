@@ -26,9 +26,8 @@ interface UserTableProps {
  * @param {number[]} props.allIds - ids for locationData.
  * @param {boolean} props.loadingUser - loading of data.
  * @param {string} props.errorUser - error during data fetch.
- * @param {(tabActive: string) => void} props.fetchUsersData
+ * @param {function(string): void} props.fetchUsersData
  * @returns {JSX.Element}
- * @constructor
  */
 
 const UserTable: FC<UserTableProps> = ({

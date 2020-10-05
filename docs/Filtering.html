@@ -89,7 +89,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Filtering<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Filtering<span class="signature">(props, filterRenderData)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
         
     
 </header>
@@ -113,7 +113,7 @@
         
         <span class="code-name">
             
-                new Filtering<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span>
+                new Filtering<span class="signature">(props, filterRenderData)</span><span class="type-signature"> &rarr; {JSX.Element}</span>
             
         </span>
     </h4>
@@ -205,17 +205,18 @@
 </tr>
 
   
-
-
-        
-
-            
-<tr class="deep-level-0">
+    
+<tr class="deep-level-1">
   
-      <td class="name"><code></code></td>
+      <td class="name"><code>filteredColumnAndValue</code></td>
   
 
   <td class="type">
+  
+      
+<span class="param-type">Object.&lt;string, string></span>
+
+
   
   </td>
 
@@ -223,8 +224,10 @@
 
   
 
-  <td class="description last"></td>
+  <td class="description last"><p>the object with key as column name and value - filter query for the column.</p></td>
 </tr>
+
+  
 
 
         
@@ -232,10 +235,15 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code></code></td>
+      <td class="name"><code>filterRenderData</code></td>
   
 
   <td class="type">
+  
+      
+<span class="param-type">function</span>
+
+
   
   </td>
 

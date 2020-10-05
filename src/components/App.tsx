@@ -17,7 +17,6 @@ interface LinkDef {
  *
  * @component
  * @returns {JSX.Element}
- * @constructor
  */
 
 const App: React.FC = () => {

@@ -15,8 +15,8 @@ export type RefForInput = HTMLInputElement;
  *  @component
  *  @param props
  *  @param  {string} props.currentColumnName - current column name.
- *  @param  {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
- *  @param {(event: : ChangeEvent<HTMLInputElement>, columnName: string) => void} props.handleInputProvided
+ *  @param  {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ *  @param {function(ChangeEvent<HTMLInputElement>, string): void} props.handleInputProvided
  *  ref is used to focus input field after filter pop-up is opened.
  */
 

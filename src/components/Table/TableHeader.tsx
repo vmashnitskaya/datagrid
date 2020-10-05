@@ -16,7 +16,6 @@ interface TableHeaderProps {
  * @param props
  * @param {StringColumn | SelectColumn | NumberColumn} props.element - current column header.
  * @returns {JSX.Element}
- * @constructor
  */
 
 const TableHeader: FC<TableHeaderProps> = ({ element }) => {

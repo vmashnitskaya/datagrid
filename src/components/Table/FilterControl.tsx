@@ -14,10 +14,9 @@ export interface FilterControlProps {
  * @component
  * @param props
  * @param {string} props.currentElementColumnName - the name of current column.
- * @param {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
- * @param {(columnName: string) => void} props.handleFilterOpened
+ * @param {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ * @param {function(string): void} props.handleFilterOpened
  * @returns {JSX.Element}
- * @constructor
  */
 
 const FilterControl: FC<FilterControlProps> = ({
