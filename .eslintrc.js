@@ -35,6 +35,7 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 'off',
         "react/jsx-props-no-spreading": "off",
         "no-use-before-define": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "@typescript-eslint/triple-slash-reference": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
