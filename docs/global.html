@@ -70,7 +70,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#Table">Table</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="AppTable.html">AppTable</a></li><li><a href="FilterControl.html">FilterControl</a></li><li><a href="Filtering.html">Filtering</a></li><li><a href="FilterPopUp.html">FilterPopUp</a></li><li><a href="LocationTable.html">LocationTable</a></li><li><a href="PaginationControl.html">PaginationControl</a></li><li><a href="RowsPerPageControl.html">RowsPerPageControl</a></li><li><a href="SortingControls.html">SortingControls</a></li><li><a href="Table.html">Table</a></li><li><a href="TableCell.html">TableCell</a></li><li><a href="TableHeader.html">TableHeader</a></li><li><a href="TableRow.html">TableRow</a></li><li><a href="UserTable.html">UserTable</a></li></ul><h3>Global</h3><ul><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li></ul></div>
                 
             </nav>
         </div>
@@ -154,6 +154,159 @@
     
 
     
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+<h4 class="name" id="SelectFilterContent">
+    <a class="href-link" href="#SelectFilterContent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        SelectFilterContent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>Component for displaying filter pop-up with select type.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Table_SelectFilterContent.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="Table_SelectFilterContent.tsx.html">Table/SelectFilterContent.tsx</a>, <a href="Table_SelectFilterContent.tsx.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="StringFilterContent">
+    <a class="href-link" href="#StringFilterContent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        StringFilterContent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>Component for displaying filter pop-up with string type.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Table_StringFilterContent.tsx.html" class="button">View Source</a>
+            <span>
+                <a href="Table_StringFilterContent.tsx.html">Table/StringFilterContent.tsx</a>, <a href="Table_StringFilterContent.tsx.html#line14">line 14</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
 
     
         <div class='vertical-section'>
@@ -164,22 +317,18 @@
 
 
     
-    <h4 class="name" id="Table">
-        <a class="href-link" href="#Table">#</a>
+    <h4 class="name" id="handleLinkDisplaying">
+        <a class="href-link" href="#handleLinkDisplaying">#</a>
         
         <span class="code-name">
             
-                Table<span class="signature">(props)</span><span class="type-signature"></span>
+                handleLinkDisplaying<span class="signature">(rowElement, columnName)</span><span class="type-signature"> &rarr; {AnchorHTMLAttributes.&lt;any>|string}</span>
             
         </span>
     </h4>
     
 
     
-    
-    <div class="description">
-        <p>Component for showing table.</p>
-    </div>
     
 
 
@@ -216,7 +365,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>props</code></td>
+      <td class="name"><code>rowElement</code></td>
   
 
   <td class="type">
@@ -230,12 +379,13 @@
   <td class="description last"></td>
 </tr>
 
+
+        
+
+            
+<tr class="deep-level-0">
   
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>renderData</code></td>
+      <td class="name"><code>columnName</code></td>
   
 
   <td class="type">
@@ -246,64 +396,8 @@
 
   
 
-  <td class="description last"><p>the object with whole data for the table, not sorted, filtered, sliced</p></td>
+  <td class="description last"></td>
 </tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>tableAllIds</code></td>
-  
-
-  <td class="type">
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>the array with sequence of ids for props.renderData.</p></td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>sortedFilteredRenderDataIds</code></td>
-  
-
-  <td class="type">
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>the array with sequence of ids for filtered and sorted data.</p></td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>setSortFilterSlicedDataIds</code></td>
-  
-
-  <td class="type">
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.</p></td>
-</tr>
-
-  
 
 
         
@@ -348,9 +442,9 @@
 
     
         <p class="tag-source">
-            <a href="Table.tsx.html" class="button">View Source</a>
+            <a href="Table_TableCell.tsx.html" class="button">View Source</a>
             <span>
-                <a href="Table.tsx.html">Table.tsx</a>, <a href="Table.tsx.html#line22">line 22</a>
+                <a href="Table_TableCell.tsx.html">Table/TableCell.tsx</a>, <a href="Table_TableCell.tsx.html#line9">line 9</a>
             </span>
         </p>
     
@@ -372,6 +466,34 @@
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>returns element in link tag if column name equals email or app_url.</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">AnchorHTMLAttributes.&lt;any></span>
+|
+
+<span class="param-type">string</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/TableHeader.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,55 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/TableHeader.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { FC } from 'react';
+
+import Filtering from './Filtering';
+import SortingControls from './SortingControls';
+
+import { ColumnInterface } from '../ColumnInterface';
+
+interface TableHeaderProps {
+    element: ColumnInterface;
+}
+
+/**
+ * Component for displaying table header.
+ *
+ * @component
+ * @param props
+ * @param {StringColumn | SelectColumn | NumberColumn} props.element - current column header.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const TableHeader: FC&lt;TableHeaderProps> = ({ element }) => {
+    return (
+        &lt;th className="bg-light">
+            &lt;div className="header">
+                &lt;div>{element.header.replace(/ /g, '\u00a0')}&lt;/div>
+                &lt;div className="icons">
+                    {element.filtering &amp;&amp; &lt;Filtering currentElementColumn={element} />}
+                    {element.sorting &amp;&amp; &lt;SortingControls currentElementColumn={element.name} />}
+                &lt;/div>
+            &lt;/div>
+        &lt;/th>
+    );
+};
+
+export default TableHeader;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

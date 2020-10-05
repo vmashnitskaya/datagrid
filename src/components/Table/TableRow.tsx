@@ -10,18 +10,30 @@ import { RootState } from '../../redux/rootReducer';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 
 export interface TableRowProps {
-    row: number;
+    id: number;
     columnHeaders: ColumnInterface[];
     rowElement: RenderDataObject;
 }
 
-const TableRow: FC<TableRowProps> = ({ row, columnHeaders, rowElement }) => {
+/**
+ * Component for displaying table row.
+ *
+ * @component
+ * @params props
+ * @param {number} props.id - the id by which in render data particular object will be extracted.
+ * @param {ColumnInterface[]} props.columnHeaders - the object with column headers info.
+ * @param {RenderDataObject} props.rowElement - the object extracted from render data by id.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const TableRow: FC<TableRowProps> = ({ id, columnHeaders, rowElement }) => {
     return (
         <tr>
             {columnHeaders.map((element: ColumnInterface) => {
                 return (
                     <TableCell
-                        key={`key${row + 1}}`}
+                        key={`key${id + 1}}`}
                         rowElement={rowElement}
                         columnName={element.name}
                     />
@@ -31,8 +43,8 @@ const TableRow: FC<TableRowProps> = ({ row, columnHeaders, rowElement }) => {
     );
 };
 
-const mapStateToProps = (state: RootState, { row }: { row: number }) => ({
-    rowElement: tableDataSelectors.getElementById(state, row),
+const mapStateToProps = (state: RootState, { id }: { id: number }) => ({
+    rowElement: tableDataSelectors.getElementById(state, id),
 });
 
 export default connect(mapStateToProps)(TableRow);

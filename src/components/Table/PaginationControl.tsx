@@ -16,6 +16,18 @@ interface PaginationControlProps {
     setCurrentPage: (rowsPerPage: number) => void;
 }
 
+/**
+ *Component for displaying pagination control.
+ *
+ * @component
+ * @props
+ * @param {number} props.currentPage - the current page selected.
+ * @param {number} props.totalPages - the number of all pages for table.
+ * @param {(rowsPerPage: number) => void} props.setCurrentPage
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 const PaginationControl: FunctionComponent<PaginationControlProps> = ({
     currentPage,
     totalPages,

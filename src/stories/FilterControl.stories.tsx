@@ -14,7 +14,7 @@ const Template: Story<FilterControlProps> = (args: FilterControlProps) => (
 export const FilterControlNotActive = Template.bind({});
 
 FilterControlNotActive.args = {
-    currentElementColumn: 'first_name',
+    currentElementColumnName: 'first_name',
     filteredColumnAndValue: {
         id: '',
         first_name: '',
@@ -35,7 +35,7 @@ FilterControlNotActive.parameters = {
 export const FilterControlActive = Template.bind({});
 
 FilterControlActive.args = {
-    currentElementColumn: 'first_name',
+    currentElementColumnName: 'first_name',
     filteredColumnAndValue: {
         id: '',
         first_name: '111',

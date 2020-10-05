@@ -1,10 +1,14 @@
 import React, { FC, KeyboardEvent, useEffect } from 'react';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import clsx from 'clsx';
+
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import './SortingControls.scss';
-import { connect, MapDispatchToPropsFunction } from 'react-redux';
+
 import { RootState } from '../../redux/rootReducer';
+import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import actions from '../../redux/tableData/tableDataActions';
 
@@ -16,6 +20,21 @@ export interface SortingControlsProps {
     setSortingColumn: (column: string) => void;
     sortRenderData: () => void;
 }
+
+/**
+ * Component for displaying table filter control and pop-up.
+ *
+ * @component
+ * @params props
+ * @param {string} props.sortingColumn - column for which sorting is executed.
+ * @param {string} props.currentElementColumn - name of current column.
+ * @param {string} props.sorting - direction of sorting.
+ * @param {(sorting: string) => void} props.setSorting
+ * @param {(column: string) => void} props.setSortingColumn
+ * @param {() => void} props.sortRenderData
+ * @returns {JSX.Element}
+ * @constructor
+ */
 
 const SortingControls: FC<SortingControlsProps> = ({
     sortingColumn,
@@ -79,7 +98,7 @@ const mapStateToProps = (state: RootState) => ({
     sortingColumn: tableDataSelectors.getSortingColumn(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     setSorting: (direction: string) => {
         dispatch(actions.setSorting(direction));
     },

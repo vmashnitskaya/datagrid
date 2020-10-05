@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> App.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,117 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>App.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useMemo, useState } from 'react';
+import { Redirect, Route, Switch } from 'react-router';
+import { BrowserRouter, Link } from 'react-router-dom';
+import './App.scss';
+import clsx from 'clsx';
+import UserTable from './UserTable';
+import AppTable from './AppTable';
+import LocationTable from './LocationTable';
+
+interface LinkDef {
+    label: string;
+    pathname: string;
+}
+
+/**
+ * App component.
+ *
+ * @component
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const App: React.FC = () => {
+    const [tabActive, setTabActive] = useState&lt;string | undefined>('Users');
+
+    const links: LinkDef[] = useMemo(
+        () => [
+            {
+                label: 'Users',
+                pathname: '/users',
+            },
+            {
+                label: 'Apps',
+                pathname: '/apps',
+            },
+            {
+                label: 'Locations',
+                pathname: '/locations',
+            },
+        ],
+        []
+    );
+
+    const handleTabActiveChange = (event: React.MouseEvent&lt;HTMLElement>): void => {
+        const newActiveLabel = event.currentTarget.dataset.label;
+
+        setTabActive(newActiveLabel);
+    };
+
+    return (
+        &lt;div className="container">
+            &lt;BrowserRouter>
+                &lt;nav>
+                    &lt;div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+                        {links.map((link) => {
+                            return (
+                                &lt;Link
+                                    className={clsx(
+                                        'nav-link',
+                                        'mt-5',
+                                        'text-dark',
+                                        tabActive === link.label &amp;&amp; 'active'
+                                    )}
+                                    key={link.label}
+                                    role="tab"
+                                    aria-controls="nav-home"
+                                    to={link.pathname}
+                                    data-label={link.label}
+                                    onClick={handleTabActiveChange}
+                                >
+                                    {link.label}
+                                &lt;/Link>
+                            );
+                        })}
+                    &lt;/div>
+                &lt;/nav>
+                &lt;div className="tab-content" id="nav-tabContent">
+                    &lt;Switch>
+                        &lt;Route exact path="/">
+                            &lt;Redirect to="/users" />
+                        &lt;/Route>
+                        &lt;Route exact path="/users">
+                            &lt;UserTable />
+                        &lt;/Route>
+                        &lt;Route path="/apps">
+                            &lt;AppTable />
+                        &lt;/Route>
+                        &lt;Route path="/locations">
+                            &lt;LocationTable />
+                        &lt;/Route>
+                    &lt;/Switch>
+                &lt;/div>
+            &lt;/BrowserRouter>
+        &lt;/div>
+    );
+};
+
+export default App;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

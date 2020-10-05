@@ -12,6 +12,14 @@ interface LinkDef {
     pathname: string;
 }
 
+/**
+ * App component.
+ *
+ * @component
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 const App: React.FC = () => {
     const [tabActive, setTabActive] = useState<string | undefined>('Users');
 

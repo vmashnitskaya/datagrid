@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/FilterControl.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,68 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/FilterControl.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { KeyboardEvent, FC } from 'react';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import clsx from 'clsx';
+
+export interface FilterControlProps {
+    currentElementColumnName: string;
+    filteredColumnAndValue: { [key: string]: string };
+    handleFilterOpened: (columnName: string) => void;
+}
+
+/**
+ * Component for displaying filter control.
+ *
+ * @component
+ * @param props
+ * @param {string} props.currentElementColumnName - the name of current column.
+ * @param {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ * @param {(columnName: string) => void} props.handleFilterOpened
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const FilterControl: FC&lt;FilterControlProps> = ({
+    currentElementColumnName,
+    filteredColumnAndValue,
+    handleFilterOpened,
+}) => {
+    const handleKeyboardFilterOpened = (event: KeyboardEvent&lt;SVGSVGElement>) => {
+        if (event.key === 'Enter') {
+            handleFilterOpened(currentElementColumnName);
+        }
+    };
+
+    return (
+        &lt;FilterListIcon
+            className={clsx(
+                'filtering',
+                filteredColumnAndValue[currentElementColumnName] &amp;&amp;
+                    filteredColumnAndValue[currentElementColumnName].length > 0 &amp;&amp;
+                    'text-info'
+            )}
+            tabIndex={0}
+            onClick={() => handleFilterOpened(currentElementColumnName)}
+            onKeyPress={handleKeyboardFilterOpened}
+        />
+    );
+};
+
+export default FilterControl;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

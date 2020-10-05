@@ -13,8 +13,10 @@ interface TableHeaderProps {
  * Component for displaying table header.
  *
  * @component
- * @param  props
- * @param  props.element - current column header.
+ * @param props
+ * @param {StringColumn | SelectColumn | NumberColumn} props.element - current column header.
+ * @returns {JSX.Element}
+ * @constructor
  */
 
 const TableHeader: FC<TableHeaderProps> = ({ element }) => {
@@ -23,12 +25,7 @@ const TableHeader: FC<TableHeaderProps> = ({ element }) => {
             <div className="header">
                 <div>{element.header.replace(/ /g, '\u00a0')}</div>
                 <div className="icons">
-                    {element.filtering && (
-                        <Filtering
-                            currentElementColumn={element.name}
-                            currentElementType={element.type}
-                        />
-                    )}
+                    {element.filtering && <Filtering currentElementColumn={element} />}
                     {element.sorting && <SortingControls currentElementColumn={element.name} />}
                 </div>
             </div>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/RowsPerPageControl.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,87 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/RowsPerPageControl.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { FunctionComponent, useMemo } from 'react';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
+
+import Dropdown from 'react-bootstrap/Dropdown';
+
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import actions from '../../redux/tableData/tableDataActions';
+
+interface RowsPerPageControlProps {
+    setRowsPerPage: (rowsPerPage: number) => void;
+    rowsPerPage: number;
+}
+
+/**
+ * Component for rows per page selection.
+ *
+ * @component
+ * @params props
+ * @param {(rowsPerPage: number) => void} props.setRowsPerPage
+ * @param {number} props.rowsPerPage - the rows per page selected.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const RowsPerPageControl: FunctionComponent&lt;RowsPerPageControlProps> = ({
+    setRowsPerPage,
+    rowsPerPage,
+}) => {
+    const dropdownKeys = useMemo((): string[] => {
+        return ['5', '10', '20', '50', '100'];
+    }, []);
+
+    const handleDropDownSelect = (eventKey: string | null) => {
+        setRowsPerPage(Number(eventKey));
+    };
+
+    return (
+        &lt;Dropdown>
+            &lt;Dropdown.Toggle variant="info" id="dropdown-basic" size="sm">
+                {rowsPerPage}
+            &lt;/Dropdown.Toggle>
+            &lt;Dropdown.Menu>
+                {dropdownKeys.map((element) => (
+                    &lt;Dropdown.Item
+                        eventKey={element}
+                        active={element === String(rowsPerPage)}
+                        onSelect={handleDropDownSelect}
+                    >
+                        {element}
+                    &lt;/Dropdown.Item>
+                ))}
+            &lt;/Dropdown.Menu>
+        &lt;/Dropdown>
+    );
+};
+
+const mapStateToProps = (state: RootState) => ({
+    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction&lt;any, any> = (dispatch) => ({
+    setRowsPerPage: (rowsPerPage: number) => {
+        dispatch(actions.setRowsPerPage(rowsPerPage));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RowsPerPageControl);
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

@@ -1,11 +1,21 @@
-import React, { FC } from 'react';
+import React, { AnchorHTMLAttributes, FC } from 'react';
 
 interface TableCellProps {
     rowElement: { [key: string]: any };
     columnName: string;
 }
 
-const handleEmailDisplaying = (rowElement: { [key: string]: any }, columnName: string) => {
+/**
+ *
+ * @param  rowElement
+ * @param columnName
+ * @returns {AnchorHTMLAttributes<any> | string} returns element in link tag if column name equals email or app_url.
+ */
+
+const handleLinkDisplaying = (
+    rowElement: { [key: string]: any },
+    columnName: string
+): AnchorHTMLAttributes<any> | string => {
     if (columnName === 'email') {
         return (
             <a className="text-secondary" href={`mailto:${rowElement[columnName]}`}>
@@ -28,12 +38,23 @@ const handleEmailDisplaying = (rowElement: { [key: string]: any }, columnName: s
     return rowElement[columnName];
 };
 
+/**
+ * Component for displaying table cell.
+ *
+ * @component
+ * @param props
+ * @param {{[p: string]: any}} props.rowElement - the object with all data for particular row.
+ * @param {string} props.columnName - current column name.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 const TableCell: FC<TableCellProps> = ({ rowElement, columnName }) => {
     return (
         <td>
             {typeof rowElement[columnName] === 'object' && rowElement[columnName] !== null
                 ? Object.values(rowElement[columnName]).join(', ')
-                : handleEmailDisplaying(rowElement, columnName)}
+                : handleLinkDisplaying(rowElement, columnName)}
         </td>
     );
 };

@@ -9,6 +9,17 @@ interface StringFilterControlProps {
 
 export type RefForInput = HTMLInputElement;
 
+/**
+ * Component for displaying filter pop-up with string type.
+ *
+ *  @component
+ *  @param props
+ *  @param  {string} props.currentColumnName - current column name.
+ *  @param  {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ *  @param {(event: : ChangeEvent<HTMLInputElement>, columnName: string) => void} props.handleInputProvided
+ *  ref is used to focus input field after filter pop-up is opened.
+ */
+
 const StringFilterContent = React.forwardRef<RefForInput, StringFilterControlProps>(
     ({ handleInputProvided, currentColumnName, filteredColumnAndValue }, ref) => {
         return (

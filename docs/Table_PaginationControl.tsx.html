@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/PaginationControl.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,132 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/PaginationControl.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { ChangeEvent, FormEvent, FunctionComponent, useEffect, useState } from 'react';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import clsx from 'clsx';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import './PaginationControl.scss';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import actions from '../../redux/tableData/tableDataActions';
+
+interface PaginationControlProps {
+    currentPage: number;
+    totalPages: number;
+    setCurrentPage: (rowsPerPage: number) => void;
+}
+
+/**
+ *Component for displaying pagination control.
+ *
+ * @component
+ * @props
+ * @param {number} props.currentPage - the current page selected.
+ * @param {number} props.totalPages - the number of all pages for table.
+ * @param {(rowsPerPage: number) => void} props.setCurrentPage
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const PaginationControl: FunctionComponent&lt;PaginationControlProps> = ({
+    currentPage,
+    totalPages,
+    setCurrentPage,
+}) => {
+    const [pageInputState, setPageInputState] = useState&lt;number>(1);
+
+    useEffect(() => {
+        setPageInputState(currentPage);
+    }, [currentPage]);
+
+    const handlePageEnter = (event: ChangeEvent&lt;HTMLInputElement>) => {
+        const page = Number(event.target.value);
+        if (page &lt;= totalPages) {
+            setPageInputState(page);
+        }
+    };
+
+    const handlePageNavigationByInput = (event: FormEvent) => {
+        event.preventDefault();
+        setCurrentPage(pageInputState);
+    };
+
+    const handlePageNavigation = (pageDirection: string) => {
+        let nextPage = 0;
+
+        switch (pageDirection) {
+            case 'next':
+                nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
+                break;
+            case 'previous':
+                nextPage = currentPage - 1 > 0 ? currentPage - 1 : currentPage;
+                break;
+            case 'first':
+                nextPage = currentPage !== 1 ? 1 : currentPage;
+                break;
+            case 'last':
+                nextPage = totalPages !== 1 ? totalPages : currentPage;
+                break;
+            default:
+                nextPage = currentPage;
+        }
+
+        setCurrentPage(nextPage);
+    };
+    return (
+        &lt;div className="pagination">
+            &lt;FirstPageIcon
+                className={clsx('page-first', currentPage !== 1 &amp;&amp; 'text-info')}
+                onClick={() => handlePageNavigation('first')}
+            />
+            &lt;NavigateBeforeIcon
+                className={clsx('page-previous', currentPage !== 1 &amp;&amp; 'text-info')}
+                onClick={() => handlePageNavigation('previous')}
+            />
+            &lt;form className="pagination-input" onSubmit={handlePageNavigationByInput}>
+                &lt;input type="text" value={pageInputState} onChange={handlePageEnter} /> of{' '}
+                {totalPages}
+            &lt;/form>
+            &lt;NavigateNextIcon
+                className={clsx('page-next', currentPage !== totalPages &amp;&amp; 'text-info')}
+                onClick={() => handlePageNavigation('next')}
+            />
+            &lt;LastPageIcon
+                className={clsx('page-last', currentPage !== totalPages &amp;&amp; 'text-info')}
+                onClick={() => handlePageNavigation('last')}
+            />
+        &lt;/div>
+    );
+};
+
+const mapStateToProps = (state: RootState) => ({
+    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+    currentPage: tableDataSelectors.getCurrentPage(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction&lt;any, any> = (dispatch) => ({
+    setCurrentPage: (currentPage: number) => {
+        dispatch(actions.setCurrentPage(currentPage));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaginationControl);
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

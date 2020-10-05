@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/StringFilterContent.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,60 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/StringFilterContent.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { ChangeEvent } from 'react';
+import HelpText from './HelpText';
+
+interface StringFilterControlProps {
+    handleInputProvided: (event: ChangeEvent&lt;HTMLInputElement>, columnName: string) => void;
+    currentColumnName: string;
+    filteredColumnAndValue: { [key: string]: string };
+}
+
+export type RefForInput = HTMLInputElement;
+
+/**
+ * Component for displaying filter pop-up with string type.
+ *
+ *  @component
+ *  @param props
+ *  @param  {string} props.currentColumnName - current column name.
+ *  @param  {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ *  @param {(event: : ChangeEvent&lt;HTMLInputElement>, columnName: string) => void} props.handleInputProvided
+ *  ref is used to focus input field after filter pop-up is opened.
+ */
+
+const StringFilterContent = React.forwardRef&lt;RefForInput, StringFilterControlProps>(
+    ({ handleInputProvided, currentColumnName, filteredColumnAndValue }, ref) => {
+        return (
+            &lt;>
+                &lt;input
+                    className="form-control form-control-sm"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    onChange={(event) => handleInputProvided(event, currentColumnName)}
+                    value={filteredColumnAndValue[currentColumnName]}
+                    ref={ref}
+                />
+                &lt;HelpText value="Fill in filter criteria and click Enter." />
+            &lt;/>
+        );
+    }
+);
+
+export default StringFilterContent;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

@@ -1,5 +1,5 @@
 import React, { FormEvent, FC, useState } from 'react';
-import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { connect } from 'react-redux';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
@@ -11,18 +11,29 @@ import actions from '../../redux/tableData/tableDataActions';
 import selectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
+import { ColumnInterface } from '../ColumnInterface';
 
 interface FilteringProps {
-    currentElementColumn: string;
+    currentElementColumn: ColumnInterface;
     filteredColumnAndValue: { [key: string]: string };
-    currentElementType: string;
     filterRenderData: () => void;
 }
+
+/**
+ * Component for displaying table filter control and pop-up.
+ *
+ * @component
+ * @param  props
+ * @param {StringColumn | SelectColumn | NumberColumn} props.currentElementColumn - the object with column info.
+ * @param {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ * @param {() => void} filterRenderData
+ * @returns {JSX.Element}
+ * @constructor
+ */
 
 const Filtering: FC<FilteringProps> = ({
     currentElementColumn,
     filteredColumnAndValue,
-    currentElementType,
     filterRenderData,
 }) => {
     const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
@@ -58,7 +69,7 @@ const Filtering: FC<FilteringProps> = ({
                     filteredColumnAndValue={filteredColumnAndValue}
                     currentElementColumn={currentElementColumn}
                     onFilterExecuted={onFilterExecuted}
-                    currentElementType={currentElementType}
+                    currentElementType={currentElementColumn.type}
                 />
             </Popover.Content>
         </Popover>
@@ -67,14 +78,15 @@ const Filtering: FC<FilteringProps> = ({
         <>
             <OverlayTrigger
                 show={
-                    Boolean(filteredColumnOpened) && filteredColumnOpened === currentElementColumn
+                    Boolean(filteredColumnOpened) &&
+                    filteredColumnOpened === currentElementColumn.name
                 }
                 trigger="click"
                 placement="bottom"
                 overlay={popover}
             >
                 <FilterControl
-                    currentElementColumn={currentElementColumn}
+                    currentElementColumnName={currentElementColumn.name}
                     filteredColumnAndValue={filteredColumnAndValue}
                     handleFilterOpened={handleFilterOpened}
                 />

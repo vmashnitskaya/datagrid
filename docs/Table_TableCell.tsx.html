@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/TableCell.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,81 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/TableCell.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { AnchorHTMLAttributes, FC } from 'react';
+
+interface TableCellProps {
+    rowElement: { [key: string]: any };
+    columnName: string;
+}
+
+/**
+ *
+ * @param  rowElement
+ * @param columnName
+ * @returns {AnchorHTMLAttributes&lt;any> | string} returns element in link tag if column name equals email or app_url.
+ */
+
+const handleLinkDisplaying = (
+    rowElement: { [key: string]: any },
+    columnName: string
+): AnchorHTMLAttributes&lt;any> | string => {
+    if (columnName === 'email') {
+        return (
+            &lt;a className="text-secondary" href={`mailto:${rowElement[columnName]}`}>
+                {rowElement[columnName]}
+            &lt;/a>
+        );
+    }
+    if (columnName === 'app_url') {
+        return (
+            &lt;a
+                className="text-secondary"
+                href={`${rowElement[columnName]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                {rowElement[columnName]}
+            &lt;/a>
+        );
+    }
+    return rowElement[columnName];
+};
+
+/**
+ * Component for displaying table cell.
+ *
+ * @component
+ * @param props
+ * @param {{[p: string]: any}} props.rowElement - the object with all data for particular row.
+ * @param {string} props.columnName - current column name.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const TableCell: FC&lt;TableCellProps> = ({ rowElement, columnName }) => {
+    return (
+        &lt;td>
+            {typeof rowElement[columnName] === 'object' &amp;&amp; rowElement[columnName] !== null
+                ? Object.values(rowElement[columnName]).join(', ')
+                : handleLinkDisplaying(rowElement, columnName)}
+        &lt;/td>
+    );
+};
+
+export default TableCell;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

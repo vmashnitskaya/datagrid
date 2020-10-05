@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> Table/Filtering.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,37 +79,127 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>Table/Filtering.tsx</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h3>DataGrid</h3></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { FormEvent, FC, useState } from 'react';
+import { connect } from 'react-redux';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+
+import { Dispatch } from 'redux';
+import FilterControl from './FilterControl';
+import FilterPopUp from './FilterPopUp';
+
+import actions from '../../redux/tableData/tableDataActions';
+import selectors from '../../redux/tableData/tableDataSelectors';
+import { RootState } from '../../redux/rootReducer';
+import { TableDataActions } from '../../redux/tableData/tableDataTypes';
+import { ColumnInterface } from '../ColumnInterface';
+
+interface FilteringProps {
+    currentElementColumn: ColumnInterface;
+    filteredColumnAndValue: { [key: string]: string };
+    filterRenderData: () => void;
+}
+
+/**
+ * Component for displaying table filter control and pop-up.
+ *
+ * @component
+ * @param  props
+ * @param {StringColumn | SelectColumn | NumberColumn} props.currentElementColumn - the object with column info.
+ * @param {{[p: string]: string}} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.
+ * @param {() => void} filterRenderData
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const Filtering: FC&lt;FilteringProps> = ({
+    currentElementColumn,
+    filteredColumnAndValue,
+    filterRenderData,
+}) => {
+    const [filteredColumnOpened, setFilteredColumnOpened] = useState&lt;string>('');
+
+    const closePopUp = (): void => {
+        setFilteredColumnOpened('');
+    };
+
+    const handleFilterOpened = (columnName: string) => {
+        if (filteredColumnOpened.length > 0) {
+            closePopUp();
+        } else {
+            setFilteredColumnOpened(columnName);
+        }
+    };
+
+    const handleFilter = (event: React.FormEvent&lt;HTMLFormElement>) => {
+        filterRenderData();
+        event.preventDefault();
+    };
+
+    const onFilterExecuted = (event: FormEvent&lt;HTMLFormElement>) => {
+        closePopUp();
+        handleFilter(event);
+    };
+
+    const popover = (
+        &lt;Popover id="popover-basic" className="bg-light">
+            &lt;Popover.Title as="h3">Filter&lt;/Popover.Title>
+            &lt;Popover.Content>
+                &lt;FilterPopUp
+                    filteredColumnOpened={filteredColumnOpened}
+                    filteredColumnAndValue={filteredColumnAndValue}
+                    currentElementColumn={currentElementColumn}
+                    onFilterExecuted={onFilterExecuted}
+                    currentElementType={currentElementColumn.type}
+                />
+            &lt;/Popover.Content>
+        &lt;/Popover>
+    );
+    return (
+        &lt;>
+            &lt;OverlayTrigger
+                show={
+                    Boolean(filteredColumnOpened) &amp;&amp;
+                    filteredColumnOpened === currentElementColumn.name
+                }
+                trigger="click"
+                placement="bottom"
+                overlay={popover}
+            >
+                &lt;FilterControl
+                    currentElementColumnName={currentElementColumn.name}
+                    filteredColumnAndValue={filteredColumnAndValue}
+                    handleFilterOpened={handleFilterOpened}
+                />
+            &lt;/OverlayTrigger>
+        &lt;/>
+    );
+};
+
+const mapStateToProps = (state: RootState) => ({
+    filteredColumnAndValue: selectors.getFilteredColumnAndValue(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch&lt;TableDataActions>) => ({
+    filterRenderData: () => {
+        dispatch(actions.filterRenderData());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filtering);
+</code></pre>
+        </article>
     </section>
-
-
 
 
 
