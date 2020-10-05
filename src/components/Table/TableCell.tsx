@@ -43,10 +43,9 @@ const handleLinkDisplaying = (
  *
  * @component
  * @param props
- * @param {{[p: string]: any}} props.rowElement - the object with all data for particular row.
- * @param {string} props.columnName - current column name.
+ * @param props.rowElement - the object with all data for particular row.
+ * @param props.columnName - current column name.
  * @returns {JSX.Element}
- * @constructor
  */
 
 const TableCell: FC<TableCellProps> = ({ rowElement, columnName }) => {

@@ -22,13 +22,12 @@ interface AppTableProps {
  *
  * @component
  * @param props
- * @param {(tabActive: string) => void} props.fetchAppsData
- * @param {number[]} props.allIds - ids for appData.
- * @param {AppDataObject[]} props.appData - object with id as key and object for table row as value.
- * @param {boolean} props.loadingApp - loading of data.
- * @param {string} props.errorApp - error during data fetch.
+ * @param props.fetchAppsData
+ * @param props.allIds - ids for appData.
+ * @param props.appData - object with id as key and object for table row as value.
+ * @param props.loadingApp - loading of data.
+ * @param props.errorApp - error during data fetch.
  * @returns {JSX.Element}
- * @constructor
  */
 
 const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingApp, errorApp }) => {

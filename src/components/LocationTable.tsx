@@ -22,13 +22,12 @@ interface LocationTableProps {
  *
  * @component
  * @param props
- * @param {NormalizedObject} props.locationData - object with id as key and object for table row as value.
- * @param {boolean} props.loadingLocation - loading of data.
- * @param {string} props.errorLocation - error during data fetch.
- * @param {(tabActive: string) => void} props.fetchLocationsData
- * @param {number[]} props.allIds - ids for locationData.
+ * @param props.locationData - object with id as key and object for table row as value.
+ * @param props.loadingLocation - loading of data.
+ * @param props.errorLocation - error during data fetch.
+ * @param props.fetchLocationsData
+ * @param props.allIds - ids for locationData.
  * @returns {JSX.Element}
- * @constructor
  */
 
 const LocationTable: FC<LocationTableProps> = ({

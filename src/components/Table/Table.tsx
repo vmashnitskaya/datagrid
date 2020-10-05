@@ -48,29 +48,28 @@ export interface TableProps {
  *
  * @component
  * @param props
- * @param {boolean} props.tableLoading - the loading of data.
- * @param {string} props.tableError - the error if occurred during data loading.
- * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
- * @param {{[p: string]: any}} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
- * @param {number[]} props.allIds - the array with ids for props.renderData.
- * @param {boolean} props.loading - the loading of data supplied from one of custom tables.
- * @param {string} props.error - the error supplied from one of custom tables.
- * @param {ColumnInterface[]} props.columnHeaders - the array with column headers and information about columns.
- * @param {number[]} props.sortFilterSlicedDataIds  - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
- * @param {number[]} props.sortedFilteredRenderDataIds - the array with sequence of ids for filtered and sorted data.
- * @param {number} props.rowsPerPage - the amount of rows per page.
- * @param {number} props.currentPage - the current page.
- * @param {number} props.totalPages - the total pages in table.
- * @param {(data: FilteringColumn) => void} props.setFilteredColumnAndValue
- * @param {(totalPages: number) => void} props.setTotalPages
- * @param {(data: NormalizedObject) => void} props.setTableRenderData
- * @param {(allIds: number[]) => void} props.setTableAllIds
- * @param {() => void} props.setTableLoading
- * @param {(error: string) => void} props.setTableError
- * @param {(allIds: number[]) => void} props.setSortedFilteredRenderDataIds
- * @param {(allIds: number[]) => void} props.setSortFilterSlicedDataIds
+ * @param props.tableLoading - the loading of data.
+ * @param props.tableError - the error if occurred during data loading.
+ * @param props.tableAllIds - the array with initial data ids used in component.
+ * @param props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
+ * @param props.allIds - the array with ids for props.renderData.
+ * @param props.loading - the loading of data supplied from one of custom tables.
+ * @param props.error - the error supplied from one of custom tables.
+ * @param props.columnHeaders - the array with column headers and information about columns.
+ * @param props.sortFilterSlicedDataIds  - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
+ * @param props.sortedFilteredRenderDataIds - the array with sequence of ids for filtered and sorted data.
+ * @param props.rowsPerPage - the amount of rows per page.
+ * @param props.currentPage - the current page.
+ * @param props.totalPages - the total pages in table.
+ * @param props.setFilteredColumnAndValue
+ * @param props.setTotalPages
+ * @param props.setTableRenderData
+ * @param props.setTableAllIds
+ * @param props.setTableLoading
+ * @param props.setTableError
+ * @param props.setSortedFilteredRenderDataIds
+ * @param props.setSortFilterSlicedDataIds
  * @returns {JSX.Element}
- * @constructor
  */
 
 const Table: FC<TableProps> = ({

@@ -25,15 +25,14 @@ export interface SortingControlsProps {
  * Component for displaying table filter control and pop-up.
  *
  * @component
- * @params props
- * @param {string} props.sortingColumn - column for which sorting is executed.
- * @param {string} props.currentElementColumn - name of current column.
- * @param {string} props.sorting - direction of sorting.
- * @param {(sorting: string) => void} props.setSorting
- * @param {(column: string) => void} props.setSortingColumn
- * @param {() => void} props.sortRenderData
+ * @param props
+ * @param props.sortingColumn - column for which sorting is executed.
+ * @param props.currentElementColumn - name of current column.
+ * @param props.sorting - direction of sorting.
+ * @param props.setSorting
+ * @param props.setSortingColumn
+ * @param props.sortRenderData
  * @returns {JSX.Element}
- * @constructor
  */
 
 const SortingControls: FC<SortingControlsProps> = ({

@@ -19,12 +19,11 @@ export interface TableRowProps {
  * Component for displaying table row.
  *
  * @component
- * @params props
- * @param {number} props.id - the id by which in render data particular object will be extracted.
- * @param {ColumnInterface[]} props.columnHeaders - the object with column headers info.
- * @param {RenderDataObject} props.rowElement - the object extracted from render data by id.
+ * @param props
+ * @param props.id - the id by which in render data particular object will be extracted.
+ * @param props.columnHeaders - the object with column headers info.
+ * @param props.rowElement - the object extracted from render data by id.
  * @returns {JSX.Element}
- * @constructor
  */
 
 const TableRow: FC<TableRowProps> = ({ id, columnHeaders, rowElement }) => {
