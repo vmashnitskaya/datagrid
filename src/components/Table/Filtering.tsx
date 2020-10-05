@@ -22,7 +22,6 @@ interface FilteringProps {
 /**
  * Component for displaying table filter control and pop-up.
  *
- * @component
  * @param  props
  * @param {StringColumn | SelectColumn | NumberColumn} props.currentElementColumn - the object with column info.
  * @param {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.

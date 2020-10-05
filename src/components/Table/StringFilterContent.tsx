@@ -12,7 +12,6 @@ export type RefForInput = HTMLInputElement;
 /**
  * Component for displaying filter pop-up with string type.
  *
- *  @component
  *  @param props
  *  @param  {string} props.currentColumnName - current column name.
  *  @param  {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.

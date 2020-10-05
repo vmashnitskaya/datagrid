@@ -24,7 +24,6 @@ export interface SortingControlsProps {
 /**
  * Component for displaying table filter control and pop-up.
  *
- * @component
  * @param props
  * @param {string} props.sortingColumn - column for which sorting is executed.
  * @param {string} props.currentElementColumn - name of current column.

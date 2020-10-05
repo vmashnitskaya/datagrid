@@ -18,7 +18,6 @@ export interface TableRowProps {
 /**
  * Component for displaying table row.
  *
- * @component
  * @param props
  * @param {number} props.id - the id by which in render data particular object will be extracted.
  * @param {ColumnInterface[]} props.columnHeaders - the object with column headers info.

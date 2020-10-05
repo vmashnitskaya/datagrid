@@ -11,7 +11,6 @@ export interface FilterControlProps {
 /**
  * Component for displaying filter control.
  *
- * @component
  * @param props
  * @param {string} props.currentElementColumnName - the name of current column.
  * @param {Object.<string, string>} props.filteredColumnAndValue - the object with key as column name and value - filter query for the column.

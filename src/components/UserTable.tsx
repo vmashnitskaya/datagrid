@@ -20,7 +20,6 @@ interface UserTableProps {
 /**
  * Component for User Data displaying.
  *
- * @component
  * @param props
  * @param {NormalizedObject} props.userData - object with id as key and object for table row as value.
  * @param {number[]} props.allIds - ids for locationData.

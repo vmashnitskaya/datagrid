@@ -8,7 +8,6 @@
     "includePattern": "\\.(jsx|js|ts|tsx)$"
   },
   "plugins": [
-    "plugins/markdown",
     "node_modules/better-docs/typescript"
   ],
   "templates": {

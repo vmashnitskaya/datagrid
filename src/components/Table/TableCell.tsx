@@ -38,7 +38,6 @@ const handleLinkDisplaying = (
 /**
  * Component for displaying table cell.
  *
- * @component
  * @param props
  * @param {Object.<string, any>} props.rowElement - the object with all data for particular row.
  * @param {string} props.columnName - current column name.

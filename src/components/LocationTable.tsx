@@ -20,7 +20,6 @@ interface LocationTableProps {
 /**
  * Component for Location Data displaying.
  *
- * @component
  * @param props
  * @param {NormalizedObject} props.locationData - object with id as key and object for table row as value.
  * @param {boolean} props.loadingLocation - loading of data.

@@ -15,7 +15,6 @@ interface RowsPerPageControlProps {
 /**
  * Component for rows per page selection.
  *
- * @component
  * @param props
  * @param {function(number): void} props.setRowsPerPage
  * @param {number} props.rowsPerPage - the rows per page selected.

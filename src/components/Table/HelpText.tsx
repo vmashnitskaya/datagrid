@@ -7,7 +7,6 @@ export interface HelpTextProps {
 /**
  * Components displays help text in filter pop-up.
  *
- * @component
  * @param {string} value
  * @returns {JSX.Element}
  */

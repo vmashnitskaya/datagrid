@@ -20,7 +20,6 @@ interface AppTableProps {
 /**
  * Component for App Data displaying.
  *
- * @component
  * @param props
  * @param {function(string): void} props.fetchAppsData
  * @param {number[]} props.allIds - ids for appData.

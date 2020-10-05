@@ -20,7 +20,6 @@ interface FilterPopUpProps {
 /**
  * Component for displaying filter pop-up.
  *
- * @component
  * @param props
  * @param {string} props.filteredColumnOpened - name of column filter opened.
  * @param {Object.<string, string>} props.filteredColumnAndValue  - the object with key as column name and value - filter query for the column.

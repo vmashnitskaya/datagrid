@@ -46,7 +46,6 @@ export interface TableProps {
 /**
  * Component for displaying table.
  *
- * @component
  * @param props
  * @param {boolean} props.tableLoading - the loading of data.
  * @param {string} props.tableError - the error if occurred during data loading.

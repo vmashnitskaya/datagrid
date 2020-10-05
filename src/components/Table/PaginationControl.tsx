@@ -19,7 +19,6 @@ interface PaginationControlProps {
 /**
  *Component for displaying pagination control.
  *
- * @component
  * @param props
  * @param {number} props.currentPage - the current page selected.
  * @param {number} props.totalPages - the number of all pages for table.

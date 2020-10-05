@@ -12,7 +12,6 @@ interface TableHeaderProps {
 /**
  * Component for displaying table header.
  *
- * @component
  * @param props
  * @param props.element - current column header.
  * @returns {JSX.Element}
