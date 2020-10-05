@@ -8,7 +8,9 @@
     "includePattern": "\\.(jsx|js|ts|tsx)$"
   },
   "plugins": [
-    "node_modules/better-docs/typescript"
+    "node_modules/better-docs/typescript",
+    "node_modules/better-docs/category",
+    "node_modules/better-docs/component"
   ],
   "templates": {
     "better-docs": {
