@@ -14,7 +14,7 @@ interface TableHeaderProps {
  *
  * @component
  * @param props
- * @param {StringColumn | SelectColumn | NumberColumn} props.element - current column header.
+ * @param props.element - current column header.
  * @returns {JSX.Element}
  */
 

@@ -22,6 +22,7 @@ interface FilterPopUpProps {
  *
  * @component
  * @param props
+<<<<<<< HEAD
  * @param {string} props.filteredColumnOpened - name of column filter opened.
  * @param {Object.<string, string>} props.filteredColumnAndValue  - the object with key as column name and value - filter query for the column.
  * @param {string} props.currentElementColumn - the current column name.
