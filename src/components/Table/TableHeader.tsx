@@ -4,14 +4,20 @@ import Filtering from './Filtering';
 import SortingControls from './SortingControls';
 
 import { ColumnInterface } from '../ColumnInterface';
-import { FilteringColumn } from './FilteringColumnInterface';
 
 interface TableHeaderProps {
     element: ColumnInterface;
-    filteredColumnAndValue: FilteringColumn;
 }
 
-const TableHeader: FC<TableHeaderProps> = ({ element, filteredColumnAndValue }) => {
+/**
+ * Component for displaying table header.
+ *
+ * @component
+ * @param  props
+ * @param  props.element - current column header.
+ */
+
+const TableHeader: FC<TableHeaderProps> = ({ element }) => {
     return (
         <th className="bg-light">
             <div className="header">
@@ -20,7 +26,6 @@ const TableHeader: FC<TableHeaderProps> = ({ element, filteredColumnAndValue }) 
                     {element.filtering && (
                         <Filtering
                             currentElementColumn={element.name}
-                            filteredColumnAndValue={filteredColumnAndValue}
                             currentElementType={element.type}
                         />
                     )}

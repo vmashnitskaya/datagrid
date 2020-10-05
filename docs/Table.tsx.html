@@ -1,7 +1,97 @@
-import React, { FC, useEffect } from 'react';
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Table.tsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Datagrid components</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#Table">Table</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>Table.tsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 
-import { Dispatch } from 'redux';
 import Loader from './Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
@@ -16,7 +106,6 @@ import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 import actions from '../../redux/tableData/tableDataActions';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
-import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 
 export interface TableProps {
     tableLoading: boolean;
@@ -27,6 +116,7 @@ export interface TableProps {
     error: string;
     allIds: number[];
     columnHeaders: ColumnInterface[];
+    filteredColumnAndValue: FilteringColumn;
     rowsPerPage: number;
     currentPage: number;
     totalPages: number;
@@ -44,24 +134,17 @@ export interface TableProps {
 }
 
 /**
- * Component for displaying table.
+ * Component for showing table.
  *
  * @component
  * @param  props
- * @param  props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
- * @param  props.allIds - the array with ids for props.renderData.
- * @param  props.tableError - the error if occurred during data loading.
- * @param  props.tableLoading - the loading of data.
- * @param  props.columnHeaders - the array with column headers and information about columns.
- * @param  props.tableAllIds - the array with initial data ids used in component..
+ * @param  props.renderData - the object with whole data for the table, not sorted, filtered, sliced
+ * @param  props.tableAllIds - the array with sequence of ids for props.renderData.
  * @param  props.sortedFilteredRenderDataIds - the array with sequence of ids for filtered and sorted data.
- * @param  props.setSortFilterSlicedDataIds - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
- * @param  props.rowsPerPage - the amount of rows per page.
- * @param  props.currentPage - the current page.
- * @param  props.totalPages - the total pages in table.
+ * @param props.setSortFilterSlicedDataIds - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
  */
 
-const Table: FC<TableProps> = ({
+const Table: FC&lt;TableProps> = ({
     tableLoading,
     tableError,
     tableAllIds,
@@ -70,6 +153,7 @@ const Table: FC<TableProps> = ({
     loading,
     error,
     columnHeaders,
+    filteredColumnAndValue,
     rowsPerPage,
     currentPage,
     totalPages,
@@ -153,43 +237,48 @@ const Table: FC<TableProps> = ({
     }, [columnHeaders, setFilteredColumnAndValue]);
 
     return (
-        <>
+        &lt;>
             {tableLoading || tableError.length > 0 ? (
-                <Loader />
+                &lt;Loader />
             ) : (
-                <>
-                    <table className="table table-hover table-bordered">
-                        <thead>
-                            <tr>
+                &lt;>
+                    &lt;table className="table table-hover table-bordered">
+                        &lt;thead>
+                            &lt;tr>
                                 {columnHeaders.map((element, index: number) => (
-                                    <TableHeader key={`key${index + 1}`} element={element} />
+                                    &lt;TableHeader
+                                        key={`key${index + 1}`}
+                                        element={element}
+                                        filteredColumnAndValue={filteredColumnAndValue}
+                                    />
                                 ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {sortFilterSlicedDataIds.length === 0 && <div>No data to display.</div>}
+                            &lt;/tr>
+                        &lt;/thead>
+                        &lt;tbody>
+                            {sortFilterSlicedDataIds.length === 0 &amp;&amp; &lt;div>No data to display.&lt;/div>}
                             {sortFilterSlicedDataIds.map((element: number) => (
-                                <TableRow
+                                &lt;TableRow
                                     key={`key${element}`}
                                     row={element}
                                     columnHeaders={columnHeaders}
                                 />
                             ))}
-                        </tbody>
-                    </table>
-                    <div className="mb-5 footer-controls">
-                        <RowsPerPageControl />
-                        <PaginationControl currentPage={currentPage} totalPages={totalPages} />
-                    </div>
-                </>
+                        &lt;/tbody>
+                    &lt;/table>
+                    &lt;div className="mb-5 footer-controls">
+                        &lt;RowsPerPageControl />
+                        &lt;PaginationControl currentPage={currentPage} totalPages={totalPages} />
+                    &lt;/div>
+                &lt;/>
             )}
-        </>
+        &lt;/>
     );
 };
 
 const mapStateToProps = (state: RootState) => ({
     sorting: tableDataSelectors.getSorting(state),
     sortingColumn: tableDataSelectors.getSortingColumn(state),
+    filteredColumnAndValue: tableDataSelectors.getFilteredColumnAndValue(state),
     rowsPerPage: tableDataSelectors.getRowsPerPage(state),
     currentPage: tableDataSelectors.getCurrentPage(state),
     totalPages: tableDataSelectors.getTotalPages(state),
@@ -200,7 +289,7 @@ const mapStateToProps = (state: RootState) => ({
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
+const mapDispatchToProps: MapDispatchToPropsFunction&lt;any, any> = (dispatch) => ({
     setFilteredColumnAndValue: (data: FilteringColumn) => {
         dispatch(actions.setFilteredColumnAndValue(data));
     },
@@ -225,9 +314,35 @@ const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     setSortFilterSlicedDataIds: (allIds: number[]) => {
         dispatch(actions.setSortFilterSlicedDataIds(allIds));
     },
-    sortRenderData: () => {
-        dispatch(actions.sortRenderData());
-    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

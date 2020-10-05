@@ -3,10 +3,14 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
+import { Dispatch } from 'redux';
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopUp';
 
 import actions from '../../redux/tableData/tableDataActions';
+import selectors from '../../redux/tableData/tableDataSelectors';
+import { RootState } from '../../redux/rootReducer';
+import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 
 interface FilteringProps {
     currentElementColumn: string;
@@ -79,10 +83,14 @@ const Filtering: FC<FilteringProps> = ({
     );
 };
 
-const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+const mapStateToProps = (state: RootState) => ({
+    filteredColumnAndValue: selectors.getFilteredColumnAndValue(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     filterRenderData: () => {
         dispatch(actions.filterRenderData());
     },
 });
 
-export default connect(null, mapDispatchToProps)(Filtering);
+export default connect(mapStateToProps, mapDispatchToProps)(Filtering);
