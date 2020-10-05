@@ -6,10 +6,7 @@ interface TableCellProps {
 }
 
 /**
- *
- * @param  rowElement
- * @param columnName
- * @returns {AnchorHTMLAttributes<any> | string} returns element in link tag if column name equals email or app_url.
+ * returns element in link tag if column name equals email or app_url.
  */
 
 const handleLinkDisplaying = (
