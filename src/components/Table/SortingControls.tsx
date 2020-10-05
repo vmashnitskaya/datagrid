@@ -68,6 +68,7 @@ const SortingControls: FC<SortingControlsProps> = ({
                         'text-secondary',
                         sorting === 'down' && sortingColumn === currentElementColumn && 'text-info'
                     )}
+                    data-testid="down"
                     onClick={() => handleSorting(currentElementColumn, 'down')}
                     tabIndex={0}
                     onKeyPress={(event: KeyboardEvent<SVGSVGElement>) =>
@@ -80,6 +81,7 @@ const SortingControls: FC<SortingControlsProps> = ({
                         'text-secondary',
                         sorting === 'up' && sortingColumn === currentElementColumn && 'text-info'
                     )}
+                    data-testid="up"
                     onClick={() => handleSorting(currentElementColumn, 'up')}
                     tabIndex={0}
                     onKeyPress={(event: KeyboardEvent<SVGSVGElement>) =>

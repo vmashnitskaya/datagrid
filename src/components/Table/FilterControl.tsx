@@ -40,6 +40,7 @@ const FilterControl: FC<FilterControlProps> = ({
             tabIndex={0}
             onClick={() => handleFilterOpened(currentElementColumnName)}
             onKeyPress={handleKeyboardFilterOpened}
+            data-testid="filter-control"
         />
     );
 };
