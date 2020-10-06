@@ -33,6 +33,7 @@ const FilterControl: FC<FilterControlProps> = ({
         <FilterListIcon
             className={clsx(
                 'filtering',
+                'text-secondary',
                 filteredColumnAndValue[currentElementColumnName] &&
                     filteredColumnAndValue[currentElementColumnName].length > 0 &&
                     'text-info'

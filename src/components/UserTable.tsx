@@ -38,13 +38,21 @@ const UserTable: FC<UserTableProps> = ({
 }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
-            { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
+            {
+                header: 'Id',
+                name: 'id',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+                display: true,
+            },
             {
                 header: 'First name',
                 name: 'first_name',
                 type: 'string',
                 sorting: true,
                 filtering: true,
+                display: true,
             },
             {
                 header: 'Last name',
@@ -52,6 +60,7 @@ const UserTable: FC<UserTableProps> = ({
                 type: 'string',
                 sorting: true,
                 filtering: true,
+                display: true,
             },
             {
                 header: 'Birth date',
@@ -59,8 +68,16 @@ const UserTable: FC<UserTableProps> = ({
                 type: 'string',
                 sorting: false,
                 filtering: false,
+                display: true,
             },
-            { header: 'Email', name: 'email', type: 'string', sorting: false, filtering: false },
+            {
+                header: 'Email',
+                name: 'email',
+                type: 'string',
+                sorting: false,
+                filtering: false,
+                display: true,
+            },
             {
                 header: 'Gender',
                 name: 'gender',
@@ -68,6 +85,7 @@ const UserTable: FC<UserTableProps> = ({
                 options: ['Female', 'Male'],
                 sorting: true,
                 filtering: true,
+                display: true,
             },
             {
                 header: 'Location',
@@ -75,6 +93,7 @@ const UserTable: FC<UserTableProps> = ({
                 type: 'string',
                 sorting: false,
                 filtering: false,
+                display: true,
             },
         ];
     }, []);

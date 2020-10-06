@@ -1,11 +1,13 @@
 import { RootState } from '../rootReducer';
 import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
 import { NormalizedObject, RenderDataObject } from './tableDataInterface';
+import { ColumnInterface } from '../../components/ColumnInterface';
 
 const getRenderData = (state: RootState): NormalizedObject => state.tableData.renderData;
 const getLoading = (state: RootState): boolean => state.tableData.loading;
 const getError = (state: RootState): string => state.tableData.error;
 const getAllIds = (state: RootState): number[] => state.tableData.allIds;
+const getColumnHeaders = (state: RootState): ColumnInterface[] => state.tableData.columnHeaders;
 
 const getSorting = (state: RootState): string => state.tableData.sorting;
 const getSortingColumn = (state: RootState): string => state.tableData.sortingColumn;
@@ -35,4 +37,5 @@ export default {
     getLoading,
     getError,
     getElementById,
+    getColumnHeaders,
 };

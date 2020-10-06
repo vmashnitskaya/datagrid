@@ -1,5 +1,6 @@
 import types, { TableDataActions } from './tableDataTypes';
 import { NormalizedObject } from './tableDataInterface';
+import { ColumnInterface } from '../../components/ColumnInterface';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -17,6 +18,12 @@ const setSortingColumn = (column: string): TableDataActions => {
     return {
         type: types.SET_SORTING_COLUMN,
         payload: column,
+    };
+};
+const setColumnHeaders = (columnHeaders: ColumnInterface[]): TableDataActions => {
+    return {
+        type: types.SET_COLUMN_HEADERS,
+        payload: columnHeaders,
     };
 };
 const setSortedFilteredRenderDataIds = (allIds: number[]): TableDataActions => {
@@ -106,4 +113,5 @@ export default {
     setLoading,
     setError,
     setAllIds,
+    setColumnHeaders,
 };

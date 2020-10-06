@@ -1,11 +1,13 @@
 import { Action } from 'redux';
 import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
 import { NormalizedObject } from './tableDataInterface';
+import { ColumnInterface } from '../../components/ColumnInterface';
 
 const SET_RENDER_DATA = 'SET_RENDER_DATA';
 const SET_ALL_IDS = 'SET_ALL_IDS';
 const SET_ERROR = 'SET_ERROR';
 const SET_LOADING = 'SET_LOADING';
+const SET_COLUMN_HEADERS = 'SET_COLUMN_HEADERS';
 
 const SET_SORTING = 'SET_SORTING';
 const SET_SORTING_COLUMN = 'SET_SORTING_COLUMN';
@@ -26,6 +28,9 @@ interface SetAllIdsAction extends Action<typeof SET_ALL_IDS> {
 }
 interface SetErrorAction extends Action<typeof SET_ERROR> {
     payload: string;
+}
+interface SetColumnHeadersAction extends Action<typeof SET_COLUMN_HEADERS> {
+    payload: ColumnInterface[];
 }
 type SetLoadingAction = Action<typeof SET_LOADING>;
 
@@ -73,7 +78,8 @@ export type TableDataActions =
     | SetRenderDataAction
     | SetErrorAction
     | SetLoadingAction
-    | SetAllIdsAction;
+    | SetAllIdsAction
+    | SetColumnHeadersAction;
 
 export default {
     SORT_RENDER_DATA,
@@ -90,4 +96,5 @@ export default {
     SET_LOADING,
     SET_ERROR,
     SET_ALL_IDS,
+    SET_COLUMN_HEADERS,
 } as const;

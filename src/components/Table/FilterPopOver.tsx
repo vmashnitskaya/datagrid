@@ -7,14 +7,14 @@ import SelectFilterContent from './SelectFilterContent';
 import { RootState } from '../../redux/rootReducer';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import actions from '../../redux/tableData/tableDataActions';
+import { ColumnInterface } from '../ColumnInterface';
 
 interface FilterPopUpProps {
     filteredColumnOpened: string;
     filteredColumnAndValue: { [key: string]: string };
-    currentElementColumn: string;
+    currentElementColumn: ColumnInterface;
     onFilterExecuted: (event: FormEvent<HTMLFormElement>) => void;
     setFilteredColumnAndValue: (newEntry: { [key: string]: string }) => void;
-    currentElementType: string;
 }
 
 /**
@@ -23,20 +23,18 @@ interface FilterPopUpProps {
  * @param props
  * @param {string} props.filteredColumnOpened - name of column filter opened.
  * @param {Object.<string, string>} props.filteredColumnAndValue  - the object with key as column name and value - filter query for the column.
- * @param {string} props.currentElementColumn - the current column name.
+ * @param {ColumnInterface} props.currentElementColumn - the current column name.
  * @param {function(React.FormEvent<HTMLFormElement>): void} props.onFilterExecuted
  * @param {function(Object.<string, string>): void} props.setFilteredColumnAndValue
- * @param {string} props.currentElementType
  * @returns {JSX.Element}
  */
 
-const FilterPopUp: FC<FilterPopUpProps> = ({
+const FilterPopOver: FC<FilterPopUpProps> = ({
     filteredColumnOpened,
     filteredColumnAndValue,
     currentElementColumn,
     onFilterExecuted,
     setFilteredColumnAndValue,
-    currentElementType,
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -48,14 +46,14 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
 
     useEffect(() => {
         if (
-            filteredColumnOpened === currentElementColumn &&
+            filteredColumnOpened === currentElementColumn.name &&
             filteredColumnOpened.length > 0 &&
             inputRef &&
             inputRef.current
         ) {
             inputRef.current.focus();
         }
-    }, [currentElementColumn, currentElementType, filteredColumnOpened]);
+    }, [currentElementColumn.name, currentElementColumn.type, filteredColumnOpened]);
 
     const handleInputProvided = (
         event: React.ChangeEvent<HTMLInputElement>,
@@ -67,18 +65,19 @@ const FilterPopUp: FC<FilterPopUpProps> = ({
 
     return (
         <form autoComplete="off" onSubmit={onFilterExecuted}>
-            {currentElementType === 'string' && (
+            {currentElementColumn.type === 'string' && (
                 <StringFilterContent
                     handleInputProvided={handleInputProvided}
-                    currentColumnName={currentElementColumn}
+                    currentColumnName={currentElementColumn.name}
                     filteredColumnAndValue={filteredColumnAndValue}
                     ref={inputRef}
                 />
             )}
-            {currentElementType === 'select' && (
+            {currentElementColumn.type === 'select' && (
                 <SelectFilterContent
+                    currentSelectionOptions={currentElementColumn.options}
                     handleInputProvided={handleInputProvided}
-                    currentColumnName={currentElementColumn}
+                    currentColumnName={currentElementColumn.name}
                     filteredColumnAndValue={filteredColumnAndValue}
                     ref={inputRef}
                 />
@@ -97,4 +96,4 @@ const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => (
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterPopUp);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPopOver);

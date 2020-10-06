@@ -4,6 +4,7 @@ interface BaseColumn<T> {
     header: string;
     sorting: boolean;
     filtering: boolean;
+    display: boolean;
 }
 
 interface StringColumn extends BaseColumn<'string'> {

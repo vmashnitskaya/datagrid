@@ -1,4 +1,5 @@
 import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { ColumnInterface } from '../../components/ColumnInterface';
 
 export interface RenderDataObject {
     [key: string]: any;
@@ -13,6 +14,7 @@ export interface TableDataInterface {
     allIds: number[];
     error: string;
     loading: boolean;
+    columnHeaders: ColumnInterface[];
     sorting: string;
     sortingColumn: string;
     sortedFilteredRenderDataIds: number[];

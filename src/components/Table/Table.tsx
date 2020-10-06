@@ -41,13 +41,16 @@ export interface TableProps {
     setSortFilterSlicedDataIds: (allIds: number[]) => void;
     sortedFilteredRenderDataIds: number[];
     sortFilterSlicedDataIds: number[];
+    setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
+    tableColumnHeaders: ColumnInterface[];
 }
 
 /**
  * Component for displaying table.
  *
  * @param props
- * @param props.tableLoading - the loading of data.
+ * @param {boolean} props.tableLoading - the loading of data.
+ * @param {ColumnInterface[]} props.tableColumnHeaders - column headers used for table.
  * @param {string} props.tableError - the error if occurred during data loading.
  * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
  * @param {Object.<string, any>} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
@@ -68,6 +71,7 @@ export interface TableProps {
  * @param {function(string): void} props.setTableError
  * @param {function(number[]): void} props.setSortedFilteredRenderDataIds
  * @param {function(number[]): void} props.setSortFilterSlicedDataIds
+ * @param {function(ColumnInterface[]: void)} props.setTableColumnHeaders
  * @returns {JSX.Element}
  */
 
@@ -93,6 +97,8 @@ const Table: FC<TableProps> = ({
     setSortedFilteredRenderDataIds,
     setSortFilterSlicedDataIds,
     sortedFilteredRenderDataIds,
+    setTableColumnHeaders,
+    tableColumnHeaders,
 }) => {
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
@@ -118,6 +124,11 @@ const Table: FC<TableProps> = ({
         setTableError(error);
     }, [error, setTableError]);
 
+    useEffect(() => {
+        if (columnHeaders.length > 0) {
+            setTableColumnHeaders(columnHeaders);
+        }
+    }, [columnHeaders, setTableColumnHeaders]);
     /**
      * Table data ids are initially set to sortedFilteredRenderDataIds.
      */
@@ -158,9 +169,12 @@ const Table: FC<TableProps> = ({
 
     useEffect(() => {
         setFilteredColumnAndValue(
-            columnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {} as FilteringColumn)
+            tableColumnHeaders.reduce(
+                (acc, el) => ({ ...acc, [el.name]: '' }),
+                {} as FilteringColumn
+            )
         );
-    }, [columnHeaders, setFilteredColumnAndValue]);
+    }, [tableColumnHeaders, setFilteredColumnAndValue]);
 
     return (
         <>
@@ -171,23 +185,34 @@ const Table: FC<TableProps> = ({
                     <table className="table table-hover table-bordered">
                         <thead>
                             <tr>
-                                {columnHeaders.map((element, index: number) => (
-                                    <TableHeader key={`key${index + 1}`} element={element} />
-                                ))}
+                                {tableColumnHeaders.map(
+                                    (element, index: number) =>
+                                        element.display && (
+                                            <TableHeader
+                                                key={`key${index + 1}`}
+                                                element={element}
+                                                last={index === tableColumnHeaders.length - 1}
+                                            />
+                                        )
+                                )}
                             </tr>
                         </thead>
                         <tbody>
-                            {sortFilterSlicedDataIds.length === 0 && <div>No data to display.</div>}
+                            {sortFilterSlicedDataIds.length === 0 && (
+                                <tr>
+                                    <td>No data to display.</td>
+                                </tr>
+                            )}
                             {sortFilterSlicedDataIds.map((element: number) => (
                                 <TableRow
-                                    key={`key${element}`}
+                                    key={`${Date.now()}_key${element}`}
                                     id={element}
-                                    columnHeaders={columnHeaders}
+                                    columnHeaders={tableColumnHeaders}
                                 />
                             ))}
                         </tbody>
                     </table>
-                    <div className="mb-5 footer-controls">
+                    <div className="mb-3 footer-controls">
                         <RowsPerPageControl />
                         <PaginationControl currentPage={currentPage} totalPages={totalPages} />
                     </div>
@@ -208,6 +233,7 @@ const mapStateToProps = (state: RootState) => ({
     tableAllIds: tableDataSelectors.getAllIds(state),
     sortedFilteredRenderDataIds: tableDataSelectors.getSortedFilteredRenderDataIds(state),
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
+    tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
@@ -237,6 +263,9 @@ const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     },
     sortRenderData: () => {
         dispatch(actions.sortRenderData());
+    },
+    setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => {
+        dispatch(actions.setColumnHeaders(columnHeaders));
     },
 });
 

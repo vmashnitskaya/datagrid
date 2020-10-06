@@ -7,6 +7,7 @@ const initialState = {
     renderData: {},
     allIds: [],
     error: '',
+    columnHeaders: [],
     loading: false,
     sorting: '',
     sortingColumn: '',
@@ -31,6 +32,8 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return { ...state, loading: true };
         case types.SET_ERROR:
             return { ...state, error: action.payload };
+        case types.SET_COLUMN_HEADERS:
+            return { ...state, columnHeaders: [...action.payload] };
         case types.SET_SORTING:
             return { ...state, sorting: action.payload };
         case types.SET_SORTING_COLUMN:

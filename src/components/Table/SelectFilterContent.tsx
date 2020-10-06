@@ -6,6 +6,7 @@ interface SelectFilterContentProps {
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;
     currentColumnName: string;
     filteredColumnAndValue: { [key: string]: string };
+    currentSelectionOptions: string[];
 }
 
 type RefForInput = HTMLInputElement;
@@ -21,28 +22,28 @@ type RefForInput = HTMLInputElement;
  */
 
 const SelectFilterContent = React.forwardRef<RefForInput, SelectFilterContentProps>(
-    ({ handleInputProvided, currentColumnName, filteredColumnAndValue }, ref) => {
+    (
+        { handleInputProvided, currentColumnName, filteredColumnAndValue, currentSelectionOptions },
+        ref
+    ) => {
         return (
             <>
-                <label htmlFor="male">Male</label>
-                <input
-                    ref={ref}
-                    type="radio"
-                    value="male"
-                    id="male"
-                    name="male"
-                    checked={filteredColumnAndValue[currentColumnName] === 'male'}
-                    onChange={(event) => handleInputProvided(event, currentColumnName)}
-                />
-                <label htmlFor="female">Female</label>
-                <input
-                    type="radio"
-                    value="female"
-                    id="female"
-                    name="female"
-                    checked={filteredColumnAndValue[currentColumnName] === 'female'}
-                    onChange={(event) => handleInputProvided(event, currentColumnName)}
-                />
+                {currentSelectionOptions.map((element) => (
+                    <>
+                        <label htmlFor={`${element}`}>
+                            {element.slice(0, 1).toUpperCase() + element.slice(1)}
+                        </label>
+                        <input
+                            ref={ref}
+                            type="radio"
+                            value={`${element}`}
+                            id={`${element}`}
+                            name={`${element}`}
+                            checked={filteredColumnAndValue[currentColumnName] === element}
+                            onChange={(event) => handleInputProvided(event, currentColumnName)}
+                        />
+                    </>
+                ))}
                 <input type="submit" className="btn btn-info btn-sm" value="Filter" />
                 <HelpText value="Select filter criteria and click Filter." />
             </>

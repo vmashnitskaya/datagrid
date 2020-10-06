@@ -30,11 +30,13 @@ const TableRow: FC<TableRowProps> = ({ id, columnHeaders, rowElement }) => {
         <tr>
             {columnHeaders.map((element: ColumnInterface) => {
                 return (
-                    <TableCell
-                        key={`key${id + 1}}`}
-                        rowElement={rowElement}
-                        columnName={element.name}
-                    />
+                    element.display && (
+                        <TableCell
+                            key={`key${id + 1}_${Math.random()}`}
+                            rowElement={rowElement}
+                            columnName={element.name}
+                        />
+                    )
                 );
             })}
         </tr>

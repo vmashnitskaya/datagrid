@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Table/FilterPopUp.tsx</title>
+  <title> Table/FilterPopOver.tsx</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopOver">FilterPopOver</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
                 
             </nav>
         </div>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>Table/FilterPopUp.tsx</h1>
+                    <h1>Table/FilterPopOver.tsx</h1>
                 </header>
                 
 
@@ -117,7 +117,7 @@ interface FilterPopUpProps {
  * @returns {JSX.Element}
  */
 
-const FilterPopUp: FC&lt;FilterPopUpProps> = ({
+const FilterPopOver: FC&lt;FilterPopUpProps> = ({
     filteredColumnOpened,
     filteredColumnAndValue,
     currentElementColumn,
@@ -184,7 +184,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction&lt;any, any> = (dispatch) =
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterPopUp);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPopOver);
 </code></pre>
         </article>
     </section>

@@ -41,6 +41,7 @@ const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
             <Dropdown.Menu>
                 {dropdownKeys.map((element) => (
                     <Dropdown.Item
+                        key={element}
                         eventKey={element}
                         active={element === String(rowsPerPage)}
                         onSelect={handleDropDownSelect}

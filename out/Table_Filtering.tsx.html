@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopUp">FilterPopUp</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppTable">AppTable</a></li><li><a href="global.html#FilterControl">FilterControl</a></li><li><a href="global.html#Filtering">Filtering</a></li><li><a href="global.html#FilterPopOver">FilterPopOver</a></li><li><a href="global.html#handleLinkDisplaying">handleLinkDisplaying</a></li><li><a href="global.html#HelpText">HelpText</a></li><li><a href="global.html#LocationTable">LocationTable</a></li><li><a href="global.html#PaginationControl">PaginationControl</a></li><li><a href="global.html#RowsPerPageControl">RowsPerPageControl</a></li><li><a href="global.html#SelectFilterContent">SelectFilterContent</a></li><li><a href="global.html#SortingControls">SortingControls</a></li><li><a href="global.html#StringFilterContent">StringFilterContent</a></li><li><a href="global.html#Table">Table</a></li><li><a href="global.html#TableCell">TableCell</a></li><li><a href="global.html#TableHeader">TableHeader</a></li><li><a href="global.html#TableRow">TableRow</a></li><li><a href="global.html#UserTable">UserTable</a></li></ul></div>
                 
             </nav>
         </div>
@@ -92,7 +92,7 @@ import Popover from 'react-bootstrap/Popover';
 
 import { Dispatch } from 'redux';
 import FilterControl from './FilterControl';
-import FilterPopUp from './FilterPopUp';
+import FilterPopOver from './FilterPopOver';
 
 import actions from '../../redux/tableData/tableDataActions';
 import selectors from '../../redux/tableData/tableDataSelectors';
@@ -149,7 +149,7 @@ const Filtering: FC&lt;FilteringProps> = ({
         &lt;Popover id="popover-basic" className="bg-light">
             &lt;Popover.Title as="h3">Filter&lt;/Popover.Title>
             &lt;Popover.Content>
-                &lt;FilterPopUp
+                &lt;FilterPopOver
                     filteredColumnOpened={filteredColumnOpened}
                     filteredColumnAndValue={filteredColumnAndValue}
                     currentElementColumn={currentElementColumn}

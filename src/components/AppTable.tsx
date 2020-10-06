@@ -32,14 +32,29 @@ interface AppTableProps {
 const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingApp, errorApp }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
-            { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
-            { header: 'App Id', name: 'app_id', type: 'string', filtering: true, sorting: true },
+            {
+                header: 'Id',
+                name: 'id',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+                display: true,
+            },
+            {
+                header: 'App Id',
+                name: 'app_id',
+                type: 'string',
+                filtering: true,
+                sorting: true,
+                display: true,
+            },
             {
                 header: 'App name',
                 name: 'app_name',
                 type: 'string',
                 filtering: true,
                 sorting: true,
+                display: true,
             },
             {
                 header: 'App version',
@@ -47,6 +62,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingAp
                 type: 'string',
                 filtering: true,
                 sorting: true,
+                display: true,
             },
             {
                 header: 'App domain',
@@ -54,6 +70,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingAp
                 type: 'string',
                 filtering: true,
                 sorting: true,
+                display: true,
             },
             {
                 header: 'App URL',
@@ -61,6 +78,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingAp
                 type: 'string',
                 filtering: false,
                 sorting: false,
+                display: true,
             },
         ];
     }, []);

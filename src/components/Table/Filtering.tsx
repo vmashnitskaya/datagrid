@@ -5,13 +5,14 @@ import Popover from 'react-bootstrap/Popover';
 
 import { Dispatch } from 'redux';
 import FilterControl from './FilterControl';
-import FilterPopUp from './FilterPopUp';
+import FilterPopUp from './FilterPopOver';
 
 import actions from '../../redux/tableData/tableDataActions';
 import selectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import { ColumnInterface } from '../ColumnInterface';
+import PopOverWrapper from './PopOverWrapper';
 
 interface FilteringProps {
     currentElementColumn: ColumnInterface;
@@ -58,37 +59,31 @@ const Filtering: FC<FilteringProps> = ({
         handleFilter(event);
     };
 
-    const popover = (
-        <Popover id="popover-basic" className="bg-light">
-            <Popover.Title as="h3">Filter</Popover.Title>
-            <Popover.Content>
-                <FilterPopUp
-                    filteredColumnOpened={filteredColumnOpened}
-                    filteredColumnAndValue={filteredColumnAndValue}
-                    currentElementColumn={currentElementColumn}
-                    onFilterExecuted={onFilterExecuted}
-                    currentElementType={currentElementColumn.type}
-                />
-            </Popover.Content>
-        </Popover>
+    const content = (
+        <FilterPopUp
+            filteredColumnOpened={filteredColumnOpened}
+            filteredColumnAndValue={filteredColumnAndValue}
+            currentElementColumn={currentElementColumn}
+            onFilterExecuted={onFilterExecuted}
+        />
     );
+    const control = (
+        <FilterControl
+            currentElementColumnName={currentElementColumn.name}
+            filteredColumnAndValue={filteredColumnAndValue}
+            handleFilterOpened={handleFilterOpened}
+        />
+    );
+    const isOpened =
+        Boolean(filteredColumnOpened) && filteredColumnOpened === currentElementColumn.name;
     return (
         <>
-            <OverlayTrigger
-                show={
-                    Boolean(filteredColumnOpened) &&
-                    filteredColumnOpened === currentElementColumn.name
-                }
-                trigger="click"
-                placement="bottom"
-                overlay={popover}
-            >
-                <FilterControl
-                    currentElementColumnName={currentElementColumn.name}
-                    filteredColumnAndValue={filteredColumnAndValue}
-                    handleFilterOpened={handleFilterOpened}
-                />
-            </OverlayTrigger>
+            <PopOverWrapper
+                content={content}
+                control={control}
+                isOpened={isOpened}
+                label="Filter"
+            />
         </>
     );
 };

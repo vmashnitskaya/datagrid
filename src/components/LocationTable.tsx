@@ -38,16 +38,45 @@ const LocationTable: FC<LocationTableProps> = ({
 }) => {
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
-            { header: 'Id', name: 'id', type: 'string', sorting: true, filtering: true },
-            { header: 'City', name: 'city', type: 'string', sorting: true, filtering: true },
-            { header: 'Country', name: 'country', type: 'string', sorting: true, filtering: true },
-            { header: 'State', name: 'state', type: 'string', sorting: true, filtering: true },
+            {
+                header: 'Id',
+                name: 'id',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+                display: true,
+            },
+            {
+                header: 'City',
+                name: 'city',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+                display: true,
+            },
+            {
+                header: 'Country',
+                name: 'country',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+                display: true,
+            },
+            {
+                header: 'State',
+                name: 'state',
+                type: 'string',
+                sorting: true,
+                filtering: true,
+                display: true,
+            },
             {
                 header: 'Country code',
                 name: 'country_code',
                 type: 'string',
                 sorting: true,
                 filtering: true,
+                display: true,
             },
             {
                 header: 'Longitude and Latitude',
@@ -55,6 +84,7 @@ const LocationTable: FC<LocationTableProps> = ({
                 type: 'string',
                 sorting: false,
                 filtering: false,
+                display: true,
             },
             {
                 header: 'Timezone',
@@ -62,6 +92,7 @@ const LocationTable: FC<LocationTableProps> = ({
                 type: 'string',
                 sorting: false,
                 filtering: false,
+                display: true,
             },
         ];
     }, []);
