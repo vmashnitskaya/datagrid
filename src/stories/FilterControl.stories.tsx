@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import FilterControl, { FilterControlProps } from '../components/Table/FilterControl';
+import FilterControl, { FilterControlProps } from '../components/Table/Filtering/FilterControl';
 
 export default {
     title: 'FilterControl',

@@ -1,4 +1,4 @@
-import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
 
 export interface RenderDataObject {

@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 import SortingControls from './SortingControls';
 
-import store from '../../redux/rootReducer';
+import store from '../../../redux/rootReducer';
 
 afterEach(cleanup);
 

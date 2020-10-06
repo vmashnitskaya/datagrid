@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import HelpText from './HelpText';
+import HelpText from '../HelpText';
 
 interface StringFilterControlProps {
     handleInputProvided: (event: ChangeEvent<HTMLInputElement>, columnName: string) => void;

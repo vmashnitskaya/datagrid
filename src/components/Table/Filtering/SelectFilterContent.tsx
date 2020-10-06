@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import HelpText from './HelpText';
+import HelpText from '../HelpText';
 import './SelectFilterContent.scss';
 
 interface SelectFilterContentProps {

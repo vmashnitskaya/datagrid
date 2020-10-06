@@ -6,9 +6,9 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import './PaginationControl.scss';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { RootState } from '../../redux/rootReducer';
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
-import actions from '../../redux/tableData/tableDataActions';
+import { RootState } from '../../../redux/rootReducer';
+import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
+import actions from '../../../redux/tableData/tableDataActions';
 
 interface PaginationControlProps {
     currentPage: number;

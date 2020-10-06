@@ -3,9 +3,9 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import { RootState } from '../../redux/rootReducer';
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
-import actions from '../../redux/tableData/tableDataActions';
+import { RootState } from '../../../redux/rootReducer';
+import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
+import actions from '../../../redux/tableData/tableDataActions';
 
 interface RowsPerPageControlProps {
     setRowsPerPage: (rowsPerPage: number) => void;

@@ -7,10 +7,10 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import './SortingControls.scss';
 
-import { RootState } from '../../redux/rootReducer';
-import { TableDataActions } from '../../redux/tableData/tableDataTypes';
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
-import actions from '../../redux/tableData/tableDataActions';
+import { RootState } from '../../../redux/rootReducer';
+import { TableDataActions } from '../../../redux/tableData/tableDataTypes';
+import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
+import actions from '../../../redux/tableData/tableDataActions';
 
 export interface SortingControlsProps {
     sortingColumn: string;

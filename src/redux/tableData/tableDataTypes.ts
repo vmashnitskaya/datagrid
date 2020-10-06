@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject } from './tableDataInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
 
@@ -21,6 +21,7 @@ const SET_SORTED_FILTERED_RENDER_DATA_IDS = 'SET_SORTED_FILTERED_RENDER_DATA_IDS
 const SET_SORT_FILTER_SLICED_DATA_IDS = 'SET_SORT_FILTER_SLICED_DATA_IDS';
 const RESET_FILTERS = 'RESET_FILTERS';
 const CHECK_ROW_CHECKBOX = 'CHECK_ROW_CHECKBOX';
+const DELETE_ROWS = 'DELETE_ROWS';
 
 interface SetRenderDataAction extends Action<typeof SET_RENDER_DATA> {
     payload: NormalizedObject;
@@ -35,6 +36,8 @@ interface SetColumnHeadersAction extends Action<typeof SET_COLUMN_HEADERS> {
     payload: ColumnInterface[];
 }
 type SetLoadingAction = Action<typeof SET_LOADING>;
+
+type DeleteRowsAction = Action<typeof DELETE_ROWS>;
 
 type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
 
@@ -89,7 +92,8 @@ export type TableDataActions =
     | SetAllIdsAction
     | SetColumnHeadersAction
     | ResetFiltersAction
-    | CheckRowCheckboxAction;
+    | CheckRowCheckboxAction
+    | DeleteRowsAction;
 
 export default {
     SORT_RENDER_DATA,
@@ -109,4 +113,5 @@ export default {
     SET_COLUMN_HEADERS,
     RESET_FILTERS,
     CHECK_ROW_CHECKBOX,
+    DELETE_ROWS,
 } as const;

@@ -5,12 +5,12 @@ import { Dispatch } from 'redux';
 import Loader from './Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
-import PaginationControl from './PaginationControl';
+import PaginationControl from './Paging/PaginationControl';
 import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
-import { FilteringColumn } from './FilteringColumnInterface';
-import RowsPerPageControl from './RowsPerPageControl';
+import { FilteringColumn } from './Filtering/FilteringColumnInterface';
+import RowsPerPageControl from './Paging/RowsPerPageControl';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 
 import actions from '../../redux/tableData/tableDataActions';

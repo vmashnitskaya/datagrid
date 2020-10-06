@@ -1,8 +1,9 @@
 import { Reducer } from 'redux';
+import { element } from 'prop-types';
 import types, { TableDataActions } from './tableDataTypes';
 import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
-import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
 
 const initialState = {
@@ -105,8 +106,8 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             };
         }
         case types.FILTER_RENDER_DATA: {
-            const filteringColumns = Object.keys(state.filteredColumnAndValue).filter((element) => {
-                return state.filteredColumnAndValue[element].length > 0;
+            const filteringColumns = Object.keys(state.filteredColumnAndValue).filter((el) => {
+                return state.filteredColumnAndValue[el].length > 0;
             });
 
             let data: RenderDataObject[] = [...state.allIds.map((elem) => state.renderData[elem])];
@@ -119,7 +120,19 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             });
             return {
                 ...state,
-                sortedFilteredRenderDataIds: data.map((el) => el.id),
+                sortedFilteredRenderDataIds: data
+                    .filter((elem) => !elem.checkbox)
+                    .map((el) => el.id),
+            };
+        }
+        case types.DELETE_ROWS: {
+            const array = state.sortedFilteredRenderDataIds
+                .map((elem) => state.renderData[elem])
+                .filter((elem) => !elem.checkbox)
+                .map((elem) => elem.id);
+            return {
+                ...state,
+                sortedFilteredRenderDataIds: [...array],
             };
         }
         default:

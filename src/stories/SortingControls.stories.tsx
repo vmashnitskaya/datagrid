@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import SortingControls, { SortingControlsProps } from '../components/Table/SortingControls';
+import SortingControls, { SortingControlsProps } from '../components/Table/Sorting/SortingControls';
 
 export default {
     title: 'SortingControls',

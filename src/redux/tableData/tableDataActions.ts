@@ -111,6 +111,12 @@ const checkRowCheckbox = (id: string): TableDataActions => {
     };
 };
 
+const deleteRows = (): TableDataActions => {
+    return {
+        type: types.DELETE_ROWS,
+    };
+};
+
 export default {
     sortRenderData,
     setSorting,
@@ -129,4 +135,5 @@ export default {
     setColumnHeaders,
     resetFilters,
     checkRowCheckbox,
+    deleteRows,
 };

@@ -5,10 +5,10 @@ import StringFilterContent from './StringFilterContent';
 import SelectFilterContent from './SelectFilterContent';
 import './FilterPopOver.scss';
 
-import { RootState } from '../../redux/rootReducer';
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
-import actions from '../../redux/tableData/tableDataActions';
-import { ColumnInterface } from '../ColumnInterface';
+import { RootState } from '../../../redux/rootReducer';
+import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
+import actions from '../../../redux/tableData/tableDataActions';
+import { ColumnInterface } from '../../ColumnInterface';
 
 interface FilterPopUpProps {
     filteredColumnOpened: string;

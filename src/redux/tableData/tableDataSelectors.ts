@@ -1,5 +1,5 @@
 import { RootState } from '../rootReducer';
-import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject, RenderDataObject } from './tableDataInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
 

@@ -5,12 +5,12 @@ import { Dispatch } from 'redux';
 import FilterControl from './FilterControl';
 import FilterPopUp from './FilterPopOver';
 
-import actions from '../../redux/tableData/tableDataActions';
-import selectors from '../../redux/tableData/tableDataSelectors';
-import { RootState } from '../../redux/rootReducer';
-import { TableDataActions } from '../../redux/tableData/tableDataTypes';
-import { ColumnInterface } from '../ColumnInterface';
-import PopOverWrapper from './PopOverWrapper';
+import actions from '../../../redux/tableData/tableDataActions';
+import selectors from '../../../redux/tableData/tableDataSelectors';
+import { RootState } from '../../../redux/rootReducer';
+import { TableDataActions } from '../../../redux/tableData/tableDataTypes';
+import { ColumnInterface } from '../../ColumnInterface';
+import PopOverWrapper from '../PopOverWrapper';
 
 interface FilteringProps {
     currentElementColumn: ColumnInterface;
