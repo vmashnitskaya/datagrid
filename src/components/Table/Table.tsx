@@ -43,6 +43,7 @@ export interface TableProps {
     sortFilterSlicedDataIds: number[];
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
+    filteredColumnAndValue: FilteringColumn;
 }
 
 /**
@@ -50,6 +51,7 @@ export interface TableProps {
  *
  * @param props
  * @param {boolean} props.tableLoading - the loading of data.
+ * @param {FilteringColumn} props.filteredColumnAndValue - the object with column as key and query as value.
  * @param {ColumnInterface[]} props.tableColumnHeaders - column headers used for table.
  * @param {string} props.tableError - the error if occurred during data loading.
  * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
@@ -99,6 +101,7 @@ const Table: FC<TableProps> = ({
     sortedFilteredRenderDataIds,
     setTableColumnHeaders,
     tableColumnHeaders,
+    filteredColumnAndValue,
 }) => {
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
@@ -234,6 +237,7 @@ const mapStateToProps = (state: RootState) => ({
     sortedFilteredRenderDataIds: tableDataSelectors.getSortedFilteredRenderDataIds(state),
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
+    filteredColumnAndValue: tableDataSelectors.getFilteredColumnAndValue(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({

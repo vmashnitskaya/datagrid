@@ -1,0 +1,16 @@
+.wrapper-button{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    outline: none;
+    border: 0;
+    height: auto;
+    background: transparent;
+    .reset {
+      cursor: pointer;
+      text-align: right;
+      text-decoration: underline;
+    }
+  }
+}

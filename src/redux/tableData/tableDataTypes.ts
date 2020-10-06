@@ -19,6 +19,7 @@ const SORT_RENDER_DATA = 'SORT_RENDER_DATA';
 const FILTER_RENDER_DATA = 'FILTER_RENDER_DATA';
 const SET_SORTED_FILTERED_RENDER_DATA_IDS = 'SET_SORTED_FILTERED_RENDER_DATA_IDS';
 const SET_SORT_FILTER_SLICED_DATA_IDS = 'SET_SORT_FILTER_SLICED_DATA_IDS';
+const RESET_FILTERS = 'RESET_FILTERS';
 
 interface SetRenderDataAction extends Action<typeof SET_RENDER_DATA> {
     payload: NormalizedObject;
@@ -37,6 +38,8 @@ type SetLoadingAction = Action<typeof SET_LOADING>;
 type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
 
 type FilterRenderDataAction = Action<typeof FILTER_RENDER_DATA>;
+
+type ResetFiltersAction = Action<typeof RESET_FILTERS>;
 
 interface SetSortingAction extends Action<typeof SET_SORTING> {
     payload: string;
@@ -79,7 +82,8 @@ export type TableDataActions =
     | SetErrorAction
     | SetLoadingAction
     | SetAllIdsAction
-    | SetColumnHeadersAction;
+    | SetColumnHeadersAction
+    | ResetFiltersAction;
 
 export default {
     SORT_RENDER_DATA,
@@ -97,4 +101,5 @@ export default {
     SET_ERROR,
     SET_ALL_IDS,
     SET_COLUMN_HEADERS,
+    RESET_FILTERS,
 } as const;

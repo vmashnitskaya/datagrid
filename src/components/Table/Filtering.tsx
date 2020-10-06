@@ -63,6 +63,7 @@ const Filtering: FC<FilteringProps> = ({
             filteredColumnAndValue={filteredColumnAndValue}
             currentElementColumn={currentElementColumn}
             onFilterExecuted={onFilterExecuted}
+            closePopUp={closePopUp}
         />
     );
     const control = (

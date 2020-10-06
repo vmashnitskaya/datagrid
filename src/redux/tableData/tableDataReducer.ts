@@ -2,6 +2,8 @@ import { Reducer } from 'redux';
 import types, { TableDataActions } from './tableDataTypes';
 import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
+import { FilteringColumn } from '../../components/Table/FilteringColumnInterface';
+import { ColumnInterface } from '../../components/ColumnInterface';
 
 const initialState = {
     renderData: {},
@@ -66,6 +68,17 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 ...state,
                 currentPage: action.payload,
             };
+        case types.RESET_FILTERS: {
+            return {
+                ...state,
+                filteredColumnAndValue: {
+                    ...state.columnHeaders.reduce(
+                        (acc: FilteringColumn, el: ColumnInterface) => ({ ...acc, [el.name]: '' }),
+                        {} as FilteringColumn
+                    ),
+                },
+            };
+        }
         case types.SET_TOTAL_PAGES:
             return {
                 ...state,

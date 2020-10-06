@@ -98,6 +98,12 @@ const setAllIds = (allIds: number[]): TableDataActions => {
     };
 };
 
+const resetFilters = (): TableDataActions => {
+    return {
+        type: types.RESET_FILTERS,
+    };
+};
+
 export default {
     sortRenderData,
     setSorting,
@@ -114,4 +120,5 @@ export default {
     setError,
     setAllIds,
     setColumnHeaders,
+    resetFilters,
 };
