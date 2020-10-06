@@ -1,7 +1,5 @@
 import React, { FormEvent, FC, useState } from 'react';
 import { connect } from 'react-redux';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
 
 import { Dispatch } from 'redux';
 import FilterControl from './FilterControl';
