@@ -43,7 +43,6 @@ export interface TableProps {
     sortFilterSlicedDataIds: number[];
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
-    filteredColumnAndValue: FilteringColumn;
 }
 
 /**
@@ -101,7 +100,6 @@ const Table: FC<TableProps> = ({
     sortedFilteredRenderDataIds,
     setTableColumnHeaders,
     tableColumnHeaders,
-    filteredColumnAndValue,
 }) => {
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
@@ -237,7 +235,6 @@ const mapStateToProps = (state: RootState) => ({
     sortedFilteredRenderDataIds: tableDataSelectors.getSortedFilteredRenderDataIds(state),
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
-    filteredColumnAndValue: tableDataSelectors.getFilteredColumnAndValue(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
