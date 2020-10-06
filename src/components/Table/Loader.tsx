@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import './LoaderComponent.scss';
+import './Loader.scss';
 
 const Loader: FC = () => {
     return (

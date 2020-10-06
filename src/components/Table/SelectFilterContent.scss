@@ -4,6 +4,8 @@
 }
   input[type="radio" i] {
     margin: 4px;
+    height: 14px;
+    width: 14px;
     &:hover{
       cursor: pointer;
     }
@@ -13,4 +15,7 @@
     &:focus {
       outline-offset: 0;
     }
+  }
+  label{
+    vertical-align: top;
   }
