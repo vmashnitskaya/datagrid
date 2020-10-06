@@ -32,24 +32,27 @@ const ColumnSelectionContent: FunctionComponent<ColumnSelectionContentProps> = (
     return (
         <>
             <form>
-                {tableColumnHeaders.map((element, index: number) => (
-                    <div>
-                        <input
-                            className={clsx(
-                                'column_checkbox mr-1',
-                                index === tableColumnHeaders.length - 1 && 'disabled'
-                            )}
-                            type="checkbox"
-                            checked={element.display}
-                            value={`${element.name}`}
-                            id={`${element.name}`}
-                            name={`${element.name}`}
-                            disabled={index === tableColumnHeaders.length - 1}
-                            onChange={() => handleCheckboxCheck(element.name)}
-                        />
-                        <label htmlFor={`${element.name}`}>{element.header}</label>
-                    </div>
-                ))}
+                {tableColumnHeaders.map(
+                    (element, index: number) =>
+                        index > 0 && (
+                            <div>
+                                <input
+                                    className={clsx(
+                                        'column_checkbox mr-1',
+                                        index === tableColumnHeaders.length - 1 && 'disabled'
+                                    )}
+                                    type="checkbox"
+                                    checked={element.display}
+                                    value={`${element.name}`}
+                                    id={`${element.name}`}
+                                    name={`${element.name}`}
+                                    disabled={index === tableColumnHeaders.length - 1}
+                                    onChange={() => handleCheckboxCheck(element.name)}
+                                />
+                                <label htmlFor={`${element.name}`}>{element.header}</label>
+                            </div>
+                        )
+                )}
             </form>
             <HelpText value="Select columns to display." />
         </>

@@ -7,6 +7,8 @@ interface BaseColumn<T> {
     display: boolean;
 }
 
+type CheckboxColumn = BaseColumn<'checkbox'>;
+
 interface StringColumn extends BaseColumn<'string'> {
     maxLength?: number;
 }
@@ -18,4 +20,4 @@ interface SelectColumn extends BaseColumn<'select'> {
     options: Array<string>;
 }
 
-export type ColumnInterface = StringColumn | SelectColumn | NumberColumn;
+export type ColumnInterface = StringColumn | SelectColumn | NumberColumn | CheckboxColumn;

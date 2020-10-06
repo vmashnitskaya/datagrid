@@ -33,6 +33,14 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingAp
     const columnHeaders = useMemo<ColumnInterface[]>(() => {
         return [
             {
+                header: '',
+                name: 'checkbox',
+                type: 'checkbox',
+                sorting: false,
+                filtering: false,
+                display: true,
+            },
+            {
                 header: 'Id',
                 name: 'id',
                 type: 'string',

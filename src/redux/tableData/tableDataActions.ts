@@ -104,6 +104,13 @@ const resetFilters = (): TableDataActions => {
     };
 };
 
+const checkRowCheckbox = (id: string): TableDataActions => {
+    return {
+        type: types.CHECK_ROW_CHECKBOX,
+        payload: id,
+    };
+};
+
 export default {
     sortRenderData,
     setSorting,
@@ -121,4 +128,5 @@ export default {
     setAllIds,
     setColumnHeaders,
     resetFilters,
+    checkRowCheckbox,
 };

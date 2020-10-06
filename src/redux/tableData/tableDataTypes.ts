@@ -20,6 +20,7 @@ const FILTER_RENDER_DATA = 'FILTER_RENDER_DATA';
 const SET_SORTED_FILTERED_RENDER_DATA_IDS = 'SET_SORTED_FILTERED_RENDER_DATA_IDS';
 const SET_SORT_FILTER_SLICED_DATA_IDS = 'SET_SORT_FILTER_SLICED_DATA_IDS';
 const RESET_FILTERS = 'RESET_FILTERS';
+const CHECK_ROW_CHECKBOX = 'CHECK_ROW_CHECKBOX';
 
 interface SetRenderDataAction extends Action<typeof SET_RENDER_DATA> {
     payload: NormalizedObject;
@@ -40,6 +41,10 @@ type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
 type FilterRenderDataAction = Action<typeof FILTER_RENDER_DATA>;
 
 type ResetFiltersAction = Action<typeof RESET_FILTERS>;
+
+interface CheckRowCheckboxAction extends Action<typeof CHECK_ROW_CHECKBOX> {
+    payload: string;
+}
 
 interface SetSortingAction extends Action<typeof SET_SORTING> {
     payload: string;
@@ -83,7 +88,8 @@ export type TableDataActions =
     | SetLoadingAction
     | SetAllIdsAction
     | SetColumnHeadersAction
-    | ResetFiltersAction;
+    | ResetFiltersAction
+    | CheckRowCheckboxAction;
 
 export default {
     SORT_RENDER_DATA,
@@ -102,4 +108,5 @@ export default {
     SET_ALL_IDS,
     SET_COLUMN_HEADERS,
     RESET_FILTERS,
+    CHECK_ROW_CHECKBOX,
 } as const;

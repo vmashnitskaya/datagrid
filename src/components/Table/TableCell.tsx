@@ -1,39 +1,14 @@
-import React, { AnchorHTMLAttributes, FC } from 'react';
+import React, { AnchorHTMLAttributes, ChangeEvent, FC } from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { TableDataActions } from '../../redux/tableData/tableDataTypes';
+import actions from '../../redux/tableData/tableDataActions';
 
 interface TableCellProps {
     rowElement: { [key: string]: any };
     columnName: string;
+    checkRowCheckbox: (id: string) => void;
 }
-
-/**
- * returns element in link tag if column name equals email or app_url.
- */
-
-const handleLinkDisplaying = (
-    rowElement: { [key: string]: any },
-    columnName: string
-): AnchorHTMLAttributes<any> | string => {
-    if (columnName === 'email') {
-        return (
-            <a className="text-secondary" href={`mailto:${rowElement[columnName]}`}>
-                {rowElement[columnName]}
-            </a>
-        );
-    }
-    if (columnName === 'app_url') {
-        return (
-            <a
-                className="text-secondary"
-                href={`${rowElement[columnName]}`}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                {rowElement[columnName]}
-            </a>
-        );
-    }
-    return rowElement[columnName];
-};
 
 /**
  * Component for displaying table cell.
@@ -44,14 +19,61 @@ const handleLinkDisplaying = (
  * @returns {JSX.Element}
  */
 
-const TableCell: FC<TableCellProps> = ({ rowElement, columnName }) => {
+const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbox }) => {
+    const handleRowChecked = (event: ChangeEvent<HTMLInputElement>) => {
+        const rowId = event.target.dataset.id;
+        checkRowCheckbox(rowId || '');
+    };
+
+    const handleDifferentTypesDisplaying = (
+        rowElementPassed: { [key: string]: any },
+        columnNamePassed: string
+    ): AnchorHTMLAttributes<any> | string => {
+        if (columnName === 'email') {
+            return (
+                <a className="text-secondary" href={`mailto:${rowElementPassed[columnNamePassed]}`}>
+                    {rowElementPassed[columnNamePassed]}
+                </a>
+            );
+        }
+        if (columnName === 'app_url') {
+            return (
+                <a
+                    className="text-secondary"
+                    href={`${rowElementPassed[columnNamePassed]}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    {rowElementPassed[columnNamePassed]}
+                </a>
+            );
+        }
+        if (columnNamePassed === 'checkbox') {
+            return (
+                <input
+                    type="checkbox"
+                    data-id={rowElementPassed.id}
+                    checked={rowElementPassed.checkbox}
+                    onChange={handleRowChecked}
+                />
+            );
+        }
+        return rowElementPassed[columnNamePassed];
+    };
+
     return (
         <td>
             {typeof rowElement[columnName] === 'object' && rowElement[columnName] !== null
                 ? Object.values(rowElement[columnName]).join(', ')
-                : handleLinkDisplaying(rowElement, columnName)}
+                : handleDifferentTypesDisplaying(rowElement, columnName)}
         </td>
     );
 };
 
-export default TableCell;
+const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
+    checkRowCheckbox: (id: string) => {
+        dispatch(actions.checkRowCheckbox(id));
+    },
+});
+
+export default connect(null, mapDispatchToProps)(TableCell);

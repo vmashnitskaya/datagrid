@@ -68,6 +68,16 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 ...state,
                 currentPage: action.payload,
             };
+        case types.CHECK_ROW_CHECKBOX: {
+            const id = action.payload;
+            return {
+                ...state,
+                renderData: {
+                    ...state.renderData,
+                    [id]: { ...state.renderData[id], checkbox: !state.renderData[id].checkbox },
+                },
+            };
+        }
         case types.RESET_FILTERS: {
             return {
                 ...state,
