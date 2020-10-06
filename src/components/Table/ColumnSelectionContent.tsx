@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
+import clsx from 'clsx';
 import { ColumnInterface } from '../ColumnInterface';
 
 import { RootState } from '../../redux/rootReducer';
@@ -34,7 +35,10 @@ const ColumnSelectionContent: FunctionComponent<ColumnSelectionContentProps> = (
                 {tableColumnHeaders.map((element, index: number) => (
                     <div>
                         <input
-                            className="column_checkbox mr-1"
+                            className={clsx(
+                                'column_checkbox mr-1',
+                                index === tableColumnHeaders.length - 1 && 'disabled'
+                            )}
                             type="checkbox"
                             checked={element.display}
                             value={`${element.name}`}
