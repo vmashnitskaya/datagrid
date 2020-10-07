@@ -55,7 +55,7 @@ const App: React.FC = () => {
                                 <Link
                                     className={clsx(
                                         'nav-link',
-                                        'mt-3',
+                                        'mt-2',
                                         'text-dark',
                                         tabActive === link.label && 'active'
                                     )}

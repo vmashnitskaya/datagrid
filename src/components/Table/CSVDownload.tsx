@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { connect } from 'react-redux';
 
 import { Button } from 'react-bootstrap';
@@ -6,6 +7,7 @@ import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 import { ColumnInterface } from '../ColumnInterface';
+import TableAlert from './TableAlert';
 
 interface DownloadProps {
     checkedItems: number[];
@@ -13,7 +15,23 @@ interface DownloadProps {
     columnHeaders: ColumnInterface[];
 }
 
+const portalContainer = document.getElementById('alert-root');
+
 const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeaders }) => {
+    const [alertShown, setAlertShown] = useState<boolean>(false);
+
+    const hideAlert = useCallback(() => {
+        if (alertShown) {
+            setAlertShown(false);
+        }
+    }, [alertShown]);
+
+    useEffect(() => {
+        if (alertShown) {
+            setTimeout(hideAlert, 5000);
+        }
+    }, [alertShown, hideAlert]);
+
     const returnStringFromObjectValues = (obj: { [key: string]: any }) => {
         return Object.values(obj)
             .map((el) => {
@@ -45,13 +63,26 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
             element.download = 'tableData.csv';
             document.body.appendChild(element);
             element.click();
+        } else {
+            setAlertShown(true);
         }
     };
 
     return (
-        <Button variant="info" size="sm" className="download" onClick={downloadTxtFile}>
-            Download
-        </Button>
+        <>
+            <Button variant="info" size="sm" className="download" onClick={downloadTxtFile}>
+                Download CSV
+            </Button>
+            {alertShown &&
+                portalContainer &&
+                createPortal(
+                    <TableAlert
+                        value="Please select rows to download."
+                        handleAlertClose={hideAlert}
+                    />,
+                    portalContainer
+                )}
+        </>
     );
 };
 
