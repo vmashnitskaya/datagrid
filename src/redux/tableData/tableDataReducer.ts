@@ -71,11 +71,14 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             };
         case types.CHECK_ROW_CHECKBOX: {
             const id = Number(action.payload);
+            const arrayChecked = state.checkedItems.includes(id)
+                ? state.checkedItems.filter((el) => el !== id)
+                : [...state.checkedItems, id];
             return {
                 ...state,
-                checkedItems: state.checkedItems.includes(id)
-                    ? state.checkedItems.filter((el) => el !== id)
-                    : [...state.checkedItems, id],
+                checkedItems: state.sortedFilteredRenderDataIds.filter((el) =>
+                    arrayChecked.includes(el)
+                ),
             };
         }
         case types.RESET_FILTERS: {
