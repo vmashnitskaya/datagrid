@@ -5,12 +5,13 @@ import { Dispatch } from 'redux';
 import Loader from './Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
-import PaginationControl from './Paging/PaginationControl';
+import PaginationControl from './Pagination/PaginationControl';
+import CSVDownload from './CSVDownload';
 import './Table.scss';
 
 import { ColumnInterface } from '../ColumnInterface';
 import { FilteringColumn } from './Filtering/FilteringColumnInterface';
-import RowsPerPageControl from './Paging/RowsPerPageControl';
+import RowsPerPageControl from './Pagination/RowsPerPageControl';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 
 import actions from '../../redux/tableData/tableDataActions';
@@ -54,7 +55,7 @@ export interface TableProps {
  * @param {ColumnInterface[]} props.tableColumnHeaders - column headers used for table.
  * @param {string} props.tableError - the error if occurred during data loading.
  * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
- * @param {Object.<string, any>} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
+ * @param {NormalizedObject} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
  * @param {number[]} props.allIds - the array with ids for props.renderData.
  * @param {boolean} props.loading - the loading of data supplied from one of custom tables.
  * @param {string} props.error - the error supplied from one of custom tables.
@@ -104,7 +105,6 @@ const Table: FC<TableProps> = ({
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
      */
-
     useEffect(() => {
         if (Object.keys(renderData).length > 0) {
             setTableRenderData({ ...renderData });
@@ -214,7 +214,10 @@ const Table: FC<TableProps> = ({
                         </tbody>
                     </table>
                     <div className="mb-3 footer-controls">
-                        <RowsPerPageControl />
+                        <div className="footer-buttons">
+                            <RowsPerPageControl />
+                            <CSVDownload />
+                        </div>
                         <PaginationControl currentPage={currentPage} totalPages={totalPages} />
                     </div>
                 </>

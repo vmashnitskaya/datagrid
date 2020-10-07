@@ -22,6 +22,7 @@ const getCurrentPage = (state: RootState): number => state.tableData.currentPage
 const getTotalPages = (state: RootState): number => state.tableData.totalPages;
 const getElementById = (state: RootState, id: number): RenderDataObject =>
     state.tableData.renderData[id];
+const getCheckedItems = (state: RootState): number[] => state.tableData.checkedItems;
 
 export default {
     getSorting,
@@ -38,4 +39,5 @@ export default {
     getError,
     getElementById,
     getColumnHeaders,
+    getCheckedItems,
 };

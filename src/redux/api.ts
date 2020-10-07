@@ -12,12 +12,7 @@ const fetchApiData = (tabActive: string) => {
     // const res = await window.fetch(url, { method: 'GET' });
     // const data = await res.json();
 
-    const arrayToNormalize = data[tabActive].map((element: { [key: string]: any }) => ({
-        ...element,
-        checkbox: false,
-    }));
-
-    const dataNormalized = (arrayToNormalize as Array<{ [key: string]: any }>).reduce(
+    const dataNormalized = (data[tabActive] as Array<{ [key: string]: any }>).reduce(
         (acc, el) => ({
             ...acc,
             [el.id]: el,

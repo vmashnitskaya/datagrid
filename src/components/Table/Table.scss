@@ -22,10 +22,18 @@
     width: 220px;
   }
 }
-.footer-controls{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.footer {
+  &-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-buttons{
+    display: flex;
+    .download{
+      margin-left: 10px;
+    }
+  }
 }
 
 

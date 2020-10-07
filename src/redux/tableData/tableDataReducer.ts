@@ -1,5 +1,4 @@
 import { Reducer } from 'redux';
-import { element } from 'prop-types';
 import types, { TableDataActions } from './tableDataTypes';
 import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
@@ -17,6 +16,7 @@ const initialState = {
     sortedFilteredRenderDataIds: [],
     sortFilterSlicedDataIds: [],
     filteredColumnAndValue: {},
+    checkedItems: [],
     rowsPerPage: 10,
     currentPage: 1,
     totalPages: 1,
@@ -70,13 +70,12 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 currentPage: action.payload,
             };
         case types.CHECK_ROW_CHECKBOX: {
-            const id = action.payload;
+            const id = Number(action.payload);
             return {
                 ...state,
-                renderData: {
-                    ...state.renderData,
-                    [id]: { ...state.renderData[id], checkbox: !state.renderData[id].checkbox },
-                },
+                checkedItems: state.checkedItems.includes(id)
+                    ? state.checkedItems.filter((el) => el !== id)
+                    : [...state.checkedItems, id],
             };
         }
         case types.RESET_FILTERS: {
@@ -120,19 +119,17 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             });
             return {
                 ...state,
-                sortedFilteredRenderDataIds: data
-                    .filter((elem) => !elem.checkbox)
-                    .map((el) => el.id),
+                sortedFilteredRenderDataIds: data.map((el) => el.id),
             };
         }
         case types.DELETE_ROWS: {
-            const array = state.sortedFilteredRenderDataIds
-                .map((elem) => state.renderData[elem])
-                .filter((elem) => !elem.checkbox)
-                .map((elem) => elem.id);
+            let array: number[] = [];
+            state.checkedItems.forEach((forEachEl) => {
+                array = state.allIds.filter((filterEl) => filterEl !== forEachEl);
+            });
             return {
                 ...state,
-                sortedFilteredRenderDataIds: [...array],
+                allIds: [...array],
             };
         }
         default:

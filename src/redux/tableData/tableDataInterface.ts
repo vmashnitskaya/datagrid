@@ -20,6 +20,7 @@ export interface TableDataInterface {
     sortedFilteredRenderDataIds: number[];
     sortFilterSlicedDataIds: number[];
     filteredColumnAndValue: FilteringColumn;
+    checkedItems: number[];
     rowsPerPage: number;
     currentPage: number;
     totalPages: number;
