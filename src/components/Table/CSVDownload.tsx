@@ -28,7 +28,7 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
 
     useEffect(() => {
         if (alertShown) {
-            setTimeout(hideAlert, 5000);
+            setTimeout(hideAlert, 500000);
         }
     }, [alertShown, hideAlert]);
 

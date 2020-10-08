@@ -8,12 +8,14 @@ import './ColumnSelectionPopOver.scss';
 const ColumnSelectionPopOver: FC = () => {
     const [isPopOverOpened, setIsPopOverOpened] = useState(false);
 
-    const handleClick = () => {
+    const handlePopOverOpenClose = () => {
         setIsPopOverOpened((prevState) => !prevState);
     };
 
     const content = <ColumnSelectionContent />;
-    const control = <DragHandleIcon className="columnsHide text-secondary" onClick={handleClick} />;
+    const control = (
+        <DragHandleIcon className="columnsHide text-secondary" onClick={handlePopOverOpenClose} />
+    );
 
     return (
         <PopOverWrapper

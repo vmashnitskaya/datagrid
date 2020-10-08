@@ -6,8 +6,10 @@
 
 .table {
   th {
-    position: relative;
+    position: sticky;
+    top: -4px;
     padding-right: 0;
+    z-index: 5;
     .header {
       display: flex;
       justify-content: space-between;

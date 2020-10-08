@@ -126,13 +126,15 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             };
         }
         case types.DELETE_ROWS: {
-            let array: number[] = [];
+            let array: number[] = [...state.allIds];
             state.checkedItems.forEach((forEachEl) => {
-                array = state.allIds.filter((filterEl) => filterEl !== forEachEl);
+                array = array.filter((filterEl) => filterEl !== forEachEl);
             });
+
             return {
                 ...state,
                 allIds: [...array],
+                checkedItems: [],
             };
         }
         default:
