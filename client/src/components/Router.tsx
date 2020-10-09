@@ -6,6 +6,11 @@ import UserTable from './UserTable';
 import AppTable from './AppTable';
 import LocationTable from './LocationTable';
 
+interface LinkDef {
+    label: string;
+    pathname: string;
+}
+
 const Router: FC = () => {
     const [tabActive, setTabActive] = useState<string | undefined>('Users');
 
@@ -35,35 +40,30 @@ const Router: FC = () => {
 
     return (
         <>
-            <nav className="bg-light">
-                <Link className="navbar-brand text-dark logo" to="/">
-                    DataGrid
-                </Link>
-                <div className="container">
-                    <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-                        {links.map((link) => {
-                            return (
-                                <Link
-                                    className={clsx(
-                                        'nav-link',
-                                        'mt-2',
-                                        'text-dark',
-                                        tabActive === link.label && 'active'
-                                    )}
-                                    key={link.label}
-                                    role="tab"
-                                    aria-controls="nav-home"
-                                    to={link.pathname}
-                                    data-label={link.label}
-                                    onClick={handleTabActiveChange}
-                                >
-                                    {link.label}
-                                </Link>
-                            );
-                        })}
-                    </div>
+            <div className="container mt-3">
+                <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+                    {links.map((link) => {
+                        return (
+                            <Link
+                                className={clsx(
+                                    'nav-link',
+                                    'mt-2',
+                                    'text-dark',
+                                    tabActive === link.label && 'active'
+                                )}
+                                key={link.label}
+                                role="tab"
+                                aria-controls="nav-home"
+                                to={link.pathname}
+                                data-label={link.label}
+                                onClick={handleTabActiveChange}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </div>
-            </nav>
+            </div>
             <div className="tab-content container" id="nav-tabContent">
                 <Switch>
                     <Route exact path="/">

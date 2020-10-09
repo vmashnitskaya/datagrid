@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/AuthPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/auth.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/datagrid.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.storybook/preview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-storybook.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/env.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/getHttpsConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/jest/cssTransform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/jest/fileTransform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/modules.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/paths.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/pnpTs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/webpackDevServer.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jsdoc.conf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/build.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/start.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ColumnInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LocationTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/CSVDownload.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/ColumnSelectionContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/ColumnSelectionPopOver.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/ColumnSelectionPopOver.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/FilterControl.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/FilterControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/FilterPopOver.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/FilterPopOver.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/Filtering.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/FilteringColumnInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/SelectFilterContent.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/SelectFilterContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Filtering/StringFilterContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/HelpText.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/HelpText.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Loader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Loader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Pagination/PaginationControl.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Pagination/PaginationControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Pagination/RowsPerPageControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/PopOverWrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Sorting/SortingControls.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Sorting/SortingControls.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Sorting/SortingControls.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Table.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/Table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableAlert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableAlert.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableCell.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableCell.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableHeader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableHeader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableRow.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/react-app-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/appData/appDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/appData/appDataInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/appData/appDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/appData/appDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/appData/appDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/example.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/locationData/locationDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/locationData/locationDataInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/locationData/locationDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/locationData/locationDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/locationData/locationDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/mock_data.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/rootReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/tableData/sortingFilteringLogic.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/tableData/tableDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/tableData/tableDataInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/tableData/tableDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/tableData/tableDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/tableData/tableDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/userData/userDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/userData/userDataInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/userData/userDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/userData/userDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/userData/userDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/FilterControl.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/HelpText.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/SortingControls.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/code-brackets.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/colors.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/comments.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/direction.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/flow.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/plugin.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/repo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stories/assets/stackalt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/iframe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/main.39b0505f5e498099a34a.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/main.39b0505f5e498099a34a.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/main.7d67c07a6100eb96449e.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/runtime~main.39b0505f5e498099a34a.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/runtime~main.39b0505f5e498099a34a.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/runtime~main.870e8ee0658e83d05c6b.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/sb_dll/storybook_docs-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/sb_dll/storybook_docs_dll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/sb_dll/storybook_ui-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/sb_dll/storybook_ui_dll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/vendors~main.39b0505f5e498099a34a.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/vendors~main.39b0505f5e498099a34a.bundle.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/vendors~main.39b0505f5e498099a34a.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/vendors~main.800ea9419959fc7b7fb8.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storybook-static/vendors~main.800ea9419959fc7b7fb8.bundle.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Volha Mashnitskaya &lt;volha_mashnitskaya@epam.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/vmashnitskaya/datagrid" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iC5IMfNgZO0MdIdowz8DD6DJd6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.linters.configure.manually.selectedeslint" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="node" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="ts.external.directory.path" value="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\components" />
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid" />
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src" />
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src\components\Table\Paging" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="" />
+      <created>1601398652790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601398652790</updated>
+      <workItem from="1601398653887" duration="1230000" />
+      <workItem from="1601445682176" duration="2365000" />
+      <workItem from="1601448068361" duration="57007000" />
+      <workItem from="1601670412465" duration="10563000" />
+      <workItem from="1601715450823" duration="1928000" />
+      <workItem from="1601717397367" duration="5797000" />
+      <workItem from="1601878687354" duration="40098000" />
+      <workItem from="1601964750892" duration="4716000" />
+      <workItem from="1601969669864" duration="25727000" />
+      <workItem from="1602006988432" duration="1544000" />
+      <workItem from="1602009357076" duration="5625000" />
+      <workItem from="1602054381960" duration="5979000" />
+      <workItem from="1602060799109" duration="1060000" />
+      <workItem from="1602061888215" duration="1080000" />
+      <workItem from="1602063795107" duration="15986000" />
+      <workItem from="1602241431650" duration="7392000" />
+    </task>
+    <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
+      <created>1601454632227</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601454632227</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)">
+      <created>1601456234360</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601456234360</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)" />
+    <MESSAGE value="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2411" y="-233" width="843" height="721" key="#ESLint" timestamp="1602245815961">
+      <screen x="1920" y="-390" width="1920" height="1050" />
+    </state>
+    <state x="2411" y="-233" width="843" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602245815961" />
+    <state x="598" y="271" key="#ESLint/0.0.1536.834@0.0.1536.834" timestamp="1601632638536" />
+    <state x="2496" y="-157" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602244444399">
+      <screen x="1920" y="-390" width="1920" height="1050" />
+    </state>
+    <state x="461" y="185" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1602011850519" />
+    <state x="2496" y="-157" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602244444399" />
+    <state x="433" y="101" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602064159982">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="2461" y="-263" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1601986285796" />
+    <state x="433" y="101" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.834@0.0.1536.834" timestamp="1602064159982" />
+    <state x="134" y="0" key="CommitChangelistDialog2" timestamp="1601456233834">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="134" y="0" key="CommitChangelistDialog2/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601456233834" />
+    <state x="496" y="112" key="FileChooserDialogImpl" timestamp="1601401251522">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="496" y="112" key="FileChooserDialogImpl/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601401251522" />
+    <state x="309" y="107" key="MultipleFileMergeDialog" timestamp="1601456227812">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="309" y="107" key="MultipleFileMergeDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601456227812" />
+    <state x="377" y="0" key="RollbackChangesDialog" timestamp="1601969194353">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="377" y="0" key="RollbackChangesDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601969194353" />
+    <state x="2391" y="-390" key="RollbackChangesDialog/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1601967494359" />
+    <state x="377" y="0" key="RollbackChangesDialog/0.0.1536.834@0.0.1536.834" timestamp="1601637797293" />
+    <state x="-1" y="0" width="1412" height="834" key="SettingsEditor" timestamp="1601903103827">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="-1" y="0" width="1412" height="834" key="SettingsEditor/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601903103827" />
+    <state x="179" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1601641951742" />
+    <state width="623" height="498" key="SwitcherDM" timestamp="1602056495750">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="623" height="498" key="SwitcherDM/0.0.1536.834@0.0.1536.834" timestamp="1602056495750" />
+    <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601969649311">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601969649311" />
+    <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.834@0.0.1536.834" timestamp="1601964322323" />
+    <state x="2452" y="44" key="run.anything.popup" timestamp="1601984804736">
+      <screen x="1920" y="-390" width="1920" height="1050" />
+    </state>
+    <state x="2452" y="44" key="run.anything.popup/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1601984804736" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/redux/appData/appDataActions.ts</url>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

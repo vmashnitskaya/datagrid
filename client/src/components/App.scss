@@ -4,6 +4,16 @@ body{
   font-family: Roboto, Arial, sans-serif;
 }
 
+.logo{
+  position: absolute;
+  font-weight: 700;
+  left: 30px;
+  top: 8px;
+}
+nav{
+  height: 50px;
+}
+
 a.nav-link{
   &.active{
     background-color: #f8f9fa !important;
