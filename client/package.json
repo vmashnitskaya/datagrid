@@ -105,6 +105,7 @@
     "chromatic": "npx chromatic --project-token t5jga8ts31f",
     "docs": "jsdoc -c jsdoc.conf.json"
   },
+  "proxy": "http://localhost:5000/",
   "browserslist": {
     "production": [
       ">0.2%",

@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import actions from '../../redux/tableData/tableDataActions';
+import './TableCell.scss';
 
 interface TableCellProps {
     rowElement: { [key: string]: any };

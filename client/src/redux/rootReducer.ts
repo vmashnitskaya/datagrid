@@ -6,6 +6,7 @@ import userData from './userData/userDataReducer';
 import appData from './appData/appDataReducer';
 import locationData from './locationData/locationDataReducer';
 import tableData from './tableData/tableDataReducer';
+import auth from './authentication/authenticationReducer';
 
 declare module 'redux' {
     export interface Dispatch<A extends Action = AnyAction> {
@@ -20,6 +21,7 @@ const reducer = combineReducers({
     appData,
     locationData,
     tableData,
+    auth,
 });
 
 export type RootState = ReturnType<typeof reducer>;

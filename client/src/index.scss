@@ -5,6 +5,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
 
+  #root{
+    background-color: #f8f9fa;
+    height: 100vh;
+  }
+
   #alert-root{
     position: absolute;
     width: 100%;

@@ -13,8 +13,8 @@ import Router from './Router';
 const App: React.FC = () => {
     return (
         <BrowserRouter>
-            <nav className="bg-light nav">
-                <Link className="navbar-brand text-info logo" to="/">
+            <nav className="bg-info nav">
+                <Link className="navbar-brand text-light logo" to="/">
                     DataGrid
                 </Link>
             </nav>

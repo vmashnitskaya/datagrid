@@ -13,13 +13,3 @@ body{
 nav{
   height: 50px;
 }
-
-a.nav-link{
-  &.active{
-    background-color: #f8f9fa !important;
-  }
-  &:not(.active):hover{
-    border: none;
-    background-color: transparent;
-  }
-}

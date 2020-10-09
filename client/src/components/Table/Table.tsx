@@ -201,7 +201,7 @@ const Table: FC<TableProps> = ({
                         <tbody>
                             {sortFilterSlicedDataIds.length === 0 && (
                                 <tr>
-                                    <td>No data to display.</td>
+                                    <td className="bg-light">No data to display.</td>
                                 </tr>
                             )}
                             {sortFilterSlicedDataIds.map((element: number) => (

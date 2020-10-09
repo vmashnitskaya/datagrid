@@ -2,16 +2,24 @@ import React, { FC, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Redirect, Route, Switch } from 'react-router';
+import { connect } from 'react-redux';
 import UserTable from './UserTable';
 import AppTable from './AppTable';
 import LocationTable from './LocationTable';
+import AuthPage from './AuthPage';
+import { RootState } from '../redux/rootReducer';
+import authenticationSelectors from '../redux/authentication/authenticationSelectors';
 
 interface LinkDef {
     label: string;
     pathname: string;
 }
 
-const Router: FC = () => {
+interface RouterParams {
+    token: string;
+}
+
+const Router: FC<RouterParams> = ({ token }) => {
     const [tabActive, setTabActive] = useState<string | undefined>('Users');
 
     const links: LinkDef[] = useMemo(
@@ -40,48 +48,63 @@ const Router: FC = () => {
 
     return (
         <>
-            <div className="container mt-3">
-                <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-                    {links.map((link) => {
-                        return (
-                            <Link
-                                className={clsx(
-                                    'nav-link',
-                                    'mt-2',
-                                    'text-dark',
-                                    tabActive === link.label && 'active'
-                                )}
-                                key={link.label}
-                                role="tab"
-                                aria-controls="nav-home"
-                                to={link.pathname}
-                                data-label={link.label}
-                                onClick={handleTabActiveChange}
-                            >
-                                {link.label}
-                            </Link>
-                        );
-                    })}
+            {token.length > 0 ? (
+                <div className="container mt-3">
+                    <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+                        {links.map((link) => {
+                            return (
+                                <Link
+                                    className={clsx(
+                                        'nav-link',
+                                        'mt-2',
+                                        'text-dark',
+                                        tabActive === link.label && 'active'
+                                    )}
+                                    key={link.label}
+                                    role="tab"
+                                    aria-controls="nav-home"
+                                    to={link.pathname}
+                                    data-label={link.label}
+                                    onClick={handleTabActiveChange}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
+                    </div>
+                    <div className="tab-content" id="nav-tabContent">
+                        <Switch>
+                            <Route exact path="/">
+                                <Redirect to="/users" />
+                            </Route>
+                            <Route exact path="/users">
+                                <UserTable />
+                            </Route>
+                            <Route path="/apps">
+                                <AppTable />
+                            </Route>
+                            <Route path="/locations">
+                                <LocationTable />
+                            </Route>
+                        </Switch>
+                    </div>
                 </div>
-            </div>
-            <div className="tab-content container" id="nav-tabContent">
+            ) : (
                 <Switch>
                     <Route exact path="/">
-                        <Redirect to="/users" />
+                        <AuthPage />
                     </Route>
-                    <Route exact path="/users">
-                        <UserTable />
-                    </Route>
-                    <Route path="/apps">
-                        <AppTable />
-                    </Route>
-                    <Route path="/locations">
-                        <LocationTable />
+                    <Route>
+                        <Redirect to="/" />
                     </Route>
                 </Switch>
-            </div>
+            )}
         </>
     );
 };
 
-export default Router;
+const mapStateToProps = (state: RootState) => ({
+    token: authenticationSelectors.getToken(state),
+});
+
+export default connect(mapStateToProps)(Router);

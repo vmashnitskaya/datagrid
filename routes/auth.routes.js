@@ -1,10 +1,10 @@
-const {Router} = require('express')
-const bcrypt = require('bcryptjs')
-const config = require('config')
-const jwt = require('jsonwebtoken')
-const {check, validationResult} = require('express-validator')
-const User = require('../models/User')
-const router = Router()
+const {Router} = require('express');
+const bcrypt = require('bcryptjs');
+const config = require('config');
+const jwt = require('jsonwebtoken');
+const {check, validationResult} = require('express-validator');
+const User = require('../models/User');
+const router = Router();
 
 router.post(
     '/register',
@@ -13,7 +13,7 @@ router.post(
         check('password', 'Минимальная длина пароля 6 символов')
             .isLength({ min: 6 })
     ],
-    async (res, req) =>{
+    async (req, res) =>{
         const errors = validationResult(req)
 
         if (!errors.isEmpty()) {
@@ -22,10 +22,10 @@ router.post(
                 message: 'Некорректный данные при регистрации'
             })
         }
-
         try{
             const {email, password} = req.body;
             const candidate = await User.findOne({ email });
+
 
             if (candidate) {
                 return res.status(400).json({ message: 'Такой пользователь уже существует' })
