@@ -11,13 +11,13 @@ const authHttp = async (url: string, method = 'GET', body: User | null = null, h
         const response = await fetch(url, { method, body: userBody, headers: userHeaders });
         const data = await response.json();
 
-        if (response.status === 400) {
+        if (response.status === 400 || response.status === 500) {
             throw new Error(data.message || 'Something went wrong.');
         }
 
         return data;
     } catch (e) {
-        return e.message;
+        throw new Error(e.message || 'Something went wrong.');
     }
 };
 

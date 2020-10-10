@@ -1,14 +1,18 @@
-import React, { FC, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FC, useMemo, useState, useEffect } from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Redirect, Route, Switch } from 'react-router';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { Dispatch } from 'redux';
 import UserTable from './UserTable';
 import AppTable from './AppTable';
 import LocationTable from './LocationTable';
 import AuthPage from './AuthPage';
 import { RootState } from '../redux/rootReducer';
 import authenticationSelectors from '../redux/authentication/authenticationSelectors';
+import { AuthActions } from '../redux/authentication/authenticationTypes';
+import authenticationActions from '../redux/authentication/authenticationActions';
 
 interface LinkDef {
     label: string;
@@ -17,10 +21,15 @@ interface LinkDef {
 
 interface RouterParams {
     token: string;
+    logout: () => void;
 }
 
-const Router: FC<RouterParams> = ({ token }) => {
+const Router: FC<RouterParams> = ({ token, logout }) => {
     const [tabActive, setTabActive] = useState<string | undefined>('Users');
+
+    useEffect(() => {
+        localStorage.setItem('token', token);
+    }, [token]);
 
     const links: LinkDef[] = useMemo(
         () => [
@@ -46,9 +55,29 @@ const Router: FC<RouterParams> = ({ token }) => {
         setTabActive(newActiveLabel);
     };
 
+    const handleLogout = () => {
+        logout();
+        localStorage.removeItem('token');
+    };
+
     return (
         <>
-            {token.length > 0 ? (
+            <nav className="bg-info nav">
+                <Link className="navbar-brand text-light logo" to="/">
+                    DataGrid
+                </Link>
+                {token && (
+                    <Button
+                        variant="light"
+                        onClick={handleLogout}
+                        size="sm"
+                        className="logout text-light"
+                    >
+                        Logout
+                    </Button>
+                )}
+            </nav>
+            {token ? (
                 <div className="container mt-3">
                     <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
                         {links.map((link) => {
@@ -106,5 +135,10 @@ const Router: FC<RouterParams> = ({ token }) => {
 const mapStateToProps = (state: RootState) => ({
     token: authenticationSelectors.getToken(state),
 });
+const mapDispatchToProps = (dispatch: Dispatch<AuthActions>) => ({
+    logout: () => {
+        dispatch(authenticationActions.logout());
+    },
+});
 
-export default connect(mapStateToProps)(Router);
+export default connect(mapStateToProps, mapDispatchToProps)(Router);

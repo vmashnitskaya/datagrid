@@ -3,7 +3,7 @@ import types, { AuthActions } from './authenticationTypes';
 import { AuthState } from './authentificationInterfaces';
 
 const initialState = {
-    token: '',
+    token: localStorage.getItem('token') || '',
     userId: '',
     error: '',
     loading: false,
@@ -25,6 +25,12 @@ const authReducer: Reducer<AuthState, AuthActions> = (state = initialState, acti
                 ...state,
                 loading: false,
                 error: action.payload,
+                token: '',
+                userId: '',
+            };
+        case types.LOGOUT:
+            return {
+                ...state,
                 token: '',
                 userId: '',
             };

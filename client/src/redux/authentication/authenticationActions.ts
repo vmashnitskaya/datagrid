@@ -18,6 +18,10 @@ const fetchAuthFailed = (error: string): AuthActions => ({
     payload: error,
 });
 
+const logout = (): AuthActions => ({
+    type: types.LOGOUT,
+});
+
 const registerUser = (
     userObject: User
 ): ThunkAction<Promise<void>, RootState, unknown, AuthActions> => async (dispatch) => {
@@ -43,4 +47,4 @@ const loginUser = (
     }
 };
 
-export default { loginUser, registerUser };
+export default { loginUser, registerUser, logout };

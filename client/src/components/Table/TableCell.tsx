@@ -32,7 +32,7 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
     ): AnchorHTMLAttributes<any> | string => {
         if (columnName === 'email') {
             return (
-                <a className="text-secondary" href={`mailto:${rowElementPassed[columnNamePassed]}`}>
+                <a className="text-dark" href={`mailto:${rowElementPassed[columnNamePassed]}`}>
                     {rowElementPassed[columnNamePassed]}
                 </a>
             );

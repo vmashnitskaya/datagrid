@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
-import Loader from './Loader';
+import Loader from '../Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
 import PaginationControl from './Pagination/PaginationControl';

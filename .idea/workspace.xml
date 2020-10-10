@@ -26,27 +26,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/AuthPage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/authentication/authHttp.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationActions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationReducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationSelectors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationTypes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/authentication/authentificationInterfaces.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/App.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AuthPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AuthPage.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AuthPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Loader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Loader.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Loader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Loader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/rootReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/rootReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authHttp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/authentication/authHttp.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/authentication/authenticationTypes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/auth.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth.routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +116,7 @@
       <workItem from="1602060799109" duration="1060000" />
       <workItem from="1602061888215" duration="1080000" />
       <workItem from="1602063795107" duration="15986000" />
-      <workItem from="1602241431650" duration="22100000" />
+      <workItem from="1602241431650" duration="27823000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
@@ -175,10 +168,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2411" y="-233" width="843" height="721" key="#ESLint" timestamp="1602245815961">
+    <state x="2411" y="-233" width="887" height="721" key="#ESLint" timestamp="1602320443757">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
-    <state x="2411" y="-233" width="843" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602245815961" />
+    <state x="2411" y="-233" width="887" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602320443757" />
     <state x="598" y="271" key="#ESLint/0.0.1536.834@0.0.1536.834" timestamp="1601632638536" />
     <state x="2496" y="-157" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602257594568">
       <screen x="1920" y="-390" width="1920" height="1050" />
