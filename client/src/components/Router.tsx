@@ -1,5 +1,5 @@
 import React, { FC, useMemo, useState, useEffect } from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Redirect, Route, Switch } from 'react-router';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ import { RootState } from '../redux/rootReducer';
 import authenticationSelectors from '../redux/authentication/authenticationSelectors';
 import { AuthActions } from '../redux/authentication/authenticationTypes';
 import authenticationActions from '../redux/authentication/authenticationActions';
+import './Router.scss';
 
 interface LinkDef {
     label: string;
@@ -78,13 +79,14 @@ const Router: FC<RouterParams> = ({ token, logout }) => {
                 )}
             </nav>
             {token ? (
-                <div className="container mt-3">
+                <div className="container app-wrapper">
                     <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
                         {links.map((link) => {
                             return (
                                 <Link
                                     className={clsx(
                                         'nav-link',
+                                        'tab',
                                         'mt-2',
                                         'text-dark',
                                         tabActive === link.label && 'active'

@@ -1,8 +1,3 @@
-export interface Location {
-    city: string;
-    country: string;
-}
-
 export interface DataObject {
     id: number;
     first_name: string;
@@ -10,7 +5,6 @@ export interface DataObject {
     date: string;
     email: string;
     gender: string;
-    location: Location;
 }
 
 export interface NormalizedObject {

@@ -96,10 +96,10 @@ const UserTable: FC<UserTableProps> = ({
                 display: true,
             },
             {
-                header: 'Location',
-                name: 'location',
+                header: 'Job title',
+                name: 'job_title',
                 type: 'string',
-                sorting: false,
+                sorting: true,
                 filtering: false,
                 display: true,
             },

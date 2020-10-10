@@ -31,7 +31,7 @@ const TableHeader: FC<TableHeaderProps> = ({ element, last, deleteRows }) => {
         deleteRows();
     };
     return (
-        <th className="bg-light">
+        <th className={`bg-light ${element.name}`}>
             <div className="header">
                 {element.type === 'checkbox' ? (
                     <DeleteIcon

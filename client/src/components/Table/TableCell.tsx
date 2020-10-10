@@ -53,6 +53,7 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
             return (
                 <input
                     type="checkbox"
+                    className="rowSelection"
                     data-id={rowElementPassed.id}
                     checked={rowElementPassed.checkbox}
                     onChange={handleRowChecked}
@@ -62,13 +63,7 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
         return rowElementPassed[columnNamePassed];
     };
 
-    return (
-        <td>
-            {typeof rowElement[columnName] === 'object' && rowElement[columnName] !== null
-                ? Object.values(rowElement[columnName]).join(', ')
-                : handleDifferentTypesDisplaying(rowElement, columnName)}
-        </td>
-    );
+    return <td>{handleDifferentTypesDisplaying(rowElement, columnName)}</td>;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({

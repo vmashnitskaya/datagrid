@@ -35,7 +35,7 @@ const ColumnSelectionContent: FunctionComponent<ColumnSelectionContentProps> = (
                 {tableColumnHeaders.map(
                     (element, index: number) =>
                         index > 0 && (
-                            <div>
+                            <div key={element.name}>
                                 <input
                                     className={clsx(
                                         'column_checkbox mr-1',

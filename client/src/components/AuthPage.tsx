@@ -40,7 +40,7 @@ const AuthPage: FC<AuthPageParams> = ({ loginUser, registerUser, loading, error 
             {loading ? (
                 <Loader />
             ) : (
-                <div className="container login-wrapper">
+                <div className="bg-light login-wrapper">
                     <Card style={{ width: '18rem' }} className="card">
                         <Card.Body>
                             <Card.Title className="login-title text-info">

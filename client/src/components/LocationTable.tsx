@@ -87,14 +87,6 @@ const LocationTable: FC<LocationTableProps> = ({
                 display: true,
             },
             {
-                header: 'Longitude and Latitude',
-                name: 'loc',
-                type: 'string',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
                 header: 'Timezone',
                 name: 'timezone',
                 type: 'string',
