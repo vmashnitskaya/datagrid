@@ -20,8 +20,8 @@ const locationDataReducer: Reducer<LocationDataState, LocationDataActions> = (
             return {
                 ...state,
                 loading: false,
-                locationData: { ...action.payload.dataNormalized },
-                allIds: [...action.payload.allIds],
+                locationData: action.payload.dataNormalized,
+                allIds: action.payload.allIds,
             };
         case types.FETCH_LOCATIONDATA_FAILED:
             return {

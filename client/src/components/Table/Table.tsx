@@ -36,14 +36,13 @@ export interface TableProps {
     sortRenderData: () => void;
     setTableRenderData: (data: NormalizedObject) => void;
     setTableAllIds: (allIds: number[]) => void;
-    setTableLoading: () => void;
-    setTableError: (error: string) => void;
     setSortedFilteredRenderDataIds: (allIds: number[]) => void;
     setSortFilterSlicedDataIds: (allIds: number[]) => void;
     sortedFilteredRenderDataIds: number[];
     sortFilterSlicedDataIds: number[];
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
+    tableRenderData: { [key: string]: any };
 }
 
 /**
@@ -69,8 +68,6 @@ export interface TableProps {
  * @param {function(number): void} props.setTotalPages
  * @param {function(NormalizedObject): void} props.setTableRenderData
  * @param {function(number[]): void} props.setTableAllIds
- * @param {function(): void} props.setTableLoading
- * @param {function(string): void} props.setTableError
  * @param {function(number[]): void} props.setSortedFilteredRenderDataIds
  * @param {function(number[]): void} props.setSortFilterSlicedDataIds
  * @param {function(ColumnInterface[]: void)} props.setTableColumnHeaders
@@ -78,8 +75,6 @@ export interface TableProps {
  */
 
 const Table: FC<TableProps> = ({
-    tableLoading,
-    tableError,
     tableAllIds,
     renderData,
     allIds,
@@ -89,12 +84,11 @@ const Table: FC<TableProps> = ({
     rowsPerPage,
     currentPage,
     totalPages,
+    tableRenderData,
     setFilteredColumnAndValue,
     setTotalPages,
     setTableRenderData,
     setTableAllIds,
-    setTableLoading,
-    setTableError,
     sortFilterSlicedDataIds,
     setSortedFilteredRenderDataIds,
     setSortFilterSlicedDataIds,
@@ -118,14 +112,6 @@ const Table: FC<TableProps> = ({
     }, [allIds, setTableAllIds]);
 
     useEffect(() => {
-        setTableLoading();
-    }, [loading, setTableLoading]);
-
-    useEffect(() => {
-        setTableError(error);
-    }, [error, setTableError]);
-
-    useEffect(() => {
         if (columnHeaders.length > 0) {
             setTableColumnHeaders(columnHeaders);
         }
@@ -136,7 +122,7 @@ const Table: FC<TableProps> = ({
 
     useEffect(() => {
         setSortedFilteredRenderDataIds([...tableAllIds]);
-    }, [setSortedFilteredRenderDataIds, tableAllIds]);
+    }, [setSortedFilteredRenderDataIds, tableAllIds, tableRenderData]);
 
     /**
      * Identify the number of rows in table and set the sliced render data for displaying.
@@ -179,7 +165,7 @@ const Table: FC<TableProps> = ({
 
     return (
         <>
-            {tableLoading || tableError.length > 0 ? (
+            {loading || error.length > 0 ? (
                 <Loader />
             ) : (
                 <>
@@ -204,13 +190,14 @@ const Table: FC<TableProps> = ({
                                     <td className="bg-light">No data to display.</td>
                                 </tr>
                             )}
-                            {sortFilterSlicedDataIds.map((element: number) => (
-                                <TableRow
-                                    key={`${Date.now()}_key${element}`}
-                                    id={element}
-                                    columnHeaders={tableColumnHeaders}
-                                />
-                            ))}
+                            {sortFilterSlicedDataIds.length > 0 &&
+                                sortFilterSlicedDataIds.map((element: number) => (
+                                    <TableRow
+                                        key={`${Date.now()}_key${element}`}
+                                        id={element}
+                                        columnHeaders={tableColumnHeaders}
+                                    />
+                                ))}
                         </tbody>
                     </table>
                     <div className="mb-3 footer-controls">
@@ -238,6 +225,7 @@ const mapStateToProps = (state: RootState) => ({
     sortedFilteredRenderDataIds: tableDataSelectors.getSortedFilteredRenderDataIds(state),
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
+    tableRenderData: tableDataSelectors.getRenderData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
@@ -249,12 +237,6 @@ const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     },
     setTableRenderData: (data: NormalizedObject) => {
         dispatch(actions.setRenderData(data));
-    },
-    setTableLoading: () => {
-        dispatch(actions.setLoading());
-    },
-    setTableError: (error: string) => {
-        dispatch(actions.setError(error));
     },
     setTableAllIds: (allIds: number[]) => {
         dispatch(actions.setAllIds(allIds));

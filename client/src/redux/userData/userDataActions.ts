@@ -1,8 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { UserdataActions } from './userDataTypes';
 import { NormalizedData } from './userDataInterfaces';
-import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
+import selectors from '../authentication/authenticationSelectors';
+import dataHttp from '../dataHttp';
+import normalizeData from '../normalizeData';
 
 const fetchUserDataPending = (): UserdataActions => ({
     type: types.FETCH_USERDATA_PENDING,
@@ -18,13 +20,21 @@ const fetchUserDataFailed = (error: string): UserdataActions => ({
     payload: error,
 });
 
-const fetchUserData = (
-    tabActive: string
-): ThunkAction<Promise<void>, RootState, unknown, UserdataActions> => async (dispatch) => {
+const fetchUserData = (): ThunkAction<Promise<void>, RootState, unknown, UserdataActions> => async (
+    dispatch,
+    getState
+) => {
     try {
         dispatch(fetchUserDataPending());
-        const userData = fetchApiData(tabActive.toLowerCase());
-        dispatch(fetchUserDataSuccess(userData));
+        const token = selectors.getToken(getState());
+
+        const userData = await dataHttp('/api/users/', 'GET', null, {
+            Authorization: `Bearer ${token}`,
+        });
+
+        const normalizedData = normalizeData(userData);
+
+        dispatch(fetchUserDataSuccess(normalizedData));
     } catch (e) {
         dispatch(fetchUserDataFailed(e.message));
     }

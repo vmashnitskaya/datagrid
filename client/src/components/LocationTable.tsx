@@ -13,7 +13,7 @@ interface LocationTableProps {
     locationData: NormalizedObject;
     loadingLocation: boolean;
     errorLocation: string;
-    fetchLocationsData: (tabActive: string) => void;
+    fetchLocationsData: () => void;
     allIds: number[];
 }
 
@@ -24,7 +24,7 @@ interface LocationTableProps {
  * @param {NormalizedObject} props.locationData - object with id as key and object for table row as value.
  * @param {boolean} props.loadingLocation - loading of data.
  * @param {string} props.errorLocation - error during data fetch.
- * @param {function(string): void} props.fetchLocationsData
+ * @param {function(): void} props.fetchLocationsData
  * @param {number[]} props.allIds - ids for locationData.
  * @returns {JSX.Element}
  */
@@ -98,7 +98,7 @@ const LocationTable: FC<LocationTableProps> = ({
     }, []);
 
     useEffect(() => {
-        fetchLocationsData('Locations');
+        fetchLocationsData();
     }, [fetchLocationsData]);
 
     return (
@@ -120,8 +120,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    fetchLocationsData: (tabActive: string) => {
-        dispatch(fetchLocationData(tabActive));
+    fetchLocationsData: () => {
+        dispatch(fetchLocationData());
     },
 });
 

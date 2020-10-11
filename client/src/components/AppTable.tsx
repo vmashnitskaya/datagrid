@@ -13,7 +13,7 @@ interface AppTableProps {
     appData: AppDataObject[];
     loadingApp: boolean;
     errorApp: string;
-    fetchAppsData: (tabActive: string) => void;
+    fetchAppsData: () => void;
     allIds: number[];
 }
 
@@ -21,7 +21,7 @@ interface AppTableProps {
  * Component for App Data displaying.
  *
  * @param props
- * @param {function(string): void} props.fetchAppsData
+ * @param {function(): void} props.fetchAppsData
  * @param {number[]} props.allIds - ids for appData.
  * @param {AppDataObject[]} props.appData - object with id as key and object for table row as value.
  * @param {boolean} props.loadingApp - loading of data.
@@ -92,7 +92,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingAp
     }, []);
 
     useEffect(() => {
-        fetchAppsData('Apps');
+        fetchAppsData();
     }, [fetchAppsData]);
 
     return (
@@ -114,8 +114,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    fetchAppsData: (tabActive: string) => {
-        dispatch(fetchAppData(tabActive));
+    fetchAppsData: () => {
+        dispatch(fetchAppData());
     },
 });
 

@@ -8,7 +8,10 @@ const app = express();
 app.use(bodyParser.json());
 
 
-app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/auth/', require('./routes/auth.routes'));
+app.use('/api/users/', require('./routes/userData.routes'));
+app.use('/api/apps/', require('./routes/appData.routers'));
+app.use('/api/locations/', require('./routes/locationData.routes'));
 
 const PORT = config.get('port') || 5000;
 

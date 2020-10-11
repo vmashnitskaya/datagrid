@@ -5,6 +5,9 @@ export interface DataObject {
     date: string;
     email: string;
     gender: string;
+    job_title: string;
+    owner: string;
+    _id: string;
 }
 
 export interface NormalizedObject {

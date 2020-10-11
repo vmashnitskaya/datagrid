@@ -14,7 +14,7 @@ interface UserTableProps {
     allIds: number[];
     loadingUser: boolean;
     errorUser: string;
-    fetchUsersData: (tabActive: string) => void;
+    fetchUsersData: () => void;
 }
 
 /**
@@ -25,7 +25,7 @@ interface UserTableProps {
  * @param {number[]} props.allIds - ids for locationData.
  * @param {boolean} props.loadingUser - loading of data.
  * @param {string} props.errorUser - error during data fetch.
- * @param {function(string): void} props.fetchUsersData
+ * @param {function(): void} props.fetchUsersData
  * @returns {JSX.Element}
  */
 
@@ -107,7 +107,7 @@ const UserTable: FC<UserTableProps> = ({
     }, []);
 
     useEffect(() => {
-        fetchUsersData('Users');
+        fetchUsersData();
     }, [fetchUsersData]);
 
     return (
@@ -129,8 +129,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    fetchUsersData: (tabActive: string) => {
-        dispatch(fetchUserData(tabActive));
+    fetchUsersData: () => {
+        dispatch(fetchUserData());
     },
 });
 

@@ -5,6 +5,8 @@ export interface LocationDataObject {
     state: string;
     country_code: string;
     timezone: string;
+    owner: string;
+    _id: string;
 }
 export interface NormalizedObject {
     [key: string]: LocationDataObject;

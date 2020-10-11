@@ -60,7 +60,7 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
                 />
             );
         }
-        return rowElementPassed[columnNamePassed];
+        return rowElementPassed[columnNamePassed] || '';
     };
 
     return <td>{handleDifferentTypesDisplaying(rowElement, columnName)}</td>;

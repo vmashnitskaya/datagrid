@@ -17,8 +17,8 @@ const appDataReducer: Reducer<AppDataState, AppDataActions> = (state = initialSt
             return {
                 ...state,
                 loading: false,
-                appData: { ...action.payload.dataNormalized },
-                allIds: { ...action.payload.allIds },
+                appData: action.payload.dataNormalized,
+                allIds: action.payload.allIds,
             };
         case types.FETCH_APPDATA_FAILED:
             return {

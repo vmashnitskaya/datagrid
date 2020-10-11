@@ -5,6 +5,8 @@ export type AppDataObject = {
     app_version: string;
     app_domain: string;
     app_url: string;
+    owner: string;
+    _id: string;
 };
 
 export interface NormalizedObject {

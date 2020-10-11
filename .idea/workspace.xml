@@ -26,26 +26,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/Router.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/redux/dataHttp.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/redux/normalizeData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/auth.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/AppData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/LocationData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/UserData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/appData.routers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/locationData.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/userData.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/App.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AuthPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AuthPage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AuthPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableHeader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/example.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/mock_data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/mock_data.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +87,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -121,7 +133,7 @@
       <workItem from="1602060799109" duration="1060000" />
       <workItem from="1602061888215" duration="1080000" />
       <workItem from="1602063795107" duration="15986000" />
-      <workItem from="1602241431650" duration="32779000" />
+      <workItem from="1602241431650" duration="51074000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
@@ -224,10 +236,14 @@
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
     <state x="2388" y="-344" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602250937336" />
-    <state x="2452" y="44" key="run.anything.popup" timestamp="1601984804736">
+    <state x="2522" y="-390" width="716" height="1050" key="find.popup" timestamp="1602353943453">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
-    <state x="2452" y="44" key="run.anything.popup/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1601984804736" />
+    <state x="2522" y="-390" width="716" height="1050" key="find.popup/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602353943453" />
+    <state x="2452" y="44" key="run.anything.popup" timestamp="1602355321593">
+      <screen x="1920" y="-390" width="1920" height="1050" />
+    </state>
+    <state x="2452" y="44" key="run.anything.popup/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602355321593" />
     <state x="2459" y="-375" width="840" height="1034" key="search.everywhere.popup" timestamp="1602251284438">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>

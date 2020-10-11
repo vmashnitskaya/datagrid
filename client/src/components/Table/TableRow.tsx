@@ -28,17 +28,20 @@ export interface TableRowProps {
 const TableRow: FC<TableRowProps> = ({ id, columnHeaders, rowElement }) => {
     return (
         <tr>
-            {columnHeaders.map((element: ColumnInterface) => {
-                return (
-                    element.display && (
-                        <TableCell
-                            key={`key${id + 1}_${Math.random()}`}
-                            rowElement={rowElement}
-                            columnName={element.name}
-                        />
-                    )
-                );
-            })}
+            {columnHeaders &&
+                columnHeaders.length > 0 &&
+                rowElement &&
+                columnHeaders.map((element: ColumnInterface) => {
+                    return (
+                        element.display && (
+                            <TableCell
+                                key={`key${id + 1}_${Math.random()}`}
+                                rowElement={rowElement}
+                                columnName={element.name}
+                            />
+                        )
+                    );
+                })}
         </tr>
     );
 };
