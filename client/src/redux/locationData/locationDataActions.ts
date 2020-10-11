@@ -38,8 +38,7 @@ const fetchLocationData = (): ThunkAction<
 
         dispatch(fetchLocationDataSuccess(normalizedData));
     } catch (e) {
-        /* dispatch(fetchLocationDataFailed(e.message)); */
-        console.log(e);
+        dispatch(fetchLocationDataFailed(e.message));
     }
 };
 

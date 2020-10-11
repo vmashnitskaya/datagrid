@@ -30,6 +30,7 @@ const Router: FC<RouterParams> = ({ token, logout }) => {
 
     useEffect(() => {
         localStorage.setItem('token', token);
+        setTabActive('Users');
     }, [token]);
 
     const links: LinkDef[] = useMemo(
@@ -52,7 +53,6 @@ const Router: FC<RouterParams> = ({ token, logout }) => {
 
     const handleTabActiveChange = (event: React.MouseEvent<HTMLElement>): void => {
         const newActiveLabel = event.currentTarget.dataset.label;
-
         setTabActive(newActiveLabel);
     };
 

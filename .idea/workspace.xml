@@ -26,39 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/redux/dataHttp.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/normalizeData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware/auth.middleware.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/AppData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/LocationData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/UserData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/appData.routers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/locationData.routes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/userData.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/mock_data.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/mock_data.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +103,7 @@
       <workItem from="1602060799109" duration="1060000" />
       <workItem from="1602061888215" duration="1080000" />
       <workItem from="1602063795107" duration="15986000" />
-      <workItem from="1602241431650" duration="51074000" />
+      <workItem from="1602241431650" duration="51737000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
