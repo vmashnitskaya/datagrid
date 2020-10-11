@@ -1,6 +1,0 @@
-{
-  "port": 5000,
-  "jwtSecret": "mern project",
-  "mongoUri": "mongodb+srv://<usName>:<pass>@cluster0.sab09.mongodb.net/app?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5000/"
-}
