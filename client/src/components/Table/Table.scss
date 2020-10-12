@@ -5,40 +5,28 @@
 }
 
 .table {
-  th {
-    position: sticky;
-    top: -4px;
-    padding-right: 0;
-    z-index: 5;
-    &.checkbox{
-      padding-right: 1em;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 40px;
-      .icons {
-        display: flex;
-      }
-    }
-  }
   td{
     width: 220px;
   }
-}
-.footer {
-  &-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .no-data{
+    text-align: center;
   }
-  &-buttons{
-    display: flex;
-    .download{
-      margin-left: 10px;
+  tfoot{
+    .footer {
+      &-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      &-buttons{
+        display: flex;
+        .download{
+          margin-left: 10px;
+        }
+      }
     }
   }
 }
+
 
 

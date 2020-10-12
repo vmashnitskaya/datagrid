@@ -11,6 +11,7 @@ import { RootState } from '../../../redux/rootReducer';
 import { TableDataActions } from '../../../redux/tableData/tableDataTypes';
 import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
 import actions from '../../../redux/tableData/tableDataActions';
+import { NormalizedObject } from '../../../redux/tableData/tableDataInterface';
 
 export interface SortingControlsProps {
     sortingColumn: string;
@@ -19,6 +20,7 @@ export interface SortingControlsProps {
     setSorting: (sorting: string) => void;
     setSortingColumn: (column: string) => void;
     sortRenderData: () => void;
+    renderData: NormalizedObject;
 }
 
 /**
@@ -41,6 +43,7 @@ const SortingControls: FC<SortingControlsProps> = ({
     setSorting,
     setSortingColumn,
     sortRenderData,
+    renderData,
 }) => {
     useEffect(() => {
         if (sorting.length > 0) {
@@ -49,12 +52,14 @@ const SortingControls: FC<SortingControlsProps> = ({
     }, [sorting, sortingColumn, sorting.length, sortRenderData]);
 
     const handleSorting = (columnName: string, direction: string) => {
-        setSorting(direction);
-        setSortingColumn(columnName);
+        if (Object.keys(renderData).length !== 0) {
+            setSorting(direction);
+            setSortingColumn(columnName);
+        }
     };
 
     const handleSortingPressed = (event: KeyboardEvent<SVGSVGElement>, direction: string) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && Object.keys(renderData).length !== 0) {
             handleSorting(currentElementColumn, direction);
         }
     };
@@ -66,6 +71,7 @@ const SortingControls: FC<SortingControlsProps> = ({
                     className={clsx(
                         'down',
                         'text-secondary',
+                        Object.keys(renderData).length === 0 && 'disabled',
                         sorting === 'down' && sortingColumn === currentElementColumn && 'text-info'
                     )}
                     data-testid={`${currentElementColumn}_down`}
@@ -79,6 +85,7 @@ const SortingControls: FC<SortingControlsProps> = ({
                     className={clsx(
                         'up',
                         'text-secondary',
+                        Object.keys(renderData).length === 0 && 'disabled',
                         sorting === 'up' && sortingColumn === currentElementColumn && 'text-info'
                     )}
                     data-testid={`${currentElementColumn}_up`}
@@ -96,6 +103,7 @@ const SortingControls: FC<SortingControlsProps> = ({
 const mapStateToProps = (state: RootState) => ({
     sorting: tableDataSelectors.getSorting(state),
     sortingColumn: tableDataSelectors.getSortingColumn(state),
+    renderData: tableDataSelectors.getRenderData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({

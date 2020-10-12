@@ -21,6 +21,7 @@ describe('Test FilterControl component', () => {
                 location: '',
             },
             handleFilterOpened: handleFilterOpenedCallback,
+            disabled: false,
         };
         const { container } = render(<FilterControl {...props} />);
 
@@ -38,6 +39,7 @@ describe('Test FilterControl component', () => {
                 gender: '',
                 location: '',
             },
+            disabled: false,
             handleFilterOpened: handleFilterOpenedCallback,
         };
         const { container } = render(<FilterControl {...props} />);
@@ -56,6 +58,7 @@ describe('Test FilterControl component', () => {
                 gender: '',
                 location: '',
             },
+            disabled: false,
             handleFilterOpened: handleFilterOpenedCallback,
         };
         const { container } = render(<FilterControl {...props} />);
@@ -82,6 +85,7 @@ describe('Test FilterControl component', () => {
                 gender: '',
                 location: '',
             },
+            disabled: false,
             handleFilterOpened: handleFilterOpenedCallback,
         };
         const { container } = render(<FilterControl {...props} />);

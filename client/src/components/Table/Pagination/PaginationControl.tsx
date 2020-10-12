@@ -46,7 +46,9 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
 
     const handlePageNavigationByInput = (event: FormEvent) => {
         event.preventDefault();
-        setCurrentPage(pageInputState);
+        if (pageInputState > 0 && pageInputState <= totalPages) {
+            setCurrentPage(pageInputState);
+        }
     };
 
     const handlePageNavigation = (pageDirection: string) => {
@@ -74,11 +76,21 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
     return (
         <div className="pagination">
             <FirstPageIcon
-                className={clsx('page-first', currentPage !== 1 && 'text-info')}
+                className={clsx(
+                    'page-first',
+                    'text-secondary',
+                    'disabled',
+                    currentPage !== 1 && 'text-info'
+                )}
                 onClick={() => handlePageNavigation('first')}
             />
             <NavigateBeforeIcon
-                className={clsx('page-previous', currentPage !== 1 && 'text-info')}
+                className={clsx(
+                    'page-previous',
+                    'text-secondary',
+                    'disabled',
+                    currentPage !== 1 && 'text-info'
+                )}
                 onClick={() => handlePageNavigation('previous')}
             />
             <form className="pagination-input" onSubmit={handlePageNavigationByInput}>
@@ -86,11 +98,21 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
                 {totalPages}
             </form>
             <NavigateNextIcon
-                className={clsx('page-next', currentPage !== totalPages && 'text-info')}
+                className={clsx(
+                    'page-next',
+                    'text-secondary',
+                    'disabled',
+                    currentPage !== totalPages && 'text-info'
+                )}
                 onClick={() => handlePageNavigation('next')}
             />
             <LastPageIcon
-                className={clsx('page-last', currentPage !== totalPages && 'text-info')}
+                className={clsx(
+                    'page-last',
+                    'text-secondary',
+                    'disabled',
+                    currentPage !== totalPages && 'text-info'
+                )}
                 onClick={() => handlePageNavigation('last')}
             />
         </div>

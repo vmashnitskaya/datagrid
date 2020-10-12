@@ -24,6 +24,7 @@ FilterControlNotActive.args = {
         gender: '',
         location: '',
     },
+    disabled: false,
 };
 
 FilterControlNotActive.parameters = {
@@ -45,6 +46,7 @@ FilterControlActive.args = {
         gender: '',
         location: '',
     },
+    disabled: false,
 };
 
 FilterControlActive.parameters = {

@@ -142,7 +142,11 @@ const Table: FC<TableProps> = ({
     }, [currentPage, rowsPerPage, setSortFilterSlicedDataIds, sortedFilteredRenderDataIds]);
 
     useEffect(() => {
-        setTotalPages(Math.ceil(sortedFilteredRenderDataIds.length / rowsPerPage));
+        setTotalPages(
+            sortedFilteredRenderDataIds.length > 0
+                ? Math.ceil(sortedFilteredRenderDataIds.length / rowsPerPage)
+                : 1
+        );
     }, [
         rowsPerPage,
         setTotalPages,
@@ -187,7 +191,9 @@ const Table: FC<TableProps> = ({
                         <tbody>
                             {sortFilterSlicedDataIds.length === 0 && (
                                 <tr>
-                                    <td className="bg-light">No data to display.</td>
+                                    <td className="bg-light no-data" colSpan={columnHeaders.length}>
+                                        No data to display.
+                                    </td>
                                 </tr>
                             )}
                             {sortFilterSlicedDataIds.length > 0 &&
@@ -199,14 +205,23 @@ const Table: FC<TableProps> = ({
                                     />
                                 ))}
                         </tbody>
+                        <tfoot>
+                            <tr className="mb-3">
+                                <td colSpan={columnHeaders.length}>
+                                    <div className="footer-controls">
+                                        <div className="footer-buttons">
+                                            <RowsPerPageControl />
+                                            <CSVDownload />
+                                        </div>
+                                        <PaginationControl
+                                            currentPage={currentPage}
+                                            totalPages={totalPages}
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
-                    <div className="mb-3 footer-controls">
-                        <div className="footer-buttons">
-                            <RowsPerPageControl />
-                            <CSVDownload />
-                        </div>
-                        <PaginationControl currentPage={currentPage} totalPages={totalPages} />
-                    </div>
                 </>
             )}
         </>

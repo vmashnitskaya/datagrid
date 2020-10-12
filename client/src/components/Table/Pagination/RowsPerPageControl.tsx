@@ -6,10 +6,12 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { RootState } from '../../../redux/rootReducer';
 import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
 import actions from '../../../redux/tableData/tableDataActions';
+import { NormalizedObject } from '../../../redux/tableData/tableDataInterface';
 
 interface RowsPerPageControlProps {
     setRowsPerPage: (rowsPerPage: number) => void;
     rowsPerPage: number;
+    renderData: NormalizedObject;
 }
 
 /**
@@ -24,6 +26,7 @@ interface RowsPerPageControlProps {
 const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
     setRowsPerPage,
     rowsPerPage,
+    renderData,
 }) => {
     const dropdownKeys = useMemo((): string[] => {
         return ['5', '10', '20', '50', '100'];
@@ -35,7 +38,12 @@ const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
 
     return (
         <Dropdown>
-            <Dropdown.Toggle variant="info" id="dropdown-basic" size="sm">
+            <Dropdown.Toggle
+                variant="info"
+                id="dropdown-basic"
+                size="sm"
+                disabled={Object.keys(renderData).length === 0}
+            >
                 {rowsPerPage}
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -56,6 +64,7 @@ const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
 
 const mapStateToProps = (state: RootState) => ({
     rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+    renderData: tableDataSelectors.getRenderData(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({

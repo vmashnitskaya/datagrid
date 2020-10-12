@@ -71,7 +71,13 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
 
     return (
         <>
-            <Button variant="info" size="sm" className="download" onClick={downloadFile}>
+            <Button
+                variant="info"
+                size="sm"
+                className="download"
+                onClick={downloadFile}
+                disabled={Object.keys(renderData).length === 0}
+            >
                 Download CSV
             </Button>
             {alertShown &&

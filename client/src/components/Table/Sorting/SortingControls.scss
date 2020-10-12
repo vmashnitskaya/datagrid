@@ -5,9 +5,15 @@
   .up {
     cursor: pointer;
     margin-top: -8px;
+    &.disabled{
+      cursor: auto;
+    }
   }
 
   .down {
     cursor: pointer;
+    &.disabled{
+      cursor: auto;
+    }
   }
 }

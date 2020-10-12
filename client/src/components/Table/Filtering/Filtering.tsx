@@ -11,11 +11,13 @@ import { RootState } from '../../../redux/rootReducer';
 import { TableDataActions } from '../../../redux/tableData/tableDataTypes';
 import { ColumnInterface } from '../../ColumnInterface';
 import PopOverWrapper from '../PopOverWrapper';
+import { NormalizedObject } from '../../../redux/tableData/tableDataInterface';
 
 interface FilteringProps {
     currentElementColumn: ColumnInterface;
     filteredColumnAndValue: { [key: string]: string };
     filterRenderData: () => void;
+    renderData: NormalizedObject;
 }
 
 /**
@@ -32,6 +34,7 @@ const Filtering: FC<FilteringProps> = ({
     currentElementColumn,
     filteredColumnAndValue,
     filterRenderData,
+    renderData,
 }) => {
     const [filteredColumnOpened, setFilteredColumnOpened] = useState<string>('');
 
@@ -40,10 +43,12 @@ const Filtering: FC<FilteringProps> = ({
     };
 
     const handleFilterOpened = (columnName: string) => {
-        if (filteredColumnOpened.length > 0) {
-            closePopUp();
-        } else {
-            setFilteredColumnOpened(columnName);
+        if (Object.keys(renderData).length > 0) {
+            if (filteredColumnOpened.length > 0) {
+                closePopUp();
+            } else {
+                setFilteredColumnOpened(columnName);
+            }
         }
     };
 
@@ -71,6 +76,7 @@ const Filtering: FC<FilteringProps> = ({
             currentElementColumnName={currentElementColumn.name}
             filteredColumnAndValue={filteredColumnAndValue}
             handleFilterOpened={handleFilterOpened}
+            disabled={Object.keys(renderData).length === 0}
         />
     );
     const isOpened =
@@ -89,6 +95,7 @@ const Filtering: FC<FilteringProps> = ({
 
 const mapStateToProps = (state: RootState) => ({
     filteredColumnAndValue: selectors.getFilteredColumnAndValue(state),
+    renderData: selectors.getRenderData(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
