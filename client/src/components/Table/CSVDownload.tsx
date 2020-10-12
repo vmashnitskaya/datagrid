@@ -32,18 +32,19 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
         }
     }, [alertShown, hideAlert]);
 
-    const returnStringFromObjectValues = (obj: { [key: string]: any }) => {
-        return Object.values(obj)
+    const returnStringValues = (obj: { [key: string]: any }) => {
+        return Object.keys(obj)
             .map((el) => {
-                if (typeof el === 'object' && el !== null) {
-                    return Object.values(el).join('/');
+                if (el !== '_id') {
+                    return obj[el];
                 }
-                return el;
+                return '';
             })
+            .filter((el) => el !== '')
             .join(',');
     };
 
-    const downloadTxtFile = () => {
+    const downloadFile = () => {
         if (checkedItems.length > 0) {
             const element = document.createElement('a');
 
@@ -52,7 +53,7 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
             const arrayToDownload = checkedItems.map((checkedItem) => renderData[checkedItem]);
             const stringToDownload = arrayToDownload
                 .map((el) => {
-                    return ` ,${returnStringFromObjectValues(el)}`;
+                    return ` ,${returnStringValues(el)}`;
                 })
                 .join('\n');
 
@@ -70,7 +71,7 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
 
     return (
         <>
-            <Button variant="info" size="sm" className="download" onClick={downloadTxtFile}>
+            <Button variant="info" size="sm" className="download" onClick={downloadFile}>
                 Download CSV
             </Button>
             {alertShown &&
