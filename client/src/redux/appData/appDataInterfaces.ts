@@ -15,12 +15,12 @@ export interface NormalizedObject {
 
 export interface NormalizedData {
     dataNormalized: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
 }
 
 export interface AppDataState {
     appData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     loading: boolean;
     error: string;
 }

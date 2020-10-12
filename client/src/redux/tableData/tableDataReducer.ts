@@ -20,6 +20,7 @@ const initialState = {
     rowsPerPage: 10,
     currentPage: 1,
     totalPages: 1,
+    tabActive: 'Users',
 };
 
 const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
@@ -39,6 +40,8 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return { ...state, columnHeaders: [...action.payload] };
         case types.SET_SORTING:
             return { ...state, sorting: action.payload };
+        case types.SET_TAB_ACTIVE:
+            return { ...state, tabActive: action.payload };
         case types.SET_SORTING_COLUMN:
             return {
                 ...state,
@@ -70,10 +73,10 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 currentPage: action.payload,
             };
         case types.CHECK_ROW_CHECKBOX: {
-            const id = Number(action.payload);
-            const arrayChecked = state.checkedItems.includes(id)
-                ? state.checkedItems.filter((el) => el !== id)
-                : [...state.checkedItems, id];
+            const _id = action.payload;
+            const arrayChecked = state.checkedItems.includes(_id)
+                ? state.checkedItems.filter((el) => el !== _id)
+                : [...state.checkedItems, _id];
             return {
                 ...state,
                 checkedItems: state.sortedFilteredRenderDataIds.filter((el) =>
@@ -104,7 +107,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             sortingFilteringLogic.sortArray(arrayToSort, state.sortingColumn, state.sorting);
             return {
                 ...state,
-                sortedFilteredRenderDataIds: arrayToSort.map((el) => el.id),
+                sortedFilteredRenderDataIds: arrayToSort.map((el) => el._id),
             };
         }
         case types.FILTER_RENDER_DATA: {
@@ -122,11 +125,11 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             });
             return {
                 ...state,
-                sortedFilteredRenderDataIds: data.map((el) => el.id),
+                sortedFilteredRenderDataIds: data.map((el) => el._id),
             };
         }
-        case types.DELETE_ROWS: {
-            let array: number[] = [...state.allIds];
+        case types.DELETE_DATA_SUCCESS: {
+            let array: string[] = [...state.allIds];
             state.checkedItems.forEach((forEachEl) => {
                 array = array.filter((filterEl) => filterEl !== forEachEl);
             });

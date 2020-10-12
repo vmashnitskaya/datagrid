@@ -1,19 +1,24 @@
-import React, { FC, useMemo, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-import { Redirect, Route, Switch } from 'react-router';
+import React, { FC, useMemo, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { Dispatch } from 'redux';
+import { Link } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router';
+import clsx from 'clsx';
+
+import { Button } from 'react-bootstrap';
 import UserTable from './UserTable';
 import AppTable from './AppTable';
 import LocationTable from './LocationTable';
 import AuthPage from './AuthPage';
+import './Router.scss';
+
 import { RootState } from '../redux/rootReducer';
-import authenticationSelectors from '../redux/authentication/authenticationSelectors';
 import { AuthActions } from '../redux/authentication/authenticationTypes';
 import authenticationActions from '../redux/authentication/authenticationActions';
-import './Router.scss';
+import authenticationSelectors from '../redux/authentication/authenticationSelectors';
+import tableDataSelectors from '../redux/tableData/tableDataSelectors';
+import tableDataActions from '../redux/tableData/tableDataActions';
+import { TableDataActions } from '../redux/tableData/tableDataTypes';
 
 interface LinkDef {
     label: string;
@@ -23,15 +28,15 @@ interface LinkDef {
 interface RouterParams {
     token: string;
     logout: () => void;
+    setTabActive: (tabActive: string) => void;
+    tabActive: string;
 }
 
-const Router: FC<RouterParams> = ({ token, logout }) => {
-    const [tabActive, setTabActive] = useState<string | undefined>('Users');
-
+const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) => {
     useEffect(() => {
         localStorage.setItem('token', token);
         setTabActive('Users');
-    }, [token]);
+    }, [token, setTabActive]);
 
     const links: LinkDef[] = useMemo(
         () => [
@@ -53,7 +58,9 @@ const Router: FC<RouterParams> = ({ token, logout }) => {
 
     const handleTabActiveChange = (event: React.MouseEvent<HTMLElement>): void => {
         const newActiveLabel = event.currentTarget.dataset.label;
-        setTabActive(newActiveLabel);
+        if (newActiveLabel) {
+            setTabActive(newActiveLabel);
+        }
     };
 
     const handleLogout = () => {
@@ -136,10 +143,14 @@ const Router: FC<RouterParams> = ({ token, logout }) => {
 
 const mapStateToProps = (state: RootState) => ({
     token: authenticationSelectors.getToken(state),
+    tabActive: tableDataSelectors.getTabActive(state),
 });
-const mapDispatchToProps = (dispatch: Dispatch<AuthActions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch<AuthActions | TableDataActions>) => ({
     logout: () => {
         dispatch(authenticationActions.logout());
+    },
+    setTabActive: (tabActive: string) => {
+        dispatch(tableDataActions.setTabActive(tabActive));
     },
 });
 

@@ -1,6 +1,11 @@
+import { ThunkAction } from 'redux-thunk';
 import types, { TableDataActions } from './tableDataTypes';
 import { NormalizedObject } from './tableDataInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
+import { RootState } from '../rootReducer';
+import selectors from './tableDataSelectors';
+import authSelectors from '../authentication/authenticationSelectors';
+import dataHttp from '../dataHttp';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -26,14 +31,14 @@ const setColumnHeaders = (columnHeaders: ColumnInterface[]): TableDataActions =>
         payload: columnHeaders,
     };
 };
-const setSortedFilteredRenderDataIds = (allIds: number[]): TableDataActions => {
+const setSortedFilteredRenderDataIds = (allIds: string[]): TableDataActions => {
     return {
         type: types.SET_SORTED_FILTERED_RENDER_DATA_IDS,
         payload: allIds,
     };
 };
 
-const setSortFilterSlicedDataIds = (sortFilterSlicedDataIds: number[]): TableDataActions => {
+const setSortFilterSlicedDataIds = (sortFilterSlicedDataIds: string[]): TableDataActions => {
     return {
         type: types.SET_SORT_FILTER_SLICED_DATA_IDS,
         payload: sortFilterSlicedDataIds,
@@ -91,7 +96,7 @@ const setError = (error: string): TableDataActions => {
     };
 };
 
-const setAllIds = (allIds: number[]): TableDataActions => {
+const setAllIds = (allIds: string[]): TableDataActions => {
     return {
         type: types.SET_ALL_IDS,
         payload: allIds,
@@ -111,10 +116,61 @@ const checkRowCheckbox = (id: string): TableDataActions => {
     };
 };
 
-const deleteRows = (): TableDataActions => {
+const deleteDataPending = (): TableDataActions => {
     return {
-        type: types.DELETE_ROWS,
+        type: types.DELETE_DATA_PENDING,
     };
+};
+
+const deleteDataSuccess = (message: string): TableDataActions => {
+    return {
+        type: types.DELETE_DATA_SUCCESS,
+        payload: message,
+    };
+};
+
+const deleteDataFailed = (error: string): TableDataActions => {
+    return {
+        type: types.DELETE_DATA_FAILED,
+        payload: error,
+    };
+};
+
+const setTabActive = (tabActive: string): TableDataActions => {
+    return {
+        type: types.SET_TAB_ACTIVE,
+        payload: tabActive,
+    };
+};
+
+const deleteRows = (): ThunkAction<Promise<void>, RootState, unknown, TableDataActions> => async (
+    dispatch,
+    getState
+) => {
+    try {
+        dispatch(deleteDataPending());
+        const rowsSelected = selectors.getCheckedItems(getState());
+        const token = authSelectors.getToken(getState());
+        const tabActive = selectors.getTabActive(getState()).toLowerCase();
+
+        const result = await dataHttp(
+            `/api/${tabActive}/delete`,
+            'DELETE',
+            { rowsSelected },
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+        const message = await result.json();
+
+        if (result.code === 200) {
+            dispatch(deleteDataSuccess(message));
+        } else {
+            dispatch(deleteDataFailed(message));
+        }
+    } catch (e) {
+        dispatch(deleteDataFailed(e.message));
+    }
 };
 
 export default {
@@ -136,4 +192,5 @@ export default {
     resetFilters,
     checkRowCheckbox,
     deleteRows,
+    setTabActive,
 };

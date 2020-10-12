@@ -14,7 +14,7 @@ interface LocationTableProps {
     loadingLocation: boolean;
     errorLocation: string;
     fetchLocationsData: () => void;
-    allIds: number[];
+    allIds: string[];
 }
 
 /**

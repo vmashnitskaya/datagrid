@@ -54,7 +54,7 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
                 <input
                     type="checkbox"
                     className="rowSelection"
-                    data-id={rowElementPassed.id}
+                    data-id={rowElementPassed._id}
                     checked={rowElementPassed.checkbox}
                     onChange={handleRowChecked}
                 />

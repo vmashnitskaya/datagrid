@@ -11,17 +11,18 @@ export interface NormalizedObject {
 
 export interface TableDataInterface {
     renderData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     error: string;
     loading: boolean;
     columnHeaders: ColumnInterface[];
     sorting: string;
     sortingColumn: string;
-    sortedFilteredRenderDataIds: number[];
-    sortFilterSlicedDataIds: number[];
+    sortedFilteredRenderDataIds: string[];
+    sortFilterSlicedDataIds: string[];
     filteredColumnAndValue: FilteringColumn;
-    checkedItems: number[];
+    checkedItems: string[];
     rowsPerPage: number;
     currentPage: number;
     totalPages: number;
+    tabActive: string;
 }

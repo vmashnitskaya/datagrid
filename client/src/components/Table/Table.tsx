@@ -22,11 +22,11 @@ import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 export interface TableProps {
     tableLoading: boolean;
     tableError: string;
-    tableAllIds: number[];
+    tableAllIds: string[];
     renderData: { [key: string]: any };
     loading: boolean;
     error: string;
-    allIds: number[];
+    allIds: string[];
     columnHeaders: ColumnInterface[];
     rowsPerPage: number;
     currentPage: number;
@@ -35,11 +35,11 @@ export interface TableProps {
     setTotalPages: (totalPages: number) => void;
     sortRenderData: () => void;
     setTableRenderData: (data: NormalizedObject) => void;
-    setTableAllIds: (allIds: number[]) => void;
-    setSortedFilteredRenderDataIds: (allIds: number[]) => void;
-    setSortFilterSlicedDataIds: (allIds: number[]) => void;
-    sortedFilteredRenderDataIds: number[];
-    sortFilterSlicedDataIds: number[];
+    setTableAllIds: (allIds: string[]) => void;
+    setSortedFilteredRenderDataIds: (allIds: string[]) => void;
+    setSortFilterSlicedDataIds: (allIds: string[]) => void;
+    sortedFilteredRenderDataIds: string[];
+    sortFilterSlicedDataIds: string[];
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
     tableRenderData: { [key: string]: any };
@@ -53,23 +53,23 @@ export interface TableProps {
  * @param {FilteringColumn} props.filteredColumnAndValue - the object with column as key and query as value.
  * @param {ColumnInterface[]} props.tableColumnHeaders - column headers used for table.
  * @param {string} props.tableError - the error if occurred during data loading.
- * @param {number[]} props.tableAllIds - the array with initial data ids used in component.
+ * @param {string[]} props.tableAllIds - the array with initial data ids used in component.
  * @param {NormalizedObject} props.renderData - the object with whole data for the table, not sorted, filtered, sliced.
- * @param {number[]} props.allIds - the array with ids for props.renderData.
+ * @param {string[]} props.allIds - the array with ids for props.renderData.
  * @param {boolean} props.loading - the loading of data supplied from one of custom tables.
  * @param {string} props.error - the error supplied from one of custom tables.
  * @param {ColumnInterface[]} props.columnHeaders - the array with column headers and information about columns.
- * @param {number[]} props.sortFilterSlicedDataIds  - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
- * @param {number[]} props.sortedFilteredRenderDataIds - the array with sequence of ids for filtered and sorted data.
+ * @param {string[]} props.sortFilterSlicedDataIds  - the array with sequence of ids for filtered, sorted, sliced data. Used for displaying on particular table page.
+ * @param {string[]} props.sortedFilteredRenderDataIds - the array with sequence of ids for filtered and sorted data.
  * @param {number} props.rowsPerPage - the amount of rows per page.
  * @param {number} props.currentPage - the current page.
  * @param {number} props.totalPages - the total pages in table.
  * @param {function(FilteringColumn): void} props.setFilteredColumnAndValue
  * @param {function(number): void} props.setTotalPages
  * @param {function(NormalizedObject): void} props.setTableRenderData
- * @param {function(number[]): void} props.setTableAllIds
- * @param {function(number[]): void} props.setSortedFilteredRenderDataIds
- * @param {function(number[]): void} props.setSortFilterSlicedDataIds
+ * @param {function(string[]): void} props.setTableAllIds
+ * @param {function(string[]): void} props.setSortedFilteredRenderDataIds
+ * @param {function(string[]): void} props.setSortFilterSlicedDataIds
  * @param {function(ColumnInterface[]: void)} props.setTableColumnHeaders
  * @returns {JSX.Element}
  */
@@ -191,15 +191,18 @@ const Table: FC<TableProps> = ({
                         <tbody>
                             {sortFilterSlicedDataIds.length === 0 && (
                                 <tr>
-                                    <td className="bg-light no-data" colSpan={columnHeaders.length}>
+                                    <td
+                                        className="bg-light no-data"
+                                        colSpan={columnHeaders.filter((el) => el.display).length}
+                                    >
                                         No data to display.
                                     </td>
                                 </tr>
                             )}
                             {sortFilterSlicedDataIds.length > 0 &&
-                                sortFilterSlicedDataIds.map((element: number) => (
+                                sortFilterSlicedDataIds.map((element: string) => (
                                     <TableRow
-                                        key={`${Date.now()}_key${element}`}
+                                        key={element}
                                         id={element}
                                         columnHeaders={tableColumnHeaders}
                                     />
@@ -207,7 +210,7 @@ const Table: FC<TableProps> = ({
                         </tbody>
                         <tfoot>
                             <tr className="mb-3">
-                                <td colSpan={columnHeaders.length}>
+                                <td colSpan={columnHeaders.filter((el) => el.display).length}>
                                     <div className="footer-controls">
                                         <div className="footer-buttons">
                                             <RowsPerPageControl />
@@ -253,13 +256,13 @@ const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     setTableRenderData: (data: NormalizedObject) => {
         dispatch(actions.setRenderData(data));
     },
-    setTableAllIds: (allIds: number[]) => {
+    setTableAllIds: (allIds: string[]) => {
         dispatch(actions.setAllIds(allIds));
     },
-    setSortedFilteredRenderDataIds: (allIds: number[]) => {
+    setSortedFilteredRenderDataIds: (allIds: string[]) => {
         dispatch(actions.setSortedFilteredRenderDataIds(allIds));
     },
-    setSortFilterSlicedDataIds: (allIds: number[]) => {
+    setSortFilterSlicedDataIds: (allIds: string[]) => {
         dispatch(actions.setSortFilterSlicedDataIds(allIds));
     },
     sortRenderData: () => {

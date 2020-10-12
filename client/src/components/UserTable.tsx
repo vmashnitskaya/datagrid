@@ -11,7 +11,7 @@ import { NormalizedObject } from '../redux/userData/userDataInterfaces';
 
 interface UserTableProps {
     userData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     loadingUser: boolean;
     errorUser: string;
     fetchUsersData: () => void;

@@ -14,7 +14,7 @@ interface AppTableProps {
     loadingApp: boolean;
     errorApp: string;
     fetchAppsData: () => void;
-    allIds: number[];
+    allIds: string[];
 }
 
 /**

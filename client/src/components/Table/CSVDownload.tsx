@@ -10,7 +10,7 @@ import { ColumnInterface } from '../ColumnInterface';
 import TableAlert from './TableAlert';
 
 interface DownloadProps {
-    checkedItems: number[];
+    checkedItems: string[];
     renderData: NormalizedObject;
     columnHeaders: ColumnInterface[];
 }

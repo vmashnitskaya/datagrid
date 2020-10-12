@@ -26,8 +26,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/appData/appDataSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/locationData/locationDataSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/normalizeData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/normalizeData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/userData/userDataSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/userData.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userData.routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,10 +94,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\components" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid" />
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\components" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src\components\Table\Paging" />
     </key>
@@ -109,7 +133,7 @@
       <workItem from="1602486947183" duration="592000" />
       <workItem from="1602487541082" duration="1180000" />
       <workItem from="1602492930867" duration="2256000" />
-      <workItem from="1602495207629" duration="5722000" />
+      <workItem from="1602495207629" duration="12846000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
@@ -161,10 +185,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2411" y="-233" width="887" height="721" key="#ESLint" timestamp="1602320443757">
+    <state x="2411" y="-233" width="887" height="721" key="#ESLint" timestamp="1602504143367">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
-    <state x="2411" y="-233" width="887" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602320443757" />
+    <state x="2411" y="-233" width="887" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602504143367" />
     <state x="598" y="271" key="#ESLint/0.0.1536.834@0.0.1536.834" timestamp="1601632638536" />
     <state x="2496" y="-157" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602257594568">
       <screen x="1920" y="-390" width="1920" height="1050" />
@@ -195,20 +219,21 @@
     <state x="377" y="0" key="RollbackChangesDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601969194353" />
     <state x="2391" y="-390" key="RollbackChangesDialog/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1601967494359" />
     <state x="377" y="0" key="RollbackChangesDialog/0.0.1536.834@0.0.1536.834" timestamp="1601637797293" />
-    <state x="1919" y="-390" width="1412" height="883" key="SettingsEditor" timestamp="1602495156830">
+    <state x="1919" y="-390" width="1412" height="883" key="SettingsEditor" timestamp="1602504217265">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
     <state x="-1" y="0" width="1412" height="834" key="SettingsEditor/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601903103827" />
-    <state x="1919" y="-390" width="1412" height="883" key="SettingsEditor/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602495156830" />
+    <state x="1919" y="-390" width="1412" height="883" key="SettingsEditor/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602504217265" />
     <state x="179" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1601641951742" />
     <state width="623" height="498" key="SwitcherDM" timestamp="1602056495750">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="623" height="498" key="SwitcherDM/0.0.1536.834@0.0.1536.834" timestamp="1602056495750" />
-    <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601969649311">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="2036" y="-273" width="1688" height="816" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602507366757">
+      <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
     <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601969649311" />
+    <state x="2036" y="-273" width="1688" height="816" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602507366757" />
     <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.834@0.0.1536.834" timestamp="1601964322323" />
     <state x="2388" y="-344" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602250937336">
       <screen x="1920" y="-390" width="1920" height="1050" />

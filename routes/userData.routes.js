@@ -21,7 +21,7 @@ router.post('/create', auth, async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
     try {
-        const usersData = await UserData.deleteOne({ id: req.user.userId });
+        const usersData = await UserData.find({ owner: req.user.userId });
         res.status(200).json(usersData)
     } catch (e) {
         res.status(500).json({ message: 'Something went wrong, try again later' });
