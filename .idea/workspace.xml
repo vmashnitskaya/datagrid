@@ -26,11 +26,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +117,7 @@
       <workItem from="1602487541082" duration="1180000" />
       <workItem from="1602492930867" duration="2256000" />
       <workItem from="1602495207629" duration="14386000" />
-      <workItem from="1602513338729" duration="896000" />
+      <workItem from="1602513338729" duration="8246000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
@@ -168,10 +169,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2411" y="-233" width="887" height="721" key="#ESLint" timestamp="1602504143367">
+    <state x="2411" y="-233" width="887" height="721" key="#ESLint" timestamp="1602524864018">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
-    <state x="2411" y="-233" width="887" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602504143367" />
+    <state x="2411" y="-233" width="887" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602524864018" />
     <state x="598" y="271" key="#ESLint/0.0.1536.834@0.0.1536.834" timestamp="1601632638536" />
     <state x="2496" y="-157" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602257594568">
       <screen x="1920" y="-390" width="1920" height="1050" />

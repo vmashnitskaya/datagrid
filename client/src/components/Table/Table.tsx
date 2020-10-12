@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { Dispatch } from 'redux';
 import Loader from '../Loader';
@@ -18,6 +19,7 @@ import actions from '../../redux/tableData/tableDataActions';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
+import CreateNewRowControl from './CreateNewRowControl';
 
 export interface TableProps {
     tableLoading: boolean;
@@ -43,6 +45,7 @@ export interface TableProps {
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
     tableRenderData: { [key: string]: any };
+    tabActive: string;
 }
 
 /**
@@ -95,6 +98,7 @@ const Table: FC<TableProps> = ({
     sortedFilteredRenderDataIds,
     setTableColumnHeaders,
     tableColumnHeaders,
+    tabActive,
 }) => {
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
@@ -187,6 +191,17 @@ const Table: FC<TableProps> = ({
                                         )
                                 )}
                             </tr>
+                            <tr>
+                                <td
+                                    className="bg-light create-wrapper"
+                                    colSpan={columnHeaders.length}
+                                >
+                                    <Link
+                                        to={`/create?from=${tabActive}`}
+                                        component={CreateNewRowControl}
+                                    />
+                                </td>
+                            </tr>
                         </thead>
                         <tbody>
                             {sortFilterSlicedDataIds.length === 0 && (
@@ -235,6 +250,7 @@ const mapStateToProps = (state: RootState) => ({
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     tableRenderData: tableDataSelectors.getRenderData(state),
+    tabActive: tableDataSelectors.getTabActive(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({

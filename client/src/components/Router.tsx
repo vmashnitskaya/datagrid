@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Redirect, Route, Switch } from 'react-router';
 import clsx from 'clsx';
 
@@ -10,6 +10,7 @@ import UserTable from './UserTable';
 import AppTable from './AppTable';
 import LocationTable from './LocationTable';
 import AuthPage from './AuthPage';
+import CreateNewRowPage from './Table/CreateNewRowPage';
 import './Router.scss';
 
 import { RootState } from '../redux/rootReducer';
@@ -33,6 +34,8 @@ interface RouterParams {
 }
 
 const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) => {
+    const location = useLocation();
+
     useEffect(() => {
         localStorage.setItem('token', token);
         setTabActive('Users');
@@ -56,10 +59,9 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
         []
     );
 
-    const handleTabActiveChange = (event: React.MouseEvent<HTMLElement>): void => {
-        const newActiveLabel = event.currentTarget.dataset.label;
-        if (newActiveLabel) {
-            setTabActive(newActiveLabel);
+    const handleTabActiveChange = (label: string): void => {
+        if (label) {
+            setTabActive(label);
         }
     };
 
@@ -88,27 +90,28 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
             {token ? (
                 <div className="container app-wrapper">
                     <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-                        {links.map((link) => {
-                            return (
-                                <Link
-                                    className={clsx(
-                                        'nav-link',
-                                        'tab',
-                                        'mt-2',
-                                        'text-dark',
-                                        tabActive === link.label && 'active'
-                                    )}
-                                    key={link.label}
-                                    role="tab"
-                                    aria-controls="nav-home"
-                                    to={link.pathname}
-                                    data-label={link.label}
-                                    onClick={handleTabActiveChange}
-                                >
-                                    {link.label}
-                                </Link>
-                            );
-                        })}
+                        {location.pathname !== '/create' &&
+                            links.map((link) => {
+                                return (
+                                    <Link
+                                        className={clsx(
+                                            'nav-link',
+                                            'tab',
+                                            'mt-2',
+                                            'text-dark',
+                                            tabActive === link.label && 'active'
+                                        )}
+                                        key={link.label}
+                                        role="tab"
+                                        aria-controls="nav-home"
+                                        to={link.pathname}
+                                        data-label={link.label}
+                                        onClick={() => handleTabActiveChange(link.label)}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                );
+                            })}
                     </div>
                     <div className="tab-content" id="nav-tabContent">
                         <Switch>
@@ -123,6 +126,9 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
                             </Route>
                             <Route path="/locations">
                                 <LocationTable />
+                            </Route>
+                            <Route path="/create">
+                                <CreateNewRowPage />
                             </Route>
                         </Switch>
                     </div>
