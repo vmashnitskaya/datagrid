@@ -31,8 +31,8 @@ router.get('/', auth, async (req, res) => {
 router.delete('/delete', auth, async (req, res) => {
     try {
         const {rowsSelected} = req.body;
-        const documentsDeleted = LocationData.deleteMany({_id: { $in: rowsSelected}})
-        res.status(200).json({message: `${documentsDeleted.deletedCount} items were deleted.`})
+        const documentsDeleted = await LocationData.deleteMany({_id: { $in: rowsSelected}})
+        res.status(200).json({message: `${documentsDeleted.deletedCount} items were deleted.`, ids: rowsSelected})
     } catch (e) {
         res.status(500).json({ message: 'Something went wrong, try again later' });
     }

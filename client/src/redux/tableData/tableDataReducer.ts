@@ -130,7 +130,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
         }
         case types.DELETE_DATA_SUCCESS: {
             let array: string[] = [...state.allIds];
-            state.checkedItems.forEach((forEachEl) => {
+            action.payload.forEach((forEachEl) => {
                 array = array.filter((filterEl) => filterEl !== forEachEl);
             });
 

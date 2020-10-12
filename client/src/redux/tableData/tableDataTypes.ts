@@ -80,7 +80,7 @@ interface SetSortedFilteredRenderDataIdsAction
 type DeleteDataPendingAction = Action<typeof DELETE_DATA_PENDING>;
 
 interface DeleteDataSuccessAction extends Action<typeof DELETE_DATA_SUCCESS> {
-    payload: string;
+    payload: string[];
 }
 
 interface DeleteDataFailedAction extends Action<typeof DELETE_DATA_FAILED> {

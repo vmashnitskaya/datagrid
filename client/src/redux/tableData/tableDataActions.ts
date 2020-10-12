@@ -122,10 +122,10 @@ const deleteDataPending = (): TableDataActions => {
     };
 };
 
-const deleteDataSuccess = (message: string): TableDataActions => {
+const deleteDataSuccess = (ids: string[]): TableDataActions => {
     return {
         type: types.DELETE_DATA_SUCCESS,
-        payload: message,
+        payload: ids,
     };
 };
 
@@ -161,13 +161,7 @@ const deleteRows = (): ThunkAction<Promise<void>, RootState, unknown, TableDataA
                 Authorization: `Bearer ${token}`,
             }
         );
-        const message = await result.json();
-
-        if (result.code === 200) {
-            dispatch(deleteDataSuccess(message));
-        } else {
-            dispatch(deleteDataFailed(message));
-        }
+        dispatch(deleteDataSuccess(result.ids));
     } catch (e) {
         dispatch(deleteDataFailed(e.message));
     }
