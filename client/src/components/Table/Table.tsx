@@ -208,23 +208,14 @@ const Table: FC<TableProps> = ({
                                     />
                                 ))}
                         </tbody>
-                        <tfoot>
-                            <tr className="mb-3">
-                                <td colSpan={columnHeaders.filter((el) => el.display).length}>
-                                    <div className="footer-controls">
-                                        <div className="footer-buttons">
-                                            <RowsPerPageControl />
-                                            <CSVDownload />
-                                        </div>
-                                        <PaginationControl
-                                            currentPage={currentPage}
-                                            totalPages={totalPages}
-                                        />
-                                    </div>
-                                </td>
-                            </tr>
-                        </tfoot>
                     </table>
+                    <div className="footer-controls">
+                        <div className="footer-buttons">
+                            <RowsPerPageControl />
+                            <CSVDownload />
+                        </div>
+                        <PaginationControl currentPage={currentPage} totalPages={totalPages} />
+                    </div>
                 </>
             )}
         </>

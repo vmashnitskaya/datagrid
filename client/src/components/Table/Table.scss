@@ -11,19 +11,18 @@
   .no-data{
     text-align: center;
   }
-  tfoot{
-    .footer {
-      &-controls {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      &-buttons{
-        display: flex;
-        .download{
-          margin-left: 10px;
-        }
-      }
+}
+.footer {
+  &-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  &-buttons{
+    display: flex;
+    .download{
+      margin-left: 10px;
     }
   }
 }
