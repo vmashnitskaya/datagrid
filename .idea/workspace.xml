@@ -26,21 +26,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.test.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.test.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Pagination/PaginationControl.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Pagination/PaginationControl.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Pagination/PaginationControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Pagination/PaginationControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Pagination/RowsPerPageControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Pagination/RowsPerPageControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableHeader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/stories/FilterControl.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/stories/FilterControl.stories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/appData.routers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/appData.routers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/locationData.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/locationData.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/userData.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userData.routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +111,7 @@
       <workItem from="1602486947183" duration="592000" />
       <workItem from="1602487541082" duration="1180000" />
       <workItem from="1602492930867" duration="2256000" />
-      <workItem from="1602495207629" duration="2618000" />
+      <workItem from="1602495207629" duration="4833000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
