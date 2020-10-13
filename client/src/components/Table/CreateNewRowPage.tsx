@@ -57,7 +57,6 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({ columnHeaders }) => {
     const handleFormSubmit = (event: FormEvent) => {
         event.preventDefault();
         const { checkbox, ...others } = formInput;
-        await createNewRow(others);
     };
 
     return (

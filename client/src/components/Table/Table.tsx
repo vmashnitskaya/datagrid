@@ -16,9 +16,12 @@ import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 
 import actions from '../../redux/tableData/tableDataActions';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import pagingSelectors from '../../redux/tableData/paging/pagingSelectors';
+import pagingActions from '../../redux/tableData/paging/pagingActions';
 import { RootState } from '../../redux/rootReducer';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import CreateNewRowControl from './CreateNewRowControl';
+import { PagingActions } from '../../redux/tableData/paging/pagingTypes';
 
 export interface TableProps {
     tableLoading: boolean;
@@ -234,9 +237,9 @@ const Table: FC<TableProps> = ({
 const mapStateToProps = (state: RootState) => ({
     sorting: tableDataSelectors.getSorting(state),
     sortingColumn: tableDataSelectors.getSortingColumn(state),
-    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
-    currentPage: tableDataSelectors.getCurrentPage(state),
-    totalPages: tableDataSelectors.getTotalPages(state),
+    rowsPerPage: pagingSelectors.getRowsPerPage(state),
+    currentPage: pagingSelectors.getCurrentPage(state),
+    totalPages: pagingSelectors.getTotalPages(state),
     tableLoading: tableDataSelectors.getLoading(state),
     tableError: tableDataSelectors.getError(state),
     tableAllIds: tableDataSelectors.getAllIds(state),
@@ -246,12 +249,12 @@ const mapStateToProps = (state: RootState) => ({
     tableRenderData: tableDataSelectors.getRenderData(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch<TableDataActions | PagingActions>) => ({
     setFilteredColumnAndValue: (data: FilteringColumn) => {
         dispatch(actions.setFilteredColumnAndValue(data));
     },
     setTotalPages: (totalPages: number) => {
-        dispatch(actions.setTotalPages(totalPages));
+        dispatch(pagingActions.setTotalPages(totalPages));
     },
     setTableRenderData: (data: NormalizedObject) => {
         dispatch(actions.setRenderData(data));

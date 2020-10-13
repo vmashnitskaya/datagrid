@@ -1,9 +1,10 @@
-import { Reducer } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import types, { TableDataActions } from './tableDataTypes';
 import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
+import pagingReducer from './paging/pagingReducer';
 
 const initialState = {
     renderData: {},
@@ -17,9 +18,6 @@ const initialState = {
     sortFilterSlicedDataIds: [],
     filteredColumnAndValue: {},
     checkedItems: [],
-    rowsPerPage: 10,
-    currentPage: 1,
-    totalPages: 1,
     tabActive: 'users',
 };
 
@@ -62,16 +60,6 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 ...state,
                 filteredColumnAndValue: { ...state.filteredColumnAndValue, ...action.payload },
             };
-        case types.SET_ROWS_PER_PAGE:
-            return {
-                ...state,
-                rowsPerPage: action.payload,
-            };
-        case types.SET_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.payload,
-            };
         case types.CHECK_ROW_CHECKBOX: {
             const _id = action.payload;
             const arrayChecked = state.checkedItems.includes(_id)
@@ -95,11 +83,6 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 },
             };
         }
-        case types.SET_TOTAL_PAGES:
-            return {
-                ...state,
-                totalPages: action.payload,
-            };
         case types.SORT_RENDER_DATA: {
             const arrayToSort = [
                 ...state.sortedFilteredRenderDataIds.map((elem) => state.renderData[elem]),
@@ -145,4 +128,6 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
     }
 };
 
-export default tableDataReducer;
+const reducer = combineReducers({ tableData: tableDataReducer, paging: pagingReducer });
+
+export default reducer;

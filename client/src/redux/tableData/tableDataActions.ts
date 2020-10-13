@@ -51,24 +51,6 @@ const setFilteredColumnAndValue = (newEntry: { [key: string]: string }): TableDa
         payload: newEntry,
     };
 };
-const setRowsPerPage = (rowsPerPage: number): TableDataActions => {
-    return {
-        type: types.SET_ROWS_PER_PAGE,
-        payload: rowsPerPage,
-    };
-};
-const setCurrentPage = (currentPage: number): TableDataActions => {
-    return {
-        type: types.SET_CURRENT_PAGE,
-        payload: currentPage,
-    };
-};
-const setTotalPages = (totalPages: number): TableDataActions => {
-    return {
-        type: types.SET_TOTAL_PAGES,
-        payload: totalPages,
-    };
-};
 
 const filterRenderData = (): TableDataActions => {
     return {
@@ -173,9 +155,6 @@ export default {
     setSortingColumn,
     setSortedFilteredRenderDataIds,
     setFilteredColumnAndValue,
-    setRowsPerPage,
-    setTotalPages,
-    setCurrentPage,
     filterRenderData,
     setSortFilterSlicedDataIds,
     setRenderData,

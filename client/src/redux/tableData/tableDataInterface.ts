@@ -21,8 +21,5 @@ export interface TableDataInterface {
     sortFilterSlicedDataIds: string[];
     filteredColumnAndValue: FilteringColumn;
     checkedItems: string[];
-    rowsPerPage: number;
-    currentPage: number;
-    totalPages: number;
     tabActive: string;
 }
