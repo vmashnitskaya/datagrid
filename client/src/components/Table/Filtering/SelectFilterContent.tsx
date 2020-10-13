@@ -29,7 +29,7 @@ const SelectFilterContent = React.forwardRef<RefForInput, SelectFilterContentPro
         return (
             <>
                 {currentSelectionOptions.map((element) => (
-                    <>
+                    <React.Fragment key={element}>
                         <label htmlFor={`${element}`}>
                             {element.slice(0, 1).toUpperCase() + element.slice(1)}
                         </label>
@@ -42,7 +42,7 @@ const SelectFilterContent = React.forwardRef<RefForInput, SelectFilterContentPro
                             checked={filteredColumnAndValue[currentColumnName] === element}
                             onChange={(event) => handleInputProvided(event, currentColumnName)}
                         />
-                    </>
+                    </React.Fragment>
                 ))}
                 <input type="submit" className="btn btn-info btn-sm" value="Filter" />
                 <HelpText value="Select filter criteria and click Filter." />

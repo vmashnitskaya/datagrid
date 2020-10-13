@@ -1,14 +1,30 @@
 import React, { FC } from 'react';
-import Button, { ButtonProps } from 'react-bootstrap/Button';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
-type CreateNewRowControlProps = Omit<ButtonProps, 'size' | 'variant'>;
+import Button from 'react-bootstrap/Button';
 
-const CreateNewRowControl: FC<CreateNewRowControlProps> = (props) => {
+import { RootState } from '../../redux/rootReducer';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+
+interface CreateNewRowControlProps {
+    tabActive: string;
+}
+
+const CreateNewRowControl: FC<CreateNewRowControlProps> = ({ tabActive }) => {
+    const history = useHistory();
+    const handleClick = () => {
+        history.push(`/create?from=${tabActive}`);
+    };
     return (
-        <Button {...props} size="sm" variant="info">
+        <Button size="sm" variant="info" onClick={handleClick}>
             Create new
         </Button>
     );
 };
 
-export default CreateNewRowControl;
+const mapStateToProps = (state: RootState) => ({
+    tabActive: tableDataSelectors.getTabActive(state),
+});
+
+export default connect(mapStateToProps)(CreateNewRowControl);

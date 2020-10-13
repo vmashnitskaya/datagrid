@@ -20,7 +20,7 @@ const initialState = {
     rowsPerPage: 10,
     currentPage: 1,
     totalPages: 1,
-    tabActive: 'Users',
+    tabActive: 'users',
 };
 
 const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (

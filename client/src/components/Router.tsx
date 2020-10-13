@@ -23,6 +23,7 @@ import { TableDataActions } from '../redux/tableData/tableDataTypes';
 
 interface LinkDef {
     label: string;
+    name: string;
     pathname: string;
 }
 
@@ -38,21 +39,34 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
 
     useEffect(() => {
         localStorage.setItem('token', token);
-        setTabActive('Users');
+        setTabActive('users');
     }, [token, setTabActive]);
+
+    useEffect(() => {
+        if (
+            location.pathname === '/users' ||
+            location.pathname === '/locations' ||
+            location.pathname === '/apps'
+        ) {
+            setTabActive(location.pathname.slice(1));
+        }
+    }, [location.pathname, setTabActive]);
 
     const links: LinkDef[] = useMemo(
         () => [
             {
                 label: 'Users',
+                name: 'users',
                 pathname: '/users',
             },
             {
                 label: 'Apps',
+                name: 'apps',
                 pathname: '/apps',
             },
             {
                 label: 'Locations',
+                name: 'locations',
                 pathname: '/locations',
             },
         ],
@@ -73,7 +87,7 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
     return (
         <>
             <nav className="bg-info nav">
-                <Link className="navbar-brand text-light logo" to="/">
+                <Link className="navbar-brand text-light logo" to="/users">
                     DataGrid
                 </Link>
                 {token && (
@@ -99,7 +113,7 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
                                             'tab',
                                             'mt-2',
                                             'text-dark',
-                                            tabActive === link.label && 'active'
+                                            tabActive === link.name && 'active'
                                         )}
                                         key={link.label}
                                         role="tab"

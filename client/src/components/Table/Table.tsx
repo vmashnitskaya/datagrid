@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { Dispatch } from 'redux';
 import Loader from '../Loader';
@@ -45,7 +44,6 @@ export interface TableProps {
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
     tableRenderData: { [key: string]: any };
-    tabActive: string;
 }
 
 /**
@@ -98,7 +96,6 @@ const Table: FC<TableProps> = ({
     sortedFilteredRenderDataIds,
     setTableColumnHeaders,
     tableColumnHeaders,
-    tabActive,
 }) => {
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
@@ -196,10 +193,7 @@ const Table: FC<TableProps> = ({
                                     className="bg-light create-wrapper"
                                     colSpan={columnHeaders.length}
                                 >
-                                    <Link
-                                        to={`/create?from=${tabActive}`}
-                                        component={CreateNewRowControl}
-                                    />
+                                    <CreateNewRowControl />
                                 </td>
                             </tr>
                         </thead>
@@ -250,7 +244,6 @@ const mapStateToProps = (state: RootState) => ({
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     tableRenderData: tableDataSelectors.getRenderData(state),
-    tabActive: tableDataSelectors.getTabActive(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
