@@ -28,14 +28,22 @@
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ColumnInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/ColumnInterface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterPopOver.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterPopOver.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/AppData.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/AppData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/LocationData.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/LocationData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/UserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/UserData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/appData.routers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/appData.routers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/locationData.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/locationData.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/userData.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userData.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,15 +89,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\redux\tableData" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\components" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src" />
-      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src\components\Table\Paging" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -202,12 +210,12 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="309" y="107" key="MultipleFileMergeDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601456227812" />
-    <state x="377" y="0" key="RollbackChangesDialog" timestamp="1602590212565">
+    <state x="362" y="0" key="RollbackChangesDialog" timestamp="1602669344374">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="377" y="0" key="RollbackChangesDialog/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601969194353" />
     <state x="2391" y="-390" key="RollbackChangesDialog/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1601967494359" />
-    <state x="377" y="0" key="RollbackChangesDialog/0.0.1536.834@0.0.1536.834" timestamp="1602590212565" />
+    <state x="362" y="0" key="RollbackChangesDialog/0.0.1536.834@0.0.1536.834" timestamp="1602669344374" />
     <state x="1919" y="-390" width="1412" height="883" key="SettingsEditor" timestamp="1602504217265">
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>

@@ -1,12 +1,11 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { TableDataActions } from './tableDataTypes';
 import { NormalizedObject } from './tableDataInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { ColumnInterface } from './ColumnInterface';
 import { RootState } from '../rootReducer';
 import selectors from './tableDataSelectors';
 import authSelectors from '../authentication/authenticationSelectors';
 import dataHttp from '../dataHttp';
-import normalizeData from '../normalizeData';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -26,10 +25,9 @@ const setSortingColumn = (column: string): TableDataActions => {
         payload: column,
     };
 };
-const setColumnHeaders = (columnHeaders: ColumnInterface[]): TableDataActions => {
+const setTableColumnHeaders = (): TableDataActions => {
     return {
-        type: types.SET_COLUMN_HEADERS,
-        payload: columnHeaders,
+        type: types.SET_TABLE_COLUMN_HEADERS,
     };
 };
 const setSortedFilteredRenderDataIds = (allIds: string[]): TableDataActions => {
@@ -139,6 +137,13 @@ const resetMessages = (): TableDataActions => {
     };
 };
 
+const hideColumn = (column: string): TableDataActions => {
+    return {
+        type: types.HIDE_COLUMN,
+        payload: column,
+    };
+};
+
 const deleteRows = (): ThunkAction<Promise<void>, RootState, unknown, TableDataActions> => async (
     dispatch,
     getState
@@ -198,11 +203,12 @@ export default {
     setLoading,
     setError,
     setAllIds,
-    setColumnHeaders,
+    setColumnHeaders: setTableColumnHeaders,
     resetFilters,
     checkRowCheckbox,
     deleteRows,
     setTabActive,
     addNewRow,
     resetMessages,
+    hideColumn,
 };

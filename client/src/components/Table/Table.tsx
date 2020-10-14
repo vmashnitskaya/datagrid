@@ -9,7 +9,7 @@ import PaginationControl from './Pagination/PaginationControl';
 import CSVDownload from './CSVDownload';
 import './Table.scss';
 
-import { ColumnInterface } from '../ColumnInterface';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 import { FilteringColumn } from './Filtering/FilteringColumnInterface';
 import RowsPerPageControl from './Pagination/RowsPerPageControl';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
@@ -30,7 +30,6 @@ export interface TableProps {
     renderData: { [key: string]: any };
     loading: boolean;
     allIds: string[];
-    columnHeaders: ColumnInterface[];
     rowsPerPage: number;
     currentPage: number;
     totalPages: number;
@@ -43,13 +42,14 @@ export interface TableProps {
     setSortFilterSlicedDataIds: (allIds: string[]) => void;
     sortedFilteredRenderDataIds: string[];
     sortFilterSlicedDataIds: string[];
-    setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
+    setTableColumnHeaders: () => void;
     tableColumnHeaders: ColumnInterface[];
     tableRenderData: { [key: string]: any };
     tableError: string;
     error: string;
     infoMessage: string;
     resetMessages: () => void;
+    tabActive: string;
 }
 
 /**
@@ -90,7 +90,6 @@ const Table: FC<TableProps> = ({
     allIds,
     loading,
     tableLoading,
-    columnHeaders,
     rowsPerPage,
     currentPage,
     totalPages,
@@ -106,6 +105,7 @@ const Table: FC<TableProps> = ({
     setTableColumnHeaders,
     tableColumnHeaders,
     resetMessages,
+    tabActive,
 }) => {
     const [alertShown, setAlertShown] = useState<boolean>(false);
 
@@ -133,10 +133,10 @@ const Table: FC<TableProps> = ({
     }, [allIds, setTableAllIds]);
 
     useEffect(() => {
-        if (columnHeaders.length > 0) {
-            setTableColumnHeaders(columnHeaders);
+        if (tabActive) {
+            setTableColumnHeaders();
         }
-    }, [columnHeaders, setTableColumnHeaders]);
+    }, [setTableColumnHeaders, tabActive]);
     /**
      * Table data ids are initially set to sortedFilteredRenderDataIds.
      */
@@ -211,7 +211,7 @@ const Table: FC<TableProps> = ({
                             <tr>
                                 <td
                                     className="bg-light create-wrapper"
-                                    colSpan={columnHeaders.length}
+                                    colSpan={tableColumnHeaders.length}
                                 >
                                     <CreateNewRowControl />
                                 </td>
@@ -222,7 +222,9 @@ const Table: FC<TableProps> = ({
                                 <tr>
                                     <td
                                         className="bg-light no-data"
-                                        colSpan={columnHeaders.filter((el) => el.display).length}
+                                        colSpan={
+                                            tableColumnHeaders.filter((el) => el.display).length
+                                        }
                                     >
                                         No data to display.
                                     </td>
@@ -233,7 +235,7 @@ const Table: FC<TableProps> = ({
                                     <TableRow
                                         key={element}
                                         id={element}
-                                        columnHeaders={tableColumnHeaders}
+                                        tableColumnHeaders={tableColumnHeaders}
                                     />
                                 ))}
                         </tbody>
@@ -271,6 +273,7 @@ const mapStateToProps = (state: RootState) => ({
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     tableRenderData: tableDataSelectors.getRenderData(state),
     infoMessage: tableDataSelectors.getInfoMessage(state),
+    tabActive: tableDataSelectors.getTabActive(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions | PagingActions>) => ({
@@ -295,8 +298,8 @@ const mapDispatchToProps = (dispatch: Dispatch<TableDataActions | PagingActions>
     sortRenderData: () => {
         dispatch(actions.sortRenderData());
     },
-    setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => {
-        dispatch(actions.setColumnHeaders(columnHeaders));
+    setTableColumnHeaders: () => {
+        dispatch(actions.setColumnHeaders());
     },
     resetMessages: () => {
         dispatch(actions.resetMessages());

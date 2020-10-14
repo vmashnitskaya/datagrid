@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import userDataSelectors from '../redux/userData/userDataSelectors';
 import fetchUserData from '../redux/userData/userDataActions';
@@ -6,7 +6,6 @@ import { RootState } from '../redux/rootReducer';
 
 import Table from './Table';
 
-import { ColumnInterface } from './ColumnInterface';
 import { NormalizedObject } from '../redux/userData/userDataInterfaces';
 
 interface UserTableProps {
@@ -36,81 +35,11 @@ const UserTable: FC<UserTableProps> = ({
     errorUser,
     fetchUsersData,
 }) => {
-    const columnHeaders = useMemo<ColumnInterface[]>(() => {
-        return [
-            {
-                header: '',
-                name: 'checkbox',
-                type: 'checkbox',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'First name',
-                name: 'first_name',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Last name',
-                name: 'last_name',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Birth date',
-                name: 'date',
-                type: 'string',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'Email',
-                name: 'email',
-                type: 'string',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'Gender',
-                name: 'gender',
-                type: 'select',
-                options: ['Female', 'Male'],
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Job title',
-                name: 'job_title',
-                type: 'string',
-                sorting: true,
-                filtering: false,
-                display: true,
-            },
-        ];
-    }, []);
-
     useEffect(() => {
         fetchUsersData();
     }, [fetchUsersData]);
 
-    return (
-        <Table
-            columnHeaders={columnHeaders}
-            renderData={userData}
-            loading={loadingUser}
-            error={errorUser}
-            allIds={allIds}
-        />
-    );
+    return <Table renderData={userData} loading={loadingUser} error={errorUser} allIds={allIds} />;
 };
 
 const mapStateToProps = (state: RootState) => ({

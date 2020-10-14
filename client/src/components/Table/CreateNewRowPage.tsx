@@ -13,19 +13,15 @@ import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import Button from 'react-bootstrap/Button';
-import { createPortal } from 'react-dom';
-import TableAlert from './TableAlert';
 import './CreateNewRowPage.scss';
 
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
-import { ColumnInterface } from '../ColumnInterface';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import actions from '../../redux/tableData/tableDataActions';
 import Loader from '../Loader';
 import AlertWrapper from './AlertWrapper';
-
-const portalContainer = document.getElementById('alert-root');
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -36,7 +32,7 @@ interface InputForm {
 }
 
 interface CreateNewRowPageProps {
-    columnHeaders: ColumnInterface[];
+    tableColumnHeaders: ColumnInterface[];
     addNewRow: (object: { [key: string]: string }) => void;
     loading: boolean;
     error: string;
@@ -45,7 +41,7 @@ interface CreateNewRowPageProps {
 }
 
 const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
-    columnHeaders,
+    tableColumnHeaders,
     addNewRow,
     loading,
     error,
@@ -53,8 +49,8 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
     resetMessages,
 }) => {
     const form = useMemo(() => {
-        return columnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {});
-    }, [columnHeaders]);
+        return tableColumnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {});
+    }, [tableColumnHeaders]);
     const query = useQuery();
     const history = useHistory();
     const [active, setActive] = useState<string | null>('users');
@@ -112,7 +108,7 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
             ) : (
                 <>
                     <Form validated onSubmit={handleFormSubmit}>
-                        {columnHeaders
+                        {tableColumnHeaders
                             .filter((el) => el.type !== 'checkbox')
                             .map((el) => {
                                 return el.type === 'select' ? (
@@ -180,7 +176,7 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-    columnHeaders: tableDataSelectors.getColumnHeaders(state),
+    tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     loading: tableDataSelectors.getLoading(state),
     error: tableDataSelectors.getError(state),
     infoMessage: tableDataSelectors.getInfoMessage(state),

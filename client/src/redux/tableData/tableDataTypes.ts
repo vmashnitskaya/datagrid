@@ -2,13 +2,13 @@ import { Action } from 'redux';
 import { AddAPhoto } from '@material-ui/icons';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject } from './tableDataInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { ColumnInterface } from './ColumnInterface';
 
 const SET_RENDER_DATA = 'SET_RENDER_DATA';
 const SET_ALL_IDS = 'SET_ALL_IDS';
 const SET_ERROR = 'SET_ERROR';
 const SET_LOADING = 'SET_LOADING';
-const SET_COLUMN_HEADERS = 'SET_COLUMN_HEADERS';
+const SET_TABLE_COLUMN_HEADERS = 'SET_TABLE_COLUMN_HEADERS';
 
 const MODIFY_DATA_PENDING = 'DELETE_DATA_PENDING';
 const DELETE_DATA_SUCCESS = 'DELETE_DATA_SUCCESS';
@@ -29,6 +29,8 @@ const CHECK_ROW_CHECKBOX = 'CHECK_ROW_CHECKBOX';
 
 const RESET_MESSAGES = 'RESET_MESSAGES';
 
+const HIDE_COLUMN = 'HIDE_COLUMN';
+
 interface SetRenderDataAction extends Action<typeof SET_RENDER_DATA> {
     payload: NormalizedObject;
 }
@@ -38,9 +40,13 @@ interface SetAllIdsAction extends Action<typeof SET_ALL_IDS> {
 interface SetErrorAction extends Action<typeof SET_ERROR> {
     payload: string;
 }
-interface SetColumnHeadersAction extends Action<typeof SET_COLUMN_HEADERS> {
-    payload: ColumnInterface[];
+
+interface HideColumnAction extends Action<typeof HIDE_COLUMN> {
+    payload: string;
 }
+
+type SetTableColumnHeadersAction = Action<typeof SET_TABLE_COLUMN_HEADERS>;
+
 type SetLoadingAction = Action<typeof SET_LOADING>;
 
 type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
@@ -103,7 +109,7 @@ export type TableDataActions =
     | SetErrorAction
     | SetLoadingAction
     | SetAllIdsAction
-    | SetColumnHeadersAction
+    | SetTableColumnHeadersAction
     | ResetFiltersAction
     | CheckRowCheckboxAction
     | SetTabActiveAction
@@ -111,7 +117,8 @@ export type TableDataActions =
     | DeleteDataSuccessAction
     | ModifyDataPendingAction
     | AddDataSuccessAction
-    | ResetMessages;
+    | ResetMessages
+    | HideColumnAction;
 
 export default {
     SORT_RENDER_DATA,
@@ -125,7 +132,7 @@ export default {
     SET_LOADING,
     SET_ERROR,
     SET_ALL_IDS,
-    SET_COLUMN_HEADERS,
+    SET_TABLE_COLUMN_HEADERS,
     RESET_FILTERS,
     CHECK_ROW_CHECKBOX,
     MODIFY_DATA_FAILED,
@@ -134,4 +141,5 @@ export default {
     MODIFY_DATA_PENDING,
     SET_TAB_ACTIVE,
     RESET_MESSAGES,
+    HIDE_COLUMN,
 } as const;

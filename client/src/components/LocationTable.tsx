@@ -6,7 +6,7 @@ import locationDataSelectors from '../redux/locationData/locationDataSelectors';
 
 import Table from './Table';
 
-import { ColumnInterface } from './ColumnInterface';
+import { ColumnInterface } from '../redux/tableData/ColumnInterface';
 import { NormalizedObject } from '../redux/locationData/locationDataInterfaces';
 
 interface LocationTableProps {
@@ -36,59 +36,6 @@ const LocationTable: FC<LocationTableProps> = ({
     fetchLocationsData,
     allIds,
 }) => {
-    const columnHeaders = useMemo<ColumnInterface[]>(() => {
-        return [
-            {
-                header: '',
-                name: 'checkbox',
-                type: 'checkbox',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'City',
-                name: 'city',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Country',
-                name: 'country',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'State',
-                name: 'state',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Country code',
-                name: 'country_code',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Timezone',
-                name: 'timezone',
-                type: 'string',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-        ];
-    }, []);
-
     useEffect(() => {
         fetchLocationsData();
     }, [fetchLocationsData]);
@@ -98,7 +45,6 @@ const LocationTable: FC<LocationTableProps> = ({
             renderData={locationData}
             loading={loadingLocation}
             error={errorLocation}
-            columnHeaders={columnHeaders}
             allIds={allIds}
         />
     );

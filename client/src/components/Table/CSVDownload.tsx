@@ -6,16 +6,16 @@ import { Button } from 'react-bootstrap';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
-import { ColumnInterface } from '../ColumnInterface';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 import AlertWrapper from './AlertWrapper';
 
 interface DownloadProps {
     checkedItems: string[];
     renderData: NormalizedObject;
-    columnHeaders: ColumnInterface[];
+    tableColumnHeaders: ColumnInterface[];
 }
 
-const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeaders }) => {
+const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, tableColumnHeaders }) => {
     const [alertShown, setAlertShown] = useState<boolean>(false);
 
     const handleAlertChange = (value: boolean) => {
@@ -38,7 +38,7 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
         if (checkedItems.length > 0) {
             const element = document.createElement('a');
 
-            const columnsToDownload = `${columnHeaders.map((el) => el.header).join(',')}\n`;
+            const columnsToDownload = `${tableColumnHeaders.map((el) => el.header).join(',')}\n`;
 
             const arrayToDownload = checkedItems.map((checkedItem) => renderData[checkedItem]);
             const stringToDownload = arrayToDownload
@@ -84,7 +84,7 @@ const mapStateToProps = (state: RootState) => {
     return {
         renderData: tableDataSelectors.getRenderData(state),
         checkedItems: tableDataSelectors.getCheckedItems(state),
-        columnHeaders: tableDataSelectors.getColumnHeaders(state),
+        tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     };
 };
 

@@ -1,7 +1,7 @@
 import { RootState } from '../rootReducer';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject, RenderDataObject } from './tableDataInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { ColumnInterface } from './ColumnInterface';
 
 const getRenderData = (state: RootState): NormalizedObject => state.tableData.tableData.renderData;
 const getLoading = (state: RootState): boolean => state.tableData.tableData.loading;
@@ -9,7 +9,7 @@ const getError = (state: RootState): string => state.tableData.tableData.error;
 const getInfoMessage = (state: RootState): string => state.tableData.tableData.infoMessage;
 const getAllIds = (state: RootState): string[] => state.tableData.tableData.allIds;
 const getColumnHeaders = (state: RootState): ColumnInterface[] =>
-    state.tableData.tableData.columnHeaders;
+    state.tableData.tableData.tableColumnHeaders;
 const getTabActive = (state: RootState): string => state.tableData.tableData.tabActive;
 
 const getSorting = (state: RootState): string => state.tableData.tableData.sorting;

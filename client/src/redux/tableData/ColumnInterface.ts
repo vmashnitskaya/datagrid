@@ -21,3 +21,7 @@ interface SelectColumn extends BaseColumn<'select'> {
 }
 
 export type ColumnInterface = StringColumn | SelectColumn | NumberColumn | CheckboxColumn;
+
+export interface ColumnsHeaders {
+    [key: string]: ColumnInterface[];
+}

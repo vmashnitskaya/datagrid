@@ -3,15 +3,17 @@ import types, { TableDataActions } from './tableDataTypes';
 import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { ColumnInterface } from './ColumnInterface';
 import pagingReducer from './paging/pagingReducer';
+import columnHeaders from './columnHeaders';
 
 const initialState = {
     renderData: {},
     allIds: [],
     error: '',
     infoMessage: '',
-    columnHeaders: [],
+    columnHeaders,
+    tableColumnHeaders: [],
     loading: false,
     sorting: '',
     sortingColumn: '',
@@ -39,12 +41,14 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return { ...state, error: action.payload, loading: false };
         case types.SET_ERROR:
             return { ...state, error: action.payload };
-        case types.SET_COLUMN_HEADERS:
-            return { ...state, columnHeaders: [...action.payload] };
+        case types.SET_TABLE_COLUMN_HEADERS: {
+            const array = state.columnHeaders[state.tabActive];
+            return { ...state, tableColumnHeaders: [...array] };
+        }
         case types.SET_SORTING:
             return { ...state, sorting: action.payload };
         case types.SET_TAB_ACTIVE:
-            return { ...state, tabActive: action.payload };
+            return { ...state, tabActive: action.payload.toLowerCase() };
         case types.SET_SORTING_COLUMN:
             return {
                 ...state,
@@ -61,6 +65,18 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 error: '',
                 infoMessage: '',
             };
+        case types.HIDE_COLUMN: {
+            const array = state.tableColumnHeaders.map((element) => {
+                if (element.name === action.payload) {
+                    return { ...element, display: !element.display };
+                }
+                return element;
+            });
+            return {
+                ...state,
+                tableColumnHeaders: array,
+            };
+        }
         case types.SET_SORT_FILTER_SLICED_DATA_IDS:
             return {
                 ...state,
@@ -87,7 +103,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return {
                 ...state,
                 filteredColumnAndValue: {
-                    ...state.columnHeaders.reduce(
+                    ...state.tableColumnHeaders.reduce(
                         (acc: FilteringColumn, el: ColumnInterface) => ({ ...acc, [el.name]: '' }),
                         {} as FilteringColumn
                     ),

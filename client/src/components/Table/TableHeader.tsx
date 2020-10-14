@@ -7,7 +7,7 @@ import Filtering from './Filtering/Filtering';
 import SortingControls from './Sorting/SortingControls';
 import './TableHeader.scss';
 
-import { ColumnInterface } from '../ColumnInterface';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 import ColumnSelectionPopOver from './ColumnSelectionPopOver';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import actions from '../../redux/tableData/tableDataActions';

@@ -7,7 +7,7 @@ import Table from './Table';
 import appDataSelectors from '../redux/appData/appDataSelectors';
 import fetchAppData from '../redux/appData/appDataActions';
 import { AppDataObject } from '../redux/appData/appDataInterfaces';
-import { ColumnInterface } from './ColumnInterface';
+import { ColumnInterface } from '../redux/tableData/ColumnInterface';
 
 interface AppTableProps {
     appData: AppDataObject[];
@@ -30,72 +30,11 @@ interface AppTableProps {
  */
 
 const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingApp, errorApp }) => {
-    const columnHeaders = useMemo<ColumnInterface[]>(() => {
-        return [
-            {
-                header: '',
-                name: 'checkbox',
-                type: 'checkbox',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'App Id',
-                name: 'app_id',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App name',
-                name: 'app_name',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App version',
-                name: 'app_version',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App domain',
-                name: 'app_domain',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App URL',
-                name: 'app_url',
-                type: 'string',
-                filtering: false,
-                sorting: false,
-                display: true,
-            },
-        ];
-    }, []);
-
     useEffect(() => {
         fetchAppsData();
     }, [fetchAppsData]);
 
-    return (
-        <Table
-            columnHeaders={columnHeaders}
-            renderData={appData}
-            loading={loadingApp}
-            error={errorApp}
-            allIds={allIds}
-        />
-    );
+    return <Table renderData={appData} loading={loadingApp} error={errorApp} allIds={allIds} />;
 };
 
 const mapStateToProps = (state: RootState) => ({
