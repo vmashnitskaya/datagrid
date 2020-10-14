@@ -47,14 +47,6 @@ const UserTable: FC<UserTableProps> = ({
                 display: true,
             },
             {
-                header: 'Id',
-                name: 'id',
-                type: 'number',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
                 header: 'First name',
                 name: 'first_name',
                 type: 'string',

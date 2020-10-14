@@ -47,14 +47,6 @@ const LocationTable: FC<LocationTableProps> = ({
                 display: true,
             },
             {
-                header: 'Id',
-                name: 'id',
-                type: 'number',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
                 header: 'City',
                 name: 'city',
                 type: 'string',

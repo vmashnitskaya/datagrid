@@ -5,10 +5,10 @@ const router = Router();
 
 router.post('/create', auth, async (req, res) => {
     try {
-        const {id, app_id, app_name, app_version, app_domain, app_url} = req.body;
+        const {app_id, app_name, app_version, app_domain, app_url} = req.body;
 
         const appDataUnit = new AppData({
-            id, app_id, app_name, app_version, app_domain, app_url, owner: req.user.userId
+            app_id, app_name, app_version, app_domain, app_url, owner: req.user.userId
         });
 
         await appDataUnit.save();

@@ -5,10 +5,10 @@ const router = Router();
 
 router.post('/create', auth, async (req, res) => {
     try {
-        const {id, first_name, last_name, date, email, gender, job_title} = req.body;
+        const {first_name, last_name, date, email, gender, job_title} = req.body;
 
         const userDataUnit = new UserData({
-            id, first_name, last_name, date, email, gender, job_title, owner: req.user.userId
+             first_name, last_name, date, email, gender, job_title, owner: req.user.userId
         });
 
         await userDataUnit.save();

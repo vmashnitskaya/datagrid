@@ -5,10 +5,10 @@ const router = Router();
 
 router.post('/create', auth, async (req, res) => {
     try {
-        const {id, city, country, state, country_code, timezone} = req.body;
+        const {city, country, state, country_code, timezone} = req.body;
 
         const locationDataUnit = new LocationData({
-            id, city, country, state, country_code, timezone, owner: req.user.userId
+             city, country, state, country_code, timezone, owner: req.user.userId
         });
 
         await locationDataUnit.save();
