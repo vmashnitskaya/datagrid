@@ -6,6 +6,7 @@ import { RootState } from '../rootReducer';
 import selectors from './tableDataSelectors';
 import authSelectors from '../authentication/authenticationSelectors';
 import dataHttp from '../dataHttp';
+import normalizeData from '../normalizeData';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -98,9 +99,9 @@ const checkRowCheckbox = (id: string): TableDataActions => {
     };
 };
 
-const deleteDataPending = (): TableDataActions => {
+const modifyDataPending = (): TableDataActions => {
     return {
-        type: types.DELETE_DATA_PENDING,
+        type: types.MODIFY_DATA_PENDING,
     };
 };
 
@@ -111,9 +112,16 @@ const deleteDataSuccess = (ids: string[]): TableDataActions => {
     };
 };
 
-const deleteDataFailed = (error: string): TableDataActions => {
+const addDataSuccess = (data: { [key: string]: any }): TableDataActions => {
     return {
-        type: types.DELETE_DATA_FAILED,
+        type: types.ADD_DATA_SUCCESS,
+        payload: data,
+    };
+};
+
+const modifyDataFailed = (error: string): TableDataActions => {
+    return {
+        type: types.MODIFY_DATA_FAILED,
         payload: error,
     };
 };
@@ -125,12 +133,18 @@ const setTabActive = (tabActive: string): TableDataActions => {
     };
 };
 
+const resetMessages = (): TableDataActions => {
+    return {
+        type: types.RESET_MESSAGES,
+    };
+};
+
 const deleteRows = (): ThunkAction<Promise<void>, RootState, unknown, TableDataActions> => async (
     dispatch,
     getState
 ) => {
     try {
-        dispatch(deleteDataPending());
+        dispatch(modifyDataPending());
         const rowsSelected = selectors.getCheckedItems(getState());
         const token = authSelectors.getToken(getState());
         const tabActive = selectors.getTabActive(getState()).toLowerCase();
@@ -145,7 +159,27 @@ const deleteRows = (): ThunkAction<Promise<void>, RootState, unknown, TableDataA
         );
         dispatch(deleteDataSuccess(result.ids));
     } catch (e) {
-        dispatch(deleteDataFailed(e.message));
+        dispatch(modifyDataFailed(e.message));
+    }
+};
+
+const addNewRow = (object: {
+    [key: string]: string;
+}): ThunkAction<Promise<void>, RootState, unknown, TableDataActions> => async (
+    dispatch,
+    getState
+) => {
+    try {
+        dispatch(modifyDataPending());
+        const token = authSelectors.getToken(getState());
+        const tabActive = selectors.getTabActive(getState()).toLowerCase();
+
+        const result = await dataHttp(`/api/${tabActive}/create`, 'POST', object, {
+            Authorization: `Bearer ${token}`,
+        });
+        dispatch(addDataSuccess(result));
+    } catch (e) {
+        dispatch(modifyDataFailed(e.message));
     }
 };
 
@@ -166,4 +200,6 @@ export default {
     checkRowCheckbox,
     deleteRows,
     setTabActive,
+    addNewRow,
+    resetMessages,
 };

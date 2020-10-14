@@ -2,15 +2,19 @@
   padding: 0 20px;
   display: flex;
   justify-content: center;
+  transform: translateY(35%);
   .alert.table-alert {
     width: auto;
     padding: 4px 30px;
     .close {
       padding: 2px;
-
       &:focus {
         outline: none;
       }
     }
+  }
+  &.create-page{
+    transform: translateY(40%);
+    margin: 0 100px;
   }
 }

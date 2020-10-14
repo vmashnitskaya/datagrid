@@ -49,7 +49,7 @@ const UserTable: FC<UserTableProps> = ({
             {
                 header: 'Id',
                 name: 'id',
-                type: 'string',
+                type: 'number',
                 sorting: true,
                 filtering: true,
                 display: true,

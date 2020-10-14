@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import { AddAPhoto } from '@material-ui/icons';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject } from './tableDataInterface';
 import { ColumnInterface } from '../../components/ColumnInterface';
@@ -9,9 +10,10 @@ const SET_ERROR = 'SET_ERROR';
 const SET_LOADING = 'SET_LOADING';
 const SET_COLUMN_HEADERS = 'SET_COLUMN_HEADERS';
 
-const DELETE_DATA_PENDING = 'DELETE_DATA_PENDING';
+const MODIFY_DATA_PENDING = 'DELETE_DATA_PENDING';
 const DELETE_DATA_SUCCESS = 'DELETE_DATA_SUCCESS';
-const DELETE_DATA_FAILED = 'DELETE_DATA_FAILED';
+const ADD_DATA_SUCCESS = 'ADD_DATA_SUCCESS';
+const MODIFY_DATA_FAILED = 'DELETE_DATA_FAILED';
 
 const SET_TAB_ACTIVE = 'SET_TAB_ACTIVE';
 const SET_SORTING = 'SET_SORTING';
@@ -24,6 +26,8 @@ const SET_SORTED_FILTERED_RENDER_DATA_IDS = 'SET_SORTED_FILTERED_RENDER_DATA_IDS
 const SET_SORT_FILTER_SLICED_DATA_IDS = 'SET_SORT_FILTER_SLICED_DATA_IDS';
 const RESET_FILTERS = 'RESET_FILTERS';
 const CHECK_ROW_CHECKBOX = 'CHECK_ROW_CHECKBOX';
+
+const RESET_MESSAGES = 'RESET_MESSAGES';
 
 interface SetRenderDataAction extends Action<typeof SET_RENDER_DATA> {
     payload: NormalizedObject;
@@ -44,6 +48,8 @@ type SortRenderDataAction = Action<typeof SORT_RENDER_DATA>;
 type FilterRenderDataAction = Action<typeof FILTER_RENDER_DATA>;
 
 type ResetFiltersAction = Action<typeof RESET_FILTERS>;
+
+type ResetMessages = Action<typeof RESET_MESSAGES>;
 
 interface CheckRowCheckboxAction extends Action<typeof CHECK_ROW_CHECKBOX> {
     payload: string;
@@ -67,13 +73,17 @@ interface SetSortedFilteredRenderDataIdsAction
     payload: string[];
 }
 
-type DeleteDataPendingAction = Action<typeof DELETE_DATA_PENDING>;
+type ModifyDataPendingAction = Action<typeof MODIFY_DATA_PENDING>;
 
 interface DeleteDataSuccessAction extends Action<typeof DELETE_DATA_SUCCESS> {
     payload: string[];
 }
 
-interface DeleteDataFailedAction extends Action<typeof DELETE_DATA_FAILED> {
+interface AddDataSuccessAction extends Action<typeof ADD_DATA_SUCCESS> {
+    payload: { [key: string]: any };
+}
+
+interface ModifyDataFailedAction extends Action<typeof MODIFY_DATA_FAILED> {
     payload: string;
 }
 
@@ -97,9 +107,11 @@ export type TableDataActions =
     | ResetFiltersAction
     | CheckRowCheckboxAction
     | SetTabActiveAction
-    | DeleteDataFailedAction
+    | ModifyDataFailedAction
     | DeleteDataSuccessAction
-    | DeleteDataPendingAction;
+    | ModifyDataPendingAction
+    | AddDataSuccessAction
+    | ResetMessages;
 
 export default {
     SORT_RENDER_DATA,
@@ -116,8 +128,10 @@ export default {
     SET_COLUMN_HEADERS,
     RESET_FILTERS,
     CHECK_ROW_CHECKBOX,
-    DELETE_DATA_FAILED,
+    MODIFY_DATA_FAILED,
     DELETE_DATA_SUCCESS,
-    DELETE_DATA_PENDING,
+    ADD_DATA_SUCCESS,
+    MODIFY_DATA_PENDING,
     SET_TAB_ACTIVE,
+    RESET_MESSAGES,
 } as const;

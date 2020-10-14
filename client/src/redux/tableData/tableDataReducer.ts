@@ -10,6 +10,7 @@ const initialState = {
     renderData: {},
     allIds: [],
     error: '',
+    infoMessage: '',
     columnHeaders: [],
     loading: false,
     sorting: '',
@@ -32,6 +33,10 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return { ...state, allIds: action.payload, loading: false };
         case types.SET_LOADING:
             return { ...state, loading: true };
+        case types.MODIFY_DATA_PENDING:
+            return { ...state, loading: true };
+        case types.MODIFY_DATA_FAILED:
+            return { ...state, error: action.payload, loading: false };
         case types.SET_ERROR:
             return { ...state, error: action.payload };
         case types.SET_COLUMN_HEADERS:
@@ -49,6 +54,12 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return {
                 ...state,
                 sortedFilteredRenderDataIds: action.payload,
+            };
+        case types.RESET_MESSAGES:
+            return {
+                ...state,
+                error: '',
+                infoMessage: '',
             };
         case types.SET_SORT_FILTER_SLICED_DATA_IDS:
             return {
@@ -116,13 +127,24 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             action.payload.forEach((forEachEl) => {
                 array = array.filter((filterEl) => filterEl !== forEachEl);
             });
-
             return {
                 ...state,
                 allIds: [...array],
                 checkedItems: [],
+                loading: false,
             };
         }
+        case types.ADD_DATA_SUCCESS:
+            return {
+                ...state,
+                infoMessage: action.payload.message,
+                renderData: { ...state.renderData, [action.payload.data._id]: action.payload.data },
+                sortedFilteredRenderDataIds: [
+                    ...state.sortedFilteredRenderDataIds,
+                    action.payload.data._id,
+                ],
+                loading: false,
+            };
         default:
             return state;
     }

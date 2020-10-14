@@ -7,7 +7,7 @@ import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
 import { ColumnInterface } from '../ColumnInterface';
-import TableAlert from './TableAlert';
+import AlertWrapper from './AlertWrapper';
 
 interface DownloadProps {
     checkedItems: string[];
@@ -15,22 +15,12 @@ interface DownloadProps {
     columnHeaders: ColumnInterface[];
 }
 
-const portalContainer = document.getElementById('alert-root');
-
 const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeaders }) => {
     const [alertShown, setAlertShown] = useState<boolean>(false);
 
-    const hideAlert = useCallback(() => {
-        if (alertShown) {
-            setAlertShown(false);
-        }
-    }, [alertShown]);
-
-    useEffect(() => {
-        if (alertShown) {
-            setTimeout(hideAlert, 500000);
-        }
-    }, [alertShown, hideAlert]);
+    const handleAlertChange = (value: boolean) => {
+        setAlertShown(value);
+    };
 
     const returnStringValues = (obj: { [key: string]: any }) => {
         return Object.keys(obj)
@@ -80,15 +70,12 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
             >
                 Download CSV
             </Button>
-            {alertShown &&
-                portalContainer &&
-                createPortal(
-                    <TableAlert
-                        value="Please select rows to download."
-                        handleAlertClose={hideAlert}
-                    />,
-                    portalContainer
-                )}
+            <AlertWrapper
+                value="Please select rows to download."
+                variant="danger"
+                alertShown={alertShown}
+                handleAlertChange={handleAlertChange}
+            />
         </>
     );
 };

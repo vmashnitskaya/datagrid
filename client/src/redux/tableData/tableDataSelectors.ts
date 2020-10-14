@@ -6,6 +6,7 @@ import { ColumnInterface } from '../../components/ColumnInterface';
 const getRenderData = (state: RootState): NormalizedObject => state.tableData.tableData.renderData;
 const getLoading = (state: RootState): boolean => state.tableData.tableData.loading;
 const getError = (state: RootState): string => state.tableData.tableData.error;
+const getInfoMessage = (state: RootState): string => state.tableData.tableData.infoMessage;
 const getAllIds = (state: RootState): string[] => state.tableData.tableData.allIds;
 const getColumnHeaders = (state: RootState): ColumnInterface[] =>
     state.tableData.tableData.columnHeaders;
@@ -37,4 +38,5 @@ export default {
     getColumnHeaders,
     getCheckedItems,
     getTabActive,
+    getInfoMessage,
 };

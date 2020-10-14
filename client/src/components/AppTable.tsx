@@ -43,7 +43,7 @@ const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingAp
             {
                 header: 'Id',
                 name: 'id',
-                type: 'string',
+                type: 'number',
                 sorting: true,
                 filtering: true,
                 display: true,

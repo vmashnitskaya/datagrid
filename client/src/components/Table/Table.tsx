@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
@@ -25,11 +25,9 @@ import { PagingActions } from '../../redux/tableData/paging/pagingTypes';
 
 export interface TableProps {
     tableLoading: boolean;
-    tableError: string;
     tableAllIds: string[];
     renderData: { [key: string]: any };
     loading: boolean;
-    error: string;
     allIds: string[];
     columnHeaders: ColumnInterface[];
     rowsPerPage: number;
@@ -47,6 +45,7 @@ export interface TableProps {
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
     tableRenderData: { [key: string]: any };
+    resetMessages: () => void;
 }
 
 /**
@@ -83,7 +82,7 @@ const Table: FC<TableProps> = ({
     renderData,
     allIds,
     loading,
-    error,
+    tableLoading,
     columnHeaders,
     rowsPerPage,
     currentPage,
@@ -104,15 +103,11 @@ const Table: FC<TableProps> = ({
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
      */
     useEffect(() => {
-        if (Object.keys(renderData).length > 0) {
-            setTableRenderData({ ...renderData });
-        }
+        setTableRenderData({ ...renderData });
     }, [renderData, setTableRenderData]);
 
     useEffect(() => {
-        if (allIds.length > 0) {
-            setTableAllIds([...allIds]);
-        }
+        setTableAllIds([...allIds]);
     }, [allIds, setTableAllIds]);
 
     useEffect(() => {
@@ -173,7 +168,7 @@ const Table: FC<TableProps> = ({
 
     return (
         <>
-            {loading || error.length > 0 ? (
+            {loading || tableLoading ? (
                 <Loader />
             ) : (
                 <>
@@ -235,7 +230,6 @@ const Table: FC<TableProps> = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-    sorting: tableDataSelectors.getSorting(state),
     sortingColumn: tableDataSelectors.getSortingColumn(state),
     rowsPerPage: pagingSelectors.getRowsPerPage(state),
     currentPage: pagingSelectors.getCurrentPage(state),

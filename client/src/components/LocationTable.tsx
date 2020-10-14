@@ -49,7 +49,7 @@ const LocationTable: FC<LocationTableProps> = ({
             {
                 header: 'Id',
                 name: 'id',
-                type: 'string',
+                type: 'number',
                 sorting: true,
                 filtering: true,
                 display: true,

@@ -7,6 +7,8 @@
 .table {
   td{
     width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .no-data{
     text-align: center;

@@ -1,14 +1,31 @@
-import React, { ChangeEvent, FC, FormEvent, useEffect, useMemo, useState } from 'react';
+import React, {
+    ChangeEvent,
+    FC,
+    FormEvent,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
 import { useHistory, useLocation } from 'react-router';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import Button from 'react-bootstrap/Button';
+import { createPortal } from 'react-dom';
+import TableAlert from './TableAlert';
 import './CreateNewRowPage.scss';
 
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { ColumnInterface } from '../ColumnInterface';
+import { TableDataActions } from '../../redux/tableData/tableDataTypes';
+import actions from '../../redux/tableData/tableDataActions';
+import Loader from '../Loader';
+import AlertWrapper from './AlertWrapper';
+
+const portalContainer = document.getElementById('alert-root');
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -20,17 +37,42 @@ interface InputForm {
 
 interface CreateNewRowPageProps {
     columnHeaders: ColumnInterface[];
+    addNewRow: (object: { [key: string]: string }) => void;
+    loading: boolean;
+    error: string;
+    infoMessage: string;
+    resetMessages: () => void;
 }
 
-const CreateNewRowPage: FC<CreateNewRowPageProps> = ({ columnHeaders }) => {
+const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
+    columnHeaders,
+    addNewRow,
+    loading,
+    error,
+    infoMessage,
+    resetMessages,
+}) => {
     const form = useMemo(() => {
         return columnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {});
     }, [columnHeaders]);
-
     const query = useQuery();
     const history = useHistory();
     const [active, setActive] = useState<string | null>('users');
     const [formInput, setFormInput] = useState<InputForm>(form);
+    const [alertShown, setAlertShown] = useState<boolean>(false);
+
+    const handleAlertChange = (value: boolean) => {
+        if (alertShown) {
+            resetMessages();
+        }
+        setAlertShown(value);
+    };
+
+    useEffect(() => {
+        if (error) {
+            setAlertShown(true);
+        }
+    }, [error]);
 
     useEffect(() => {
         setFormInput(form);
@@ -40,84 +82,117 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({ columnHeaders }) => {
         setActive(query.get('from'));
     }, [query]);
 
-    const handleCancel = () => {
+    const handleClose = useCallback(() => {
         history.push(`/${active}`);
-    };
+        resetMessages();
+    }, [active, history, resetMessages]);
 
     const handleInputProvided = (event: ChangeEvent<HTMLInputElement>, inputName: string) => {
         const userInput = event.target.value;
-        console.log(inputName);
         setFormInput((prevState) => ({ ...prevState, [inputName]: userInput }));
     };
 
-    useEffect(() => {
-        console.log(formInput);
-    }, [formInput]);
-
-    const handleFormSubmit = (event: FormEvent) => {
+    const handleFormSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        const { checkbox, ...others } = formInput;
+        const { checkbox, ...dataToSend } = formInput;
+        await addNewRow(dataToSend);
     };
+
+    useEffect(() => {
+        if (infoMessage) {
+            handleClose();
+        }
+    }, [infoMessage, handleClose]);
 
     return (
         <>
             <h3 className="text-info">Create new row for {active} table</h3>
-            <Form validated onSubmit={handleFormSubmit}>
-                {columnHeaders
-                    .filter((el) => el.type !== 'checkbox')
-                    .map((el) => {
-                        return el.type === 'select' ? (
-                            <Form.Group className="form-group" key={el.name}>
-                                <Form.Label className="form-label" as="label">
-                                    {el.header}:
-                                </Form.Label>
-                                {el.options.map((elem: string) => (
-                                    <Form.Check
-                                        key={elem}
-                                        type="radio"
-                                        label={elem}
-                                        required
-                                        name={el.name}
-                                        value={elem}
-                                        checked={elem === formInput[el.name]}
-                                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                            handleInputProvided(event, el.name)
-                                        }
-                                    />
-                                ))}
-                            </Form.Group>
-                        ) : (
-                            <Form.Group className="form-group" key={el.name}>
-                                <Form.Label as="label">{el.header}:</Form.Label>
-                                <Form.Control
-                                    size="sm"
-                                    type="text"
-                                    required
-                                    placeholder={`Enter ${el.header.toLowerCase()}`}
-                                    name={el.name}
-                                    value={formInput ? formInput[el.name] : ''}
-                                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                        handleInputProvided(event, el.name)
-                                    }
-                                />
-                            </Form.Group>
-                        );
-                    })}
-                <div className="buttons">
-                    <Button className="bg-info" size="sm" type="submit">
-                        Create
-                    </Button>
-                    <Button className="bg-info" size="sm" type="button" onClick={handleCancel}>
-                        Cancel
-                    </Button>
-                </div>
-            </Form>
+            {loading ? (
+                <Loader />
+            ) : (
+                <>
+                    <Form validated onSubmit={handleFormSubmit}>
+                        {columnHeaders
+                            .filter((el) => el.type !== 'checkbox')
+                            .map((el) => {
+                                return el.type === 'select' ? (
+                                    <Form.Group className="form-group" key={el.name}>
+                                        <Form.Label className="form-label" as="label">
+                                            {el.header}:
+                                        </Form.Label>
+                                        {el.options.map((elem: string) => (
+                                            <Form.Check
+                                                key={elem}
+                                                type="radio"
+                                                label={elem}
+                                                required
+                                                name={el.name}
+                                                value={elem}
+                                                checked={elem === formInput[el.name]}
+                                                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                                    handleInputProvided(event, el.name)
+                                                }
+                                            />
+                                        ))}
+                                    </Form.Group>
+                                ) : (
+                                    <Form.Group className="form-group" key={el.name}>
+                                        <Form.Label as="label">{el.header}:</Form.Label>
+                                        <Form.Control
+                                            size="sm"
+                                            type={el.type === 'number' ? 'number' : 'text'}
+                                            required
+                                            placeholder={`Enter ${el.header.toLowerCase()}`}
+                                            name={el.name}
+                                            value={formInput ? formInput[el.name] : ''}
+                                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                                handleInputProvided(event, el.name)
+                                            }
+                                        />
+                                    </Form.Group>
+                                );
+                            })}
+                        <div className="buttons">
+                            <Button className="bg-info" size="sm" type="submit">
+                                Create
+                            </Button>
+                            <Button
+                                className="bg-info"
+                                size="sm"
+                                type="button"
+                                onClick={handleClose}
+                            >
+                                Cancel
+                            </Button>
+                        </div>
+                    </Form>
+                </>
+            )}
+            <AlertWrapper
+                value={error}
+                classNames="create-page"
+                variant="danger"
+                alertShown={alertShown}
+                handleAlertChange={handleAlertChange}
+            />
         </>
     );
 };
 
 const mapStateToProps = (state: RootState) => ({
     columnHeaders: tableDataSelectors.getColumnHeaders(state),
+    loading: tableDataSelectors.getLoading(state),
+    error: tableDataSelectors.getError(state),
+    infoMessage: tableDataSelectors.getInfoMessage(state),
 });
 
-export default connect(mapStateToProps)(CreateNewRowPage);
+const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
+    addNewRow: (data: { [key: string]: string }) => {
+        dispatch(actions.addNewRow(data));
+    },
+    resetMessages: () => {
+        dispatch(actions.resetMessages());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewRowPage);

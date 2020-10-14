@@ -13,7 +13,7 @@ router.post('/create', auth, async (req, res) => {
 
         await appDataUnit.save();
 
-        res.status(201).json({ appDataUnit });
+        res.status(201).json({ data: appDataUnit, message: 'The item is created.' });
     } catch (e) {
         res.status(500).json({ message: 'Something went wrong, try again later' });
     }

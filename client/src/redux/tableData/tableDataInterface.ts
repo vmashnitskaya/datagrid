@@ -22,4 +22,5 @@ export interface TableDataInterface {
     filteredColumnAndValue: FilteringColumn;
     checkedItems: string[];
     tabActive: string;
+    infoMessage: string;
 }
