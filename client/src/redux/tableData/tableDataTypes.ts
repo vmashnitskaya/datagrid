@@ -76,7 +76,7 @@ interface SetSortedFilteredRenderDataIdsAction
 type ModifyDataPendingAction = Action<typeof MODIFY_DATA_PENDING>;
 
 interface DeleteDataSuccessAction extends Action<typeof DELETE_DATA_SUCCESS> {
-    payload: string[];
+    payload: { [key: string]: any };
 }
 
 interface AddDataSuccessAction extends Action<typeof ADD_DATA_SUCCESS> {

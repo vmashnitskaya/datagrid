@@ -124,7 +124,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
         }
         case types.DELETE_DATA_SUCCESS: {
             let array: string[] = [...state.allIds];
-            action.payload.forEach((forEachEl) => {
+            action.payload.ids.forEach((forEachEl: string) => {
                 array = array.filter((filterEl) => filterEl !== forEachEl);
             });
             return {
@@ -132,6 +132,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 allIds: [...array],
                 checkedItems: [],
                 loading: false,
+                infoMessage: action.payload.message,
             };
         }
         case types.ADD_DATA_SUCCESS:

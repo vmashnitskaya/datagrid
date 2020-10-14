@@ -22,6 +22,7 @@ import { RootState } from '../../redux/rootReducer';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import CreateNewRowControl from './CreateNewRowControl';
 import { PagingActions } from '../../redux/tableData/paging/pagingTypes';
+import AlertWrapper from './AlertWrapper';
 
 export interface TableProps {
     tableLoading: boolean;
@@ -45,6 +46,9 @@ export interface TableProps {
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
     tableColumnHeaders: ColumnInterface[];
     tableRenderData: { [key: string]: any };
+    tableError: string;
+    error: string;
+    infoMessage: string;
     resetMessages: () => void;
 }
 
@@ -78,6 +82,9 @@ export interface TableProps {
  */
 
 const Table: FC<TableProps> = ({
+    tableError,
+    error,
+    infoMessage,
     tableAllIds,
     renderData,
     allIds,
@@ -98,7 +105,22 @@ const Table: FC<TableProps> = ({
     sortedFilteredRenderDataIds,
     setTableColumnHeaders,
     tableColumnHeaders,
+    resetMessages,
 }) => {
+    const [alertShown, setAlertShown] = useState<boolean>(false);
+
+    const handleAlertChange = (value: boolean) => {
+        if (alertShown) {
+            resetMessages();
+        }
+        setAlertShown(value);
+    };
+
+    useEffect(() => {
+        if (error || tableError || infoMessage) {
+            setAlertShown(true);
+        }
+    }, [error, tableError, infoMessage]);
     /**
      * Table data is set after receiving from any of 3 components: UserTable, AppTable, LocationTable.
      */
@@ -223,6 +245,13 @@ const Table: FC<TableProps> = ({
                         </div>
                         <PaginationControl currentPage={currentPage} totalPages={totalPages} />
                     </div>
+                    <AlertWrapper
+                        value={error || tableError ? error : infoMessage}
+                        classNames="create-page"
+                        variant={error || tableError ? 'danger' : 'success'}
+                        alertShown={alertShown}
+                        handleAlertChange={handleAlertChange}
+                    />
                 </>
             )}
         </>
@@ -241,6 +270,7 @@ const mapStateToProps = (state: RootState) => ({
     sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
     tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     tableRenderData: tableDataSelectors.getRenderData(state),
+    infoMessage: tableDataSelectors.getInfoMessage(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions | PagingActions>) => ({
@@ -267,6 +297,9 @@ const mapDispatchToProps = (dispatch: Dispatch<TableDataActions | PagingActions>
     },
     setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => {
         dispatch(actions.setColumnHeaders(columnHeaders));
+    },
+    resetMessages: () => {
+        dispatch(actions.resetMessages());
     },
 });
 
