@@ -27,23 +27,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ColumnInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/ColumnInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterPopOver.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterPopOver.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

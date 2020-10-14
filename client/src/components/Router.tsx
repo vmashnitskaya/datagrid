@@ -73,9 +73,9 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
         []
     );
 
-    const handleTabActiveChange = (label: string): void => {
-        if (label) {
-            setTabActive(label);
+    const handleTabActiveChange = (name: string): void => {
+        if (name) {
+            setTabActive(name);
         }
     };
 
@@ -120,7 +120,7 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
                                         aria-controls="nav-home"
                                         to={link.pathname}
                                         data-label={link.label}
-                                        onClick={() => handleTabActiveChange(link.label)}
+                                        onClick={() => handleTabActiveChange(link.name)}
                                     >
                                         {link.label}
                                     </Link>

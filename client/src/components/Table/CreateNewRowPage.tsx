@@ -17,7 +17,7 @@ import './CreateNewRowPage.scss';
 
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
-import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
+import { ColumnInterface, ColumnsHeaders } from '../../redux/tableData/ColumnInterface';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import actions from '../../redux/tableData/tableDataActions';
 import Loader from '../Loader';
@@ -32,7 +32,7 @@ interface InputForm {
 }
 
 interface CreateNewRowPageProps {
-    tableColumnHeaders: ColumnInterface[];
+    allColumnHeaders: ColumnsHeaders;
     addNewRow: (object: { [key: string]: string }) => void;
     loading: boolean;
     error: string;
@@ -41,21 +41,33 @@ interface CreateNewRowPageProps {
 }
 
 const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
-    tableColumnHeaders,
+    allColumnHeaders,
     addNewRow,
     loading,
     error,
     infoMessage,
     resetMessages,
 }) => {
-    const form = useMemo(() => {
-        return tableColumnHeaders.reduce((acc, el) => ({ ...acc, [el.name]: '' }), {});
-    }, [tableColumnHeaders]);
     const query = useQuery();
     const history = useHistory();
     const [active, setActive] = useState<string | null>('users');
-    const [formInput, setFormInput] = useState<InputForm>(form);
+    const [formInput, setFormInput] = useState<InputForm>({});
     const [alertShown, setAlertShown] = useState<boolean>(false);
+    const [headersToDisplay, setHeadersToDisplay] = useState<ColumnInterface[]>([]);
+
+    useEffect(() => {
+        if (active) {
+            const array = allColumnHeaders[active.toLowerCase()];
+            setHeadersToDisplay([...array]);
+        }
+    }, [active, allColumnHeaders]);
+
+    const form = useMemo(() => {
+        if (headersToDisplay.length > 0) {
+            return headersToDisplay.reduce((acc, el) => ({ ...acc, [el.header]: '' }), {});
+        }
+        return {};
+    }, [headersToDisplay]);
 
     const handleAlertChange = (value: boolean) => {
         if (alertShown) {
@@ -108,7 +120,7 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
             ) : (
                 <>
                     <Form validated onSubmit={handleFormSubmit}>
-                        {tableColumnHeaders
+                        {headersToDisplay
                             .filter((el) => el.type !== 'checkbox')
                             .map((el) => {
                                 return el.type === 'select' ? (
@@ -176,7 +188,7 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-    tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
+    allColumnHeaders: tableDataSelectors.getAllHeaders(state),
     loading: tableDataSelectors.getLoading(state),
     error: tableDataSelectors.getError(state),
     infoMessage: tableDataSelectors.getInfoMessage(state),

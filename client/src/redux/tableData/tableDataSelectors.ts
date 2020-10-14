@@ -1,7 +1,7 @@
 import { RootState } from '../rootReducer';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject, RenderDataObject } from './tableDataInterface';
-import { ColumnInterface } from './ColumnInterface';
+import { ColumnInterface, ColumnsHeaders } from './ColumnInterface';
 
 const getRenderData = (state: RootState): NormalizedObject => state.tableData.tableData.renderData;
 const getLoading = (state: RootState): boolean => state.tableData.tableData.loading;
@@ -10,6 +10,7 @@ const getInfoMessage = (state: RootState): string => state.tableData.tableData.i
 const getAllIds = (state: RootState): string[] => state.tableData.tableData.allIds;
 const getColumnHeaders = (state: RootState): ColumnInterface[] =>
     state.tableData.tableData.tableColumnHeaders;
+const getAllHeaders = (state: RootState): ColumnsHeaders => state.tableData.tableData.columnHeaders;
 const getTabActive = (state: RootState): string => state.tableData.tableData.tabActive;
 
 const getSorting = (state: RootState): string => state.tableData.tableData.sorting;
@@ -39,4 +40,5 @@ export default {
     getCheckedItems,
     getTabActive,
     getInfoMessage,
+    getAllHeaders,
 };
