@@ -27,10 +27,14 @@
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

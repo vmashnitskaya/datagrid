@@ -87,7 +87,10 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
     }, [setFormInput, form]);
 
     useEffect(() => {
-        setActive(query.get('from'));
+        const queryString = query.get('from');
+        if (queryString) {
+            setActive(queryString.toLowerCase());
+        }
     }, [query]);
 
     const handleClose = useCallback(() => {

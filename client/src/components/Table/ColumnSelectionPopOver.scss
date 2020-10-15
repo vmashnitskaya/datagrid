@@ -6,6 +6,7 @@ input[type="checkbox"]{
   cursor: pointer;
   &.disabled{
     cursor: auto;
+    filter: grayscale(100%);
   }
 }
 

@@ -1,5 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'react-bootstrap';

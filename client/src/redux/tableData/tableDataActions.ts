@@ -1,7 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { TableDataActions } from './tableDataTypes';
 import { NormalizedObject } from './tableDataInterface';
-import { ColumnInterface } from './ColumnInterface';
 import { RootState } from '../rootReducer';
 import selectors from './tableDataSelectors';
 import authSelectors from '../authentication/authenticationSelectors';

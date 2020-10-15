@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 import fetchLocationData from '../redux/locationData/locationDataActions';
@@ -6,7 +6,6 @@ import locationDataSelectors from '../redux/locationData/locationDataSelectors';
 
 import Table from './Table';
 
-import { ColumnInterface } from '../redux/tableData/ColumnInterface';
 import { NormalizedObject } from '../redux/locationData/locationDataInterfaces';
 
 interface LocationTableProps {

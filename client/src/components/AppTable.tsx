@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 
@@ -7,7 +7,6 @@ import Table from './Table';
 import appDataSelectors from '../redux/appData/appDataSelectors';
 import fetchAppData from '../redux/appData/appDataActions';
 import { AppDataObject } from '../redux/appData/appDataInterfaces';
-import { ColumnInterface } from '../redux/tableData/ColumnInterface';
 
 interface AppTableProps {
     appData: AppDataObject[];

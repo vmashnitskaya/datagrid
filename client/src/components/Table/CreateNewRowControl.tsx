@@ -14,7 +14,7 @@ interface CreateNewRowControlProps {
 const CreateNewRowControl: FC<CreateNewRowControlProps> = ({ tabActive }) => {
     const history = useHistory();
     const handleClick = () => {
-        history.push(`/create?from=${tabActive}`);
+        history.push(`/create?from=${tabActive.toLowerCase()}`);
     };
     return (
         <Button size="sm" variant="info" onClick={handleClick}>

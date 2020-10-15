@@ -1,8 +1,6 @@
 import { Action } from 'redux';
-import { AddAPhoto } from '@material-ui/icons';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
 import { NormalizedObject } from './tableDataInterface';
-import { ColumnInterface } from './ColumnInterface';
 
 const SET_RENDER_DATA = 'SET_RENDER_DATA';
 const SET_ALL_IDS = 'SET_ALL_IDS';
