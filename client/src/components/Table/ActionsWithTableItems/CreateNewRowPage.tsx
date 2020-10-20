@@ -7,29 +7,24 @@ import React, {
     useMemo,
     useState,
 } from 'react';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import Button from 'react-bootstrap/Button';
+import useQuery from './useQuery';
 import './CreateNewRowPage.scss';
 
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
-import { RootState } from '../../redux/rootReducer';
-import { ColumnInterface, ColumnsHeaders } from '../../redux/tableData/ColumnInterface';
-import { TableDataActions } from '../../redux/tableData/tableDataTypes';
-import actions from '../../redux/tableData/tableDataActions';
-import Loader from '../Loader';
-import AlertWrapper from './AlertWrapper';
-
-const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-};
-
-interface InputForm {
-    [key: string]: string;
-}
+import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
+import { RootState } from '../../../redux/rootReducer';
+import { ColumnInterface, ColumnsHeaders } from '../../../redux/tableData/ColumnInterface';
+import { TableDataActions } from '../../../redux/tableData/tableDataTypes';
+import actions from '../../../redux/tableData/tableDataActions';
+import Loader from '../../Loader';
+import AlertWrapper from '../AlertWrapper';
+import FormControl from './FormControl';
+import { InputForm } from './InputFormInterface';
 
 interface CreateNewRowPageProps {
     allColumnHeaders: ColumnsHeaders;
@@ -123,49 +118,15 @@ const CreateNewRowPage: FC<CreateNewRowPageProps> = ({
             ) : (
                 <>
                     <Form validated onSubmit={handleFormSubmit}>
-                        {headersToDisplay
-                            .filter((el) => el.type !== 'checkbox')
-                            .map((el) => {
-                                return el.type === 'select' ? (
-                                    <Form.Group className="form-group" key={el.name}>
-                                        <Form.Label className="form-label" as="label">
-                                            {el.header}:
-                                        </Form.Label>
-                                        {el.options.map((elem: string) => (
-                                            <Form.Check
-                                                key={elem}
-                                                type="radio"
-                                                label={elem}
-                                                required
-                                                name={el.name}
-                                                value={elem}
-                                                checked={elem === formInput[el.name]}
-                                                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                                    handleInputProvided(event, el.name)
-                                                }
-                                            />
-                                        ))}
-                                    </Form.Group>
-                                ) : (
-                                    <Form.Group className="form-group" key={el.name}>
-                                        <Form.Label as="label">{el.header}:</Form.Label>
-                                        <Form.Control
-                                            size="sm"
-                                            type={el.type === 'number' ? 'number' : 'text'}
-                                            required
-                                            placeholder={`Enter ${el.header.toLowerCase()}`}
-                                            name={el.name}
-                                            value={formInput ? formInput[el.name] : ''}
-                                            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                                                handleInputProvided(event, el.name)
-                                            }
-                                        />
-                                    </Form.Group>
-                                );
-                            })}
+                        <FormControl
+                            handleInputProvided={handleInputProvided}
+                            headersToDisplay={headersToDisplay}
+                            formInput={formInput}
+                            readOnly={false}
+                        />
                         <div className="buttons">
                             <Button className="bg-info" size="sm" type="submit">
-                                Create
+                                Save
                             </Button>
                             <Button
                                 className="bg-info"

@@ -50,6 +50,14 @@ const columnHeaders: ColumnsHeaders = {
             filtering: false,
             display: true,
         },
+        {
+            header: 'Open',
+            name: 'open',
+            type: 'string',
+            sorting: false,
+            filtering: false,
+            display: true,
+        },
     ],
     users: [
         {
@@ -109,6 +117,14 @@ const columnHeaders: ColumnsHeaders = {
             filtering: false,
             display: true,
         },
+        {
+            header: 'Open',
+            name: 'open',
+            type: 'string',
+            sorting: false,
+            filtering: false,
+            display: true,
+        },
     ],
     apps: [
         {
@@ -157,6 +173,14 @@ const columnHeaders: ColumnsHeaders = {
             type: 'string',
             filtering: false,
             sorting: false,
+            display: true,
+        },
+        {
+            header: 'Open',
+            name: 'open',
+            type: 'string',
+            sorting: false,
+            filtering: false,
             display: true,
         },
     ],

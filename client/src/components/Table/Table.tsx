@@ -20,7 +20,7 @@ import pagingSelectors from '../../redux/tableData/paging/pagingSelectors';
 import pagingActions from '../../redux/tableData/paging/pagingActions';
 import { RootState } from '../../redux/rootReducer';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
-import CreateNewRowControl from './CreateNewRowControl';
+import CreateNewRowControl from './ActionsWithTableItems/CreateNewRowControl';
 import { PagingActions } from '../../redux/tableData/paging/pagingTypes';
 import AlertWrapper from './AlertWrapper';
 

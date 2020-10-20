@@ -26,15 +26,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/FormControl.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/InputFormInterface.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/OpenItemPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/useQuery.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/AppTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/CreateNewRowControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/CreateNewRowPage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CreateNewRowPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/CreateNewRowPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/mock_data.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/columnHeaders.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/columnHeaders.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +73,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../nodejs-rest" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="node" />
@@ -80,15 +86,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\components\Table\ActionsWithTableItems" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\redux\tableData" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid" />
       <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\src\components" />
-      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -121,6 +127,9 @@
       <workItem from="1602492930867" duration="2256000" />
       <workItem from="1602495207629" duration="14386000" />
       <workItem from="1602513338729" duration="44232000" />
+      <workItem from="1602753863549" duration="122000" />
+      <workItem from="1603130749321" duration="86000" />
+      <workItem from="1603130854739" duration="14461000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
@@ -192,11 +201,12 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="134" y="0" key="CommitChangelistDialog2/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601456233834" />
-    <state x="2540" y="-249" key="FileChooserDialogImpl" timestamp="1602495128022">
-      <screen x="1920" y="-390" width="1920" height="1050" />
+    <state x="496" y="112" key="FileChooserDialogImpl" timestamp="1602753983530">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="496" y="112" key="FileChooserDialogImpl/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601401251522" />
     <state x="2540" y="-249" key="FileChooserDialogImpl/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602495128022" />
+    <state x="496" y="112" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1602753983530" />
     <state x="309" y="107" key="MultipleFileMergeDialog" timestamp="1601456227812">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -235,11 +245,11 @@
       <screen x="1920" y="-390" width="1920" height="1050" />
     </state>
     <state x="2452" y="44" key="run.anything.popup/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602355321593" />
-    <state x="431" y="12" width="672" height="822" key="search.everywhere.popup" timestamp="1602577799521">
+    <state x="431" y="12" width="840" height="822" key="search.everywhere.popup" timestamp="1602753912592">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="2459" y="-375" width="840" height="1034" key="search.everywhere.popup/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602251284438" />
-    <state x="431" y="12" width="672" height="822" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1602577799521" />
+    <state x="431" y="12" width="840" height="822" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1602753912592" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

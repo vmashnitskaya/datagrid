@@ -1,9 +1,12 @@
 import React, { AnchorHTMLAttributes, ChangeEvent, FC } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import './TableCell.scss';
+
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import actions from '../../redux/tableData/tableDataActions';
-import './TableCell.scss';
 
 interface TableCellProps {
     rowElement: { [key: string]: any };
@@ -26,14 +29,11 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
         checkRowCheckbox(rowId || '');
     };
 
-    const handleDifferentTypesDisplaying = (
-        rowElementPassed: { [key: string]: any },
-        columnNamePassed: string
-    ): AnchorHTMLAttributes<any> | string => {
+    const handleDifferentTypesDisplaying = (): AnchorHTMLAttributes<any> | string => {
         if (columnName === 'email') {
             return (
-                <a className="text-dark" href={`mailto:${rowElementPassed[columnNamePassed]}`}>
-                    {rowElementPassed[columnNamePassed]}
+                <a className="text-dark" href={`mailto:${rowElement[columnName]}`}>
+                    {rowElement[columnName]}
                 </a>
             );
         }
@@ -41,29 +41,43 @@ const TableCell: FC<TableCellProps> = ({ rowElement, columnName, checkRowCheckbo
             return (
                 <a
                     className="text-secondary"
-                    href={`${rowElementPassed[columnNamePassed]}`}
+                    href={`${rowElement[columnName]}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    {rowElementPassed[columnNamePassed]}
+                    {rowElement[columnName]}
                 </a>
             );
         }
-        if (columnNamePassed === 'checkbox') {
+        if (columnName === 'checkbox') {
             return (
                 <input
                     type="checkbox"
                     className="rowSelection"
-                    data-id={rowElementPassed._id}
-                    checked={rowElementPassed.checkbox}
+                    data-id={rowElement._id}
+                    checked={rowElement.checkbox}
                     onChange={handleRowChecked}
                 />
             );
         }
-        return rowElementPassed[columnNamePassed] || '';
+        if (columnName === 'open') {
+            return (
+                <Link
+                    className="text-info"
+                    to={(location) =>
+                        `${location.pathname.slice(0, location.pathname.length - 1)}?id=${
+                            rowElement._id
+                        }`
+                    }
+                >
+                    Open
+                </Link>
+            );
+        }
+        return rowElement[columnName] || '';
     };
 
-    return <td>{handleDifferentTypesDisplaying(rowElement, columnName)}</td>;
+    return <td>{handleDifferentTypesDisplaying()}</td>;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({

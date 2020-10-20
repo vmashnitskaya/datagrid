@@ -30,17 +30,23 @@ const TableHeader: FC<TableHeaderProps> = ({ element, last, deleteRows }) => {
     const handleRowsDeleting = () => {
         deleteRows();
     };
+
+    const displayDifferentHeaderTypes = () => {
+        if (element.name === 'checkbox') {
+            return (
+                <DeleteIcon className="delete-icon text-secondary" onClick={handleRowsDeleting} />
+            );
+        }
+        if (element.name === 'open') {
+            return <div>Open</div>;
+        }
+        return <div>{element.header.replace(/ /g, '\u00a0')}</div>;
+    };
+
     return (
         <th className={`bg-light ${element.name}`}>
             <div className="header">
-                {element.type === 'checkbox' ? (
-                    <DeleteIcon
-                        className="delete-icon text-secondary"
-                        onClick={handleRowsDeleting}
-                    />
-                ) : (
-                    <div>{element.header.replace(/ /g, '\u00a0')}</div>
-                )}
+                {displayDifferentHeaderTypes()}
                 <div className="icons">
                     {element.filtering && <Filtering currentElementColumn={element} />}
                     {element.sorting && <SortingControls currentElementColumn={element.name} />}

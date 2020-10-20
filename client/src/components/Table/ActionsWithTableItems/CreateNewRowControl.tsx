@@ -4,8 +4,8 @@ import { useHistory } from 'react-router';
 
 import Button from 'react-bootstrap/Button';
 
-import { RootState } from '../../redux/rootReducer';
-import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import { RootState } from '../../../redux/rootReducer';
+import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
 
 interface CreateNewRowControlProps {
     tabActive: string;

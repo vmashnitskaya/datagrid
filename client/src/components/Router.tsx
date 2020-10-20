@@ -10,7 +10,7 @@ import UserTable from './UserTable';
 import AppTable from './AppTable';
 import LocationTable from './LocationTable';
 import AuthPage from './AuthPage';
-import CreateNewRowPage from './Table/CreateNewRowPage';
+import CreateNewRowPage from './Table/ActionsWithTableItems/CreateNewRowPage';
 import './Router.scss';
 
 import { RootState } from '../redux/rootReducer';
@@ -20,6 +20,7 @@ import authenticationSelectors from '../redux/authentication/authenticationSelec
 import tableDataSelectors from '../redux/tableData/tableDataSelectors';
 import tableDataActions from '../redux/tableData/tableDataActions';
 import { TableDataActions } from '../redux/tableData/tableDataTypes';
+import OpenItemPage from './Table/ActionsWithTableItems/OpenItemPage';
 
 interface LinkDef {
     label: string;
@@ -104,7 +105,7 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
             {token ? (
                 <div className="container app-wrapper">
                     <div className="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-                        {location.pathname !== '/create' &&
+                        {links.some((el) => el.pathname === location.pathname) &&
                             links.map((link) => {
                                 return (
                                     <Link
@@ -143,6 +144,9 @@ const Router: FC<RouterParams> = ({ token, logout, setTabActive, tabActive }) =>
                             </Route>
                             <Route path="/create">
                                 <CreateNewRowPage />
+                            </Route>
+                            <Route path={['/user', '/app', '/location']}>
+                                <OpenItemPage />
                             </Route>
                         </Switch>
                     </div>
