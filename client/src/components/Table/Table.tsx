@@ -191,10 +191,10 @@ const Table: FC<TableProps> = ({
 
     const handleOnDragEnd = (result) => {
         if (!result.destination) return;
-        const items = [...sortFilterSlicedDataIds];
+        const items = [...sortedFilteredRenderDataIds];
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
-        setSortFilterSlicedDataIds(items);
+        setSortedFilteredRenderDataIds(items);
     };
 
     return (
