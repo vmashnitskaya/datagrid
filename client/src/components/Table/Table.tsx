@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Dispatch } from 'redux';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Loader from '../Loader';
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
@@ -188,6 +189,14 @@ const Table: FC<TableProps> = ({
         );
     }, [tableColumnHeaders, setFilteredColumnAndValue]);
 
+    const handleOnDragEnd = (result) => {
+        if (!result.destination) return;
+        const items = [...sortFilterSlicedDataIds];
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+        setSortFilterSlicedDataIds(items);
+    };
+
     return (
         <>
             {loading || tableLoading ? (
@@ -217,29 +226,42 @@ const Table: FC<TableProps> = ({
                                 </td>
                             </tr>
                         </thead>
-                        <tbody>
-                            {sortFilterSlicedDataIds.length === 0 && (
-                                <tr>
-                                    <td
-                                        className="bg-light no-data"
-                                        colSpan={
-                                            tableColumnHeaders.filter((el) => el.display).length
-                                        }
-                                    >
-                                        No data to display.
-                                    </td>
-                                </tr>
-                            )}
-                            {sortFilterSlicedDataIds.length > 0 &&
-                                sortFilterSlicedDataIds.map((element: string) => (
-                                    <TableRow
-                                        key={element}
-                                        id={element}
-                                        tableColumnHeaders={tableColumnHeaders}
-                                    />
-                                ))}
-                        </tbody>
+                        <DragDropContext onDragEnd={handleOnDragEnd}>
+                            <Droppable droppableId="tbody">
+                                {(provided) => (
+                                    <tbody {...provided.droppableProps} ref={provided.innerRef}>
+                                        {sortFilterSlicedDataIds.length === 0 && (
+                                            <tr>
+                                                <td
+                                                    className="bg-light no-data"
+                                                    colSpan={
+                                                        tableColumnHeaders.filter(
+                                                            (el) => el.display
+                                                        ).length
+                                                    }
+                                                >
+                                                    No data to display.
+                                                </td>
+                                            </tr>
+                                        )}
+                                        {sortFilterSlicedDataIds.length > 0 &&
+                                            sortFilterSlicedDataIds.map(
+                                                (element: string, index: number) => (
+                                                    <TableRow
+                                                        key={element}
+                                                        id={element}
+                                                        index={index}
+                                                        tableColumnHeaders={tableColumnHeaders}
+                                                    />
+                                                )
+                                            )}
+                                        {provided.placeholder}
+                                    </tbody>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                     </table>
+
                     <div className="footer-controls">
                         <div className="footer-buttons">
                             <RowsPerPageControl />

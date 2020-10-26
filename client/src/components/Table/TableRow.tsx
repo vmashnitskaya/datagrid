@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
+import { Draggable } from 'react-beautiful-dnd';
 
 import TableCell from './TableCell';
 
@@ -13,6 +14,7 @@ export interface TableRowProps {
     id: string;
     tableColumnHeaders: ColumnInterface[];
     rowElement: RenderDataObject;
+    index: number;
 }
 
 /**
@@ -25,24 +27,32 @@ export interface TableRowProps {
  * @returns {JSX.Element}
  */
 
-const TableRow: FC<TableRowProps> = ({ id, tableColumnHeaders, rowElement }) => {
+const TableRow: FC<TableRowProps> = ({ id, tableColumnHeaders, rowElement, index }) => {
     return (
-        <tr>
-            {rowElement &&
-                tableColumnHeaders &&
-                tableColumnHeaders.length > 0 &&
-                tableColumnHeaders.map((element: ColumnInterface) => {
-                    return (
-                        element.display && (
-                            <TableCell
-                                key={`${id}_${element.name}`}
-                                rowElement={rowElement}
-                                columnName={element.name}
-                            />
-                        )
-                    );
-                })}
-        </tr>
+        <Draggable draggableId={id} index={index}>
+            {(provided) => (
+                <tr
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    {rowElement &&
+                        tableColumnHeaders &&
+                        tableColumnHeaders.length > 0 &&
+                        tableColumnHeaders.map((element: ColumnInterface) => {
+                            return (
+                                element.display && (
+                                    <TableCell
+                                        key={`${id}_${element.name}`}
+                                        rowElement={rowElement}
+                                        columnName={element.name}
+                                    />
+                                )
+                            );
+                        })}
+                </tr>
+            )}
+        </Draggable>
     );
 };
 
