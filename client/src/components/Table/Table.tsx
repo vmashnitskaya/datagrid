@@ -189,7 +189,7 @@ const Table: FC<TableProps> = ({
         );
     }, [tableColumnHeaders, setFilteredColumnAndValue]);
 
-    const handleOnDragEnd = (result) => {
+    const handleOnDragEnd = (result: { [key: string]: any }) => {
         if (!result.destination) return;
         const items = [...sortedFilteredRenderDataIds];
         const [reorderedItem] = items.splice(result.source.index, 1);
