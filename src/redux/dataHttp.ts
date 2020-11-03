@@ -11,7 +11,6 @@ const dataHttp = async (
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
         };
-        console.log(userHeaders);
         if (body) {
             userBody = JSON.stringify(body);
         }
