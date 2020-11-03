@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+
+
+  #alert-root{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
+  }
+}

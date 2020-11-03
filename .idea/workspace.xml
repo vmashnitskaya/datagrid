@@ -26,7 +26,177 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/datagrid.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.storybook/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.storybook/preview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/env.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/getHttpsConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/jest/cssTransform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/jest/fileTransform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/modules.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/paths.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/pnpTs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/config/webpackDevServer.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/jsdoc.conf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/scripts/build.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/scripts/start.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/scripts/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/App.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AppTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AuthPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/AuthPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Loader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Loader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/LocationTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Router.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Router.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/CreateNewRowControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/CreateNewRowPage.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/CreateNewRowPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/FormControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/InputFormInterface.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/OpenItemPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ActionsWithTableItems/useQuery.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/AlertWrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/CSVDownload.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/ColumnSelectionPopOver.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterPopOver.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilterPopOver.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/Filtering.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/FilteringColumnInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/SelectFilterContent.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/SelectFilterContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Filtering/StringFilterContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/HelpText.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/HelpText.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Pagination/PaginationControl.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Pagination/PaginationControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Pagination/RowsPerPageControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/PopOverWrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Sorting/SortingControls.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/Table.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableAlert.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableAlert.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableCell.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableHeader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/TableRow.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Table/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/react-app-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/appData/appDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authHttp.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authenticationTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/authentication/authentificationInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/dataHttp.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/locationData/locationDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/normalizeData.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/rootReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/ColumnInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/columnHeaders.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/paging/pagingActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/paging/pagingReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/paging/pagingSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/paging/pagingTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/sortingFilteringLogic.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataInterface.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/tableData/tableDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataInterfaces.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataReducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataSelectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/userData/userDataTypes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/FilterControl.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/HelpText.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/SortingControls.stories.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/code-brackets.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/colors.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/comments.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/direction.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/flow.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/plugin.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/repo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/stories/assets/stackalt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/iframe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/main.39b0505f5e498099a34a.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/main.39b0505f5e498099a34a.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/main.7d67c07a6100eb96449e.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/runtime~main.39b0505f5e498099a34a.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/runtime~main.39b0505f5e498099a34a.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/runtime~main.870e8ee0658e83d05c6b.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/sb_dll/storybook_docs-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/sb_dll/storybook_docs_dll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/sb_dll/storybook_ui-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/sb_dll/storybook_ui_dll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/vendors~main.39b0505f5e498099a34a.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/vendors~main.39b0505f5e498099a34a.bundle.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/vendors~main.39b0505f5e498099a34a.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/vendors~main.800ea9419959fc7b7fb8.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/storybook-static/vendors~main.800ea9419959fc7b7fb8.bundle.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/auth.middleware.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/AppData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/LocationData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/User.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/UserData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/appData.routers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/auth.routes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/locationData.routes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/userData.routes.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,16 +229,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../datagrid-express" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="node" />
     <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\node_modules\eslint" />
     <property name="node.js.selected.package.standard" value="" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
-    <property name="ts.external.directory.path" value="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\client\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Users\Volha_Mashnitskaya\WebstormProjects\datagrid\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -123,7 +296,11 @@
       <workItem from="1603710196254" duration="2703000" />
       <workItem from="1603712920072" duration="796000" />
       <workItem from="1603713902525" duration="911000" />
-      <workItem from="1603715659019" duration="317000" />
+      <workItem from="1603715659019" duration="1631000" />
+      <workItem from="1604042302870" duration="1971000" />
+      <workItem from="1604314751465" duration="16000" />
+      <workItem from="1604387591237" duration="2505000" />
+      <workItem from="1604391431310" duration="1269000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>
@@ -175,11 +352,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix closing of filter pop up&#10;&#10;(cherry picked from commit 399c871492c03133a88c23245843992a98232659)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2411" y="-233" width="887" height="721" key="#ESLint" timestamp="1602524864018">
-      <screen x="1920" y="-390" width="1920" height="1050" />
+    <state x="598" y="114" width="887" height="721" key="#ESLint" timestamp="1604390336153">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="2411" y="-233" width="887" height="721" key="#ESLint/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602524864018" />
-    <state x="598" y="271" key="#ESLint/0.0.1536.834@0.0.1536.834" timestamp="1601632638536" />
+    <state x="598" y="114" key="#ESLint/0.0.1536.834@0.0.1536.834" timestamp="1604390336153" />
     <state x="461" y="185" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602590745289">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -195,12 +372,12 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="134" y="0" key="CommitChangelistDialog2/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601456233834" />
-    <state x="496" y="112" key="FileChooserDialogImpl" timestamp="1603367980492">
+    <state x="496" y="112" key="FileChooserDialogImpl" timestamp="1604391867440">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="496" y="112" key="FileChooserDialogImpl/0.0.1536.834/1920.-390.1920.1050@0.0.1536.834" timestamp="1601401251522" />
     <state x="2540" y="-249" key="FileChooserDialogImpl/0.0.1536.834/1920.-390.1920.1050@1920.-390.1920.1050" timestamp="1602495128022" />
-    <state x="496" y="112" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1603367980492" />
+    <state x="496" y="112" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1604391867440" />
     <state x="309" y="107" key="MultipleFileMergeDialog" timestamp="1601456227812">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
