@@ -17,6 +17,9 @@
     .delete-icon{
       cursor: pointer;
       margin: 0 auto;
+      &.disabled{
+          cursor: auto;
+      }
     }
   }
   .columnsHide {

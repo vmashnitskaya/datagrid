@@ -26,7 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8583540b-17ae-418e-9c6f-36e21ec5d942" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/TableHeader.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Table/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Table/TableHeader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +133,7 @@
       <workItem from="1604314751465" duration="16000" />
       <workItem from="1604387591237" duration="2505000" />
       <workItem from="1604391431310" duration="1879000" />
+      <workItem from="1604404040543" duration="1024000" />
     </task>
     <task id="LOCAL-00001" summary="add filtering to column&#10;&#10;(cherry picked from commit acb3d0b63f788a9788055a67374e3d670ce29439)">
       <created>1601454632227</created>

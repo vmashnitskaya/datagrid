@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { connect } from 'react-redux';
+import clsx from 'clsx';
 import Filtering from './Filtering/Filtering';
 import SortingControls from './Sorting/SortingControls';
 import './TableHeader.scss';
@@ -11,11 +12,15 @@ import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 import ColumnSelectionPopOver from './ColumnSelectionPopOver';
 import { TableDataActions } from '../../redux/tableData/tableDataTypes';
 import actions from '../../redux/tableData/tableDataActions';
+import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
+import { RootState } from '../../redux/rootReducer';
 
 interface TableHeaderProps {
     element: ColumnInterface;
     last: boolean;
     deleteRows: () => void;
+    sortFilterSlicedDataIds: string[];
+    checkedItems: string[];
 }
 
 /**
@@ -26,15 +31,31 @@ interface TableHeaderProps {
  * @returns {JSX.Element}
  */
 
-const TableHeader: FC<TableHeaderProps> = ({ element, last, deleteRows }) => {
+const TableHeader: FC<TableHeaderProps> = ({
+    element,
+    last,
+    deleteRows,
+    sortFilterSlicedDataIds,
+    checkedItems,
+}) => {
     const handleRowsDeleting = () => {
-        deleteRows();
+        if (checkedItems && checkedItems.length > 0) {
+            deleteRows();
+        }
     };
 
     const displayDifferentHeaderTypes = () => {
         if (element.name === 'checkbox') {
             return (
-                <DeleteIcon className="delete-icon text-secondary" onClick={handleRowsDeleting} />
+                <DeleteIcon
+                    className={clsx(
+                        'delete-icon text-secondary',
+                        sortFilterSlicedDataIds &&
+                            sortFilterSlicedDataIds.length === 0 &&
+                            'disabled'
+                    )}
+                    onClick={handleRowsDeleting}
+                />
             );
         }
         if (element.name === 'open') {
@@ -57,10 +78,15 @@ const TableHeader: FC<TableHeaderProps> = ({ element, last, deleteRows }) => {
     );
 };
 
+const mapStateToProps = (state: RootState) => ({
+    sortFilterSlicedDataIds: tableDataSelectors.getSortFilterSlicedDataIds(state),
+    checkedItems: tableDataSelectors.getCheckedItems(state),
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
     deleteRows: () => {
         dispatch(actions.deleteRows());
     },
 });
 
-export default connect(null, mapDispatchToProps)(TableHeader);
+export default connect(mapStateToProps, mapDispatchToProps)(TableHeader);
