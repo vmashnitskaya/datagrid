@@ -1,6 +1,10 @@
+import { ThunkAction } from 'redux-thunk';
 import types, { TableDataActions } from './tableDataTypes';
 import { NormalizedObject } from './tableDataInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { RootState } from '../rootReducer';
+import selectors from './tableDataSelectors';
+import authSelectors from '../authentication/authenticationSelectors';
+import dataHttp from '../dataHttp';
 
 const sortRenderData = (): TableDataActions => {
     return {
@@ -20,20 +24,19 @@ const setSortingColumn = (column: string): TableDataActions => {
         payload: column,
     };
 };
-const setColumnHeaders = (columnHeaders: ColumnInterface[]): TableDataActions => {
+const setTableColumnHeaders = (): TableDataActions => {
     return {
-        type: types.SET_COLUMN_HEADERS,
-        payload: columnHeaders,
+        type: types.SET_TABLE_COLUMN_HEADERS,
     };
 };
-const setSortedFilteredRenderDataIds = (allIds: number[]): TableDataActions => {
+const setSortedFilteredRenderDataIds = (allIds: string[]): TableDataActions => {
     return {
         type: types.SET_SORTED_FILTERED_RENDER_DATA_IDS,
         payload: allIds,
     };
 };
 
-const setSortFilterSlicedDataIds = (sortFilterSlicedDataIds: number[]): TableDataActions => {
+const setSortFilterSlicedDataIds = (sortFilterSlicedDataIds: string[]): TableDataActions => {
     return {
         type: types.SET_SORT_FILTER_SLICED_DATA_IDS,
         payload: sortFilterSlicedDataIds,
@@ -44,24 +47,6 @@ const setFilteredColumnAndValue = (newEntry: { [key: string]: string }): TableDa
     return {
         type: types.SET_FILTERED_COLUMN_AND_VALUE,
         payload: newEntry,
-    };
-};
-const setRowsPerPage = (rowsPerPage: number): TableDataActions => {
-    return {
-        type: types.SET_ROWS_PER_PAGE,
-        payload: rowsPerPage,
-    };
-};
-const setCurrentPage = (currentPage: number): TableDataActions => {
-    return {
-        type: types.SET_CURRENT_PAGE,
-        payload: currentPage,
-    };
-};
-const setTotalPages = (totalPages: number): TableDataActions => {
-    return {
-        type: types.SET_TOTAL_PAGES,
-        payload: totalPages,
     };
 };
 
@@ -91,7 +76,7 @@ const setError = (error: string): TableDataActions => {
     };
 };
 
-const setAllIds = (allIds: number[]): TableDataActions => {
+const setAllIds = (allIds: string[]): TableDataActions => {
     return {
         type: types.SET_ALL_IDS,
         payload: allIds,
@@ -111,10 +96,103 @@ const checkRowCheckbox = (id: string): TableDataActions => {
     };
 };
 
-const deleteRows = (): TableDataActions => {
+const modifyDataPending = (): TableDataActions => {
     return {
-        type: types.DELETE_ROWS,
+        type: types.MODIFY_DATA_PENDING,
     };
+};
+
+const deleteDataSuccess = (data: { [key: string]: any }): TableDataActions => {
+    return {
+        type: types.DELETE_DATA_SUCCESS,
+        payload: data,
+    };
+};
+
+const addDataSuccess = (data: { [key: string]: any }): TableDataActions => {
+    return {
+        type: types.ADD_DATA_SUCCESS,
+        payload: data,
+    };
+};
+
+const modifyDataFailed = (error: string): TableDataActions => {
+    return {
+        type: types.MODIFY_DATA_FAILED,
+        payload: error,
+    };
+};
+
+const setTabActive = (tabActive: string): TableDataActions => {
+    return {
+        type: types.SET_TAB_ACTIVE,
+        payload: tabActive,
+    };
+};
+
+const resetMessages = (): TableDataActions => {
+    return {
+        type: types.RESET_MESSAGES,
+    };
+};
+
+const hideColumn = (column: string): TableDataActions => {
+    return {
+        type: types.HIDE_COLUMN,
+        payload: column,
+    };
+};
+
+const deleteRows = (): ThunkAction<Promise<void>, RootState, unknown, TableDataActions> => async (
+    dispatch,
+    getState
+) => {
+    try {
+        dispatch(modifyDataPending());
+        const rowsSelected = selectors.getCheckedItems(getState());
+        const token = authSelectors.getToken(getState());
+        const tabActive = selectors.getTabActive(getState()).toLowerCase();
+
+        const result = await dataHttp(
+            `https://datagrid-express.herokuapp.com/api/${tabActive}/delete`,
+            'DELETE',
+            { rowsSelected },
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+        const message = `${result.deleted} ${
+            result.deleted === 1 ? 'row was' : 'rows were'
+        } deleted`;
+        dispatch(deleteDataSuccess({ ids: result.ids, message }));
+    } catch (e) {
+        dispatch(modifyDataFailed(e.message));
+    }
+};
+
+const addNewRow = (object: {
+    [key: string]: string;
+}): ThunkAction<Promise<void>, RootState, unknown, TableDataActions> => async (
+    dispatch,
+    getState
+) => {
+    try {
+        dispatch(modifyDataPending());
+        const token = authSelectors.getToken(getState());
+        const tabActive = selectors.getTabActive(getState()).toLowerCase();
+
+        const result = await dataHttp(
+            `https://datagrid-express.herokuapp.com/api/${tabActive}/create`,
+            'POST',
+            object,
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+        dispatch(addDataSuccess(result));
+    } catch (e) {
+        dispatch(modifyDataFailed(e.message));
+    }
 };
 
 export default {
@@ -123,17 +201,18 @@ export default {
     setSortingColumn,
     setSortedFilteredRenderDataIds,
     setFilteredColumnAndValue,
-    setRowsPerPage,
-    setTotalPages,
-    setCurrentPage,
     filterRenderData,
     setSortFilterSlicedDataIds,
     setRenderData,
     setLoading,
     setError,
     setAllIds,
-    setColumnHeaders,
+    setColumnHeaders: setTableColumnHeaders,
     resetFilters,
     checkRowCheckbox,
     deleteRows,
+    setTabActive,
+    addNewRow,
+    resetMessages,
+    hideColumn,
 };

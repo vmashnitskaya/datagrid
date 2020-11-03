@@ -1,8 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { AppDataActions } from './appDataTypes';
-import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
 import { NormalizedData } from './appDataInterfaces';
+import selectors from '../authentication/authenticationSelectors';
+import dataHttp from '../dataHttp';
+import normalizeData from '../normalizeData';
 
 const fetchAppDataPending = (): AppDataActions => ({
     type: types.FETCH_APPDATA_PENDING,
@@ -18,13 +20,26 @@ const fetchAppDataFailed = (error: string): AppDataActions => ({
     payload: error,
 });
 
-const fetchAppData = (
-    tabActive: string
-): ThunkAction<Promise<void>, RootState, unknown, AppDataActions> => async (dispatch) => {
+const fetchAppData = (): ThunkAction<Promise<void>, RootState, unknown, AppDataActions> => async (
+    dispatch,
+    getState
+) => {
     try {
         dispatch(fetchAppDataPending());
-        const appData = fetchApiData(tabActive.toLowerCase());
-        dispatch(fetchAppDataSuccess(appData));
+        const token = selectors.getToken(getState());
+
+        const userData = await dataHttp(
+            'https://datagrid-express.herokuapp.com/api/apps/',
+            'GET',
+            null,
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+
+        const normalizedData = normalizeData(userData);
+
+        dispatch(fetchAppDataSuccess(normalizedData));
     } catch (e) {
         dispatch(fetchAppDataFailed(e.message));
     }

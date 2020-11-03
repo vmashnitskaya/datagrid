@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import clsx from 'clsx';
-import { ColumnInterface } from '../ColumnInterface';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 
 import { RootState } from '../../redux/rootReducer';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
@@ -13,21 +13,15 @@ import HelpText from './HelpText';
 
 interface ColumnSelectionContentProps {
     tableColumnHeaders: ColumnInterface[];
-    setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => void;
+    hideColumn: (column: string) => void;
 }
 
 const ColumnSelectionContent: FunctionComponent<ColumnSelectionContentProps> = ({
     tableColumnHeaders,
-    setTableColumnHeaders,
+    hideColumn,
 }) => {
     const handleCheckboxCheck = (columnName: string) => {
-        const array = tableColumnHeaders.map((element) => {
-            if (element.name === columnName) {
-                return { ...element, display: !element.display };
-            }
-            return element;
-        });
-        setTableColumnHeaders(array);
+        hideColumn(columnName);
     };
     return (
         <>
@@ -35,7 +29,7 @@ const ColumnSelectionContent: FunctionComponent<ColumnSelectionContentProps> = (
                 {tableColumnHeaders.map(
                     (element, index: number) =>
                         index > 0 && (
-                            <div>
+                            <div key={element.name}>
                                 <input
                                     className={clsx(
                                         'column_checkbox mr-1',
@@ -64,8 +58,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<TableDataActions>) => ({
-    setTableColumnHeaders: (columnHeaders: ColumnInterface[]) => {
-        dispatch(actions.setColumnHeaders(columnHeaders));
+    hideColumn: (column: string) => {
+        dispatch(actions.hideColumn(column));
     },
 });
 

@@ -1,5 +1,5 @@
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { ColumnInterface, ColumnsHeaders } from './ColumnInterface';
 
 export interface RenderDataObject {
     [key: string]: any;
@@ -11,17 +11,17 @@ export interface NormalizedObject {
 
 export interface TableDataInterface {
     renderData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     error: string;
     loading: boolean;
-    columnHeaders: ColumnInterface[];
+    columnHeaders: ColumnsHeaders;
+    tableColumnHeaders: ColumnInterface[];
     sorting: string;
     sortingColumn: string;
-    sortedFilteredRenderDataIds: number[];
-    sortFilterSlicedDataIds: number[];
+    sortedFilteredRenderDataIds: string[];
+    sortFilterSlicedDataIds: string[];
     filteredColumnAndValue: FilteringColumn;
-    checkedItems: number[];
-    rowsPerPage: number;
-    currentPage: number;
-    totalPages: number;
+    checkedItems: string[];
+    tabActive: string;
+    infoMessage: string;
 }

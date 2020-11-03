@@ -1,7 +1,11 @@
 td{
   overflow: hidden;
   padding: 5px 2px;
-  max-width: 400px;
-  min-width: 100px;
-  overflow: hidden;
+  max-width: 200px;
+  min-width: 40px;
+  background: white;
+  .rowSelection{
+    display: block;
+    margin: 0 auto;
+  }
 }

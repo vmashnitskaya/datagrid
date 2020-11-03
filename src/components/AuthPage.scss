@@ -1,0 +1,22 @@
+.login {
+  &-wrapper {
+   padding: 150px;
+    height: 100vh;
+    .card{
+      margin: 0 auto;
+      min-width: 400px;
+    }
+    .login-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    .error-alert{
+      max-width: 400px;
+      margin: 30px auto;
+    }
+  }
+  &-title{
+    font-size: 25px;
+    font-weight: 700;
+  }
+}

@@ -5,30 +5,25 @@
 }
 
 .table {
-  th {
-    position: sticky;
-    top: -4px;
-    padding-right: 0;
-    z-index: 5;
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 40px;
-      .icons {
-        display: flex;
-      }
-    }
-  }
   td{
     width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  .no-data{
+    text-align: center;
+  }
+  .create-wrapper {
+    padding: 4px;
+    text-align: right;
+}
 }
 .footer {
   &-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
   }
   &-buttons{
     display: flex;
@@ -37,5 +32,6 @@
     }
   }
 }
+
 
 

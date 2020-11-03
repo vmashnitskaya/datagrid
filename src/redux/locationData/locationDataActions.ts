@@ -1,8 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import types, { LocationDataActions } from './locationDataTypes';
 import { NormalizedData } from './locationDataInterfaces';
-import fetchApiData from '../api';
 import { RootState } from '../rootReducer';
+import selectors from '../authentication/authenticationSelectors';
+import dataHttp from '../dataHttp';
+import normalizeData from '../normalizeData';
 
 const fetchLocationDataPending = (): LocationDataActions => ({
     type: types.FETCH_LOCATIONDATA_PENDING,
@@ -18,13 +20,28 @@ const fetchLocationDataFailed = (error: string): LocationDataActions => ({
     payload: error,
 });
 
-const fetchLocationData = (
-    tabActive: string
-): ThunkAction<Promise<void>, RootState, unknown, LocationDataActions> => async (dispatch) => {
+const fetchLocationData = (): ThunkAction<
+    Promise<void>,
+    RootState,
+    unknown,
+    LocationDataActions
+> => async (dispatch, getState) => {
     try {
         dispatch(fetchLocationDataPending());
-        const locationData = fetchApiData(tabActive.toLowerCase());
-        dispatch(fetchLocationDataSuccess(locationData));
+        const token = selectors.getToken(getState());
+
+        const userData = await dataHttp(
+            'https://datagrid-express.herokuapp.com/api/locations/',
+            'GET',
+            null,
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+
+        const normalizedData = normalizeData(userData);
+
+        dispatch(fetchLocationDataSuccess(normalizedData));
     } catch (e) {
         dispatch(fetchLocationDataFailed(e.message));
     }

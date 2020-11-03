@@ -1,16 +1,12 @@
-export interface Loc {
-    longitude: string;
-    latitude: string;
-}
-
 export interface LocationDataObject {
     id: number;
     city: number;
     country: string;
     state: string;
     country_code: string;
-    loc: Loc;
     timezone: string;
+    owner: string;
+    _id: string;
 }
 export interface NormalizedObject {
     [key: string]: LocationDataObject;
@@ -18,12 +14,12 @@ export interface NormalizedObject {
 
 export interface NormalizedData {
     dataNormalized: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
 }
 
 export interface LocationDataState {
     locationData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     loading: boolean;
     error: string;
 }

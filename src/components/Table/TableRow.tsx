@@ -1,49 +1,62 @@
 import React, { FC } from 'react';
 import { connect } from 'react-redux';
+import { Draggable } from 'react-beautiful-dnd';
 
 import TableCell from './TableCell';
 
-import { ColumnInterface } from '../ColumnInterface';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
 import { RenderDataObject } from '../../redux/tableData/tableDataInterface';
 
 import { RootState } from '../../redux/rootReducer';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 
 export interface TableRowProps {
-    id: number;
-    columnHeaders: ColumnInterface[];
+    id: string;
+    tableColumnHeaders: ColumnInterface[];
     rowElement: RenderDataObject;
+    index: number;
 }
 
 /**
  * Component for displaying table row.
  *
  * @param props
- * @param {number} props.id - the id by which in render data particular object will be extracted.
- * @param {ColumnInterface[]} props.columnHeaders - the object with column headers info.
+ * @param {string} props.id - the id by which in render data particular object will be extracted.
+ * @param {ColumnInterface[]} props.tableColumnHeaders - the object with column headers info.
  * @param {RenderDataObject} props.rowElement - the object extracted from render data by id.
  * @returns {JSX.Element}
  */
 
-const TableRow: FC<TableRowProps> = ({ id, columnHeaders, rowElement }) => {
+const TableRow: FC<TableRowProps> = ({ id, tableColumnHeaders, rowElement, index }) => {
     return (
-        <tr>
-            {columnHeaders.map((element: ColumnInterface) => {
-                return (
-                    element.display && (
-                        <TableCell
-                            key={`key${id + 1}_${Math.random()}`}
-                            rowElement={rowElement}
-                            columnName={element.name}
-                        />
-                    )
-                );
-            })}
-        </tr>
+        <Draggable draggableId={id} index={index}>
+            {(provided) => (
+                <tr
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    {rowElement &&
+                        tableColumnHeaders &&
+                        tableColumnHeaders.length > 0 &&
+                        tableColumnHeaders.map((element: ColumnInterface) => {
+                            return (
+                                element.display && (
+                                    <TableCell
+                                        key={`${id}_${element.name}`}
+                                        rowElement={rowElement}
+                                        columnName={element.name}
+                                    />
+                                )
+                            );
+                        })}
+                </tr>
+            )}
+        </Draggable>
     );
 };
 
-const mapStateToProps = (state: RootState, { id }: { id: number }) => ({
+const mapStateToProps = (state: RootState, { id }: { id: string }) => ({
     rowElement: tableDataSelectors.getElementById(state, id),
 });
 

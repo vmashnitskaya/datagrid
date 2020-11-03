@@ -1,14 +1,18 @@
 import React, { ChangeEvent, FormEvent, FunctionComponent, useEffect, useState } from 'react';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
+import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { Dispatch } from 'redux';
 import clsx from 'clsx';
+
+import FirstPageIcon from '@material-ui/icons/FirstPage';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import './PaginationControl.scss';
-import { connect, MapDispatchToPropsFunction } from 'react-redux';
+
 import { RootState } from '../../../redux/rootReducer';
-import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
-import actions from '../../../redux/tableData/tableDataActions';
+import pagingSelectors from '../../../redux/tableData/paging/pagingSelectors';
+import pagingActions from '../../../redux/tableData/paging/pagingActions';
+import { PagingActions } from '../../../redux/tableData/paging/pagingTypes';
 
 interface PaginationControlProps {
     currentPage: number;
@@ -46,7 +50,9 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
 
     const handlePageNavigationByInput = (event: FormEvent) => {
         event.preventDefault();
-        setCurrentPage(pageInputState);
+        if (pageInputState > 0 && pageInputState <= totalPages) {
+            setCurrentPage(pageInputState);
+        }
     };
 
     const handlePageNavigation = (pageDirection: string) => {
@@ -74,11 +80,19 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
     return (
         <div className="pagination">
             <FirstPageIcon
-                className={clsx('page-first', currentPage !== 1 && 'text-info')}
+                className={clsx(
+                    'page-first',
+                    'text-secondary',
+                    currentPage !== 1 ? 'text-info' : 'disabled'
+                )}
                 onClick={() => handlePageNavigation('first')}
             />
             <NavigateBeforeIcon
-                className={clsx('page-previous', currentPage !== 1 && 'text-info')}
+                className={clsx(
+                    'page-previous',
+                    'text-secondary',
+                    currentPage !== 1 ? 'text-info' : 'disabled'
+                )}
                 onClick={() => handlePageNavigation('previous')}
             />
             <form className="pagination-input" onSubmit={handlePageNavigationByInput}>
@@ -86,11 +100,19 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
                 {totalPages}
             </form>
             <NavigateNextIcon
-                className={clsx('page-next', currentPage !== totalPages && 'text-info')}
+                className={clsx(
+                    'page-next',
+                    'text-secondary',
+                    currentPage !== totalPages ? 'text-info' : 'disabled'
+                )}
                 onClick={() => handlePageNavigation('next')}
             />
             <LastPageIcon
-                className={clsx('page-last', currentPage !== totalPages && 'text-info')}
+                className={clsx(
+                    'page-last',
+                    'text-secondary',
+                    currentPage !== totalPages ? 'text-info' : 'disabled'
+                )}
                 onClick={() => handlePageNavigation('last')}
             />
         </div>
@@ -98,13 +120,15 @@ const PaginationControl: FunctionComponent<PaginationControlProps> = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
-    currentPage: tableDataSelectors.getCurrentPage(state),
+    rowsPerPage: pagingSelectors.getRowsPerPage(state),
+    currentPage: pagingSelectors.getCurrentPage(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (
+    dispatch: Dispatch<PagingActions>
+) => ({
     setCurrentPage: (currentPage: number) => {
-        dispatch(actions.setCurrentPage(currentPage));
+        dispatch(pagingActions.setCurrentPage(currentPage));
     },
 });
 

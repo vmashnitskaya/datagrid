@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 
@@ -7,21 +7,20 @@ import Table from './Table';
 import appDataSelectors from '../redux/appData/appDataSelectors';
 import fetchAppData from '../redux/appData/appDataActions';
 import { AppDataObject } from '../redux/appData/appDataInterfaces';
-import { ColumnInterface } from './ColumnInterface';
 
 interface AppTableProps {
     appData: AppDataObject[];
     loadingApp: boolean;
     errorApp: string;
-    fetchAppsData: (tabActive: string) => void;
-    allIds: number[];
+    fetchAppsData: () => void;
+    allIds: string[];
 }
 
 /**
  * Component for App Data displaying.
  *
  * @param props
- * @param {function(string): void} props.fetchAppsData
+ * @param {function(): void} props.fetchAppsData
  * @param {number[]} props.allIds - ids for appData.
  * @param {AppDataObject[]} props.appData - object with id as key and object for table row as value.
  * @param {boolean} props.loadingApp - loading of data.
@@ -30,80 +29,11 @@ interface AppTableProps {
  */
 
 const AppTable: FC<AppTableProps> = ({ fetchAppsData, allIds, appData, loadingApp, errorApp }) => {
-    const columnHeaders = useMemo<ColumnInterface[]>(() => {
-        return [
-            {
-                header: '',
-                name: 'checkbox',
-                type: 'checkbox',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'Id',
-                name: 'id',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'App Id',
-                name: 'app_id',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App name',
-                name: 'app_name',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App version',
-                name: 'app_version',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App domain',
-                name: 'app_domain',
-                type: 'string',
-                filtering: true,
-                sorting: true,
-                display: true,
-            },
-            {
-                header: 'App URL',
-                name: 'app_url',
-                type: 'string',
-                filtering: false,
-                sorting: false,
-                display: true,
-            },
-        ];
-    }, []);
-
     useEffect(() => {
-        fetchAppsData('Apps');
+        fetchAppsData();
     }, [fetchAppsData]);
 
-    return (
-        <Table
-            columnHeaders={columnHeaders}
-            renderData={appData}
-            loading={loadingApp}
-            error={errorApp}
-            allIds={allIds}
-        />
-    );
+    return <Table renderData={appData} loading={loadingApp} error={errorApp} allIds={allIds} />;
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -114,8 +44,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    fetchAppsData: (tabActive: string) => {
-        dispatch(fetchAppData(tabActive));
+    fetchAppsData: () => {
+        dispatch(fetchAppData());
     },
 });
 

@@ -1,15 +1,20 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import { RootState } from '../../../redux/rootReducer';
 import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
-import actions from '../../../redux/tableData/tableDataActions';
+import pagingSelectors from '../../../redux/tableData/paging/pagingSelectors';
+import pagingActions from '../../../redux/tableData/paging/pagingActions';
+import { NormalizedObject } from '../../../redux/tableData/tableDataInterface';
+import { PagingActions } from '../../../redux/tableData/paging/pagingTypes';
 
 interface RowsPerPageControlProps {
     setRowsPerPage: (rowsPerPage: number) => void;
     rowsPerPage: number;
+    renderData: NormalizedObject;
 }
 
 /**
@@ -24,6 +29,7 @@ interface RowsPerPageControlProps {
 const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
     setRowsPerPage,
     rowsPerPage,
+    renderData,
 }) => {
     const dropdownKeys = useMemo((): string[] => {
         return ['5', '10', '20', '50', '100'];
@@ -35,7 +41,12 @@ const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
 
     return (
         <Dropdown>
-            <Dropdown.Toggle variant="info" id="dropdown-basic" size="sm">
+            <Dropdown.Toggle
+                variant="info"
+                id="dropdown-basic"
+                size="sm"
+                disabled={Object.keys(renderData).length === 0}
+            >
                 {rowsPerPage}
             </Dropdown.Toggle>
             <Dropdown.Menu>
@@ -55,12 +66,15 @@ const RowsPerPageControl: FunctionComponent<RowsPerPageControlProps> = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-    rowsPerPage: tableDataSelectors.getRowsPerPage(state),
+    rowsPerPage: pagingSelectors.getRowsPerPage(state),
+    renderData: tableDataSelectors.getRenderData(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
+const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (
+    dispatch: Dispatch<PagingActions>
+) => ({
     setRowsPerPage: (rowsPerPage: number) => {
-        dispatch(actions.setRowsPerPage(rowsPerPage));
+        dispatch(pagingActions.setRowsPerPage(rowsPerPage));
     },
 });
 

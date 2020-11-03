@@ -1,58 +1,55 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from 'react-bootstrap';
 import tableDataSelectors from '../../redux/tableData/tableDataSelectors';
 import { RootState } from '../../redux/rootReducer';
 import { NormalizedObject } from '../../redux/tableData/tableDataInterface';
-import { ColumnInterface } from '../ColumnInterface';
-import TableAlert from './TableAlert';
+import { ColumnInterface } from '../../redux/tableData/ColumnInterface';
+import AlertWrapper from './AlertWrapper';
 
 interface DownloadProps {
-    checkedItems: number[];
+    checkedItems: string[];
     renderData: NormalizedObject;
-    columnHeaders: ColumnInterface[];
+    tableColumnHeaders: ColumnInterface[];
 }
 
-const portalContainer = document.getElementById('alert-root');
-
-const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeaders }) => {
+const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, tableColumnHeaders }) => {
     const [alertShown, setAlertShown] = useState<boolean>(false);
 
-    const hideAlert = useCallback(() => {
-        if (alertShown) {
-            setAlertShown(false);
-        }
-    }, [alertShown]);
+    const handleAlertChange = (value: boolean) => {
+        setAlertShown(value);
+    };
 
-    useEffect(() => {
-        if (alertShown) {
-            setTimeout(hideAlert, 500000);
-        }
-    }, [alertShown, hideAlert]);
-
-    const returnStringFromObjectValues = (obj: { [key: string]: any }) => {
-        return Object.values(obj)
+    const returnStringValues = (obj: { [key: string]: any }) => {
+        return Object.keys(obj)
             .map((el) => {
-                if (typeof el === 'object' && el !== null) {
-                    return Object.values(el).join('/');
+                if (el !== '_id' && el !== '__v' && el !== 'owner') {
+                    return obj[el];
                 }
-                return el;
+                return '';
             })
+            .filter((el) => el !== '')
             .join(',');
     };
 
-    const downloadTxtFile = () => {
+    const downloadFile = () => {
         if (checkedItems.length > 0) {
             const element = document.createElement('a');
 
-            const columnsToDownload = `${columnHeaders.map((el) => el.header).join(',')}\n`;
+            const columnsToDownload = `${tableColumnHeaders
+                .map((el) => {
+                    if (el.header !== 'Open') {
+                        return el.header;
+                    }
+                    return '';
+                })
+                .join(',')}\n`;
 
             const arrayToDownload = checkedItems.map((checkedItem) => renderData[checkedItem]);
             const stringToDownload = arrayToDownload
                 .map((el) => {
-                    return ` ,${returnStringFromObjectValues(el)}`;
+                    return ` ,${returnStringValues(el)}`;
                 })
                 .join('\n');
 
@@ -70,18 +67,21 @@ const CSVDownload: FC<DownloadProps> = ({ renderData, checkedItems, columnHeader
 
     return (
         <>
-            <Button variant="info" size="sm" className="download" onClick={downloadTxtFile}>
+            <Button
+                variant="info"
+                size="sm"
+                className="download"
+                onClick={downloadFile}
+                disabled={Object.keys(renderData).length === 0}
+            >
                 Download CSV
             </Button>
-            {alertShown &&
-                portalContainer &&
-                createPortal(
-                    <TableAlert
-                        value="Please select rows to download."
-                        handleAlertClose={hideAlert}
-                    />,
-                    portalContainer
-                )}
+            <AlertWrapper
+                value="Please select rows to download."
+                variant="danger"
+                alertShown={alertShown}
+                handleAlertChange={handleAlertChange}
+            />
         </>
     );
 };
@@ -90,7 +90,7 @@ const mapStateToProps = (state: RootState) => {
     return {
         renderData: tableDataSelectors.getRenderData(state),
         checkedItems: tableDataSelectors.getCheckedItems(state),
-        columnHeaders: tableDataSelectors.getColumnHeaders(state),
+        tableColumnHeaders: tableDataSelectors.getColumnHeaders(state),
     };
 };
 

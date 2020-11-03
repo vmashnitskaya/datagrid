@@ -1,8 +1,3 @@
-export interface Location {
-    city: string;
-    country: string;
-}
-
 export interface DataObject {
     id: number;
     first_name: string;
@@ -10,7 +5,9 @@ export interface DataObject {
     date: string;
     email: string;
     gender: string;
-    location: Location;
+    job_title: string;
+    owner: string;
+    _id: string;
 }
 
 export interface NormalizedObject {
@@ -19,12 +16,12 @@ export interface NormalizedObject {
 
 export interface NormalizedData {
     dataNormalized: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
 }
 
 export interface UserDataState {
     userData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     loading: boolean;
     error: string;
 }

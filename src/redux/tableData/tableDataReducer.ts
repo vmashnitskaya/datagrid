@@ -1,25 +1,27 @@
-import { Reducer } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import types, { TableDataActions } from './tableDataTypes';
 import { RenderDataObject, TableDataInterface } from './tableDataInterface';
 import sortingFilteringLogic from './sortingFilteringLogic';
 import { FilteringColumn } from '../../components/Table/Filtering/FilteringColumnInterface';
-import { ColumnInterface } from '../../components/ColumnInterface';
+import { ColumnInterface } from './ColumnInterface';
+import pagingReducer from './paging/pagingReducer';
+import columnHeaders from './columnHeaders';
 
 const initialState = {
     renderData: {},
     allIds: [],
     error: '',
-    columnHeaders: [],
+    infoMessage: '',
+    columnHeaders,
+    tableColumnHeaders: [],
     loading: false,
-    sorting: '',
-    sortingColumn: '',
+    sorting: 'down',
+    sortingColumn: 'id',
     sortedFilteredRenderDataIds: [],
     sortFilterSlicedDataIds: [],
     filteredColumnAndValue: {},
     checkedItems: [],
-    rowsPerPage: 10,
-    currentPage: 1,
-    totalPages: 1,
+    tabActive: 'users',
 };
 
 const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
@@ -33,12 +35,20 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return { ...state, allIds: action.payload, loading: false };
         case types.SET_LOADING:
             return { ...state, loading: true };
+        case types.MODIFY_DATA_PENDING:
+            return { ...state, loading: true };
+        case types.MODIFY_DATA_FAILED:
+            return { ...state, error: action.payload, loading: false };
         case types.SET_ERROR:
             return { ...state, error: action.payload };
-        case types.SET_COLUMN_HEADERS:
-            return { ...state, columnHeaders: [...action.payload] };
+        case types.SET_TABLE_COLUMN_HEADERS: {
+            const array = state.columnHeaders[state.tabActive];
+            return { ...state, tableColumnHeaders: [...array] };
+        }
         case types.SET_SORTING:
             return { ...state, sorting: action.payload };
+        case types.SET_TAB_ACTIVE:
+            return { ...state, tabActive: action.payload.toLowerCase() };
         case types.SET_SORTING_COLUMN:
             return {
                 ...state,
@@ -49,6 +59,24 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 ...state,
                 sortedFilteredRenderDataIds: action.payload,
             };
+        case types.RESET_MESSAGES:
+            return {
+                ...state,
+                error: '',
+                infoMessage: '',
+            };
+        case types.HIDE_COLUMN: {
+            const array = state.tableColumnHeaders.map((element) => {
+                if (element.name === action.payload) {
+                    return { ...element, display: !element.display };
+                }
+                return element;
+            });
+            return {
+                ...state,
+                tableColumnHeaders: array,
+            };
+        }
         case types.SET_SORT_FILTER_SLICED_DATA_IDS:
             return {
                 ...state,
@@ -59,21 +87,11 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
                 ...state,
                 filteredColumnAndValue: { ...state.filteredColumnAndValue, ...action.payload },
             };
-        case types.SET_ROWS_PER_PAGE:
-            return {
-                ...state,
-                rowsPerPage: action.payload,
-            };
-        case types.SET_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.payload,
-            };
         case types.CHECK_ROW_CHECKBOX: {
-            const id = Number(action.payload);
-            const arrayChecked = state.checkedItems.includes(id)
-                ? state.checkedItems.filter((el) => el !== id)
-                : [...state.checkedItems, id];
+            const _id = action.payload;
+            const arrayChecked = state.checkedItems.includes(_id)
+                ? state.checkedItems.filter((el) => el !== _id)
+                : [...state.checkedItems, _id];
             return {
                 ...state,
                 checkedItems: state.sortedFilteredRenderDataIds.filter((el) =>
@@ -85,18 +103,13 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             return {
                 ...state,
                 filteredColumnAndValue: {
-                    ...state.columnHeaders.reduce(
+                    ...state.tableColumnHeaders.reduce(
                         (acc: FilteringColumn, el: ColumnInterface) => ({ ...acc, [el.name]: '' }),
                         {} as FilteringColumn
                     ),
                 },
             };
         }
-        case types.SET_TOTAL_PAGES:
-            return {
-                ...state,
-                totalPages: action.payload,
-            };
         case types.SORT_RENDER_DATA: {
             const arrayToSort = [
                 ...state.sortedFilteredRenderDataIds.map((elem) => state.renderData[elem]),
@@ -104,7 +117,7 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             sortingFilteringLogic.sortArray(arrayToSort, state.sortingColumn, state.sorting);
             return {
                 ...state,
-                sortedFilteredRenderDataIds: arrayToSort.map((el) => el.id),
+                sortedFilteredRenderDataIds: arrayToSort.map((el) => el._id),
             };
         }
         case types.FILTER_RENDER_DATA: {
@@ -122,24 +135,38 @@ const tableDataReducer: Reducer<TableDataInterface, TableDataActions> = (
             });
             return {
                 ...state,
-                sortedFilteredRenderDataIds: data.map((el) => el.id),
+                sortedFilteredRenderDataIds: data.map((el) => el._id),
             };
         }
-        case types.DELETE_ROWS: {
-            let array: number[] = [...state.allIds];
-            state.checkedItems.forEach((forEachEl) => {
+        case types.DELETE_DATA_SUCCESS: {
+            let array: string[] = [...state.allIds];
+            action.payload.ids.forEach((forEachEl: string) => {
                 array = array.filter((filterEl) => filterEl !== forEachEl);
             });
-
             return {
                 ...state,
                 allIds: [...array],
                 checkedItems: [],
+                loading: false,
+                infoMessage: action.payload.message,
             };
         }
+        case types.ADD_DATA_SUCCESS:
+            return {
+                ...state,
+                infoMessage: action.payload.message,
+                renderData: { ...state.renderData, [action.payload.data._id]: action.payload.data },
+                sortedFilteredRenderDataIds: [
+                    ...state.sortedFilteredRenderDataIds,
+                    action.payload.data._id,
+                ],
+                loading: false,
+            };
         default:
             return state;
     }
 };
 
-export default tableDataReducer;
+const reducer = combineReducers({ tableData: tableDataReducer, paging: pagingReducer });
+
+export default reducer;

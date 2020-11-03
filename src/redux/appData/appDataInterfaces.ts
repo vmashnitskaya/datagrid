@@ -5,6 +5,8 @@ export type AppDataObject = {
     app_version: string;
     app_domain: string;
     app_url: string;
+    owner: string;
+    _id: string;
 };
 
 export interface NormalizedObject {
@@ -13,12 +15,12 @@ export interface NormalizedObject {
 
 export interface NormalizedData {
     dataNormalized: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
 }
 
 export interface AppDataState {
     appData: NormalizedObject;
-    allIds: number[];
+    allIds: string[];
     loading: boolean;
     error: string;
 }

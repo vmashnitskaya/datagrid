@@ -39,6 +39,7 @@ module.exports = {
         "@typescript-eslint/no-use-before-define": ["error"],
         "@typescript-eslint/triple-slash-reference": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "no-underscore-dangle": "off",
         "jsx-a11y/label-has-associated-control": [ "error", {
             "required": {
                 "some": [ "nesting", "id"  ]

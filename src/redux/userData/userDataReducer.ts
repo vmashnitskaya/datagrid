@@ -17,8 +17,8 @@ const userDataReducer: Reducer<UserDataState, UserdataActions> = (state = initia
             return {
                 ...state,
                 loading: false,
-                userData: { ...action.payload.dataNormalized },
-                allIds: [...action.payload.allIds],
+                userData: action.payload.dataNormalized,
+                allIds: action.payload.allIds,
             };
         case types.FETCH_USERDATA_FAILED:
             return {

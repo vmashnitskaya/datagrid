@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
 import fetchLocationData from '../redux/locationData/locationDataActions';
@@ -6,15 +6,14 @@ import locationDataSelectors from '../redux/locationData/locationDataSelectors';
 
 import Table from './Table';
 
-import { ColumnInterface } from './ColumnInterface';
 import { NormalizedObject } from '../redux/locationData/locationDataInterfaces';
 
 interface LocationTableProps {
     locationData: NormalizedObject;
     loadingLocation: boolean;
     errorLocation: string;
-    fetchLocationsData: (tabActive: string) => void;
-    allIds: number[];
+    fetchLocationsData: () => void;
+    allIds: string[];
 }
 
 /**
@@ -24,7 +23,7 @@ interface LocationTableProps {
  * @param {NormalizedObject} props.locationData - object with id as key and object for table row as value.
  * @param {boolean} props.loadingLocation - loading of data.
  * @param {string} props.errorLocation - error during data fetch.
- * @param {function(string): void} props.fetchLocationsData
+ * @param {function(): void} props.fetchLocationsData
  * @param {number[]} props.allIds - ids for locationData.
  * @returns {JSX.Element}
  */
@@ -36,77 +35,8 @@ const LocationTable: FC<LocationTableProps> = ({
     fetchLocationsData,
     allIds,
 }) => {
-    const columnHeaders = useMemo<ColumnInterface[]>(() => {
-        return [
-            {
-                header: '',
-                name: 'checkbox',
-                type: 'checkbox',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'Id',
-                name: 'id',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'City',
-                name: 'city',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Country',
-                name: 'country',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'State',
-                name: 'state',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Country code',
-                name: 'country_code',
-                type: 'string',
-                sorting: true,
-                filtering: true,
-                display: true,
-            },
-            {
-                header: 'Longitude and Latitude',
-                name: 'loc',
-                type: 'string',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-            {
-                header: 'Timezone',
-                name: 'timezone',
-                type: 'string',
-                sorting: false,
-                filtering: false,
-                display: true,
-            },
-        ];
-    }, []);
-
     useEffect(() => {
-        fetchLocationsData('Locations');
+        fetchLocationsData();
     }, [fetchLocationsData]);
 
     return (
@@ -114,7 +44,6 @@ const LocationTable: FC<LocationTableProps> = ({
             renderData={locationData}
             loading={loadingLocation}
             error={errorLocation}
-            columnHeaders={columnHeaders}
             allIds={allIds}
         />
     );
@@ -128,8 +57,8 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<any, any> = (dispatch) => ({
-    fetchLocationsData: (tabActive: string) => {
-        dispatch(fetchLocationData(tabActive));
+    fetchLocationsData: () => {
+        dispatch(fetchLocationData());
     },
 });
 

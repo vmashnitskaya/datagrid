@@ -1,0 +1,14 @@
+.app-wrapper{
+  margin-top: 60px;
+  .tab{
+    border: 1px solid #dee2e6;
+    border-bottom: none;
+    &.active{
+      background-color: #f8f9fa !important;
+    }
+    &:hover,
+    &:focus{
+      background-color: #f8f9fa !important;
+    }
+  }
+}

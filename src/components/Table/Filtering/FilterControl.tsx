@@ -1,11 +1,13 @@
 import React, { KeyboardEvent, FC } from 'react';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import clsx from 'clsx';
+import './FilterControl.scss';
 
 export interface FilterControlProps {
     currentElementColumnName: string;
     filteredColumnAndValue: { [key: string]: string };
     handleFilterOpened: (columnName: string) => void;
+    disabled: boolean;
 }
 
 /**
@@ -22,6 +24,7 @@ const FilterControl: FC<FilterControlProps> = ({
     currentElementColumnName,
     filteredColumnAndValue,
     handleFilterOpened,
+    disabled,
 }) => {
     const handleKeyboardFilterOpened = (event: KeyboardEvent<SVGSVGElement>) => {
         if (event.key === 'Enter') {
@@ -36,7 +39,8 @@ const FilterControl: FC<FilterControlProps> = ({
                 'text-secondary',
                 filteredColumnAndValue[currentElementColumnName] &&
                     filteredColumnAndValue[currentElementColumnName].length > 0 &&
-                    'text-info'
+                    'text-info',
+                disabled && 'disabled'
             )}
             tabIndex={0}
             onClick={() => handleFilterOpened(currentElementColumnName)}

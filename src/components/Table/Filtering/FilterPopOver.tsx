@@ -8,7 +8,7 @@ import './FilterPopOver.scss';
 import { RootState } from '../../../redux/rootReducer';
 import tableDataSelectors from '../../../redux/tableData/tableDataSelectors';
 import actions from '../../../redux/tableData/tableDataActions';
-import { ColumnInterface } from '../../ColumnInterface';
+import { ColumnInterface } from '../../../redux/tableData/ColumnInterface';
 
 interface FilterPopUpProps {
     filteredColumnOpened: string;
